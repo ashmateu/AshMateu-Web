@@ -124,16 +124,65 @@
             min-height: 100vh;
             background: var(--ivory);
             display: grid;
+            grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr auto;
+            grid-template-areas: "content visuals" "bottom bottom";
             padding: 0 var(--gutter);
+            column-gap: 64px;
         }
 
         .hero-content {
+            grid-area: content;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding-top: 140px;
             padding-bottom: 60px;
+        }
+
+        /* Visuals: imagen principal + flotante */
+        .hero-visuals {
+            grid-area: visuals;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 60px;
+        }
+
+        .hero-img-main {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-img-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            filter: brightness(0.88) contrast(1.06) saturate(0.78);
+        }
+
+        .hero-img-float {
+            position: absolute;
+            bottom: 100px;
+            left: -52px;
+            width: 44%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            outline: 4px solid var(--ivory);
+            z-index: 2;
+        }
+
+        .hero-img-float img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            filter: brightness(0.88) contrast(1.06) saturate(0.78);
         }
 
         .hero-eyebrow {
@@ -200,6 +249,7 @@
         .cta-secondary:hover { opacity: 1; }
 
         .hero-bottom {
+            grid-area: bottom;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -661,7 +711,18 @@
             }
 
             /* Hero mobile */
-            #hero { min-height: 100svh; }
+            #hero {
+                min-height: 100svh;
+                grid-template-columns: 1fr;
+                grid-template-areas: "content" "visuals" "bottom";
+                column-gap: 0;
+            }
+            .hero-visuals {
+                padding: 0 0 32px;
+                height: 56vw;
+                max-height: 320px;
+            }
+            .hero-img-float { display: none; }
             .hero-content {
                 padding-top: 100px;
                 padding-bottom: 24px;
@@ -770,6 +831,18 @@
         <div class="hero-ctas">
             <a href="#trabajo" class="cta-primary">Ver trabajo</a>
             <a href="#contacto" class="cta-secondary">Contacto</a>
+        </div>
+    </div>
+    <div class="hero-visuals">
+        <div class="hero-img-main">
+            <img src="images/extracted/dolores-fonzi/img-000.webp"
+                 alt="Dolores Fonzi — Styling Ash Mateu"
+                 loading="eager" fetchpriority="high">
+        </div>
+        <div class="hero-img-float">
+            <img src="images/extracted/valentina-miumiu/img-000.webp"
+                 alt="Valentina × Miu Miu — Styling Ash Mateu"
+                 loading="eager">
         </div>
     </div>
     <div class="hero-bottom">
