@@ -1,5 +1,3 @@
-export const config = { runtime: 'edge' };
-
 const AUTHOR_URL = 'https://marieclaire.perfil.com/autores/ashmateu';
 
 function extractMeta(html, property) {
@@ -9,25 +7,29 @@ function extractMeta(html, property) {
 }
 
 function extractExcerpt(html) {
-  // Primer párrafo con al menos 80 caracteres
   const m = html.match(/<p[^>]*>((?:(?!<p|<\/p>).){80,}?)<\/p>/s);
   if (!m) return null;
   return m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 320);
 }
 
-export default async function handler(req) {
-  // Vercel Cron envía Authorization: Bearer <CRON_SECRET>
-  const auth = req.headers.get('authorization') ?? '';
+export default async function handler(req, res) {
+  // Aceptar GET (cron) y POST
   const secret = process.env.CRON_SECRET;
-  if (secret && auth !== `Bearer ${secret}`) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+  if (secret) {
+    const auth = req.headers['authorization'] ?? '';
+    if (auth !== `Bearer ${secret}`) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
   }
 
-  const SUPABASE_URL = process.env.SUPABASE_URL;
-  const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+  const SUPABASE_URL = process.env.SUPABASE_URL
+    || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY
+    || process.env.SUPABASE_SECRET_KEY
+    || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
-    return new Response(JSON.stringify({ error: 'Missing env vars' }), { status: 500 });
+    return res.status(500).json({ error: 'Missing env vars', SUPABASE_URL: !!SUPABASE_URL, SUPABASE_SERVICE_KEY: !!SUPABASE_SERVICE_KEY });
   }
 
   const sbHeaders = {
@@ -41,7 +43,7 @@ export default async function handler(req) {
     headers: { 'User-Agent': 'Mozilla/5.0 (compatible; ashmateu-bot/1.0)' }
   });
   if (!pageRes.ok) {
-    return new Response(JSON.stringify({ error: 'Cannot fetch author page', status: pageRes.status }), { status: 502 });
+    return res.status(502).json({ error: 'Cannot fetch author page', status: pageRes.status });
   }
   const pageHtml = await pageRes.text();
 
@@ -52,7 +54,7 @@ export default async function handler(req) {
   )];
 
   if (!articleUrls.length) {
-    return new Response(JSON.stringify({ error: 'No articles found on author page' }), { status: 502 });
+    return res.status(502).json({ error: 'No articles found on author page' });
   }
 
   // 3. URLs ya existentes en Supabase
@@ -74,7 +76,6 @@ export default async function handler(req) {
       const artHtml = await artRes.text();
 
       let title = extractMeta(artHtml, 'og:title') ?? url;
-      // Limpiar sufijo " - Marie Claire Argentina" etc.
       title = title.replace(/\s*[-|–]\s*Marie Claire.*/i, '').trim();
 
       const cover_url = extractMeta(artHtml, 'og:image');
@@ -100,23 +101,19 @@ export default async function handler(req) {
       if (insertRes.ok) {
         inserted.push(title);
       } else {
-        const err = await insertRes.text();
-        errors.push({ url, reason: err });
+        errors.push({ url, reason: await insertRes.text() });
       }
     } catch (e) {
       errors.push({ url, reason: String(e) });
     }
   }
 
-  return new Response(JSON.stringify({
+  return res.status(200).json({
     checked: articleUrls.length,
     already_in_db: existingUrls.size,
     new_found: newUrls.length,
     inserted: inserted.length,
     articles: inserted,
     errors,
-  }, null, 2), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' }
   });
 }
