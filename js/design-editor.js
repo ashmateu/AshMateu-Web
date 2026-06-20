@@ -3,7 +3,20 @@
 
   const SUPABASE_URL = 'https://jrxklahobxpxmtnncvst.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd';
+  const SUPABASE_CDN = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
   const PREFIX = '__de';
+
+  // Espera al DOM y carga Supabase si hace falta
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.supabase) {
+      init();
+    } else {
+      const s = document.createElement('script');
+      s.src = SUPABASE_CDN;
+      s.onload = init;
+      document.head.appendChild(s);
+    }
+  });
 
   const DEFAULTS = {
     font_serif: 'Playfair Display',
@@ -22,14 +35,6 @@
   };
 
   let sb, session, current = { ...DEFAULTS };
-
-  // ── Esperar a que supabase esté disponible ──
-  function waitForSupabase(cb) {
-    if (window.supabase) return cb();
-    const int = setInterval(() => { if (window.supabase) { clearInterval(int); cb(); } }, 100);
-  }
-
-  waitForSupabase(init);
 
   async function init() {
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
