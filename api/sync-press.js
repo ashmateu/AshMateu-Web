@@ -41,17 +41,23 @@ function extractExcerpt(html) {
   return m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 320);
 }
 
-// Extrae el thumbnail asociado a cada URL desde la página del autor
+// Extrae el thumbnail asociado a cada URL desde la página del autor via JSON-LD
 function buildThumbnailMap(pageHtml, articleUrls) {
   const map = {};
-  // Busca bloques que contengan el link del artículo + una imagen cercana
-  for (const url of articleUrls) {
-    const escaped = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    // Ventana de 2000 chars alrededor del link
-    const re = new RegExp(`.{0,1500}${escaped}.{0,1500}`, 's');
-    const block = pageHtml.match(re)?.[0] ?? '';
-    const imgMatch = block.match(/https:\/\/fotos\.perfil\.com\/[^"' \s>]+(?:\.jpe?g|\.png|\.webp)/i);
-    if (imgMatch) map[url] = imgMatch[0];
+  // Extrae todos los bloques JSON-LD de la página
+  const jsonLdMatches = [...pageHtml.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const match of jsonLdMatches) {
+    try {
+      const data = JSON.parse(match[1]);
+      const items = Array.isArray(data) ? data : [data];
+      for (const item of items) {
+        const url = item.url;
+        const img = item.image?.url ?? item.image;
+        if (url && img && articleUrls.includes(url)) {
+          map[url] = typeof img === 'string' ? img : null;
+        }
+      }
+    } catch {}
   }
   return map;
 }
