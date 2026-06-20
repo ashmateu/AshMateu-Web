@@ -97,6 +97,26 @@
     #logoutBtn { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: none; border: none;
       color: rgba(255,255,255,0.45); cursor: pointer; }
     #logoutBtn:hover { color: var(--white); }
+    /* ── Diseño ── */
+    .design-section { margin-bottom: 36px; }
+    .design-section h3 { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sand); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .design-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .design-control { display: flex; flex-direction: column; gap: 8px; }
+    .design-control label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.45); }
+    .design-control input[type="text"], .design-control select { border: 1px solid rgba(0,0,0,0.12); padding: 9px 12px; font-family: var(--sans); font-size: 13px; background: var(--white); outline: none; width: 100%; }
+    .design-control input[type="text"]:focus, .design-control select:focus { border-color: var(--black); }
+    .design-control input[type="color"] { width: 48px; height: 36px; border: 1px solid rgba(0,0,0,0.12); padding: 2px; cursor: pointer; background: var(--white); }
+    .slider-row { display: flex; align-items: center; gap: 12px; }
+    .slider-row input[type="range"] { flex: 1; accent-color: var(--black); }
+    .slider-val { font-size: 12px; font-weight: 500; min-width: 44px; text-align: right; color: var(--black); }
+    .font-preview { margin-top: 6px; font-size: 18px; line-height: 1.4; color: rgba(0,0,0,0.6); min-height: 30px; }
+    .pos-grid { display: grid; grid-template-columns: repeat(3, 32px); gap: 4px; margin-top: 4px; }
+    .pos-btn { width: 32px; height: 32px; border: 1px solid rgba(0,0,0,0.15); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 9px; color: rgba(0,0,0,0.4); transition: background 0.15s; }
+    .pos-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+    .pos-btn:hover:not(.active) { background: rgba(0,0,0,0.05); }
+    .design-save-row { display: flex; align-items: center; gap: 16px; padding-top: 8px; }
+    .design-msg { font-size: 12px; color: var(--green); display: none; }
+    .overlay-preview { width: 100%; height: 60px; border: 1px solid rgba(0,0,0,0.1); margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -134,6 +154,7 @@
     <button class="tab" onclick="switchTab('blog')">Blog</button>
     <button class="tab" onclick="switchTab('prensa')">Prensa</button>
     <button class="tab" onclick="switchTab('ordenes')">Órdenes</button>
+    <button class="tab" onclick="switchTab('diseno')">Diseño</button>
   </nav>
 
   <!-- ── PRODUCTOS ── -->
@@ -173,6 +194,147 @@
       <button class="filter-btn" data-status="rejected" onclick="filterOrders('rejected', this)">Rechazadas</button>
     </div>
     <div id="ordersContainer"><p class="loading">Cargando...</p></div>
+  </div>
+
+  <!-- ── DISEÑO ── -->
+  <div id="tab-diseno" class="tab-content">
+    <div class="toolbar">
+      <h2>Diseño del sitio</h2>
+    </div>
+
+    <!-- Tipografía -->
+    <div class="design-section">
+      <h3>Tipografía</h3>
+      <div class="design-grid">
+        <div class="design-control">
+          <label>Fuente serif (títulos)</label>
+          <input type="text" id="dFontSerif" placeholder="ej: Cormorant Garamond" oninput="previewFont('serif')">
+          <div class="font-preview" id="prevSerif" style="font-family:'Playfair Display',Georgia,serif">Ash Mateu — directora creativa</div>
+        </div>
+        <div class="design-control">
+          <label>Fuente sans (texto)</label>
+          <input type="text" id="dFontSans" placeholder="ej: DM Sans" oninput="previewFont('sans')">
+          <div class="font-preview" id="prevSans">Moda, estilo y arte editorial</div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--sand);margin-top:12px">Escribí el nombre exacto de cualquier <a href="https://fonts.google.com" target="_blank" style="color:var(--sand)">Google Font</a>. Ej: Cormorant Garamond, DM Serif Display, Lora, Raleway</p>
+    </div>
+
+    <!-- Tamaños y espaciado -->
+    <div class="design-section">
+      <h3>Tamaño y espaciado</h3>
+      <div class="design-grid">
+        <div class="design-control">
+          <label>Tamaño de texto base</label>
+          <div class="slider-row">
+            <input type="range" id="dFontSize" min="13" max="20" step="1" oninput="updateSlider('dFontSize','valFontSize'); previewText()">
+            <span class="slider-val"><span id="valFontSize">16</span>px</span>
+          </div>
+        </div>
+        <div class="design-control">
+          <label>Altura de línea</label>
+          <div class="slider-row">
+            <input type="range" id="dLineHeight" min="1.2" max="2.2" step="0.05" oninput="updateSlider('dLineHeight','valLineHeight')">
+            <span class="slider-val" id="valLineHeight">1.75</span>
+          </div>
+        </div>
+        <div class="design-control">
+          <label>Espaciado entre letras</label>
+          <div class="slider-row">
+            <input type="range" id="dLetterSpacing" min="-0.05" max="0.2" step="0.005" oninput="updateSlider('dLetterSpacing','valLetterSpacing')">
+            <span class="slider-val"><span id="valLetterSpacing">0</span>em</span>
+          </div>
+        </div>
+        <div class="design-control">
+          <label>Espaciado entre secciones</label>
+          <div class="slider-row">
+            <input type="range" id="dSectionSpacing" min="40" max="200" step="4" oninput="updateSlider('dSectionSpacing','valSectionSpacing')">
+            <span class="slider-val"><span id="valSectionSpacing">96</span>px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fotos -->
+    <div class="design-section">
+      <h3>Efectos de fotos</h3>
+      <div class="design-grid">
+        <div class="design-control">
+          <label>Brillo</label>
+          <div class="slider-row">
+            <input type="range" id="dBrightness" min="50" max="130" step="1" oninput="updateSlider('dBrightness','valBrightness')">
+            <span class="slider-val"><span id="valBrightness">88</span>%</span>
+          </div>
+        </div>
+        <div class="design-control">
+          <label>Contraste</label>
+          <div class="slider-row">
+            <input type="range" id="dContrast" min="70" max="150" step="1" oninput="updateSlider('dContrast','valContrast')">
+            <span class="slider-val"><span id="valContrast">106</span>%</span>
+          </div>
+        </div>
+        <div class="design-control">
+          <label>Saturación</label>
+          <div class="slider-row">
+            <input type="range" id="dSaturation" min="0" max="150" step="1" oninput="updateSlider('dSaturation','valSaturation')">
+            <span class="slider-val"><span id="valSaturation">78</span>%</span>
+          </div>
+        </div>
+        <div class="design-control">
+          <label>Posición de imagen</label>
+          <div class="pos-grid" id="posGrid">
+            <button class="pos-btn" data-pos="top left" onclick="selectPos(this)" title="Arriba izquierda">↖</button>
+            <button class="pos-btn" data-pos="top center" onclick="selectPos(this)" title="Arriba centro">↑</button>
+            <button class="pos-btn" data-pos="top right" onclick="selectPos(this)" title="Arriba derecha">↗</button>
+            <button class="pos-btn" data-pos="center left" onclick="selectPos(this)" title="Centro izquierda">←</button>
+            <button class="pos-btn active" data-pos="center center" onclick="selectPos(this)" title="Centro">●</button>
+            <button class="pos-btn" data-pos="center right" onclick="selectPos(this)" title="Centro derecha">→</button>
+            <button class="pos-btn" data-pos="bottom left" onclick="selectPos(this)" title="Abajo izquierda">↙</button>
+            <button class="pos-btn" data-pos="bottom center" onclick="selectPos(this)" title="Abajo centro">↓</button>
+            <button class="pos-btn" data-pos="bottom right" onclick="selectPos(this)" title="Abajo derecha">↘</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Degradado sobre fotos -->
+    <div class="design-section">
+      <h3>Degradado sobre fotos</h3>
+      <div class="design-grid">
+        <div class="design-control">
+          <label>Color del degradado</label>
+          <input type="color" id="dOverlayColor" value="#000000" oninput="updateOverlayPreview()">
+        </div>
+        <div class="design-control">
+          <label>Opacidad del degradado</label>
+          <div class="slider-row">
+            <input type="range" id="dOverlayOpacity" min="0" max="80" step="1" oninput="updateSlider('dOverlayOpacity','valOverlayOpacity'); updateOverlayPreview()">
+            <span class="slider-val"><span id="valOverlayOpacity">0</span>%</span>
+          </div>
+        </div>
+        <div class="design-control">
+          <label>Dirección del degradado</label>
+          <select id="dOverlayDir" onchange="updateOverlayPreview()">
+            <option value="to bottom">De arriba a abajo</option>
+            <option value="to top">De abajo a arriba</option>
+            <option value="to right">De izquierda a derecha</option>
+            <option value="to left">De derecha a izquierda</option>
+            <option value="to bottom right">Diagonal ↘</option>
+            <option value="to bottom left">Diagonal ↙</option>
+          </select>
+        </div>
+        <div class="design-control">
+          <label>Vista previa</label>
+          <canvas class="overlay-preview" id="overlayPreview" width="300" height="60"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guardar -->
+    <div class="design-save-row">
+      <button class="btn btn-primary" onclick="saveDesignSettings()">Guardar cambios</button>
+      <span class="design-msg" id="designMsg">Guardado correctamente</span>
+    </div>
   </div>
 </div>
 
@@ -336,6 +498,7 @@ function switchTab(tab) {
   if (tab === 'ordenes') loadOrders();
   if (tab === 'blog') loadPosts();
   if (tab === 'prensa') loadPress();
+  if (tab === 'diseno') loadDesignSettings();
 }
 
 // ── PRODUCTOS ──
@@ -635,6 +798,147 @@ async function deletePress(id) {
   if (!confirm('¿Eliminar este artículo?')) return;
   await sb.from('press').delete().eq('id', id);
   loadPress();
+}
+
+// ── DISEÑO ──
+const DESIGN_DEFAULTS = {
+  font_serif: 'Playfair Display', font_sans: 'Inter',
+  font_size_base: '16', line_height: '1.75', letter_spacing: '0', section_spacing: '96',
+  img_brightness: '88', img_contrast: '106', img_saturation: '78',
+  img_position: 'center center',
+  overlay_color: '#000000', overlay_opacity: '0', overlay_direction: 'to bottom',
+};
+
+function updateSlider(sliderId, valId) {
+  const v = document.getElementById(sliderId).value;
+  const el = document.getElementById(valId);
+  if (el) el.textContent = parseFloat(v);
+}
+
+function previewFont(type) {
+  if (type === 'serif') {
+    const name = document.getElementById('dFontSerif').value.trim() || 'Playfair Display';
+    loadPreviewFont(name);
+    document.getElementById('prevSerif').style.fontFamily = `'${name}', Georgia, serif`;
+  } else {
+    const name = document.getElementById('dFontSans').value.trim() || 'Inter';
+    loadPreviewFont(name);
+    document.getElementById('prevSans').style.fontFamily = `'${name}', system-ui, sans-serif`;
+  }
+}
+
+function loadPreviewFont(name) {
+  const id = 'font-prev-' + name.replace(/\s+/g, '-');
+  if (!document.getElementById(id)) {
+    const link = document.createElement('link');
+    link.id = id;
+    link.rel = 'stylesheet';
+    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@400;700&display=swap`;
+    document.head.appendChild(link);
+  }
+}
+
+function selectPos(btn) {
+  document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function updateOverlayPreview() {
+  const canvas = document.getElementById('overlayPreview');
+  const ctx = canvas.getContext('2d');
+  const color = document.getElementById('dOverlayColor').value;
+  const opacity = parseFloat(document.getElementById('dOverlayOpacity').value) / 100;
+  const dir = document.getElementById('dOverlayDir').value;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Fondo gris para representar una foto
+  ctx.fillStyle = '#bbb';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Degradado encima
+  let x0 = 0, y0 = 0, x1 = 0, y1 = canvas.height;
+  if (dir === 'to top') { y0 = canvas.height; y1 = 0; }
+  else if (dir === 'to right') { x1 = canvas.width; y1 = 0; }
+  else if (dir === 'to left') { x0 = canvas.width; x1 = 0; y1 = 0; }
+  else if (dir === 'to bottom right') { x1 = canvas.width; }
+  else if (dir === 'to bottom left') { x0 = canvas.width; }
+
+  const grad = ctx.createLinearGradient(x0, y0, x1, y1);
+  const r = parseInt(color.slice(1,3),16), g = parseInt(color.slice(3,5),16), b = parseInt(color.slice(5,7),16);
+  grad.addColorStop(0, `rgba(${r},${g},${b},${opacity})`);
+  grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+async function loadDesignSettings() {
+  const { data } = await sb.from('site_settings').select('key,value');
+  const s = { ...DESIGN_DEFAULTS };
+  (data || []).forEach(r => { if (r.key in DESIGN_DEFAULTS) s[r.key] = r.value; });
+
+  document.getElementById('dFontSerif').value = s.font_serif;
+  document.getElementById('dFontSans').value  = s.font_sans;
+
+  previewFont('serif');
+  previewFont('sans');
+
+  const setSlider = (id, valId, val) => {
+    document.getElementById(id).value = val;
+    const el = document.getElementById(valId);
+    if (el) el.textContent = parseFloat(val);
+  };
+  setSlider('dFontSize',       'valFontSize',       s.font_size_base);
+  setSlider('dLineHeight',     'valLineHeight',      s.line_height);
+  setSlider('dLetterSpacing',  'valLetterSpacing',   s.letter_spacing);
+  setSlider('dSectionSpacing', 'valSectionSpacing',  s.section_spacing);
+  setSlider('dBrightness',     'valBrightness',      s.img_brightness);
+  setSlider('dContrast',       'valContrast',        s.img_contrast);
+  setSlider('dSaturation',     'valSaturation',      s.img_saturation);
+  setSlider('dOverlayOpacity', 'valOverlayOpacity',  s.overlay_opacity);
+
+  document.getElementById('dOverlayColor').value = s.overlay_color;
+  document.getElementById('dOverlayDir').value   = s.overlay_direction;
+
+  // Posición: activar el botón correcto
+  document.querySelectorAll('.pos-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.pos === s.img_position);
+  });
+
+  updateOverlayPreview();
+}
+
+async function saveDesignSettings() {
+  const activePos = document.querySelector('.pos-btn.active');
+  const settings = {
+    font_serif:       document.getElementById('dFontSerif').value.trim() || DESIGN_DEFAULTS.font_serif,
+    font_sans:        document.getElementById('dFontSans').value.trim()  || DESIGN_DEFAULTS.font_sans,
+    font_size_base:   document.getElementById('dFontSize').value,
+    line_height:      document.getElementById('dLineHeight').value,
+    letter_spacing:   document.getElementById('dLetterSpacing').value,
+    section_spacing:  document.getElementById('dSectionSpacing').value,
+    img_brightness:   document.getElementById('dBrightness').value,
+    img_contrast:     document.getElementById('dContrast').value,
+    img_saturation:   document.getElementById('dSaturation').value,
+    img_position:     activePos ? activePos.dataset.pos : 'center center',
+    overlay_color:    document.getElementById('dOverlayColor').value,
+    overlay_opacity:  document.getElementById('dOverlayOpacity').value,
+    overlay_direction: document.getElementById('dOverlayDir').value,
+  };
+
+  const upserts = Object.entries(settings).map(([key, value]) => ({ key, value: String(value) }));
+  const { error } = await sb.from('site_settings').upsert(upserts, { onConflict: 'key' });
+
+  const msg = document.getElementById('designMsg');
+  if (error) {
+    msg.style.color = 'var(--red)';
+    msg.textContent = 'Error: ' + error.message;
+  } else {
+    msg.style.color = 'var(--green)';
+    msg.textContent = 'Guardado correctamente';
+  }
+  msg.style.display = 'inline';
+  setTimeout(() => { msg.style.display = 'none'; }, 3000);
 }
 </script>
 
