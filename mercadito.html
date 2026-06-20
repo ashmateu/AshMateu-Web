@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Mercadito de Ash — Ash Mateu</title>
+    <meta name="description" content="Piezas seleccionadas y contenido digital curado por Ash Mateu. Vintage, accesorios y recursos de moda.">
+    <link rel="canonical" href="https://ashmateu.com/mercadito.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="El Mercadito de Ash — Ash Mateu">
+    <meta property="og:description" content="Piezas seleccionadas y contenido digital curado por Ash Mateu.">
+    <meta property="og:url" content="https://ashmateu.com/mercadito.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="El Mercadito de Ash — Ash Mateu">
+    <meta name="twitter:description" content="Piezas seleccionadas y contenido digital curado por Ash Mateu.">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --black:  #0A0A0A;
+            --ivory:  #F7F3EE;
+            --white:  #FFFFFF;
+            --sand:   #B5A898;
+            --gutter: 56px;
+            --serif:  'Playfair Display', Georgia, serif;
+            --sans:   'Inter', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            font-weight: 300;
+            color: var(--black);
+            background: var(--ivory);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px var(--gutter);
+            background: rgba(247, 243, 238, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(181, 168, 152, 0.25);
+        }
+
+        .nav-logo {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active { opacity: 1; }
+
+        /* ── Header ── */
+        .mercadito-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 160px var(--gutter) 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 96px;
+            align-items: end;
+        }
+
+        .mercadito-header h1 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(52px, 7vw, 104px);
+            line-height: 0.95;
+            letter-spacing: -0.01em;
+        }
+
+        .mercadito-header h1 em {
+            font-style: italic;
+            color: var(--sand);
+        }
+
+        .mercadito-header-desc {
+            padding-bottom: 8px;
+        }
+
+        .mercadito-header-desc p {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.6);
+            max-width: 380px;
+        }
+
+        .mercadito-header-desc p + p {
+            margin-top: 20px;
+        }
+
+        /* ── Filter tabs ── */
+        .mercadito-filters {
+            padding: 48px var(--gutter) 0;
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid rgba(10,10,10,0.1);
+        }
+
+        .cat-btn {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: none;
+            border: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            opacity: 0.35;
+            transition: opacity 0.2s;
+            border-bottom: 1px solid transparent;
+            margin-bottom: -1px;
+            position: relative;
+        }
+
+        .cat-btn:hover { opacity: 0.7; }
+
+        .cat-btn.active {
+            opacity: 1;
+            border-bottom-color: var(--black);
+        }
+
+        /* ── Product grid ── */
+        .mercadito-section {
+            padding: 64px var(--gutter) 120px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px 32px;
+        }
+
+        /* ── Product card ── */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card { display: none; }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background: #1a1a1a;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.88) contrast(1.06) saturate(0.78);
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.03);
+        }
+
+        .product-img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+        }
+
+        .product-img-placeholder span {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .product-cat-tag {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-family: var(--serif);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(10,10,10,0.55);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid rgba(10,10,10,0.08);
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--black);
+            letter-spacing: -0.01em;
+        }
+
+        .product-price .currency {
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--sand);
+            margin-right: 3px;
+        }
+
+        /* Botón MercadoPago */
+        .btn-mp {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 18px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-mp:hover { opacity: 0.7; }
+
+        .btn-mp svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Sold out state */
+        .product-card.sold-out .product-img::after {
+            content: 'Vendido';
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: rgba(10,10,10,0.75);
+            padding: 6px 10px;
+        }
+
+        .product-card.sold-out .btn-mp {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* ── Aviso ── */
+        .mercadito-aviso {
+            margin: 0 var(--gutter) 0;
+            padding: 24px 32px;
+            background: rgba(181,168,152,0.12);
+            border-left: 2px solid var(--sand);
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(10,10,10,0.6);
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 32px var(--gutter);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--white); }
+
+        .footer-copy {
+            font-size: 10px;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Hamburger ── */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 201;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 1px;
+            background: var(--black);
+            transition: transform 0.25s, opacity 0.25s;
+        }
+        .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            :root { --gutter: 24px; }
+
+            .nav-hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                inset: 0;
+                background: var(--ivory);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 44px;
+                z-index: 200;
+                display: none;
+            }
+            .nav-links.is-open { display: flex; }
+            .nav-links a { font-size: 20px; letter-spacing: 0.2em; opacity: 0.75; }
+
+            .mercadito-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 120px var(--gutter) 72px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px 20px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .mercadito-filters { gap: 0; }
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo">Ash Mateu</a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/#trabajo">Trabajo</a></li>
+        <li><a href="/#servicios">Servicios</a></li>
+        <li><a href="/mercadito.html" class="active">Mercadito</a></li>
+        <li><a href="/#sobre">Sobre</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- HEADER -->
+<header class="mercadito-header">
+    <h1>El Mercadito<br><em>de Ash</em></h1>
+    <div class="mercadito-header-desc">
+        <p>Piezas seleccionadas con criterio de stylist. Vintage que vale, accesorios que duran.</p>
+        <p>También: contenido digital para aprender a ver la moda de otra manera.</p>
+    </div>
+</header>
+
+<!-- FILTERS -->
+<div class="mercadito-filters">
+    <button class="cat-btn active" data-filter="all">Todos</button>
+    <button class="cat-btn" data-filter="pieza">Piezas</button>
+    <button class="cat-btn" data-filter="digital">Digital</button>
+</div>
+
+<!-- AVISO -->
+<p class="mercadito-aviso" style="margin-top:40px;">
+    Pagos procesados por MercadoPago. Envíos a todo el país. Para consultas escribí a <strong>ash.mateu@gmail.com</strong> o por Instagram <strong>@ashmateu</strong>.
+</p>
+
+<!-- PRODUCTS -->
+<section class="mercadito-section">
+    <div class="products-grid" id="productsGrid">
+        <p id="loadingMsg" style="grid-column:1/-1;font-size:13px;color:var(--sand);padding:24px 0;">Cargando productos...</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <span class="footer-logo">Ash Mateu</span>
+    <ul class="footer-links">
+        <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+    </ul>
+    <span class="footer-copy">&#169; 2026</span>
+</footer>
+
+<script>
+// ── Nav hamburger ──
+const hamburger = document.getElementById('navHamburger');
+const navLinks  = document.getElementById('navLinks');
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('is-open');
+        navLinks.classList.toggle('is-open', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            hamburger.classList.remove('is-open');
+            navLinks.classList.remove('is-open');
+        });
+    });
+}
+
+// ── Config — reemplazar con tus valores de Supabase ──
+const SUPABASE_URL = 'https://jrxklahobxpxmtnncvst.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd';
+
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const arrowSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M12 3l9 9-9 9"/></svg>`;
+
+let allProducts = [];
+let activeFilter = 'all';
+
+function formatPrice(price, currency) {
+    const n = Number(price);
+    if (currency === 'ARS') return `<span class="currency">ARS</span>${n.toLocaleString('es-AR')}`;
+    return `<span class="currency">USD</span>${n % 1 === 0 ? n : n.toFixed(2)}`;
+}
+
+function cardHTML(p) {
+    const soldOut = p.stock === 0 ? 'sold-out' : '';
+    const img = p.image_url
+        ? `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`
+        : `<div class="product-img-placeholder"><span>Imagen próximamente</span></div>`;
+    const catLabel = p.category === 'digital' ? 'Digital' : 'Pieza';
+    const btnContent = p.mp_link && p.stock !== 0
+        ? `<a class="btn-mp" href="${p.mp_link}" target="_blank" rel="noopener">${arrowSvg} Comprar</a>`
+        : `<span class="btn-mp" style="opacity:0.25;pointer-events:none">${arrowSvg} ${p.stock === 0 ? 'Vendido' : 'Próximamente'}</span>`;
+
+    return `
+        <article class="product-card ${soldOut}" data-cat="${p.category}">
+            <div class="product-img">${img}</div>
+            <span class="product-cat-tag">${catLabel}</span>
+            <h2 class="product-name">${p.name}</h2>
+            <p class="product-desc">${p.description ?? ''}</p>
+            <div class="product-footer">
+                <span class="product-price">${formatPrice(p.price, p.currency)}</span>
+                ${btnContent}
+            </div>
+        </article>`;
+}
+
+function applyFilter(filter) {
+    activeFilter = filter;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
+    });
+}
+
+async function loadProducts() {
+    const grid = document.getElementById('productsGrid');
+
+    const { data, error } = await sb
+        .from('products')
+        .select('*')
+        .eq('active', true)
+        .order('created_at', { ascending: false });
+
+    if (error || !data) {
+        // Supabase no configurado aún — no mostrar error al visitante
+        document.getElementById('loadingMsg').remove();
+        return;
+    }
+
+    allProducts = data;
+    grid.innerHTML = data.length
+        ? data.map(cardHTML).join('')
+        : '<p style="grid-column:1/-1;font-size:13px;color:var(--sand);padding:24px 0">Próximos productos disponibles pronto.</p>';
+
+    applyFilter(activeFilter);
+}
+
+// Filtro de categorías
+document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+});
+
+loadProducts();
+</script>
+
+</body>
+</html>

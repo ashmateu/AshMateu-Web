@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ash Mateu — Dirección Creativa & Styling</title>
+    <meta name="description" content="Ash Mateu es stylist, directora creativa y consultora de moda con base entre Buenos Aires, Nueva York y París.">
+    <link rel="canonical" href="https://ashmateu.com">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ash Mateu — Dirección Creativa & Styling">
+    <meta property="og:description" content="Stylist y directora creativa. Chanel, Gucci, Miu Miu. Buenos Aires, Nueva York, París.">
+    <meta property="og:url" content="https://ashmateu.com">
+    <meta property="og:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="800">
+    <meta property="og:image:alt" content="Ash Mateu — Editorial Chanel Haute Couture">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ash Mateu — Dirección Creativa & Styling">
+    <meta name="twitter:description" content="Stylist y directora creativa. Chanel, Gucci, Miu Miu. Buenos Aires, Nueva York, París.">
+    <meta name="twitter:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.jpg">
+
+    <link rel="preload" as="image" href="images/extracted/chanel-hc/img-005.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ── Tokens ── */
+        :root {
+            --black:  #0A0A0A;
+            --ivory:  #F7F3EE;
+            --white:  #FFFFFF;
+            --sand:   #B5A898;
+            --gutter: 56px;
+            --serif:  'Playfair Display', Georgia, serif;
+            --sans:   'Inter', system-ui, sans-serif;
+        }
+
+        /* ── Base ── */
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            font-weight: 300;
+            color: var(--black);
+            background: var(--ivory);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px var(--gutter);
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        nav.scrolled {
+            background: rgba(247, 243, 238, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(181, 168, 152, 0.25);
+        }
+
+        .nav-logo {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 44px;
+            list-style: none;
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 201;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 1px;
+            background: var(--black);
+            transition: transform 0.25s, opacity 0.25s;
+        }
+        .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        .nav-links a {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--black);
+            opacity: 0.55;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+
+        /* ── Hero ── */
+        #hero {
+            min-height: 100vh;
+            background: var(--ivory);
+            display: grid;
+            grid-template-rows: 1fr auto;
+            padding: 0 var(--gutter);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 140px;
+            padding-bottom: 60px;
+        }
+
+        .hero-eyebrow {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 36px;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(48px, 6.5vw, 92px);
+            font-weight: 400;
+            line-height: 1.06;
+            letter-spacing: -0.01em;
+            color: var(--black);
+            max-width: 860px;
+            margin-bottom: 36px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--black);
+            opacity: 0.55;
+            margin-bottom: 52px;
+            max-width: 400px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .cta-primary {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--black);
+            border-bottom: 1px solid var(--black);
+            padding-bottom: 3px;
+            transition: opacity 0.2s;
+        }
+
+        .cta-primary:hover { opacity: 0.4; }
+
+        .cta-secondary {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--black);
+            opacity: 0.4;
+            transition: opacity 0.2s;
+        }
+
+        .cta-secondary:hover { opacity: 1; }
+
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0 44px;
+            border-top: 1px solid rgba(181, 168, 152, 0.35);
+        }
+
+        .hero-location {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--sand);
+        }
+
+        .hero-scroll {
+            font-size: 14px;
+            color: var(--black);
+            opacity: 0.3;
+        }
+
+        /* ── Section base ── */
+        section { padding: 120px var(--gutter); }
+
+        .section-inner { max-width: 1360px; margin: 0 auto; }
+
+        .section-label {
+            display: block;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 64px;
+        }
+
+        /* ── Portfolio Strip ── */
+        #trabajo { background: var(--black); }
+
+        .strip-header {
+            padding: 80px var(--gutter) 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .strip-hint {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(181,168,152,0.45);
+        }
+
+        .strip-wrap {
+            position: relative;
+        }
+
+        .strip-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(10,10,10,0.55);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s, background 0.2s;
+            backdrop-filter: blur(6px);
+        }
+        .strip-arrow svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .strip-arrow:hover { background: rgba(10,10,10,0.85); }
+        .strip-arrow--left  { left: 16px; }
+        .strip-arrow--right { right: 16px; }
+        .strip-arrow.is-hidden { opacity: 0; pointer-events: none; }
+
+        .portfolio-strip {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            cursor: grab;
+            scroll-behavior: smooth;
+        }
+        .portfolio-strip::-webkit-scrollbar { display: none; }
+        .portfolio-strip.is-dragging { cursor: grabbing; scroll-behavior: auto; }
+
+        .strip-track {
+            display: flex;
+            gap: 2px;
+            padding: 0 var(--gutter) 80px;
+            height: 84vh;
+            min-height: 520px;
+        }
+
+        .strip-item {
+            flex-shrink: 0;
+            width: 34vw;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background: #111;
+            text-decoration: none;
+            display: block;
+        }
+
+        .strip-item--wide { width: 54vw; }
+
+        .strip-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            filter: brightness(0.88) contrast(1.06) saturate(0.78);
+            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1), filter 0.5s;
+            display: block;
+        }
+
+        .strip-item:hover .strip-img {
+            transform: scale(1.04);
+            filter: brightness(0.65) contrast(1.1) saturate(0.72);
+        }
+
+        .strip-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 36px 32px;
+            background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .strip-meta {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.35s, transform 0.35s;
+        }
+
+        .strip-title {
+            font-family: var(--serif);
+            font-size: clamp(16px, 1.8vw, 26px);
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1.15;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.35s 0.06s, transform 0.35s 0.06s;
+        }
+
+        .strip-item:hover .strip-meta,
+        .strip-item:hover .strip-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .strip-number {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.25);
+            transition: color 0.3s;
+        }
+        .strip-item:hover .strip-number { color: rgba(255,255,255,0.5); }
+
+        /* ── Services ── */
+        #servicios { background: var(--ivory); }
+
+        .services-list { list-style: none; }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 48px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(181, 168, 152, 0.38);
+            align-items: baseline;
+        }
+
+        .service-item:last-child {
+            border-bottom: 1px solid rgba(181, 168, 152, 0.38);
+        }
+
+        .service-name {
+            font-family: var(--serif);
+            font-size: clamp(19px, 1.8vw, 26px);
+            font-weight: 400;
+            line-height: 1.25;
+        }
+
+        .service-desc {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--black);
+            opacity: 0.62;
+            max-width: 560px;
+        }
+
+        /* ── About ── */
+        #sobre { background: var(--ivory); }
+
+        #sobre .section-label { margin-bottom: 16px; }
+
+        .about-editorial-headline {
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(64px, 9vw, 136px);
+            line-height: 0.9;
+            color: var(--black);
+            margin-bottom: 64px;
+            letter-spacing: -0.015em;
+        }
+
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 96px;
+            align-items: start;
+        }
+
+        .about-video-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .about-video-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        .yt-thumb {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .yt-play {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.18);
+            transition: background 0.2s;
+        }
+        .yt-play:hover { background: rgba(0,0,0,0.32); }
+        .yt-play svg {
+            width: 56px;
+            height: 56px;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+        }
+
+        .about-text-block { padding-top: 8px; }
+
+        .about-text {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.9;
+            color: var(--black);
+        }
+
+        .about-text p + p { margin-top: 28px; }
+
+        /* ── Contact ── */
+        #contacto {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        #contacto .section-label { color: rgba(181,168,152,0.65); }
+
+        .contact-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 96px;
+            align-items: start;
+        }
+
+        .contact-headline {
+            font-family: var(--serif);
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 400;
+            line-height: 1.22;
+            color: var(--white);
+        }
+
+        .contact-sub {
+            margin-top: 28px;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.42);
+        }
+
+        .contact-info {
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .contact-info-line {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sand);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field {
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            padding: 22px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-field:first-child { border-top: 1px solid rgba(255,255,255,0.12); }
+
+        .form-label {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--sand);
+            opacity: 0.75;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: var(--sans);
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--white);
+            width: 100%;
+            resize: none;
+        }
+
+        .form-field textarea { min-height: 88px; }
+
+        ::placeholder { color: rgba(255,255,255,0.2); }
+
+        .form-submit {
+            margin-top: 44px;
+            align-self: flex-start;
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: none;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.28);
+            padding-bottom: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .form-submit:hover { opacity: 0.45; }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 32px var(--gutter);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: rgba(255,255,255,0.65); }
+
+        .footer-copy {
+            font-size: 10px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            :root { --gutter: 24px; }
+
+            /* Nav: hamburger visible, links como overlay */
+            .nav-hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                inset: 0;
+                background: var(--ivory);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 44px;
+                z-index: 200;
+                display: none;
+            }
+            .nav-links.is-open { display: flex; }
+            .nav-links a {
+                font-size: 20px;
+                letter-spacing: 0.2em;
+                opacity: 0.75;
+            }
+
+            /* Hero mobile */
+            #hero { min-height: 100svh; }
+            .hero-content {
+                padding-top: 100px;
+                padding-bottom: 24px;
+                justify-content: center;
+            }
+            .hero-eyebrow { display: none; }
+            .hero-title {
+                font-size: clamp(40px, 11vw, 60px);
+                line-height: 1.04;
+                margin-bottom: 24px;
+            }
+            .hero-subtitle {
+                max-width: none;
+                margin-bottom: 36px;
+                font-size: 13px;
+            }
+            .hero-bottom { padding: 18px 0 24px; }
+
+            /* Carousel */
+            .strip-item { width: 80vw; }
+            .strip-item--wide { width: 92vw; }
+            .strip-track { height: 72vh; min-height: 380px; }
+
+            /* Overlay en mobile: solo título, siempre visible */
+            .strip-overlay { padding: 20px 18px; }
+            .strip-meta { display: none; }
+            .strip-title { font-size: 15px; opacity: 1; transform: none; }
+            .strip-number { display: none; }
+            .strip-arrow { width: 36px; height: 36px; }
+            .strip-arrow svg { width: 14px; height: 14px; }
+
+            /* Resto */
+            .service-item { grid-template-columns: 1fr; gap: 10px; }
+            .about-inner,
+            .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+            .about-photo { aspect-ratio: 4 / 3; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+    </style>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://ashmateu.com/#ash",
+      "name": "Ash Mateu",
+      "jobTitle": ["Fashion Stylist", "Creative Director", "Fashion Consultant"],
+      "description": "Stylist y directora creativa. Chanel, Louis Vuitton, Miu Miu, Dolce & Gabbana, Gucci. Buenos Aires, Nueva York, París.",
+      "url": "https://ashmateu.com",
+      "email": "ash.mateu@gmail.com",
+      "sameAs": ["https://www.instagram.com/ashmateu"],
+      "knowsAbout": ["Fashion Styling", "Creative Direction", "Fashion Consulting", "Editorial Photography", "Fashion Education"],
+      "workLocation": [
+        { "@type": "City", "name": "Buenos Aires" },
+        { "@type": "City", "name": "New York" },
+        { "@type": "City", "name": "Paris" }
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://ashmateu.com/#service",
+      "name": "Ash Mateu — Styling & Dirección Creativa",
+      "description": "Styling editorial, dirección creativa y consultoría de moda para marcas, publicaciones y producciones audiovisuales.",
+      "url": "https://ashmateu.com",
+      "provider": { "@id": "https://ashmateu.com/#ash" },
+      "areaServed": ["AR", "US", "FR"],
+      "serviceType": ["Fashion Styling", "Creative Direction", "Fashion Consulting"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "ash.mateu@gmail.com",
+        "contactType": "sales"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+    <a href="#hero" class="nav-logo">Ash Mateu</a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#trabajo">Trabajo</a></li>
+        <li><a href="/blog.html">Notas</a></li>
+        <li><a href="/prensa.html">Prensa</a></li>
+        <li><a href="/mercadito.html">Mercadito</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-content">
+        <p class="hero-eyebrow">Ash Mateu</p>
+        <h1 class="hero-title">Estrategia creativa<br>con verdad cultural.</h1>
+        <p class="hero-subtitle">Chanel, Miu Miu, Gucci. Tapas de Marie Claire.<br>Dolores Fonzi, Griselda Siciliani. Buenos Aires, Nueva York, París.</p>
+        <div class="hero-ctas">
+            <a href="#trabajo" class="cta-primary">Ver trabajo</a>
+            <a href="#contacto" class="cta-secondary">Contacto</a>
+        </div>
+    </div>
+    <div class="hero-bottom">
+        <span class="hero-location">Buenos Aires &nbsp;&mdash;&nbsp; Nueva York &nbsp;&mdash;&nbsp; París</span>
+        <span class="hero-scroll">&#8595;</span>
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="trabajo">
+    <div class="strip-header">
+        <span class="section-label" style="margin-bottom:0">Trabajo</span>
+        <span class="strip-hint">Arrastrar para explorar</span>
+    </div>
+    <div class="strip-wrap">
+    <button class="strip-arrow strip-arrow--left is-hidden" id="arrowLeft" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="strip-arrow strip-arrow--right" id="arrowRight" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+    <div class="portfolio-strip" id="portfolioStrip">
+        <div class="strip-track">
+
+            <a class="strip-item" href="projects/chanel-hc.html">
+                <img class="strip-img" src="images/extracted/chanel-hc/img-005.webp" alt="Chanel Haute Couture" loading="eager" fetchpriority="high">
+                <span class="strip-number">01</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Dirección Creativa — Nueva York</p>
+                    <h3 class="strip-title">Chanel Haute Couture<br>× Marie Claire Argentina</h3>
+                </div>
+            </a>
+
+            <a class="strip-item" href="projects/valentina-ferrer.html">
+                <img class="strip-img" src="images/extracted/valentina-miumiu/img-000.webp" alt="Valentina Ferrer Miu Miu" loading="lazy">
+                <span class="strip-number">02</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Styling — Portada — Nueva York 2023</p>
+                    <h3 class="strip-title">Valentina Ferrer<br>× Miu Miu</h3>
+                </div>
+            </a>
+
+            <a class="strip-item" href="projects/leonie-hanne.html">
+                <img class="strip-img" src="images/extracted/leonie-dg/img-003.webp" alt="Leonie Hanne Dolce & Gabbana" loading="lazy">
+                <span class="strip-number">03</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Dirección Creativa — Nueva York 2024</p>
+                    <h3 class="strip-title">Leonie Hanne<br>× Dolce & Gabbana</h3>
+                </div>
+            </a>
+
+            <a class="strip-item" href="projects/chanel-williamsburg.html">
+                <img class="strip-img" src="images/extracted/chanel-pap/img-000.webp" alt="Chanel Prêt-à-porter Williamsburg" loading="lazy">
+                <span class="strip-number">04</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Styling — Brooklyn, Nueva York</p>
+                    <h3 class="strip-title">Chanel Prêt-à-porter<br>Williamsburg</h3>
+                </div>
+            </a>
+
+            <a class="strip-item" href="projects/dolores-fonzi.html">
+                <img class="strip-img" src="images/extracted/dolores-fonzi/img-003.webp" alt="Dolores Fonzi" loading="lazy">
+                <span class="strip-number">05</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Celebrity Styling</p>
+                    <h3 class="strip-title">Dolores Fonzi</h3>
+                </div>
+            </a>
+
+            <a class="strip-item strip-item--wide" href="projects/calu-chinatown.html">
+                <img class="strip-img" src="images/extracted/calu-chinatown/img-004.webp" alt="Calu Rivero Chinese New Year" loading="lazy">
+                <span class="strip-number">06</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Styling — Chinatown, Manhattan</p>
+                    <h3 class="strip-title">Calu Rivero<br>Chinese New Year</h3>
+                </div>
+            </a>
+
+            <a class="strip-item" href="projects/netflix-mf.html">
+                <img class="strip-img" src="images/extracted/netflix-mf/img-000.webp" alt="Netflix Martín Fierro" loading="lazy">
+                <span class="strip-number">07</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Celebrity Styling — Red Carpet</p>
+                    <h3 class="strip-title">Netflix<br>× Martín Fierro</h3>
+                </div>
+            </a>
+
+            <a class="strip-item" href="projects/gucci-rural.html">
+                <img class="strip-img" src="images/extracted/gucci-rural/img-001.webp" alt="Editorial Rural Gucci" loading="lazy">
+                <span class="strip-number">08</span>
+                <div class="strip-overlay">
+                    <p class="strip-meta">Styling — Upstate New York</p>
+                    <h3 class="strip-title">Editorial Rural<br>× Gucci</h3>
+                </div>
+            </a>
+
+        </div>
+    </div>
+    </div><!-- /.strip-wrap -->
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+    <div class="section-inner">
+        <span class="section-label">Sobre</span>
+        <h2 class="about-editorial-headline">Ash Mateu</h2>
+        <div class="about-inner">
+            <div class="about-video-wrap" id="ytFacade">
+                <img class="yt-thumb"
+                     src="https://img.youtube.com/vi/7lB4UjBaTyQ/hqdefault.jpg"
+                     alt="Vlog de Ash — Styling Gime Accardi, Martín Fierro de Teatro 2025">
+                <div class="yt-play" aria-label="Reproducir video">
+                    <svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="34" cy="34" r="34" fill="white" fill-opacity="0.92"/>
+                        <polygon points="27,20 54,34 27,48" fill="#0A0A0A"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="about-text-block">
+                <div class="about-text">
+                    <p>Ash Mateu trabaja en moda desde que moda era otra cosa. Stylist, directora creativa, consultora: los títulos cambian según el proyecto, pero el trabajo siempre es el mismo. Encontrar la imagen que conecta.</p>
+                    <p>Chanel, Louis Vuitton, Miu Miu, Dolce & Gabbana, Gucci, Nike, L'Oréal, Mercedes Benz. Tapa de Marie Claire Argentina más veces de las que recuerda con exactitud. Styling para Dolores Fonzi, Griselda Siciliani, Valentina Zenere y buena parte del elenco de Netflix Argentina.</p>
+                    <p>En 2015 fundó Inside Studios, escuela de moda online que llegó a tener más de 20.000 estudiantes en toda la región.</p>
+                    <p>Disponible para proyectos editoriales, campañas y colaboraciones de marca.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+    <div class="section-inner">
+        <span class="section-label">Servicios</span>
+        <ul class="services-list">
+            <li class="service-item">
+                <h3 class="service-name">Dirección creativa</h3>
+                <p class="service-desc">De la idea al resultado. Concibo y produzco editoriales, campañas y contenidos para marcas que necesitan más que un proveedor.</p>
+            </li>
+            <li class="service-item">
+                <h3 class="service-name">Styling editorial y publicitario</h3>
+                <p class="service-desc">Construyo looks para producciones fotográficas y audiovisuales. Trabajo directo con marcas, fotógrafos y equipos completos de producción.</p>
+            </li>
+            <li class="service-item">
+                <h3 class="service-name">Celebrity styling</h3>
+                <p class="service-desc">Red carpets, eventos, prensa, apariciones. El styling para figuras públicas tiene sus propias reglas y su propio ritmo.</p>
+            </li>
+            <li class="service-item">
+                <h3 class="service-name">Consultoría de marca</h3>
+                <p class="service-desc">Moda, belleza, cultura. Trabajo sobre identidad visual y tono de comunicación con marcas que necesitan una perspectiva que viene del set, no de una presentación de PowerPoint.</p>
+            </li>
+            <li class="service-item">
+                <h3 class="service-name">Trend research</h3>
+                <p class="service-desc">Analizo qué está pasando en la cultura antes de que aparezca en las tendencias, y lo traduzco en decisiones concretas de comunicación.</p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <div class="section-inner">
+        <span class="section-label">Contacto</span>
+        <div class="contact-inner">
+            <div>
+                <h2 class="contact-headline">Nuevos proyectos para 2026. Escribime.</h2>
+                <div class="contact-info">
+                    <span class="contact-info-line">ash.mateu@gmail.com</span>
+                    <span class="contact-info-line">@ashmateu</span>
+                </div>
+            </div>
+            <!-- Formspree: creá cuenta en formspree.io con ash.mateu@gmail.com
+                 y reemplazá FORMSPREE_ID por el código de tu formulario (ej: xabcdefg) -->
+            <form class="contact-form" id="contactForm"
+                  action="https://formspree.io/f/xeebjqpq" method="POST">
+                <input type="hidden" name="_subject" value="Nuevo contacto — ashmateu.com">
+                <input type="hidden" name="_language" value="es">
+                <div class="form-field">
+                    <label class="form-label" for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Contame sobre tu proyecto"></textarea>
+                </div>
+                <button type="submit" class="form-submit" id="formBtn">Enviar &#8594;</button>
+                <p id="formStatus" style="display:none;margin-top:16px;font-size:0.8rem;color:var(--sand);letter-spacing:.08em;"></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <span class="footer-logo">Ash Mateu</span>
+    <ul class="footer-links">
+        <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
+        <li><a href="#trabajo">Trabajo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <span class="footer-copy">&#169; 2025</span>
+</footer>
+
+<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 48);
+    }, { passive: true });
+
+    // Carousel
+    const strip = document.getElementById('portfolioStrip');
+    if (strip) {
+        const SPEED = 0.6;      // px per frame auto-scroll
+        const WHEEL_MULT = 3;   // wheel multiplier
+        const DRAG_MULT = 1.8;  // drag multiplier
+
+        let paused = false;
+        let rafId;
+
+        // Auto-scroll loop
+        function autoScroll() {
+            if (!paused) {
+                strip.scrollLeft += SPEED;
+                // Loop back to start when reaching end
+                if (strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 2) {
+                    strip.scrollLeft = 0;
+                }
+            }
+            rafId = requestAnimationFrame(autoScroll);
+        }
+        rafId = requestAnimationFrame(autoScroll);
+
+        // Pause on hover
+        strip.addEventListener('mouseenter', () => { paused = true; });
+        strip.addEventListener('mouseleave', () => { paused = false; });
+
+        // Wheel → solo intercepta gesto horizontal del trackpad
+        strip.addEventListener('wheel', (e) => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                e.preventDefault();
+                paused = true;
+                strip.scrollLeft += e.deltaX * WHEEL_MULT;
+                clearTimeout(strip._wheelTimer);
+                strip._wheelTimer = setTimeout(() => { paused = false; }, 1200);
+            }
+            // scroll vertical pasa al navegador normalmente
+        }, { passive: false });
+
+        // Drag to scroll (mouse)
+        let dragging = false, startX = 0, scrollStart = 0;
+
+        strip.addEventListener('mousedown', (e) => {
+            dragging = true;
+            paused = true;
+            startX = e.pageX;
+            scrollStart = strip.scrollLeft;
+            strip.classList.add('is-dragging');
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!dragging) return;
+            strip.scrollLeft = scrollStart - (e.pageX - startX) * DRAG_MULT;
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (!dragging) return;
+            dragging = false;
+            strip.classList.remove('is-dragging');
+            clearTimeout(strip._dragTimer);
+            strip._dragTimer = setTimeout(() => { paused = false; }, 1500);
+        });
+
+        // Swipe to scroll (touch)
+        let touching = false, touchStartX = 0, touchStartY = 0, touchScrollStart = 0;
+        let touchDir = null;
+
+        strip.addEventListener('touchstart', (e) => {
+            touching = true;
+            paused = true;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchScrollStart = strip.scrollLeft;
+            touchDir = null;
+        }, { passive: true });
+
+        strip.addEventListener('touchmove', (e) => {
+            if (!touching) return;
+            const dx = e.touches[0].clientX - touchStartX;
+            const dy = e.touches[0].clientY - touchStartY;
+            if (!touchDir) touchDir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+            if (touchDir === 'h') {
+                e.preventDefault();
+                strip.scrollLeft = touchScrollStart - dx * DRAG_MULT;
+            }
+        }, { passive: false });
+
+        strip.addEventListener('touchend', () => {
+            touching = false;
+            touchDir = null;
+            clearTimeout(strip._dragTimer);
+            strip._dragTimer = setTimeout(() => { paused = false; }, 1500);
+        }, { passive: true });
+
+        // Flechas
+        const arrowL = document.getElementById('arrowLeft');
+        const arrowR = document.getElementById('arrowRight');
+        const SCROLL_JUMP = window.innerWidth * 0.7;
+
+        function updateArrows() {
+            const atStart = strip.scrollLeft <= 4;
+            const atEnd   = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 4;
+            arrowL.classList.toggle('is-hidden', atStart);
+            arrowR.classList.toggle('is-hidden', atEnd);
+        }
+
+        arrowL.addEventListener('click', () => {
+            paused = true;
+            strip.scrollBy({ left: -SCROLL_JUMP, behavior: 'smooth' });
+            clearTimeout(strip._dragTimer);
+            strip._dragTimer = setTimeout(() => { paused = false; }, 1200);
+        });
+
+        arrowR.addEventListener('click', () => {
+            paused = true;
+            strip.scrollBy({ left: SCROLL_JUMP, behavior: 'smooth' });
+            clearTimeout(strip._dragTimer);
+            strip._dragTimer = setTimeout(() => { paused = false; }, 1200);
+        });
+
+        strip.addEventListener('scroll', updateArrows, { passive: true });
+        updateArrows();
+    }
+
+    // YouTube facade → iframe al click
+    const ytFacade = document.getElementById('ytFacade');
+    if (ytFacade) {
+        ytFacade.addEventListener('click', () => {
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/7lB4UjBaTyQ?autoplay=1&rel=0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+            ytFacade.innerHTML = '';
+            ytFacade.appendChild(iframe);
+            ytFacade.style.cursor = 'default';
+        });
+    }
+
+    // Hamburger nav
+    const hamburger = document.getElementById('navHamburger');
+    const navLinks  = document.getElementById('navLinks');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            const open = navLinks.classList.toggle('is-open');
+            hamburger.classList.toggle('is-open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        });
+        navLinks.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+                hamburger.classList.remove('is-open');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
+    // Formulario Formspree con feedback visual
+    const form = document.getElementById('contactForm');
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('formBtn');
+            const status = document.getElementById('formStatus');
+            btn.textContent = 'Enviando...';
+            btn.disabled = true;
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { Accept: 'application/json' }
+                });
+                if (res.ok) {
+                    status.textContent = 'Mensaje recibido. Te escribo pronto.';
+                    status.style.display = 'block';
+                    form.reset();
+                    btn.textContent = 'Enviado';
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                status.textContent = 'Error al enviar. Escribime directo a ash.mateu@gmail.com';
+                status.style.display = 'block';
+                btn.textContent = 'Enviar →';
+                btn.disabled = false;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

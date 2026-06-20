@@ -1,0 +1,637 @@
+{
+  "/Users/mariano_rosso/Downloads/ashmateu-web/HANDOFF.md": {
+    "mtime": 1781908846.682423,
+    "ast_hash": "767d3a03e85d63f384ca7c218af1b9cb",
+    "semantic_hash": "767d3a03e85d63f384ca7c218af1b9cb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/index.html": {
+    "mtime": 1781908754.4877012,
+    "ast_hash": "d927c890eecab62db257df3e1952f399",
+    "semantic_hash": "d927c890eecab62db257df3e1952f399"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/calu-chinatown.html": {
+    "mtime": 1781904080.3128803,
+    "ast_hash": "a5a9f6e06252145afc18940e9544ce72",
+    "semantic_hash": "a5a9f6e06252145afc18940e9544ce72"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/chanel-hc.html": {
+    "mtime": 1781902532.433936,
+    "ast_hash": "d78f56f65c9569172991161ef6832f65",
+    "semantic_hash": "d78f56f65c9569172991161ef6832f65"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/chanel-williamsburg.html": {
+    "mtime": 1781902584.2831311,
+    "ast_hash": "5e4d939015f631b786b1482502ec7598",
+    "semantic_hash": "5e4d939015f631b786b1482502ec7598"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/dolores-fonzi.html": {
+    "mtime": 1781904063.1476576,
+    "ast_hash": "9726fcab20b8b54e51ce2195fab2e8bb",
+    "semantic_hash": "9726fcab20b8b54e51ce2195fab2e8bb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/gucci-rural.html": {
+    "mtime": 1781904075.4634445,
+    "ast_hash": "ccf1bf4e01d9cc2bb7aa0d918c1679d9",
+    "semantic_hash": "ccf1bf4e01d9cc2bb7aa0d918c1679d9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/leonie-hanne.html": {
+    "mtime": 1781902568.4767723,
+    "ast_hash": "54a96ba52ca5f8197d618953cfe935d0",
+    "semantic_hash": "54a96ba52ca5f8197d618953cfe935d0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/netflix-mf.html": {
+    "mtime": 1781902636.1360328,
+    "ast_hash": "f09ba826b0101a5e86cfd9c32dcd5eb6",
+    "semantic_hash": "f09ba826b0101a5e86cfd9c32dcd5eb6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/projects/valentina-ferrer.html": {
+    "mtime": 1781904066.7997663,
+    "ast_hash": "453f7f16663eba50490950e61fb71517",
+    "semantic_hash": "453f7f16663eba50490950e61fb71517"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-050.jpg": {
+    "mtime": 1781895081.7238007,
+    "ast_hash": "6824f8ecc9e8cd5a1cbb4ba91da0b84a",
+    "semantic_hash": "6824f8ecc9e8cd5a1cbb4ba91da0b84a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-051.jpg": {
+    "mtime": 1781895081.7500496,
+    "ast_hash": "faf49e39acd40e6d5b89148df3a13ea6",
+    "semantic_hash": "faf49e39acd40e6d5b89148df3a13ea6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-052.jpg": {
+    "mtime": 1781895081.8987951,
+    "ast_hash": "e697ca3a467447c54f28ee358ca60a47",
+    "semantic_hash": "e697ca3a467447c54f28ee358ca60a47"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-053.jpg": {
+    "mtime": 1781895081.9927268,
+    "ast_hash": "41c4c05cbd9412ca497c7c3739de16ab",
+    "semantic_hash": "41c4c05cbd9412ca497c7c3739de16ab"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-054.jpg": {
+    "mtime": 1781895082.031026,
+    "ast_hash": "2719b41498a6223893465f3ddf6e9876",
+    "semantic_hash": "2719b41498a6223893465f3ddf6e9876"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-055.jpg": {
+    "mtime": 1781895082.045247,
+    "ast_hash": "0fd98e99ce19751bd8f72ca32285b582",
+    "semantic_hash": "0fd98e99ce19751bd8f72ca32285b582"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-056.jpg": {
+    "mtime": 1781895082.1275785,
+    "ast_hash": "99e00e1d7044dc8b5a92dbf8270897f0",
+    "semantic_hash": "99e00e1d7044dc8b5a92dbf8270897f0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-057.jpg": {
+    "mtime": 1781895082.2336073,
+    "ast_hash": "bd41ba5ea2497a74321c2707a3a94ca9",
+    "semantic_hash": "bd41ba5ea2497a74321c2707a3a94ca9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-058.jpg": {
+    "mtime": 1781895082.294503,
+    "ast_hash": "b76a2720eb92f14e49cf7c35bef6d618",
+    "semantic_hash": "b76a2720eb92f14e49cf7c35bef6d618"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-059.jpg": {
+    "mtime": 1781895082.3064058,
+    "ast_hash": "2b046ff713956d84376f4599d41244b7",
+    "semantic_hash": "2b046ff713956d84376f4599d41244b7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-060.jpg": {
+    "mtime": 1781895082.3339596,
+    "ast_hash": "76c241dace45100626301b897eaed0c8",
+    "semantic_hash": "76c241dace45100626301b897eaed0c8"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-061.jpg": {
+    "mtime": 1781895082.36001,
+    "ast_hash": "943b71e1ea123218ee39cb4f4f9fc5fd",
+    "semantic_hash": "943b71e1ea123218ee39cb4f4f9fc5fd"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-062.jpg": {
+    "mtime": 1781895082.3958714,
+    "ast_hash": "812e57bcd6a2a65b1a4c85204bfde6eb",
+    "semantic_hash": "812e57bcd6a2a65b1a4c85204bfde6eb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-063.jpg": {
+    "mtime": 1781895082.418107,
+    "ast_hash": "151ecded5de041d619cd0c2b24a8b244",
+    "semantic_hash": "151ecded5de041d619cd0c2b24a8b244"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-064.jpg": {
+    "mtime": 1781895082.4393632,
+    "ast_hash": "8b7091651e607c4f1033e7a6c442b169",
+    "semantic_hash": "8b7091651e607c4f1033e7a6c442b169"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-065.jpg": {
+    "mtime": 1781895082.4688766,
+    "ast_hash": "5439c18fd7c69ca3a71217e41f0e2c53",
+    "semantic_hash": "5439c18fd7c69ca3a71217e41f0e2c53"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-066.jpg": {
+    "mtime": 1781895082.4990077,
+    "ast_hash": "d576a826047603554469674c203fda5a",
+    "semantic_hash": "d576a826047603554469674c203fda5a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-067.jpg": {
+    "mtime": 1781895082.5305982,
+    "ast_hash": "8e67a819e24126d18c817f01c8797b1c",
+    "semantic_hash": "8e67a819e24126d18c817f01c8797b1c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-068.jpg": {
+    "mtime": 1781895082.55945,
+    "ast_hash": "7320be6de56e72120901066556d7c97c",
+    "semantic_hash": "7320be6de56e72120901066556d7c97c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-069.jpg": {
+    "mtime": 1781895082.606805,
+    "ast_hash": "374c48d31e26bb9f1f0921dea1c07473",
+    "semantic_hash": "374c48d31e26bb9f1f0921dea1c07473"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-070.jpg": {
+    "mtime": 1781895082.6212573,
+    "ast_hash": "2e2ad856d3285fe0797fcec1c2ff1411",
+    "semantic_hash": "2e2ad856d3285fe0797fcec1c2ff1411"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-071.jpg": {
+    "mtime": 1781895082.626349,
+    "ast_hash": "85d0436f6d5ea24aaadef741b1bdc3da",
+    "semantic_hash": "85d0436f6d5ea24aaadef741b1bdc3da"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-072.jpg": {
+    "mtime": 1781895082.6420844,
+    "ast_hash": "7d7640bc0854fbb6b97ab62619711c0c",
+    "semantic_hash": "7d7640bc0854fbb6b97ab62619711c0c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-073.jpg": {
+    "mtime": 1781895082.6674924,
+    "ast_hash": "b41b948710cf4fe951d3e7235e50587f",
+    "semantic_hash": "b41b948710cf4fe951d3e7235e50587f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-074.jpg": {
+    "mtime": 1781895082.694176,
+    "ast_hash": "10760ca9e173d0fd7933cac252992f85",
+    "semantic_hash": "10760ca9e173d0fd7933cac252992f85"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-075.jpg": {
+    "mtime": 1781895082.7005348,
+    "ast_hash": "81c36ba9ba5d19caeb1c973c2f7703da",
+    "semantic_hash": "81c36ba9ba5d19caeb1c973c2f7703da"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-076.jpg": {
+    "mtime": 1781895082.7141857,
+    "ast_hash": "b8c70973a7f6d1cf4c0288955214eec4",
+    "semantic_hash": "b8c70973a7f6d1cf4c0288955214eec4"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-077.jpg": {
+    "mtime": 1781895082.7364762,
+    "ast_hash": "55a73898fac4241a9270b92e7e037d32",
+    "semantic_hash": "55a73898fac4241a9270b92e7e037d32"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-078.jpg": {
+    "mtime": 1781895082.794283,
+    "ast_hash": "e1b99ee6649b324c4f18eef414fca73e",
+    "semantic_hash": "e1b99ee6649b324c4f18eef414fca73e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-079.jpg": {
+    "mtime": 1781895082.8102367,
+    "ast_hash": "02a9e16c75fa0f781772d71c2916f591",
+    "semantic_hash": "02a9e16c75fa0f781772d71c2916f591"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-080.jpg": {
+    "mtime": 1781895082.8258345,
+    "ast_hash": "6139e54eb7a8eb93c3edc865600229af",
+    "semantic_hash": "6139e54eb7a8eb93c3edc865600229af"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-081.jpg": {
+    "mtime": 1781895082.8487868,
+    "ast_hash": "6b9796519bed090111c61b411a58d4ea",
+    "semantic_hash": "6b9796519bed090111c61b411a58d4ea"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-082.jpg": {
+    "mtime": 1781895082.8581567,
+    "ast_hash": "9b202b95f7ecbd35da0998298e99d716",
+    "semantic_hash": "9b202b95f7ecbd35da0998298e99d716"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-083.jpg": {
+    "mtime": 1781895082.8874903,
+    "ast_hash": "75aed06a805515372869a21e3bdbd9b9",
+    "semantic_hash": "75aed06a805515372869a21e3bdbd9b9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-084.jpg": {
+    "mtime": 1781895082.915024,
+    "ast_hash": "954eca63e4f68d5ba146b7a14c625655",
+    "semantic_hash": "954eca63e4f68d5ba146b7a14c625655"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-085.jpg": {
+    "mtime": 1781895082.9211004,
+    "ast_hash": "842a8cd4ba3da724c93898075a15c2ed",
+    "semantic_hash": "842a8cd4ba3da724c93898075a15c2ed"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-086.jpg": {
+    "mtime": 1781895082.962934,
+    "ast_hash": "d3e9074e63aca2bda5e856d684a2979f",
+    "semantic_hash": "d3e9074e63aca2bda5e856d684a2979f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-087.jpg": {
+    "mtime": 1781895082.96927,
+    "ast_hash": "8ddcf258f162f6e8a210c0484851a2e8",
+    "semantic_hash": "8ddcf258f162f6e8a210c0484851a2e8"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-088.jpg": {
+    "mtime": 1781895083.0184155,
+    "ast_hash": "19e174237f86117ca59ad3dc4b2b9762",
+    "semantic_hash": "19e174237f86117ca59ad3dc4b2b9762"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-089.jpg": {
+    "mtime": 1781895083.0390732,
+    "ast_hash": "60701bbae62060211d67a2ac06ad3d2f",
+    "semantic_hash": "60701bbae62060211d67a2ac06ad3d2f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-090.jpg": {
+    "mtime": 1781895083.0663426,
+    "ast_hash": "ef4c29948c57e4b2565e0c2e9a038e2a",
+    "semantic_hash": "ef4c29948c57e4b2565e0c2e9a038e2a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-01.jpg": {
+    "mtime": 1781893556.367314,
+    "ast_hash": "728c60a32a7143ca85c0ae03bf268ed5",
+    "semantic_hash": "728c60a32a7143ca85c0ae03bf268ed5"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-02.jpg": {
+    "mtime": 1781893556.4822493,
+    "ast_hash": "6423c76cc1373e9f544cdf1eecec95a5",
+    "semantic_hash": "6423c76cc1373e9f544cdf1eecec95a5"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-03.jpg": {
+    "mtime": 1781893556.546854,
+    "ast_hash": "eae160e806a92d86e026b122503f5d6b",
+    "semantic_hash": "eae160e806a92d86e026b122503f5d6b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-04.jpg": {
+    "mtime": 1781893556.6170187,
+    "ast_hash": "0c3cf4b107383b073acaa84d8ca8691e",
+    "semantic_hash": "0c3cf4b107383b073acaa84d8ca8691e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-05.jpg": {
+    "mtime": 1781893556.6802733,
+    "ast_hash": "abb7995da852d34caabf89757fc0c165",
+    "semantic_hash": "abb7995da852d34caabf89757fc0c165"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-06.jpg": {
+    "mtime": 1781893556.7825446,
+    "ast_hash": "fc9da00c1818369fff64ef5152882035",
+    "semantic_hash": "fc9da00c1818369fff64ef5152882035"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-07.jpg": {
+    "mtime": 1781893556.9629517,
+    "ast_hash": "806bd755f7c4304442601d1d761fdba7",
+    "semantic_hash": "806bd755f7c4304442601d1d761fdba7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-08.jpg": {
+    "mtime": 1781893557.080905,
+    "ast_hash": "a52e6f4adac4901c7f70a5eadc1c0cd3",
+    "semantic_hash": "a52e6f4adac4901c7f70a5eadc1c0cd3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-09.jpg": {
+    "mtime": 1781893557.2205708,
+    "ast_hash": "c8e97b98f3814d4297a979c5af820999",
+    "semantic_hash": "c8e97b98f3814d4297a979c5af820999"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-10.jpg": {
+    "mtime": 1781893557.3225095,
+    "ast_hash": "fb1614d2f8f8b96c6e5a6c6de1c4db44",
+    "semantic_hash": "fb1614d2f8f8b96c6e5a6c6de1c4db44"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-11.jpg": {
+    "mtime": 1781893557.7386482,
+    "ast_hash": "b08d5c723a0df9c0f61714954adebf93",
+    "semantic_hash": "b08d5c723a0df9c0f61714954adebf93"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-12.jpg": {
+    "mtime": 1781893558.0366535,
+    "ast_hash": "4d4c2bffaef9cb70cfe483fe35e3fa11",
+    "semantic_hash": "4d4c2bffaef9cb70cfe483fe35e3fa11"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-13.jpg": {
+    "mtime": 1781893558.1335664,
+    "ast_hash": "6fcaa26422603f0bec31a40dde2a5564",
+    "semantic_hash": "6fcaa26422603f0bec31a40dde2a5564"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-14.jpg": {
+    "mtime": 1781893558.2130828,
+    "ast_hash": "671e14e32bf19f68be772c023b3ef58d",
+    "semantic_hash": "671e14e32bf19f68be772c023b3ef58d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-15.jpg": {
+    "mtime": 1781893558.3255074,
+    "ast_hash": "34fd0ae45f8531e600559164a4c8b623",
+    "semantic_hash": "34fd0ae45f8531e600559164a4c8b623"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-16.jpg": {
+    "mtime": 1781893558.4234414,
+    "ast_hash": "9fe1aae4aaf87af044b23453250be92d",
+    "semantic_hash": "9fe1aae4aaf87af044b23453250be92d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-000.jpg": {
+    "mtime": 1781902063.4643772,
+    "ast_hash": "f8548e23baab260240bdd0acb434d0b3",
+    "semantic_hash": "f8548e23baab260240bdd0acb434d0b3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-001.jpg": {
+    "mtime": 1781902063.4757357,
+    "ast_hash": "58e825ed271957e5b2c8b11b3dec3e25",
+    "semantic_hash": "58e825ed271957e5b2c8b11b3dec3e25"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-002.jpg": {
+    "mtime": 1781902063.4881396,
+    "ast_hash": "a78c951ef5b3f42dff815ac9d97797e5",
+    "semantic_hash": "a78c951ef5b3f42dff815ac9d97797e5"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-003.jpg": {
+    "mtime": 1781902063.5004284,
+    "ast_hash": "25dd970f32f57e09dc701c4913fe4eb4",
+    "semantic_hash": "25dd970f32f57e09dc701c4913fe4eb4"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-004.jpg": {
+    "mtime": 1781902063.5145981,
+    "ast_hash": "0db59797eb80d7aa9e05cdf7a8ba1382",
+    "semantic_hash": "0db59797eb80d7aa9e05cdf7a8ba1382"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-005.jpg": {
+    "mtime": 1781902063.5238748,
+    "ast_hash": "6d49c3ab8806018fc19508af13c57bca",
+    "semantic_hash": "6d49c3ab8806018fc19508af13c57bca"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-nj/img-000.jpg": {
+    "mtime": 1781902063.8322287,
+    "ast_hash": "3127eff4ebfa2774d0efd17318bd676f",
+    "semantic_hash": "3127eff4ebfa2774d0efd17318bd676f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-000.jpg": {
+    "mtime": 1781902063.7015715,
+    "ast_hash": "d7394047e7b24cbba231ce9cc2c0d973",
+    "semantic_hash": "d7394047e7b24cbba231ce9cc2c0d973"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-001.jpg": {
+    "mtime": 1781902063.7023396,
+    "ast_hash": "f04b287702a2e227e2248b0846ff25f9",
+    "semantic_hash": "f04b287702a2e227e2248b0846ff25f9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-002.jpg": {
+    "mtime": 1781902441.976272,
+    "ast_hash": "e93efc0417fca71af6b0efc3982348fa",
+    "semantic_hash": "e93efc0417fca71af6b0efc3982348fa"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-003.jpg": {
+    "mtime": 1781902063.7187316,
+    "ast_hash": "bd9e8287a528282d3d1bae1feef6bd84",
+    "semantic_hash": "bd9e8287a528282d3d1bae1feef6bd84"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-004.jpg": {
+    "mtime": 1781902063.7282567,
+    "ast_hash": "302923002e8f70646b0e069cc184cc73",
+    "semantic_hash": "302923002e8f70646b0e069cc184cc73"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-005.jpg": {
+    "mtime": 1781902063.742646,
+    "ast_hash": "b5161a61fd7ad87b147af05978c0655d",
+    "semantic_hash": "b5161a61fd7ad87b147af05978c0655d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-006.jpg": {
+    "mtime": 1781902063.7517102,
+    "ast_hash": "764fd8891a6688317ab72f139100b214",
+    "semantic_hash": "764fd8891a6688317ab72f139100b214"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-007.jpg": {
+    "mtime": 1781902063.7619538,
+    "ast_hash": "79fd51b694e4cd723f06c869309ed235",
+    "semantic_hash": "79fd51b694e4cd723f06c869309ed235"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-008.jpg": {
+    "mtime": 1781902063.776431,
+    "ast_hash": "1acd00470a34978807ec4f8d8378238b",
+    "semantic_hash": "1acd00470a34978807ec4f8d8378238b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-009.jpg": {
+    "mtime": 1781902063.7864966,
+    "ast_hash": "3e8c00fe29d67bb015e1db2465ec02a9",
+    "semantic_hash": "3e8c00fe29d67bb015e1db2465ec02a9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-010.jpg": {
+    "mtime": 1781902063.7971098,
+    "ast_hash": "8f5e1a9576c0175afc0a032d477958f9",
+    "semantic_hash": "8f5e1a9576c0175afc0a032d477958f9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-011.jpg": {
+    "mtime": 1781902063.80392,
+    "ast_hash": "ed17247d8e86c2ce25a99a39e0a190c5",
+    "semantic_hash": "ed17247d8e86c2ce25a99a39e0a190c5"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-000.jpg": {
+    "mtime": 1781902063.4038222,
+    "ast_hash": "cf7835bb5b3247acf0b7eda36059c7d4",
+    "semantic_hash": "cf7835bb5b3247acf0b7eda36059c7d4"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-001.jpg": {
+    "mtime": 1781902063.4160821,
+    "ast_hash": "6c5f9551287cffe11b16a4975c7a5dda",
+    "semantic_hash": "6c5f9551287cffe11b16a4975c7a5dda"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-002.jpg": {
+    "mtime": 1781902063.4266245,
+    "ast_hash": "281c30eae97caae6fb1d6d579c538ae7",
+    "semantic_hash": "281c30eae97caae6fb1d6d579c538ae7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-003.jpg": {
+    "mtime": 1781902063.434699,
+    "ast_hash": "e6ce73c39e567809d8fc1ea617bbd669",
+    "semantic_hash": "e6ce73c39e567809d8fc1ea617bbd669"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-000.jpg": {
+    "mtime": 1781902321.3774893,
+    "ast_hash": "b84d03defb0a68063f00a2cb4385265e",
+    "semantic_hash": "b84d03defb0a68063f00a2cb4385265e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-001.jpg": {
+    "mtime": 1781902321.381365,
+    "ast_hash": "4af024a40fff35926a89dbcf45d29f96",
+    "semantic_hash": "4af024a40fff35926a89dbcf45d29f96"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-002.jpg": {
+    "mtime": 1781902321.3842423,
+    "ast_hash": "d8cfad70fadd35e6b590ddf909c2b8e8",
+    "semantic_hash": "d8cfad70fadd35e6b590ddf909c2b8e8"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-003.jpg": {
+    "mtime": 1781902321.3954983,
+    "ast_hash": "23091b6170124b7ee4fdca3bb44cf821",
+    "semantic_hash": "23091b6170124b7ee4fdca3bb44cf821"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-004.jpg": {
+    "mtime": 1781902321.398599,
+    "ast_hash": "4c4b5bb01a6bcef41e9ef1e5e3e61c0c",
+    "semantic_hash": "4c4b5bb01a6bcef41e9ef1e5e3e61c0c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-005.jpg": {
+    "mtime": 1781902321.4070399,
+    "ast_hash": "bbec797e8c220a04cfedd030d1281a1c",
+    "semantic_hash": "bbec797e8c220a04cfedd030d1281a1c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-006.jpg": {
+    "mtime": 1781902321.4100788,
+    "ast_hash": "06fda86f9325f0dbde114c289de4f61d",
+    "semantic_hash": "06fda86f9325f0dbde114c289de4f61d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/gucci-rural/img-000.jpg": {
+    "mtime": 1781902063.8668048,
+    "ast_hash": "7ed22ba15b2759802657a84c40829615",
+    "semantic_hash": "7ed22ba15b2759802657a84c40829615"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/gucci-rural/img-001.jpg": {
+    "mtime": 1781902063.88725,
+    "ast_hash": "a130f5d50fc642f10e8348caf7fcb7fb",
+    "semantic_hash": "a130f5d50fc642f10e8348caf7fcb7fb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/gucci-rural/img-002.jpg": {
+    "mtime": 1781902063.9026182,
+    "ast_hash": "7b1925d4864a9b520efcd68c9c45bcaf",
+    "semantic_hash": "7b1925d4864a9b520efcd68c9c45bcaf"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-000.jpg": {
+    "mtime": 1781902063.5965679,
+    "ast_hash": "5ded34b584deedb751a696a78769c867",
+    "semantic_hash": "5ded34b584deedb751a696a78769c867"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-001.jpg": {
+    "mtime": 1781902063.605933,
+    "ast_hash": "43f34629d350688701842d80aa502929",
+    "semantic_hash": "43f34629d350688701842d80aa502929"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-002.jpg": {
+    "mtime": 1781902063.6153529,
+    "ast_hash": "ede7e68ba572cb579ab2a907a35027f7",
+    "semantic_hash": "ede7e68ba572cb579ab2a907a35027f7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-003.jpg": {
+    "mtime": 1781902063.6268535,
+    "ast_hash": "c35b8a14c461194ee29e6d34b666e105",
+    "semantic_hash": "c35b8a14c461194ee29e6d34b666e105"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-004.jpg": {
+    "mtime": 1781902063.6375215,
+    "ast_hash": "969dbbd9b993a307b7aaf6686528b9b7",
+    "semantic_hash": "969dbbd9b993a307b7aaf6686528b9b7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-005.jpg": {
+    "mtime": 1781902063.6392994,
+    "ast_hash": "3cf0daa8013620f6d4e548192dd46c8f",
+    "semantic_hash": "3cf0daa8013620f6d4e548192dd46c8f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-006.jpg": {
+    "mtime": 1781902063.6511207,
+    "ast_hash": "5af30177ab04371d273fb549ca7b5e4a",
+    "semantic_hash": "5af30177ab04371d273fb549ca7b5e4a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-007.jpg": {
+    "mtime": 1781902063.6551049,
+    "ast_hash": "98695a202952f83071649779977571c7",
+    "semantic_hash": "98695a202952f83071649779977571c7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-008.jpg": {
+    "mtime": 1781902063.6683168,
+    "ast_hash": "e280bfb926496e8a99d272c73ee74702",
+    "semantic_hash": "e280bfb926496e8a99d272c73ee74702"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-009.jpg": {
+    "mtime": 1781902063.6716528,
+    "ast_hash": "f3ca7142e1c34a3d6004944737a85455",
+    "semantic_hash": "f3ca7142e1c34a3d6004944737a85455"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-000.jpg": {
+    "mtime": 1781902321.4365175,
+    "ast_hash": "bb9323cccdc1e3248634db6202e0a2d3",
+    "semantic_hash": "bb9323cccdc1e3248634db6202e0a2d3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-001.jpg": {
+    "mtime": 1781902321.439725,
+    "ast_hash": "3f2edbee238b3a48635d811277f52184",
+    "semantic_hash": "3f2edbee238b3a48635d811277f52184"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-002.jpg": {
+    "mtime": 1781902321.4442542,
+    "ast_hash": "8271e9972b5920fe00175701386325b7",
+    "semantic_hash": "8271e9972b5920fe00175701386325b7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-003.jpg": {
+    "mtime": 1781902321.4481013,
+    "ast_hash": "22a87a7c837d83b5c9b201e819f848af",
+    "semantic_hash": "22a87a7c837d83b5c9b201e819f848af"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-004.jpg": {
+    "mtime": 1781902321.4525511,
+    "ast_hash": "353cafbd607fdb3d1af42cfe1cad8137",
+    "semantic_hash": "353cafbd607fdb3d1af42cfe1cad8137"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-005.jpg": {
+    "mtime": 1781902321.4554763,
+    "ast_hash": "56bbad7cb2402812c8a3c9101ebf7b32",
+    "semantic_hash": "56bbad7cb2402812c8a3c9101ebf7b32"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-006.jpg": {
+    "mtime": 1781902321.4579458,
+    "ast_hash": "1db40b26a9e8d1411c0eb5022975e69c",
+    "semantic_hash": "1db40b26a9e8d1411c0eb5022975e69c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-007.jpg": {
+    "mtime": 1781902321.4605436,
+    "ast_hash": "af96444f3e35b19867fbcd9bce286a45",
+    "semantic_hash": "af96444f3e35b19867fbcd9bce286a45"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-000.jpg": {
+    "mtime": 1781902063.5518112,
+    "ast_hash": "86065399796415749b56c69429c32e22",
+    "semantic_hash": "86065399796415749b56c69429c32e22"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-001.jpg": {
+    "mtime": 1781902063.5535338,
+    "ast_hash": "49c536bf5ea08b22770cd75bb6966f63",
+    "semantic_hash": "49c536bf5ea08b22770cd75bb6966f63"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-002.jpg": {
+    "mtime": 1781902063.5616906,
+    "ast_hash": "871cff3d6e5093fa24251e38ed062be6",
+    "semantic_hash": "871cff3d6e5093fa24251e38ed062be6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-003.jpg": {
+    "mtime": 1781902063.5641892,
+    "ast_hash": "6db04fa953b8f71040bd6ed8770a3d37",
+    "semantic_hash": "6db04fa953b8f71040bd6ed8770a3d37"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-004.jpg": {
+    "mtime": 1781902063.5703373,
+    "ast_hash": "485de9416afe1e90cd9729b879b1056e",
+    "semantic_hash": "485de9416afe1e90cd9729b879b1056e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/fonzi-076.jpg": {
+    "mtime": 1781901312.631496,
+    "ast_hash": "a9c2c1ec1475b302954cec494849e90a",
+    "semantic_hash": "a9c2c1ec1475b302954cec494849e90a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/fonzi_bw-078.jpg": {
+    "mtime": 1781901312.7421927,
+    "ast_hash": "0f86f85009309cefb34a5b77ea9bba77",
+    "semantic_hash": "0f86f85009309cefb34a5b77ea9bba77"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/netflix-081.jpg": {
+    "mtime": 1781901312.8192213,
+    "ast_hash": "a91e8c8ebf84c34a810a3c20ac2e6515",
+    "semantic_hash": "a91e8c8ebf84c34a810a3c20ac2e6515"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/netflix2-084.jpg": {
+    "mtime": 1781901312.9219692,
+    "ast_hash": "1fa778a7c5dc2ef29fb3d83bd1c6f217",
+    "semantic_hash": "1fa778a7c5dc2ef29fb3d83bd1c6f217"
+  }
+}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prensa — Ash Mateu</title>
+  <meta name="description" content="Ash Mateu en medios. Marie Claire, tapas, entrevistas y publicaciones.">
+  <link rel="canonical" href="https://ashmateu.com/prensa.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Prensa — Ash Mateu">
+  <meta property="og:url" content="https://ashmateu.com/prensa.html">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0A0A0A; --ivory: #F7F3EE; --white: #fff; --sand: #B5A898;
+      --gutter: 56px; --serif: 'Playfair Display', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); font-weight: 300; color: var(--black); background: var(--ivory); -webkit-font-smoothing: antialiased; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 28px var(--gutter);
+      background: rgba(247,243,238,0.96); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(181,168,152,0.25);
+    }
+    .nav-logo { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--black); transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .prensa-header {
+      background: var(--black); color: var(--white);
+      padding: 160px var(--gutter) 100px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: end;
+    }
+    .prensa-header h1 { font-family: var(--serif); font-size: clamp(52px, 7vw, 104px); font-weight: 400; line-height: 0.95; letter-spacing: -0.01em; }
+    .prensa-header h1 em { font-style: italic; color: var(--sand); }
+    .prensa-header-desc p { font-size: 15px; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.55); max-width: 380px; }
+
+    /* Featured — primer item grande */
+    .press-featured {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(10,10,10,0.08);
+    }
+    .press-featured-img {
+      aspect-ratio: 4/3; overflow: hidden; background: #111;
+    }
+    .press-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.5s; }
+    .press-featured:hover .press-featured-img img { transform: scale(1.03); }
+    .press-featured-body {
+      padding: 64px 56px; display: flex; flex-direction: column; justify-content: flex-end;
+      border-left: 1px solid rgba(10,10,10,0.08);
+    }
+    .press-pub { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sand); margin-bottom: 16px; }
+    .press-title-lg { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 48px); font-weight: 400; line-height: 1.15; margin-bottom: 16px; }
+    .press-excerpt-lg { font-size: 15px; font-weight: 300; line-height: 1.8; color: rgba(10,10,10,0.6); margin-bottom: 24px; }
+    .press-date { font-size: 11px; color: rgba(10,10,10,0.35); letter-spacing: 0.1em; margin-bottom: 28px; }
+    .press-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      background: var(--black); color: var(--white); text-decoration: none;
+      padding: 12px 20px; transition: opacity 0.2s; align-self: flex-start;
+    }
+    .press-link:hover { opacity: 0.75; }
+
+    /* Grid resto */
+    .press-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(10,10,10,0.08);
+    }
+    .press-card {
+      padding: 36px 40px 44px;
+      border-right: 1px solid rgba(10,10,10,0.08);
+      border-bottom: 1px solid rgba(10,10,10,0.08);
+      text-decoration: none; color: var(--black);
+      display: flex; flex-direction: column;
+      transition: background 0.2s;
+    }
+    .press-card:nth-child(3n) { border-right: none; }
+    .press-card:hover { background: rgba(10,10,10,0.02); }
+    .press-card-img { aspect-ratio: 3/2; overflow: hidden; margin-bottom: 24px; background: #eee; }
+    .press-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.5s; }
+    .press-card:hover .press-card-img img { transform: scale(1.03); }
+    .press-card-img-placeholder { width: 100%; height: 100%; background: #ddd; }
+    .press-card .press-pub { margin-bottom: 10px; }
+    .press-card-title { font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.25; margin-bottom: 10px; }
+    .press-card-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.55); flex: 1; margin-bottom: 16px; }
+    .press-card .press-date { margin-bottom: 12px; }
+    .press-read { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
+    .press-card:hover .press-read { opacity: 1; }
+
+    .press-empty { padding: 120px var(--gutter); text-align: center; color: var(--sand); font-size: 13px; }
+
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 36px; list-style: none; }
+    .footer-links a { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); }
+
+    @media (max-width: 900px) {
+      :root { --gutter: 24px; }
+      .nav-hamburger { display: flex; }
+      .nav-links { position: fixed; inset: 0; background: var(--ivory); flex-direction: column; align-items: center; justify-content: center; gap: 44px; z-index: 200; display: none; }
+      .nav-links.is-open { display: flex; }
+      .nav-links a { font-size: 20px; letter-spacing: 0.2em; opacity: 0.75; }
+      .prensa-header { grid-template-columns: 1fr; gap: 40px; padding: 120px var(--gutter) 72px; }
+      .press-featured { grid-template-columns: 1fr; }
+      .press-featured-body { padding: 36px var(--gutter); border-left: none; border-top: 1px solid rgba(10,10,10,0.08); }
+      .press-grid { grid-template-columns: repeat(2, 1fr); }
+      .press-card { padding: 24px 20px 32px; }
+      .press-card:nth-child(3n) { border-right: 1px solid rgba(10,10,10,0.08); }
+      .press-card:nth-child(2n) { border-right: none; }
+    }
+    @media (max-width: 560px) {
+      .press-grid { grid-template-columns: 1fr; }
+      .press-card { border-right: none; }
+      footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Ash Mateu</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/#trabajo">Trabajo</a></li>
+    <li><a href="/blog.html">Notas</a></li>
+    <li><a href="/prensa.html" class="active">Prensa</a></li>
+    <li><a href="/mercadito.html">Mercadito</a></li>
+    <li><a href="/#contacto">Contacto</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<header class="prensa-header">
+  <h1>Ash Mateu<br><em>en medios</em></h1>
+  <div class="prensa-header-desc">
+    <p>Marie Claire, tapas, entrevistas. Trabajo publicado en los medios de moda más importantes del país y la región.</p>
+  </div>
+</header>
+
+<main id="pressMain"></main>
+
+<footer>
+  <span class="footer-logo">Ash Mateu</span>
+  <ul class="footer-links">
+    <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/#contacto">Contacto</a></li>
+  </ul>
+  <span class="footer-copy">&copy; 2026</span>
+</footer>
+
+<script>
+const SUPABASE_URL = 'https://jrxklahobxpxmtnncvst.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const hamburger = document.getElementById('navHamburger');
+const navLinks  = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  const open = hamburger.classList.toggle('is-open');
+  navLinks.classList.toggle('is-open', open);
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  hamburger.classList.remove('is-open');
+  navLinks.classList.remove('is-open');
+}));
+
+function formatDate(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleDateString('es-AR', { month:'long', year:'numeric' });
+}
+
+async function loadPress() {
+  const main = document.getElementById('pressMain');
+  const { data, error } = await sb.from('press').select('*').eq('active', true).order('publication_date', { ascending: false });
+
+  if (error || !data?.length) {
+    main.innerHTML = '<div class="press-empty">Los artículos aparecen acá cuando se carguen desde el panel admin.</div>';
+    return;
+  }
+
+  const featured = data.find(p => p.featured) ?? data[0];
+  const rest = data.filter(p => p.id !== featured.id);
+
+  const featuredHTML = `
+    <div class="press-featured">
+      <div class="press-featured-img">
+        ${featured.cover_url ? `<img src="${featured.cover_url}" alt="${featured.title}" loading="lazy">` : ''}
+      </div>
+      <div class="press-featured-body">
+        <span class="press-pub">${featured.publication}</span>
+        <h2 class="press-title-lg">${featured.title}</h2>
+        ${featured.excerpt ? `<p class="press-excerpt-lg">${featured.excerpt}</p>` : ''}
+        <span class="press-date">${formatDate(featured.publication_date)}</span>
+        ${featured.url ? `<a class="press-link" href="${featured.url}" target="_blank" rel="noopener">Leer en ${featured.publication} →</a>` : ''}
+      </div>
+    </div>`;
+
+  const gridHTML = rest.length ? `
+    <div class="press-grid">
+      ${rest.map(p => `
+        <${p.url ? `a href="${p.url}" target="_blank" rel="noopener"` : 'div'} class="press-card">
+          <div class="press-card-img">
+            ${p.cover_url ? `<img src="${p.cover_url}" alt="${p.title}" loading="lazy">` : '<div class="press-card-img-placeholder"></div>'}
+          </div>
+          <span class="press-pub">${p.publication}</span>
+          <h3 class="press-card-title">${p.title}</h3>
+          ${p.excerpt ? `<p class="press-card-excerpt">${p.excerpt}</p>` : ''}
+          <span class="press-date">${formatDate(p.publication_date)}</span>
+          ${p.url ? `<span class="press-read">Leer artículo →</span>` : ''}
+        </${p.url ? 'a' : 'div'}>
+      `).join('')}
+    </div>` : '';
+
+  main.innerHTML = featuredHTML + gridHTML;
+}
+
+loadPress();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# AI crawlers — allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://ashmateu.com/sitemap.xml
+
+# AI context file
+# llms.txt: https://ashmateu.com/llms.txt
