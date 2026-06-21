@@ -23,7 +23,7 @@
     <link rel="preload" as="image" href="images/extracted/chanel-hc/img-005.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
         /* ── Reset ── */
@@ -57,10 +57,9 @@
             top: 0; left: 0; right: 0;
             z-index: 100;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
             padding: 28px var(--gutter);
-            overflow: visible;
             transition: background 0.4s, border-color 0.4s;
         }
 
@@ -71,22 +70,13 @@
         }
 
         .nav-logo {
-            position: absolute;
-            left: var(--gutter);
-            top: 0;
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(52px, 6.4vw, 95px);
-            font-weight: 300;
-            font-style: italic;
-            letter-spacing: 0.14em;
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
             text-decoration: none;
-            line-height: 1;
-            white-space: nowrap;
-            z-index: 201;
-            color: #0A0A0A;
-            -webkit-mask-image: linear-gradient(90deg, black 35%, rgba(0,0,0,0.04) 100%);
-            mask-image: linear-gradient(90deg, black 35%, rgba(0,0,0,0.04) 100%);
+            color: var(--black);
         }
 
         .nav-links {
@@ -701,7 +691,6 @@
             :root { --gutter: 24px; }
 
             /* Nav: hamburger visible, links como overlay */
-            .nav-logo { font-size: clamp(36px, 10vw, 56px); top: 4px; }
             .nav-hamburger { display: flex; }
             .nav-links {
                 position: fixed;
