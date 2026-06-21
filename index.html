@@ -1366,12 +1366,12 @@ if (typeof gsap !== 'undefined') {
 
     if (preloader) {
         document.body.style.overflow = 'hidden';
-        // Ocultar hero inicialmente para que el preloader tape todo
         gsap.set(['.hero-eyebrow','.hero-title','.hero-subtitle','.hero-ctas'], { opacity: 0 });
         gsap.set(['.hero-img-main','.hero-img-float','.hero-bottom'], { opacity: 0 });
 
-        gsap.timeline()
-            .from('.preloader-name', { opacity: 0, y: 8, duration: 0.9, ease: 'power2.out', delay: 0.2 })
+        function startPreloader() {
+            gsap.timeline()
+            .from('.preloader-name', { opacity: 0, y: 8, duration: 0.9, ease: 'power2.out' })
             .to('.preloader-line',   { width: 52, duration: 0.6, ease: 'power2.out' }, '-=0.3')
             .to('.preloader-name',   { opacity: 0, duration: 0.45, ease: 'power2.in' }, '+=0.5')
             .to('.preloader-line',   { opacity: 0, duration: 0.3, ease: 'power2.in' }, '-=0.3')
@@ -1379,11 +1379,18 @@ if (typeof gsap !== 'undefined') {
             .call(() => {
                 preloader.style.display = 'none';
                 document.body.style.overflow = '';
-                // Restaurar opacity antes de animar con clip-path
                 gsap.set(['.hero-eyebrow','.hero-title','.hero-subtitle','.hero-ctas',
                           '.hero-img-main','.hero-img-float','.hero-bottom'], { opacity: 1 });
                 startHero();
             });
+        }
+
+        // Espera Aboreto antes de mostrar el preloader (máx 1s de gracia)
+        Promise.race([
+            document.fonts.load('400 1em Aboreto'),
+            new Promise(r => setTimeout(r, 1000))
+        ]).then(startPreloader);
+
     } else {
         startHero();
     }
