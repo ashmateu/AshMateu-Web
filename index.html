@@ -762,6 +762,32 @@
             footer { flex-direction: column; gap: 20px; text-align: center; }
             .footer-links { justify-content: center; }
         }
+
+        /* ── Preloader ── */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9500;
+            background: var(--ivory);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+        }
+        .preloader-name {
+            font-family: var(--serif);
+            font-size: clamp(22px, 4vw, 52px);
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            color: var(--black);
+            line-height: 1;
+        }
+        .preloader-line {
+            width: 0;
+            height: 1px;
+            background: var(--sand);
+        }
     </style>
 
 <script defer src="/_vercel/insights/script.js"></script>
@@ -805,6 +831,12 @@
 </script>
 </head>
 <body>
+
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+    <span class="preloader-name">Ash Mateu</span>
+    <div class="preloader-line"></div>
+</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -1298,28 +1330,78 @@
 
 <script src="/js/effects.js"></script>
 <script>
-// Hero entrance animation (runs after effects.js initializes GSAP)
 if (typeof gsap !== 'undefined') {
-    const heroTl = gsap.timeline({ delay: 0.12 });
-    heroTl
-        .from('.hero-eyebrow',  { opacity: 0, y: 10,  duration: 0.75, ease: 'power2.out' })
-        .from('.hero-title',    { opacity: 0, y: 26,  duration: 1.0,  ease: 'power2.out' }, '-=0.45')
-        .from('.hero-subtitle', { opacity: 0, y: 18,  duration: 0.8,  ease: 'power2.out' }, '-=0.52')
-        .from('.hero-ctas',     { opacity: 0, y: 12,  duration: 0.7,  ease: 'power2.out' }, '-=0.48')
-        .from('.hero-img-main', { opacity: 0, scale: 1.035, duration: 1.5, ease: 'power2.out' }, 0)
-        .from('.hero-img-float',{ opacity: 0, x: -30, duration: 1.1,  ease: 'power2.out' }, 0.3)
-        .from('.hero-bottom',   { opacity: 0,          duration: 0.8,  ease: 'power2.out' }, '-=0.5');
 
-    // Subtle hero image parallax on scroll
+    // ── Preloader → Hero ──────────────────────────────────────────────
+    const preloader = document.getElementById('preloader');
+    function startHero() {
+        // Clip-path reveal: texto emerge desde abajo
+        const heroTl = gsap.timeline();
+        heroTl
+            .fromTo('.hero-eyebrow',
+                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+                { clipPath: 'inset(0 0 0% 0)', duration: 0.75, ease: 'power3.out' })
+            .fromTo('.hero-title',
+                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+                { clipPath: 'inset(0 0 0% 0)', duration: 1.0, ease: 'power3.out' }, '-=0.42')
+            .fromTo('.hero-subtitle',
+                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+                { clipPath: 'inset(0 0 0% 0)', duration: 0.85, ease: 'power3.out' }, '-=0.5')
+            .fromTo('.hero-ctas',
+                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+                { clipPath: 'inset(0 0 0% 0)', duration: 0.75, ease: 'power3.out' }, '-=0.46')
+            .fromTo('.hero-img-main',
+                { opacity: 0, scale: 1.045 },
+                { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, 0)
+            .fromTo('.hero-img-float',
+                { opacity: 0, x: -36 },
+                { opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' }, 0.28)
+            .fromTo('.hero-bottom',
+                { opacity: 0 },
+                { opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.55');
+    }
+
+    if (preloader) {
+        document.body.style.overflow = 'hidden';
+        // Ocultar hero inicialmente para que el preloader tape todo
+        gsap.set(['.hero-eyebrow','.hero-title','.hero-subtitle','.hero-ctas'], { opacity: 0 });
+        gsap.set(['.hero-img-main','.hero-img-float','.hero-bottom'], { opacity: 0 });
+
+        gsap.timeline()
+            .from('.preloader-name', { opacity: 0, y: 8, duration: 0.9, ease: 'power2.out', delay: 0.2 })
+            .to('.preloader-line',   { width: 52, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+            .to('.preloader-name',   { opacity: 0, duration: 0.45, ease: 'power2.in' }, '+=0.5')
+            .to('.preloader-line',   { opacity: 0, duration: 0.3, ease: 'power2.in' }, '-=0.3')
+            .to(preloader,           { opacity: 0, duration: 0.5, ease: 'power2.in' }, '-=0.2')
+            .call(() => {
+                preloader.style.display = 'none';
+                document.body.style.overflow = '';
+                // Restaurar opacity antes de animar con clip-path
+                gsap.set(['.hero-eyebrow','.hero-title','.hero-subtitle','.hero-ctas',
+                          '.hero-img-main','.hero-img-float','.hero-bottom'], { opacity: 1 });
+                startHero();
+            });
+    } else {
+        startHero();
+    }
+
+    // ── Parallax hero image ───────────────────────────────────────────
     gsap.to('.hero-img-main img', {
-        yPercent: -10,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-        },
+        yPercent: -10, ease: 'none',
+        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
+    });
+
+    // ── Magnetic CTA hover ────────────────────────────────────────────
+    document.querySelectorAll('.cta-primary, .cta-secondary').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+            const r  = btn.getBoundingClientRect();
+            const dx = (e.clientX - r.left - r.width  / 2) * 0.32;
+            const dy = (e.clientY - r.top  - r.height / 2) * 0.32;
+            gsap.to(btn, { x: dx, y: dy, duration: 0.35, ease: 'power2.out' });
+        });
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.45)' });
+        });
     });
 }
 </script>
