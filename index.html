@@ -1094,6 +1094,9 @@
                     }
                     return p;
                 });
+                if (renderedProjects.length > 6) {
+                    [renderedProjects[5], renderedProjects[6]] = [renderedProjects[6], renderedProjects[5]];
+                }
                 grid.innerHTML = renderedProjects.map((p, i) => `
                     <a class="work-item" href="projects/${p.slug}.html">
                         <div class="work-img-wrap">
