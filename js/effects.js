@@ -146,6 +146,14 @@
         });
     }
 
+    document.querySelectorAll('.work-item').forEach((el, i) => {
+        gsap.from(el, {
+            opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 90%' },
+            delay: (i % 3) * 0.08,
+        });
+    });
+
     document.querySelectorAll('.case-block, .case-full, .case-gallery').forEach(el => {
         gsap.from(el, {
             opacity: 0, y: 26, duration: 0.95, ease: 'power2.out',
