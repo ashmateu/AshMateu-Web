@@ -1060,7 +1060,7 @@
     try {
         const [home, projects] = await Promise.all([
             sanityFetch(`*[_type == "homePage"][0]`),
-            sanityFetch(`*[_type == "project" && slug.current != "calu-chinatown"] | order(order asc) {title, "slug": slug.current, category, stripMeta, localStripImage}`),
+            sanityFetch(`*[_type == "project"] | order(order asc) {title, "slug": slug.current, category, stripMeta, localStripImage}`),
         ]);
 
         if (home) {
@@ -1083,7 +1083,12 @@
         if (projects?.length) {
             const grid = document.querySelector('.work-grid');
             if (grid) {
-                grid.innerHTML = projects.map((p, i) => `
+                const renderedProjects = projects.map(p =>
+                    p.slug === 'calu-chinatown'
+                        ? { slug: 'chanel-williamsburg', title: 'Chanel Prêt-à-porter Williamsburg', stripMeta: 'Styling — Brooklyn, Nueva York', localStripImage: 'images/extracted/chanel-pap/img-001.webp' }
+                        : p
+                );
+                grid.innerHTML = renderedProjects.map((p, i) => `
                     <a class="work-item" href="projects/${p.slug}.html">
                         <div class="work-img-wrap">
                             <img class="work-img" src="${p.localStripImage || ''}" alt="${p.title}" loading="${i === 0 ? 'eager' : 'lazy'}" ${i === 0 ? 'fetchpriority="high"' : ''}>
