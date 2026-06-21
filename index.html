@@ -1083,11 +1083,17 @@
         if (projects?.length) {
             const grid = document.querySelector('.work-grid');
             if (grid) {
-                const renderedProjects = projects.map(p =>
-                    p.slug === 'calu-chinatown'
-                        ? { slug: 'chanel-williamsburg', title: 'Chanel Prêt-à-porter Williamsburg', stripMeta: 'Styling — Brooklyn, Nueva York', localStripImage: 'images/extracted/chanel-pap/img-001.webp' }
-                        : p
-                );
+                let chanelWilliamsburgSeen = false;
+                const renderedProjects = projects.map(p => {
+                    if (p.slug === 'chanel-williamsburg' && !chanelWilliamsburgSeen) {
+                        chanelWilliamsburgSeen = true;
+                        return { slug: 'calu-chinatown', title: 'Calu Rivero — Chinese New Year', stripMeta: 'Styling — Chinatown, Manhattan', localStripImage: 'images/extracted/calu-chinatown/img-004.webp' };
+                    }
+                    if (p.slug === 'calu-chinatown') {
+                        return { slug: 'chanel-williamsburg', title: 'Chanel Prêt-à-porter Williamsburg', stripMeta: 'Styling — Brooklyn, Nueva York', localStripImage: 'images/extracted/chanel-pap/img-001.webp' };
+                    }
+                    return p;
+                });
                 grid.innerHTML = renderedProjects.map((p, i) => `
                     <a class="work-item" href="projects/${p.slug}.html">
                         <div class="work-img-wrap">
