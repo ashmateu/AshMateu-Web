@@ -767,30 +767,6 @@
         }
 
         /* ── Preloader ── */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            z-index: 9500;
-            background: var(--ivory);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 28px;
-        }
-        .preloader-name {
-            font-family: 'Aboreto', system-ui;
-            font-size: clamp(22px, 4vw, 52px);
-            font-weight: 400;
-            letter-spacing: 0.22em;
-            color: var(--black);
-            line-height: 1;
-        }
-        .preloader-line {
-            width: 0;
-            height: 1px;
-            background: var(--sand);
-        }
     </style>
 
 <script defer src="/_vercel/insights/script.js"></script>
@@ -834,12 +810,6 @@
 </script>
 </head>
 <body>
-
-<!-- PRELOADER -->
-<div id="preloader" aria-hidden="true">
-    <span class="preloader-name">Ash Mateu</span>
-    <div class="preloader-line"></div>
-</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -1335,78 +1305,42 @@
 <script>
 if (typeof gsap !== 'undefined') {
 
-    // ── Preloader → Hero ──────────────────────────────────────────────
-    const preloader = document.getElementById('preloader');
-    function startHero() {
-        // Clip-path reveal: texto emerge desde abajo
-        const heroTl = gsap.timeline();
-        heroTl
-            .fromTo('.hero-eyebrow',
-                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
-                { clipPath: 'inset(0 0 0% 0)', duration: 0.75, ease: 'power3.out' })
-            .fromTo('.hero-title',
-                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
-                { clipPath: 'inset(0 0 0% 0)', duration: 1.0, ease: 'power3.out' }, '-=0.42')
-            .fromTo('.hero-subtitle',
-                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
-                { clipPath: 'inset(0 0 0% 0)', duration: 0.85, ease: 'power3.out' }, '-=0.5')
-            .fromTo('.hero-ctas',
-                { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
-                { clipPath: 'inset(0 0 0% 0)', duration: 0.75, ease: 'power3.out' }, '-=0.46')
-            .fromTo('.hero-img-main',
-                { opacity: 0, scale: 1.045 },
-                { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, 0)
-            .fromTo('.hero-img-float',
-                { opacity: 0, x: -36 },
-                { opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' }, 0.28)
-            .fromTo('.hero-bottom',
-                { opacity: 0 },
-                { opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.55');
-    }
-
-    if (preloader) {
-        document.body.style.overflow = 'hidden';
-        gsap.set(['.hero-eyebrow','.hero-title','.hero-subtitle','.hero-ctas'], { opacity: 0 });
-        gsap.set(['.hero-img-main','.hero-img-float','.hero-bottom'], { opacity: 0 });
-
-        function startPreloader() {
-            gsap.timeline()
-            .from('.preloader-name', { opacity: 0, y: 8, duration: 0.9, ease: 'power2.out' })
-            .to('.preloader-line',   { width: 52, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-            .to('.preloader-name',   { opacity: 0, duration: 0.45, ease: 'power2.in' }, '+=0.5')
-            .to('.preloader-line',   { opacity: 0, duration: 0.3, ease: 'power2.in' }, '-=0.3')
-            .to(preloader,           { opacity: 0, duration: 0.5, ease: 'power2.in' }, '-=0.2')
-            .call(() => {
-                preloader.style.display = 'none';
-                document.body.style.overflow = '';
-                gsap.set(['.hero-eyebrow','.hero-title','.hero-subtitle','.hero-ctas',
-                          '.hero-img-main','.hero-img-float','.hero-bottom'], { opacity: 1 });
-                startHero();
+    // ── Hero entry + Ken Burns ────────────────────────────────────────
+    gsap.timeline({ delay: 0.15 })
+        .fromTo('.hero-eyebrow',
+            { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+            { clipPath: 'inset(0 0 0% 0)', duration: 0.75, ease: 'power3.out' })
+        .fromTo('.hero-title',
+            { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+            { clipPath: 'inset(0 0 0% 0)', duration: 1.0, ease: 'power3.out' }, '-=0.42')
+        .fromTo('.hero-subtitle',
+            { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+            { clipPath: 'inset(0 0 0% 0)', duration: 0.85, ease: 'power3.out' }, '-=0.5')
+        .fromTo('.hero-ctas',
+            { clipPath: 'inset(0 0 110% 0)', opacity: 1 },
+            { clipPath: 'inset(0 0 0% 0)', duration: 0.75, ease: 'power3.out' }, '-=0.46')
+        .fromTo('.hero-img-main',
+            { opacity: 0, scale: 1.045 },
+            { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, 0)
+        .fromTo('.hero-img-float',
+            { opacity: 0, x: -36 },
+            { opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' }, 0.28)
+        .fromTo('.hero-bottom',
+            { opacity: 0 },
+            { opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.55')
+        .call(() => {
+            // Ken Burns arranca después de la entrada
+            gsap.to('.hero-img-main img', {
+                scale: 1.1, xPercent: -2.5, duration: 20,
+                ease: 'power1.inOut', yoyo: true, repeat: -1
             });
-        }
-
-        // Espera Aboreto antes de mostrar el preloader (máx 1s de gracia)
-        Promise.race([
-            document.fonts.load('400 1em Aboreto'),
-            new Promise(r => setTimeout(r, 1000))
-        ]).then(startPreloader);
-
-    } else {
-        startHero();
-    }
+        });
 
     // ── Parallax hero image (scroll) ─────────────────────────────────
     gsap.to('.hero-img-main img', {
         yPercent: -10, ease: 'none',
         scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
     });
-
-    // ── Ken Burns persistente — la imagen nunca queda estática ────────
-    gsap.fromTo('.hero-img-main img',
-        { scale: 1.0, xPercent: 0 },
-        { scale: 1.07, xPercent: -2, duration: 24, ease: 'power1.inOut',
-          yoyo: true, repeat: -1, delay: 1.8 }
-    );
 
     // ── Magnetic CTA hover ────────────────────────────────────────────
     document.querySelectorAll('.cta-primary, .cta-secondary').forEach(btn => {
