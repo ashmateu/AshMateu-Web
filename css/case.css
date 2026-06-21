@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+
 /* ── Case Study Shared Styles ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -40,9 +42,10 @@ nav.scrolled {
     border-bottom: 1px solid rgba(181,168,152,0.2);
 }
 .nav-logo {
-    font-family: var(--serif);
-    font-size: 18px;
-    letter-spacing: 0.04em;
+    font-family: 'Aboreto', system-ui;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
     text-decoration: none;
     color: var(--white);
     transition: color 0.3s;
