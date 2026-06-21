@@ -125,13 +125,17 @@
     </a>
 </div>
 
-<script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 48);
-    }, { passive: true });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.45/bundled/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="/js/sanity.js"></script>
 <script src="/js/project-page.js"></script>
+<script src="/js/effects.js"></script>
+<script>
+if (typeof gsap !== 'undefined') {
+    gsap.from('.case-hero-overlay', { opacity: 0, y: 28, duration: 1.1, ease: 'power2.out', delay: 0.2 });
+    gsap.from('.case-hero-img', { scale: 1.04, duration: 1.6, ease: 'power2.out' });
+}
+</script>
 </body>
 </html>
