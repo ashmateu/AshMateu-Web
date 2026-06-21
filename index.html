@@ -1055,7 +1055,10 @@
 
 <script>
     const nav = document.getElementById('nav');
-    // Nav scroll state now handled by effects.js via Lenis
+    // Baseline nav scroll state (works even if Lenis CDN fails to load)
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 48);
+    }, { passive: true });
 
     // Carousel
     const strip = document.getElementById('portfolioStrip');

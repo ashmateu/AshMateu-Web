@@ -8,14 +8,17 @@
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
 
-    // Nav scroll state via Lenis (replaces window scroll listener)
     const nav = document.getElementById('nav');
+
+    // Baseline nav scroll via window (works regardless of Lenis state)
     if (nav) {
-        lenis.on('scroll', ({ scroll }) => {
-            nav.classList.toggle('scrolled', scroll > 48);
-            ScrollTrigger.update();
-        });
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 48);
+        }, { passive: true });
     }
+
+    // Lenis scroll → also update ScrollTrigger
+    lenis.on('scroll', () => ScrollTrigger.update());
 
     // Smooth anchor navigation
     document.querySelectorAll('a[href^="#"]').forEach(a => {
