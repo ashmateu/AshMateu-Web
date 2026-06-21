@@ -740,12 +740,12 @@
 <nav id="nav">
     <a href="#hero" class="nav-logo">Ash Mateu</a>
     <ul class="nav-links" id="navLinks">
-        <li><a href="#trabajo">Trabajo</a></li>
-        <li><a href="/prensa.html">Prensa</a></li>
-        <li><a href="/blog.html">Notas</a></li>
-        <li><a href="#vlog">Vlog</a></li>
-        <li><a href="/mercadito.html" style="font-weight:500;opacity:0.75">Mercadito</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#trabajo" data-i18n="nav.work">Trabajo</a></li>
+        <li><a href="/prensa.html" data-i18n="nav.press">Prensa</a></li>
+        <li><a href="/blog.html" data-i18n="nav.notes">Notas</a></li>
+        <li><a href="#vlog" data-i18n="nav.vlog">Vlog</a></li>
+        <li><a href="/mercadito.html" style="font-weight:500;opacity:0.75" data-i18n="nav.shop">Mercadito</a></li>
+        <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -759,8 +759,8 @@
         <h1 class="hero-title">Moda con intención.<br>La imagen desde adentro.</h1>
         <p class="hero-subtitle">Chanel, Miu Miu, Gucci. Tapas de Marie Claire.<br>Dolores Fonzi, Griselda Siciliani. Buenos Aires, Nueva York, París.</p>
         <div class="hero-ctas">
-            <a href="#trabajo" class="cta-primary">Ver trabajo</a>
-            <a href="#contacto" class="cta-secondary">Contacto</a>
+            <a href="#trabajo" class="cta-primary" data-i18n="hero.cta.primary">Ver trabajo</a>
+            <a href="#contacto" class="cta-secondary" data-i18n="hero.cta.secondary">Contacto</a>
         </div>
     </div>
     <div class="hero-visuals">
@@ -784,7 +784,7 @@
 <!-- PORTFOLIO -->
 <section id="trabajo">
     <div class="strip-header">
-        <span class="section-label" style="margin-bottom:0">Trabajo</span>
+        <span class="section-label" style="margin-bottom:0" data-i18n="section.work">Trabajo</span>
         <span style="font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(181,168,152,0.4)">08 Proyectos</span>
     </div>
     <div class="work-grid">
@@ -902,7 +902,7 @@
 <!-- SERVICIOS -->
 <section id="servicios">
     <div class="section-inner">
-        <span class="section-label">Servicios</span>
+        <span class="section-label" data-i18n="section.services">Servicios</span>
         <ul class="services-list">
             <li class="service-item">
                 <h3 class="service-name">Dirección creativa</h3>
@@ -931,7 +931,7 @@
 <!-- CONTACTO -->
 <section id="contacto">
     <div class="section-inner">
-        <span class="section-label">Contacto</span>
+        <span class="section-label" data-i18n="section.contact">Contacto</span>
         <div class="contact-inner">
             <div>
                 <h2 class="contact-headline">Nuevos proyectos para 2026. Escribime.</h2>
@@ -947,18 +947,18 @@
                 <input type="hidden" name="_subject" value="Nuevo contacto — ashmateu.com">
                 <input type="hidden" name="_language" value="es">
                 <div class="form-field">
-                    <label class="form-label" for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                    <label class="form-label" for="nombre" data-i18n="form.name.label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" data-i18n="form.name.placeholder" required>
                 </div>
                 <div class="form-field">
-                    <label class="form-label" for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                    <label class="form-label" for="email" data-i18n="form.email.label">Email</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com" data-i18n="form.email.placeholder" required>
                 </div>
                 <div class="form-field">
-                    <label class="form-label" for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" placeholder="Contame sobre tu proyecto"></textarea>
+                    <label class="form-label" for="mensaje" data-i18n="form.message.label">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Contame sobre tu proyecto" data-i18n="form.message.placeholder"></textarea>
                 </div>
-                <button type="submit" class="form-submit" id="formBtn">Enviar &#8594;</button>
+                <button type="submit" class="form-submit" id="formBtn" data-i18n="form.submit">Enviar &#8594;</button>
                 <p id="formStatus" style="display:none;margin-top:16px;font-size:0.8rem;color:var(--sand);letter-spacing:.08em;"></p>
             </form>
         </div>
@@ -970,11 +970,14 @@
     <span class="footer-logo">Ash Mateu</span>
     <ul class="footer-links">
         <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
-        <li><a href="#trabajo">Trabajo</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#trabajo" data-i18n="footer.work">Trabajo</a></li>
+        <li><a href="#contacto" data-i18n="footer.contact">Contacto</a></li>
     </ul>
     <span class="footer-copy">&#169; 2025</span>
 </footer>
+
+<!-- i18n: ES / EN / PT -->
+<script src="/js/i18n.js"></script>
 
 <!-- Smooth scroll + animations -->
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.45/bundled/lenis.min.js"></script>
@@ -1028,7 +1031,8 @@
             e.preventDefault();
             const btn = document.getElementById('formBtn');
             const status = document.getElementById('formStatus');
-            btn.textContent = 'Enviando...';
+            const _t = window.i18n ? window.i18n.t.bind(window.i18n) : function(k){return k;};
+            btn.textContent = _t('form.sending');
             btn.disabled = true;
             try {
                 const res = await fetch(form.action, {
@@ -1037,17 +1041,17 @@
                     headers: { Accept: 'application/json' }
                 });
                 if (res.ok) {
-                    status.textContent = 'Mensaje recibido. Te escribo pronto.';
+                    status.textContent = _t('form.success');
                     status.style.display = 'block';
                     form.reset();
-                    btn.textContent = 'Enviado';
+                    btn.textContent = _t('form.sent');
                 } else {
                     throw new Error();
                 }
             } catch {
-                status.textContent = 'Error al enviar. Escribime directo a ash.mateu@gmail.com';
+                status.textContent = _t('form.error');
                 status.style.display = 'block';
-                btn.textContent = 'Enviar →';
+                btn.textContent = _t('form.submit');
                 btn.disabled = false;
             }
         });
@@ -1107,6 +1111,7 @@
                             <h3 class="work-title">${p.title}</h3>
                         </div>
                     </a>`).join('');
+                if (window.i18n) window.i18n.apply();
             }
         }
     } catch (e) {
