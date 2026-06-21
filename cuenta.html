@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta — El Mercadito de Ash</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://ashmateu.com/cuenta.html">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --black:  #0A0A0A;
+            --ivory:  #F7F3EE;
+            --white:  #FFFFFF;
+            --sand:   #B5A898;
+            --gutter: 56px;
+            --serif:  'Playfair Display', Georgia, serif;
+            --sans:   'Inter', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            font-weight: 300;
+            color: var(--black);
+            background: var(--ivory);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px var(--gutter);
+            background: rgba(247, 243, 238, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(181, 168, 152, 0.25);
+        }
+
+        .nav-logo {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+
+        /* Widget de usuario en nav */
+        .nav-user-widget {
+            position: relative;
+            display: none;
+        }
+
+        .nav-user-trigger {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .nav-user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--black);
+            color: var(--ivory);
+            font-family: var(--serif);
+            font-size: 12px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-user-email {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            color: var(--black);
+            opacity: 0.6;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .nav-user-chevron {
+            width: 10px;
+            height: 10px;
+            color: var(--black);
+            opacity: 0.4;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .nav-user-trigger[aria-expanded="true"] .nav-user-chevron {
+            transform: rotate(180deg);
+        }
+
+        .nav-user-dropdown {
+            position: absolute;
+            top: calc(100% + 16px);
+            right: 0;
+            background: var(--ivory);
+            border: 1px solid rgba(10,10,10,0.1);
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(10,10,10,0.1);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-6px);
+            transition: opacity 0.18s, transform 0.18s;
+        }
+
+        .nav-user-dropdown.is-open {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        .nav-user-dropdown a,
+        .nav-user-dropdown button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            background: none;
+            border: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.15s, background 0.15s;
+            border-bottom: 1px solid rgba(10,10,10,0.06);
+        }
+
+        .nav-user-dropdown a:last-child,
+        .nav-user-dropdown button:last-child { border-bottom: none; }
+
+        .nav-user-dropdown a:hover,
+        .nav-user-dropdown button:hover {
+            opacity: 1;
+            background: rgba(10,10,10,0.03);
+        }
+
+        .nav-user-dropdown .logout-btn {
+            color: rgba(10,10,10,0.45);
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 201;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 1px;
+            background: var(--black);
+            transition: transform 0.25s, opacity 0.25s;
+        }
+
+        /* ── Pantalla de carga ── */
+        .page-loading {
+            position: fixed;
+            inset: 0;
+            background: var(--ivory);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            transition: opacity 0.3s;
+        }
+
+        .page-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-mark {
+            font-family: var(--serif);
+            font-size: 13px;
+            font-style: italic;
+            color: rgba(10,10,10,0.25);
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Header cuenta ── */
+        .cuenta-header {
+            background: var(--black);
+            padding: 140px var(--gutter) 72px;
+        }
+
+        .cuenta-saludo-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 14px;
+        }
+
+        .cuenta-saludo-nombre {
+            font-family: var(--serif);
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--white);
+        }
+
+        .cuenta-saludo-nombre em {
+            font-style: italic;
+            color: var(--sand);
+        }
+
+        .cuenta-saludo-email {
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.3);
+            margin-top: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Sección principal ── */
+        .cuenta-section {
+            padding: 64px var(--gutter) 100px;
+            max-width: 1100px;
+        }
+
+        .cuenta-nav-strip {
+            display: flex;
+            gap: 2px;
+            border-bottom: 1px solid rgba(10,10,10,0.08);
+            margin-bottom: 48px;
+        }
+
+        .cuenta-nav-tab {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: none;
+            border: none;
+            border-bottom: 1px solid transparent;
+            padding: 14px 20px;
+            margin-bottom: -1px;
+            cursor: pointer;
+            opacity: 0.35;
+            transition: opacity 0.15s;
+        }
+
+        .cuenta-nav-tab.active {
+            opacity: 1;
+            border-bottom-color: var(--black);
+        }
+
+        .cuenta-section-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 28px;
+        }
+
+        /* ── Tabla pedidos ── */
+        .pedidos-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pedidos-table th {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--black);
+            opacity: 0.35;
+            text-align: left;
+            padding: 0 24px 16px 0;
+            border-bottom: 1px solid rgba(10,10,10,0.08);
+        }
+
+        .pedidos-table th:last-child {
+            text-align: right;
+            padding-right: 0;
+        }
+
+        .pedidos-table td {
+            padding: 22px 24px 22px 0;
+            border-bottom: 1px solid rgba(10,10,10,0.05);
+            vertical-align: middle;
+        }
+
+        .pedidos-table td:last-child {
+            text-align: right;
+            padding-right: 0;
+        }
+
+        .pedido-nombre {
+            font-family: var(--serif);
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--black);
+            display: block;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .pedido-id {
+            font-size: 10px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.3);
+            letter-spacing: 0.06em;
+        }
+
+        .pedido-fecha {
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.45);
+            white-space: nowrap;
+        }
+
+        .pedido-monto {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--black);
+            white-space: nowrap;
+        }
+
+        .pedido-monto .currency {
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--sand);
+            margin-right: 3px;
+        }
+
+        /* Badges de estado */
+        .pedido-estado {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            white-space: nowrap;
+        }
+
+        .pedido-estado.pendiente {
+            background: rgba(181, 168, 152, 0.18);
+            color: #7A6A5A;
+        }
+
+        .pedido-estado.confirmado {
+            background: rgba(10, 10, 10, 0.06);
+            color: var(--black);
+        }
+
+        .pedido-estado.enviado {
+            background: rgba(10, 10, 10, 0.88);
+            color: var(--ivory);
+        }
+
+        /* ── Estado vacío ── */
+        .pedidos-empty {
+            padding: 64px 0 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .pedidos-empty-title {
+            font-family: var(--serif);
+            font-size: 24px;
+            font-weight: 400;
+            font-style: italic;
+            color: rgba(10,10,10,0.35);
+        }
+
+        .pedidos-empty-text {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.4);
+            line-height: 1.8;
+        }
+
+        .pedidos-empty-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--black);
+            text-decoration: none;
+            padding: 14px 20px;
+            margin-top: 8px;
+            transition: opacity 0.15s;
+        }
+
+        .pedidos-empty-cta:hover { opacity: 0.7; }
+
+        .pedidos-empty-cta svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
+        /* ── Panel acceso denegado (no logueado) ── */
+        .acceso-denegado {
+            padding: 140px var(--gutter) 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            display: none;
+        }
+
+        .acceso-denegado-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+        }
+
+        .acceso-denegado-title {
+            font-family: var(--serif);
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 400;
+            color: var(--black);
+            line-height: 1.1;
+        }
+
+        .acceso-denegado-title em {
+            font-style: italic;
+        }
+
+        .acceso-denegado-text {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.5);
+            line-height: 1.8;
+            max-width: 380px;
+        }
+
+        .btn-acceso {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--black);
+            border: none;
+            padding: 16px 24px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: opacity 0.15s;
+        }
+
+        .btn-acceso:hover { opacity: 0.7; }
+
+        .btn-acceso svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
+        /* ── Skeleton loading ── */
+        .skeleton-row td {
+            padding: 22px 24px 22px 0;
+            border-bottom: 1px solid rgba(10,10,10,0.05);
+        }
+
+        .skel {
+            height: 14px;
+            background: linear-gradient(90deg, rgba(10,10,10,0.06) 0%, rgba(10,10,10,0.03) 50%, rgba(10,10,10,0.06) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s infinite;
+            border-radius: 0;
+        }
+
+        .skel.wide { width: 180px; }
+        .skel.med  { width: 80px; }
+        .skel.slim { width: 56px; }
+
+        @keyframes shimmer {
+            from { background-position: 200% 0; }
+            to   { background-position: -200% 0; }
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 32px var(--gutter);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--white); }
+
+        .footer-copy {
+            font-size: 10px;
+            color: rgba(255,255,255,0.18);
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            :root { --gutter: 24px; }
+
+            .nav-hamburger { display: flex; }
+
+            .nav-links {
+                position: fixed;
+                inset: 0;
+                background: var(--ivory);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 44px;
+                z-index: 200;
+                display: none;
+            }
+
+            .nav-links.is-open { display: flex; }
+            .nav-links a { font-size: 20px; letter-spacing: 0.2em; opacity: 0.75; }
+
+            .nav-user-email { display: none; }
+
+            .cuenta-header { padding: 120px var(--gutter) 60px; }
+
+            .pedidos-table th:nth-child(2),
+            .pedidos-table td:nth-child(2) { display: none; }
+        }
+
+        @media (max-width: 560px) {
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .pedidos-table th:nth-child(3),
+            .pedidos-table td:nth-child(3) { display: none; }
+
+            .pedido-nombre { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Pantalla de carga mientras verificamos sesión -->
+<div class="page-loading" id="pageLoading">
+    <span class="loading-mark">El Mercadito</span>
+</div>
+
+<!-- NAV -->
+<nav>
+    <a href="/" class="nav-logo">Ash Mateu</a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/#trabajo">Trabajo</a></li>
+        <li><a href="/prensa.html">Prensa</a></li>
+        <li><a href="/blog.html">Notas</a></li>
+        <li><a href="/#vlog">Vlog</a></li>
+        <li><a href="/mercadito.html">Mercadito</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+    </ul>
+
+    <!-- Widget con sesión -->
+    <div class="nav-user-widget" id="navUserWidget">
+        <button class="nav-user-trigger" aria-expanded="false" id="navUserTrigger">
+            <span class="nav-user-avatar" id="navAvatar">A</span>
+            <span class="nav-user-email" id="navEmail"></span>
+            <svg class="nav-user-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 1l4 4 4-4"/>
+            </svg>
+        </button>
+        <div class="nav-user-dropdown" id="navUserDropdown">
+            <a href="/cuenta.html">Mi cuenta</a>
+            <button class="logout-btn" id="navLogoutBtn">Cerrar sesión</button>
+        </div>
+    </div>
+
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+
+<!-- VISTA: No logueada -->
+<div class="acceso-denegado" id="vistaNoAuth">
+    <p class="acceso-denegado-label">Mi cuenta</p>
+    <h1 class="acceso-denegado-title">Para ver tu cuenta<br><em>ingresá primero.</em></h1>
+    <p class="acceso-denegado-text">Acá vas a encontrar el historial de tus pedidos y tus datos de contacto.</p>
+    <button class="btn-acceso" id="btnAbrirModal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+        </svg>
+        Ingresar
+    </button>
+</div>
+
+
+<!-- VISTA: Con sesión -->
+<div id="vistaAuth" style="display:none;">
+
+    <header class="cuenta-header">
+        <p class="cuenta-saludo-label">Mi cuenta</p>
+        <h1 class="cuenta-saludo-nombre">Hola, <em id="saludoNombre">.</em></h1>
+        <p class="cuenta-saludo-email" id="saludoEmail"></p>
+    </header>
+
+    <section class="cuenta-section">
+
+        <div class="cuenta-nav-strip">
+            <button class="cuenta-nav-tab active" id="tabPedidos">Mis pedidos</button>
+            <button class="cuenta-nav-tab" id="tabDatos">Datos</button>
+        </div>
+
+        <!-- Panel pedidos -->
+        <div id="panelPedidos">
+            <p class="cuenta-section-label">Historial de compras</p>
+
+            <!-- Skeleton mientras carga -->
+            <table class="pedidos-table" id="pedidosSkeleton">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th style="text-align:right;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="skeleton-row">
+                        <td><div class="skel wide"></div></td>
+                        <td><div class="skel slim"></div></td>
+                        <td><div class="skel slim"></div></td>
+                        <td style="text-align:right;"><div class="skel med" style="margin-left:auto;"></div></td>
+                    </tr>
+                    <tr class="skeleton-row">
+                        <td><div class="skel" style="width:220px;"></div></td>
+                        <td><div class="skel slim"></div></td>
+                        <td><div class="skel slim"></div></td>
+                        <td style="text-align:right;"><div class="skel med" style="margin-left:auto;"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tabla real -->
+            <table class="pedidos-table" id="pedidosTable" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th style="text-align:right;">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="pedidosBody"></tbody>
+            </table>
+
+            <!-- Estado vacío -->
+            <div class="pedidos-empty" id="pedidosEmpty" style="display:none;">
+                <p class="pedidos-empty-title">Todavía no tenés pedidos.</p>
+                <p class="pedidos-empty-text">Cuando comprés algo en el Mercadito, tu historial aparece acá.</p>
+                <a href="/mercadito.html" class="pedidos-empty-cta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 12h18M12 3l9 9-9 9"/>
+                    </svg>
+                    Ir al Mercadito
+                </a>
+            </div>
+        </div>
+
+        <!-- Panel datos (placeholder) -->
+        <div id="panelDatos" style="display:none;">
+            <p class="cuenta-section-label">Mis datos</p>
+            <p style="font-size:13px;font-weight:300;color:rgba(10,10,10,0.45);line-height:1.8;">
+                Para modificar tus datos de contacto escribí a <strong style="font-weight:400;">ash.mateu@gmail.com</strong>.
+            </p>
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+    <span class="footer-logo">Ash Mateu</span>
+    <ul class="footer-links">
+        <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
+        <li><a href="/mercadito.html">Mercadito</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+    </ul>
+    <span class="footer-copy">&#169; 2026</span>
+</footer>
+
+
+<!-- MODAL AUTH — mismo markup que en mercadito.html -->
+<div class="auth-overlay" id="authOverlay" role="dialog" aria-modal="true" aria-label="Autenticación">
+    <div onclick="closeAuthModal()" style="position:absolute;inset:0;cursor:pointer;" aria-hidden="true"></div>
+    <div class="auth-modal" role="document">
+        <div class="auth-modal-header">
+            <span class="auth-modal-brand">El Mercadito</span>
+            <button class="auth-modal-close" onclick="closeAuthModal()" aria-label="Cerrar">
+                <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M1 1l16 16M17 1L1 17"/>
+                </svg>
+            </button>
+        </div>
+        <div class="auth-tabs">
+            <button class="auth-tab-btn active" id="tabLogin" onclick="switchAuthTab('login')">Ingresar</button>
+            <button class="auth-tab-btn" id="tabRegister" onclick="switchAuthTab('register')">Crear cuenta</button>
+        </div>
+        <div class="auth-body">
+            <div class="auth-panel active" id="panelLogin">
+                <div class="auth-error" id="errorLogin" role="alert"></div>
+                <div class="auth-field">
+                    <label class="auth-label" for="loginEmail">Email</label>
+                    <input class="auth-input" type="email" id="loginEmail" autocomplete="email" placeholder="tu@email.com">
+                </div>
+                <div class="auth-field">
+                    <label class="auth-label" for="loginPassword">Contraseña</label>
+                    <input class="auth-input" type="password" id="loginPassword" autocomplete="current-password" placeholder="••••••••">
+                </div>
+                <button class="auth-submit" id="btnLogin" onclick="handleLogin()">
+                    <span class="auth-btn-text">Ingresar</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="auth-arrow" style="width:13px;height:13px;flex-shrink:0;"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
+                    <span class="auth-spinner"></span>
+                </button>
+                <button class="auth-forgot" onclick="handleForgot()">¿Olvidaste tu contraseña?</button>
+            </div>
+            <div class="auth-panel" id="panelRegister">
+                <div class="auth-error" id="errorRegister" role="alert"></div>
+                <div class="auth-field">
+                    <label class="auth-label" for="registerEmail">Email</label>
+                    <input class="auth-input" type="email" id="registerEmail" autocomplete="email" placeholder="tu@email.com">
+                </div>
+                <div class="auth-field">
+                    <label class="auth-label" for="registerPassword">Contraseña</label>
+                    <input class="auth-input" type="password" id="registerPassword" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+                </div>
+                <div class="auth-field">
+                    <label class="auth-label" for="registerPasswordConfirm">Confirmar contraseña</label>
+                    <input class="auth-input" type="password" id="registerPasswordConfirm" autocomplete="new-password" placeholder="••••••••">
+                </div>
+                <button class="auth-submit" id="btnRegister" onclick="handleRegister()">
+                    <span class="auth-btn-text">Crear cuenta</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="auth-arrow" style="width:13px;height:13px;flex-shrink:0;"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
+                    <span class="auth-spinner"></span>
+                </button>
+                <p class="auth-note">Al crear tu cuenta aceptás recibir novedades del Mercadito.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+/* Estilos del modal — incluidos inline para no depender de archivo externo */
+body.auth-open { overflow: hidden; }
+
+.auth-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.auth-overlay.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.auth-modal {
+    background: var(--ivory);
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    transform: translateY(16px);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.auth-overlay.is-open .auth-modal { transform: translateY(0); }
+
+.auth-modal-header {
+    background: var(--black);
+    padding: 28px 32px 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.auth-modal-brand {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ivory);
+}
+
+.auth-modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(247,243,238,0.4);
+    transition: color 0.15s;
+}
+
+.auth-modal-close:hover { color: var(--ivory); }
+.auth-modal-close svg { width: 18px; height: 18px; }
+
+.auth-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(10,10,10,0.1);
+}
+
+.auth-tab-btn {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 18px 12px 16px;
+    cursor: pointer;
+    opacity: 0.35;
+    transition: opacity 0.15s, border-color 0.15s;
+    margin-bottom: -1px;
+}
+
+.auth-tab-btn.active { opacity: 1; border-bottom-color: var(--black); }
+
+.auth-body { padding: 32px 32px 36px; }
+
+.auth-panel { display: none; }
+.auth-panel.active { display: block; }
+
+.auth-error {
+    font-size: 12px;
+    font-weight: 300;
+    color: #8B2020;
+    background: rgba(139,32,32,0.06);
+    border-left: 2px solid #8B2020;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    display: none;
+}
+
+.auth-error.visible { display: block; }
+
+.auth-field { margin-bottom: 16px; }
+
+.auth-label {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.5;
+    margin-bottom: 8px;
+}
+
+.auth-input {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--black);
+    background: var(--white);
+    border: 1px solid rgba(10,10,10,0.15);
+    padding: 13px 14px;
+    outline: none;
+    border-radius: 0;
+    transition: border-color 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.auth-input::placeholder { color: rgba(10,10,10,0.3); }
+.auth-input:focus { border-color: var(--black); }
+
+.auth-submit {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    border: none;
+    border-radius: 0;
+    padding: 16px 20px;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: opacity 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.auth-submit:hover { opacity: 0.75; }
+.auth-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.auth-spinner {
+    width: 13px;
+    height: 13px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-top-color: var(--white);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+}
+
+.auth-submit.loading .auth-spinner { display: block; }
+.auth-submit.loading .auth-btn-text,
+.auth-submit.loading .auth-arrow { display: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.auth-forgot {
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--sand);
+    margin-top: 14px;
+    transition: color 0.15s;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--sans);
+}
+
+.auth-forgot:hover { color: var(--black); }
+
+.auth-note {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(10,10,10,0.4);
+    text-align: center;
+    margin-top: 20px;
+    line-height: 1.6;
+}
+</style>
+
+
+<script>
+// ── Config Supabase ──
+const SUPABASE_URL      = 'https://jrxklahobxpxmtnncvst.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
+// ── Init ──
+(async function init() {
+    const { data: { session } } = await sb.auth.getSession();
+    hideSplash();
+
+    if (session && session.user) {
+        showCuenta(session.user);
+        loadPedidos(session.user.id);
+    } else {
+        showNoAuth();
+    }
+
+    // Escucha cambios de sesión
+    sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+            closeAuthModal();
+            showCuenta(session.user);
+            loadPedidos(session.user.id);
+        }
+        if (event === 'SIGNED_OUT') {
+            showNoAuth();
+        }
+    });
+})();
+
+
+// ── Splash ──
+function hideSplash() {
+    const el = document.getElementById('pageLoading');
+    el.classList.add('hidden');
+    setTimeout(() => el.remove(), 400);
+}
+
+
+// ── Mostrar vistas ──
+function showCuenta(user) {
+    document.getElementById('vistaNoAuth').style.display = 'none';
+    document.getElementById('vistaAuth').style.display   = 'block';
+
+    const email   = user.email || '';
+    const initial = email.charAt(0).toUpperCase();
+
+    // Saludo — intentar extraer nombre de user_metadata
+    const nombre = user.user_metadata?.full_name
+        ? user.user_metadata.full_name.split(' ')[0]
+        : email.split('@')[0];
+
+    document.getElementById('saludoNombre').textContent = nombre;
+    document.getElementById('saludoEmail').textContent  = email;
+
+    // Nav
+    const widget = document.getElementById('navUserWidget');
+    widget.style.display = 'block';
+    document.getElementById('navAvatar').textContent = initial;
+    document.getElementById('navEmail').textContent  = email;
+}
+
+function showNoAuth() {
+    document.getElementById('vistaNoAuth').style.display = 'flex';
+    document.getElementById('vistaAuth').style.display   = 'none';
+    document.getElementById('navUserWidget').style.display = 'none';
+}
+
+
+// ── Cargar pedidos ──
+async function loadPedidos(userId) {
+    const skeleton = document.getElementById('pedidosSkeleton');
+    const table    = document.getElementById('pedidosTable');
+    const empty    = document.getElementById('pedidosEmpty');
+    const tbody    = document.getElementById('pedidosBody');
+
+    const { data, error } = await sb
+        .from('orders')
+        .select('*, products(name)')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+
+    skeleton.style.display = 'none';
+
+    if (error || !data || data.length === 0) {
+        empty.style.display = 'flex';
+        return;
+    }
+
+    const estados = { pendiente: 'pendiente', confirmado: 'confirmado', enviado: 'enviado' };
+
+    tbody.innerHTML = data.map(order => {
+        const estado   = estados[order.status] || 'pendiente';
+        const etiqueta = { pendiente: 'Pendiente', confirmado: 'Confirmado', enviado: 'Enviado' }[estado];
+        const fecha    = new Date(order.created_at).toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
+        const currency = order.currency || 'ARS';
+        const precio   = currency === 'ARS'
+            ? `<span class="currency">ARS</span>${Number(order.amount).toLocaleString('es-AR')}`
+            : `<span class="currency">USD</span>${Number(order.amount).toFixed(0)}`;
+
+        return `
+            <tr>
+                <td>
+                    <span class="pedido-nombre">${order.products?.name || 'Producto'}</span>
+                    <span class="pedido-id">#${order.id}</span>
+                </td>
+                <td><span class="pedido-fecha">${fecha}</span></td>
+                <td><span class="pedido-estado ${estado}">${etiqueta}</span></td>
+                <td><span class="pedido-monto">${precio}</span></td>
+            </tr>`;
+    }).join('');
+
+    table.style.display = 'table';
+}
+
+
+// ── Tabs cuenta ──
+document.getElementById('tabPedidos').addEventListener('click', () => {
+    document.getElementById('tabPedidos').classList.add('active');
+    document.getElementById('tabDatos').classList.remove('active');
+    document.getElementById('panelPedidos').style.display = 'block';
+    document.getElementById('panelDatos').style.display   = 'none';
+});
+
+document.getElementById('tabDatos').addEventListener('click', () => {
+    document.getElementById('tabDatos').classList.add('active');
+    document.getElementById('tabPedidos').classList.remove('active');
+    document.getElementById('panelDatos').style.display   = 'block';
+    document.getElementById('panelPedidos').style.display = 'none';
+});
+
+
+// ── Nav dropdown ──
+document.getElementById('navUserTrigger').addEventListener('click', () => {
+    const dropdown = document.getElementById('navUserDropdown');
+    const trigger  = document.getElementById('navUserTrigger');
+    const open = dropdown.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+
+document.addEventListener('click', e => {
+    const widget = document.getElementById('navUserWidget');
+    if (widget && !widget.contains(e.target)) {
+        document.getElementById('navUserDropdown').classList.remove('is-open');
+        document.getElementById('navUserTrigger').setAttribute('aria-expanded', 'false');
+    }
+});
+
+document.getElementById('navLogoutBtn').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    window.location.href = '/mercadito.html';
+});
+
+
+// ── Hamburger nav ──
+const hamburger = document.getElementById('navHamburger');
+const navLinks  = document.getElementById('navLinks');
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('is-open');
+        navLinks.classList.toggle('is-open', open);
+    });
+}
+
+
+// ── Botón acceso (vista no auth) ──
+document.getElementById('btnAbrirModal').addEventListener('click', () => openAuthModal('login'));
+
+
+// ══════════════════════════════════════════════════════════════
+//  AUTH MODAL
+// ══════════════════════════════════════════════════════════════
+
+function openAuthModal(tab) {
+    switchAuthTab(tab || 'login');
+    document.getElementById('authOverlay').classList.add('is-open');
+    document.body.classList.add('auth-open');
+    setTimeout(() => {
+        const first = document.querySelector('#authOverlay .auth-panel.active .auth-input');
+        if (first) first.focus();
+    }, 100);
+}
+
+function closeAuthModal() {
+    document.getElementById('authOverlay').classList.remove('is-open');
+    document.body.classList.remove('auth-open');
+    clearAuthErrors();
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeAuthModal();
+});
+
+function switchAuthTab(tab) {
+    const isLogin = tab === 'login';
+    document.getElementById('tabLogin').classList.toggle('active', isLogin);
+    document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+    document.getElementById('panelLogin').classList.toggle('active', isLogin);
+    document.getElementById('panelRegister').classList.toggle('active', !isLogin);
+    clearAuthErrors();
+}
+
+function showAuthError(panelId, msg) {
+    const el = document.getElementById('error' + panelId);
+    el.textContent = msg;
+    el.classList.add('visible');
+}
+
+function clearAuthErrors() {
+    document.querySelectorAll('.auth-error').forEach(el => {
+        el.textContent = '';
+        el.classList.remove('visible');
+        el.style.cssText = '';
+    });
+}
+
+function setLoading(btnId, loading) {
+    const btn = document.getElementById(btnId);
+    btn.classList.toggle('loading', loading);
+    btn.disabled = loading;
+}
+
+async function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass  = document.getElementById('loginPassword').value;
+
+    if (!email || !pass) {
+        showAuthError('Login', 'Completá email y contraseña para ingresar.');
+        return;
+    }
+
+    setLoading('btnLogin', true);
+
+    const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+
+    if (error) {
+        showAuthError('Login', 'Email o contraseña incorrectos.');
+        setLoading('btnLogin', false);
+    }
+    // El éxito lo maneja onAuthStateChange
+}
+
+async function handleRegister() {
+    const email   = document.getElementById('registerEmail').value.trim();
+    const pass    = document.getElementById('registerPassword').value;
+    const confirm = document.getElementById('registerPasswordConfirm').value;
+
+    if (!email) { showAuthError('Register', 'Ingresá tu email.'); return; }
+    if (pass.length < 8) { showAuthError('Register', 'La contraseña debe tener al menos 8 caracteres.'); return; }
+    if (pass !== confirm) { showAuthError('Register', 'Las contraseñas no coinciden.'); return; }
+
+    setLoading('btnRegister', true);
+
+    const { data, error } = await sb.auth.signUp({ email, password: pass });
+
+    if (error) {
+        showAuthError('Register', error.message || 'Error al crear la cuenta. Intentá de nuevo.');
+        setLoading('btnRegister', false);
+        return;
+    }
+
+    if (data.user && !data.session) {
+        // Email de confirmación enviado
+        document.getElementById('panelRegister').innerHTML = `
+            <p style="font-size:14px;font-weight:300;line-height:1.9;color:var(--black);padding:8px 0 4px;">
+                Revisá tu email para confirmar tu cuenta.<br>
+                <span style="color:rgba(10,10,10,0.45);font-size:12px;">Si no llega en unos minutos, revisá la carpeta de spam.</span>
+            </p>`;
+    }
+    // Si ya hay sesión, onAuthStateChange lo maneja
+}
+
+async function handleForgot() {
+    const email = document.getElementById('loginEmail').value.trim();
+    if (!email) {
+        showAuthError('Login', 'Primero ingresá tu email para recuperar la contraseña.');
+        return;
+    }
+
+    await sb.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://ashmateu.com/cuenta.html'
+    });
+
+    const el = document.getElementById('errorLogin');
+    el.style.borderLeftColor = 'var(--sand)';
+    el.style.color = '#7A6A5A';
+    el.style.background = 'rgba(181,168,152,0.1)';
+    el.textContent = 'Si tu email está registrado, te enviamos un link para restablecer tu contraseña.';
+    el.classList.add('visible');
+}
+</script>
+
+</body>
+</html>
