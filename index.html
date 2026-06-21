@@ -1060,7 +1060,7 @@
     try {
         const [home, projects] = await Promise.all([
             sanityFetch(`*[_type == "homePage"][0]`),
-            sanityFetch(`*[_type == "project"] | order(order asc) {title, "slug": slug.current, category, stripMeta, localStripImage}`),
+            sanityFetch(`*[_type == "project" && slug.current != "calu-chinatown"] | order(order asc) {title, "slug": slug.current, category, stripMeta, localStripImage}`),
         ]);
 
         if (home) {
