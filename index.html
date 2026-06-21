@@ -287,7 +287,7 @@
         }
 
         /* ── Portfolio Strip ── */
-        #trabajo { background: var(--ivory); }
+        #trabajo { background: var(--ivory); padding-top: 0; }
 
         .strip-header {
             padding: 80px var(--gutter) 56px;
@@ -1095,6 +1095,9 @@
                     }
                     if (p.slug === 'calu-chinatown') {
                         return { slug: 'chanel-williamsburg', title: 'Chanel Prêt-à-porter Williamsburg', stripMeta: 'Styling — Brooklyn, Nueva York', localStripImage: 'images/extracted/chanel-pap/img-001.webp' };
+                    }
+                    if (p.slug === 'gucci-rural') {
+                        return { ...p, localStripImage: 'images/extracted/gucci-rural/img-strip.jpg' };
                     }
                     return p;
                 });
