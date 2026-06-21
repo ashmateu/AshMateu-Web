@@ -290,10 +290,12 @@
         #trabajo { background: var(--black); }
 
         .strip-header {
-            padding: 80px var(--gutter) 36px;
+            padding: 56px var(--gutter) 20px;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+            border-bottom: 1px solid rgba(181,168,152,0.12);
+            margin-bottom: 0;
         }
 
         .strip-hint {
@@ -301,7 +303,7 @@
             font-weight: 400;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: rgba(181,168,152,0.45);
+            color: rgba(181,168,152,0.35);
         }
 
         .strip-wrap {
@@ -384,8 +386,8 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 36px 32px;
-            background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+            padding: 40px 32px;
+            background: linear-gradient(to top, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.28) 42%, transparent 65%);
             pointer-events: none;
         }
 
@@ -395,10 +397,10 @@
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--sand);
-            margin-bottom: 8px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.35s, transform 0.35s;
+            margin-bottom: 10px;
+            opacity: 0.7;
+            transform: translateY(0);
+            transition: opacity 0.4s, transform 0.4s;
         }
 
         .strip-title {
@@ -406,29 +408,56 @@
             font-size: clamp(16px, 1.8vw, 26px);
             font-weight: 400;
             color: var(--white);
-            line-height: 1.15;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.35s 0.06s, transform 0.35s 0.06s;
+            line-height: 1.18;
+            opacity: 0.88;
+            transform: translateY(0);
+            transition: opacity 0.4s 0.05s, transform 0.4s 0.05s;
         }
 
-        .strip-item:hover .strip-meta,
+        .strip-item:hover .strip-meta {
+            opacity: 1;
+            transform: translateY(-4px);
+        }
         .strip-item:hover .strip-title {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(-4px);
         }
+
+        .strip-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--sand);
+            transition: width 0.55s cubic-bezier(0.16,1,0.3,1);
+        }
+        .strip-item:hover::after { width: 100%; }
 
         .strip-number {
             position: absolute;
-            top: 28px;
-            right: 28px;
+            top: 24px;
+            right: 24px;
+            font-family: var(--serif);
             font-size: 11px;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.25);
-            transition: color 0.3s;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.22);
+            transition: color 0.4s;
         }
-        .strip-item:hover .strip-number { color: rgba(255,255,255,0.5); }
+        .strip-item:hover .strip-number { color: rgba(255,255,255,0.55); }
+
+        .strip-progress {
+            height: 1px;
+            background: rgba(181,168,152,0.14);
+            margin: 0 var(--gutter);
+        }
+        .strip-progress-bar {
+            height: 100%;
+            background: var(--sand);
+            width: 0%;
+            transition: width 0.08s linear;
+        }
 
         /* ── Services ── */
         #servicios { background: var(--ivory); }
@@ -947,6 +976,7 @@
         </div>
     </div>
     </div><!-- /.strip-wrap -->
+    <div class="strip-progress"><div class="strip-progress-bar" id="stripProgress"></div></div>
 </section>
 
 <!-- SOBRE -->
@@ -1185,8 +1215,16 @@
             strip._dragTimer = setTimeout(() => { paused = false; }, 1200);
         });
 
-        strip.addEventListener('scroll', updateArrows, { passive: true });
-        updateArrows();
+        const progressBar = document.getElementById('stripProgress');
+        function updateStrip() {
+            updateArrows();
+            if (progressBar) {
+                const pct = strip.scrollLeft / (strip.scrollWidth - strip.clientWidth) * 100;
+                progressBar.style.width = pct + '%';
+            }
+        }
+        strip.addEventListener('scroll', updateStrip, { passive: true });
+        updateStrip();
     }
 
     // YouTube facade → iframe al click
