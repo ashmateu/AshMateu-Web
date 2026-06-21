@@ -1388,11 +1388,18 @@ if (typeof gsap !== 'undefined') {
         startHero();
     }
 
-    // ── Parallax hero image ───────────────────────────────────────────
+    // ── Parallax hero image (scroll) ─────────────────────────────────
     gsap.to('.hero-img-main img', {
         yPercent: -10, ease: 'none',
         scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
     });
+
+    // ── Ken Burns persistente — la imagen nunca queda estática ────────
+    gsap.fromTo('.hero-img-main img',
+        { scale: 1.0, xPercent: 0 },
+        { scale: 1.07, xPercent: -2, duration: 24, ease: 'power1.inOut',
+          yoyo: true, repeat: -1, delay: 1.8 }
+    );
 
     // ── Magnetic CTA hover ────────────────────────────────────────────
     document.querySelectorAll('.cta-primary, .cta-secondary').forEach(btn => {
