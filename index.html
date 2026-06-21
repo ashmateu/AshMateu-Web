@@ -1244,5 +1244,51 @@
     }
 </script>
 
+<script src="/js/sanity.js"></script>
+<script>
+(async () => {
+    try {
+        const [home, projects] = await Promise.all([
+            sanityFetch(`*[_type == "homePage"][0]`),
+            sanityFetch(`*[_type == "project"] | order(order asc) {title, "slug": slug.current, category, stripMeta, localStripImage}`),
+        ]);
+
+        if (home) {
+            if (home.heroTitle)      document.querySelector('.hero-title').innerHTML    = home.heroTitle.replace(/\n/g, '<br>');
+            if (home.heroSubtitle)   document.querySelector('.hero-subtitle').innerHTML = home.heroSubtitle.replace(/\n/g, '<br>');
+            if (home.heroEyebrow)    document.querySelector('.hero-eyebrow').textContent = home.heroEyebrow;
+            if (home.heroLocations)  document.querySelector('.hero-location').textContent = home.heroLocations;
+            if (home.aboutText)      document.querySelector('.about-text').innerHTML    = toHtml(home.aboutText);
+            if (home.contactHeadline) document.querySelector('.contact-headline').textContent = home.contactHeadline;
+            if (home.services?.length) {
+                const items = document.querySelectorAll('.service-item');
+                home.services.forEach((svc, i) => {
+                    if (!items[i]) return;
+                    if (svc.title)       items[i].querySelector('.service-name').textContent = svc.title;
+                    if (svc.description) items[i].querySelector('.service-desc').textContent = svc.description;
+                });
+            }
+        }
+
+        if (projects?.length) {
+            const track = document.querySelector('.strip-track');
+            if (track) {
+                track.innerHTML = projects.map((p, i) => `
+                    <a class="strip-item${i === 5 ? ' strip-item--wide' : ''}" href="projects/${p.slug}.html">
+                        <img class="strip-img" src="${p.localStripImage || ''}" alt="${p.title}" loading="${i === 0 ? 'eager' : 'lazy'}" ${i === 0 ? 'fetchpriority="high"' : ''}>
+                        <span class="strip-number">${String(i + 1).padStart(2, '0')}</span>
+                        <div class="strip-overlay">
+                            <p class="strip-meta">${p.stripMeta || p.category || ''}</p>
+                            <h3 class="strip-title">${p.title}</h3>
+                        </div>
+                    </a>`).join('');
+            }
+        }
+    } catch (e) {
+        // Sanity no disponible, usa contenido hardcodeado
+    }
+})();
+</script>
+
 </body>
 </html>
