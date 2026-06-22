@@ -89,13 +89,46 @@
 
         /* ── Header ── */
         .mercadito-header {
-            background: var(--black);
+            background: radial-gradient(ellipse at 28% 60%, #1e1610 0%, #0a0a0a 65%);
             color: var(--white);
             padding: 160px var(--gutter) 100px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 96px;
             align-items: end;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mercadito-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.045;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .mercadito-header-deco {
+            position: absolute;
+            font-family: var(--serif);
+            font-size: clamp(280px, 38vw, 560px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.028);
+            right: -30px;
+            bottom: -80px;
+            line-height: 1;
+            user-select: none;
+            pointer-events: none;
+            letter-spacing: -0.04em;
+            z-index: 0;
+        }
+
+        .mercadito-header h1,
+        .mercadito-header-desc {
+            position: relative;
+            z-index: 1;
         }
 
         .mercadito-header h1 {
@@ -1208,6 +1241,7 @@
 
 <!-- HEADER -->
 <header class="mercadito-header">
+    <span class="mercadito-header-deco" aria-hidden="true">M</span>
     <h1>El Mercadito<br><em>de Ash</em></h1>
     <div class="mercadito-header-desc">
         <p>Piezas seleccionadas con criterio de stylist. Vintage que vale, accesorios que duran.</p>
