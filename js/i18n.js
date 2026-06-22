@@ -131,6 +131,18 @@
         return dict[key] || TRANSLATIONS.es[key] || key;
     }
 
+    // Cache del contenido original en español (cargado desde Sanity/HTML)
+    var _esCache = {};
+
+    function cacheEs() {
+        document.querySelectorAll('[data-i18n-override]').forEach(function (el) {
+            var key = el.dataset.i18nOverride;
+            if (!_esCache[key]) {
+                _esCache[key] = HTML_KEYS[key] ? el.innerHTML : el.textContent;
+            }
+        });
+    }
+
     function apply() {
         var lang = getLang();
         var dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
@@ -147,10 +159,19 @@
             }
         });
 
-        // Sanity-driven elements — translate only for non-ES so Sanity stays authoritative in Spanish
-        if (lang !== 'es') {
-            document.querySelectorAll('[data-i18n-override]').forEach(function (el) {
-                var key = el.dataset.i18nOverride;
+        // Sanity-driven elements: restore ES cache or apply translation
+        document.querySelectorAll('[data-i18n-override]').forEach(function (el) {
+            var key = el.dataset.i18nOverride;
+            if (lang === 'es') {
+                // Restaurar contenido original en español
+                if (_esCache[key] !== undefined) {
+                    if (HTML_KEYS[key]) {
+                        el.innerHTML = _esCache[key];
+                    } else {
+                        el.textContent = _esCache[key];
+                    }
+                }
+            } else {
                 var val = dict[key];
                 if (!val) return;
                 if (HTML_KEYS[key]) {
@@ -158,8 +179,8 @@
                 } else {
                     el.textContent = val;
                 }
-            });
-        }
+            }
+        });
 
         var htmlLang = lang === 'fr' ? 'fr' : (lang === 'en' ? 'en' : 'es');
         document.documentElement.lang = htmlLang;
@@ -225,6 +246,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         injectStyles();
         injectSwitcher();
+        cacheEs();   // guardar HTML original antes de cualquier traducción
         apply();
     });
 
