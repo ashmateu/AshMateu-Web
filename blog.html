@@ -306,7 +306,7 @@
 
 <header class="blog-hero" id="blogHero">
   <div class="blog-hero-bg" id="heroBg">
-    <div class="blog-hero-bg-fallback"></div>
+    <img src="/images/ash/bts-set.jpg" alt="Ash Mateu en set" loading="eager">
   </div>
   <div class="blog-hero-overlay"></div>
   <div class="blog-hero-content">
@@ -352,24 +352,24 @@ function formatDate(d) {
   return new Date(d).toLocaleDateString('es-AR', { day:'2-digit', month:'long', year:'numeric' });
 }
 
-function collage(coverUrl, title, eager) {
-  if (!coverUrl) return '<div class="collage-placeholder"></div>';
+function collage(p, eager) {
+  const u1 = p.cover_url, u2 = p.cover_url_2, u3 = p.cover_url_3;
+  if (!u1) return '<div class="collage-placeholder"></div>';
   const load = eager ? 'eager' : 'lazy';
   return `
     <figure class="collage-main">
-      <img src="${coverUrl}" alt="${title}" loading="${load}">
+      <img src="${u1}" alt="${p.title}" loading="${load}">
     </figure>
     <figure class="collage-crop">
-      <img src="${coverUrl}" alt="" loading="lazy" style="object-position:80% 15%">
+      <img src="${u2 || u1}" alt="" loading="lazy" style="object-position:center top">
     </figure>
     <figure class="collage-crop">
-      <img src="${coverUrl}" alt="" loading="lazy" style="object-position:20% 80%">
+      <img src="${u3 || u1}" alt="" loading="lazy" style="object-position:center bottom">
     </figure>`;
 }
 
 async function loadPosts() {
   const grid = document.getElementById('blogGrid');
-  const heroBg = document.getElementById('heroBg');
 
   const { data, error } = await sb.from('posts').select('*').eq('active', true).order('published_at', { ascending: false });
 
@@ -378,15 +378,10 @@ async function loadPosts() {
     return;
   }
 
-  // Set hero background from first post
-  if (data[0].cover_url) {
-    heroBg.innerHTML = `<img src="${data[0].cover_url}" alt="" loading="eager">`;
-  }
-
   grid.innerHTML = data.map((p, i) => `
     <a class="post-card" href="/blog/post.html?slug=${p.slug}">
       <div class="post-collage">
-        ${collage(p.cover_url, p.title, i === 0)}
+        ${collage(p, i === 0)}
       </div>
       <div class="post-body">
         <span class="post-date">${formatDate(p.published_at)}</span>
