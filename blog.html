@@ -18,92 +18,271 @@
     :root {
       --black: #0A0A0A; --ivory: #F7F3EE; --white: #fff; --sand: #B5A898;
       --gutter: 56px; --serif: 'Playfair Display', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+      --gap: 3px;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); font-weight: 300; color: var(--black); background: var(--ivory); -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--sans); font-weight: 300; color: var(--black); background: var(--black); -webkit-font-smoothing: antialiased; }
 
+    /* ── Nav ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 28px var(--gutter);
-      background: rgba(247,243,238,0.96); backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(181,168,152,0.25);
+      background: rgba(10,10,10,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .nav-logo { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .nav-logo { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    .nav-logo:hover { color: var(--white); }
     .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
-    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: rgba(255,255,255,0.9); }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
-    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--black); transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--white); transition: transform 0.25s, opacity 0.25s; }
     .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-    .blog-header {
-      padding: 160px var(--gutter) 80px;
-      border-bottom: 1px solid rgba(10,10,10,0.08);
+    /* ── Hero header ── */
+    .blog-hero {
+      position: relative;
+      height: 70vh;
+      min-height: 480px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
     }
-    .blog-header .eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sand); margin-bottom: 24px; }
-    .blog-header h1 { font-family: var(--serif); font-size: clamp(48px, 6vw, 88px); font-weight: 400; line-height: 1; letter-spacing: -0.01em; }
-    .blog-header h1 em { font-style: italic; }
 
+    .blog-hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .blog-hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      filter: brightness(0.45) contrast(1.1) saturate(0.6);
+    }
+
+    .blog-hero-bg-fallback {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #1a1210 0%, #0a0a0a 100%);
+    }
+
+    .blog-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.1) 60%);
+      z-index: 1;
+    }
+
+    .blog-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 var(--gutter) 64px;
+      width: 100%;
+    }
+
+    .blog-hero-content .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 20px;
+    }
+
+    .blog-hero-content h1 {
+      font-family: var(--serif);
+      font-size: clamp(56px, 8vw, 120px);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .blog-hero-content h1 em {
+      font-style: italic;
+      color: rgba(181,168,152,0.85);
+    }
+
+    /* ── Grid ── */
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--gap);
+      background: var(--black);
+      padding: var(--gap);
     }
 
+    /* First card: full width hero */
+    .post-card:first-child {
+      grid-column: 1 / -1;
+    }
+
+    /* ── Card ── */
     .post-card {
-      border-right: 1px solid rgba(10,10,10,0.08);
-      border-bottom: 1px solid rgba(10,10,10,0.08);
-      padding: 40px 40px 48px;
       text-decoration: none;
       color: var(--black);
       display: flex;
       flex-direction: column;
-      transition: background 0.2s;
+      background: var(--ivory);
+      overflow: hidden;
+      transition: opacity 0.25s;
     }
-    .post-card:nth-child(3n) { border-right: none; }
-    .post-card:hover { background: rgba(10,10,10,0.02); }
 
-    .post-cover {
-      width: 100%; aspect-ratio: 16/9; overflow: hidden; margin-bottom: 28px;
-      background: #1a1a1a;
+    .post-card:hover { opacity: 0.93; }
+
+    /* ── Collage ── */
+    .post-collage {
+      flex-shrink: 0;
+      background: var(--black);
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: 62% 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 380px;
     }
-    .post-cover img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.5s ease; }
-    .post-card:hover .post-cover img { transform: scale(1.03); }
-    .post-cover-placeholder { width: 100%; height: 100%; background: #111; }
 
-    .post-date { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sand); margin-bottom: 12px; }
-    .post-title { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); font-weight: 400; line-height: 1.25; margin-bottom: 12px; }
-    .post-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.55); flex: 1; }
-    .post-read { margin-top: 24px; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
+    .post-card:first-child .post-collage {
+      height: 560px;
+      grid-template-columns: 64% 1fr;
+    }
 
-    .blog-empty { padding: 120px var(--gutter); text-align: center; color: var(--sand); font-size: 13px; }
+    .collage-main {
+      grid-row: 1 / 3;
+      overflow: hidden;
+    }
 
-    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
+    .collage-crop {
+      overflow: hidden;
+    }
+
+    .collage-main img,
+    .collage-crop img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.88) contrast(1.06) saturate(0.78);
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .post-card:hover .collage-main img,
+    .post-card:hover .collage-crop img {
+      transform: scale(1.04);
+    }
+
+    .collage-placeholder {
+      grid-row: 1 / 3;
+      grid-column: 1 / -1;
+      background: #111;
+      height: 380px;
+    }
+
+    .post-card:first-child .collage-placeholder { height: 560px; }
+
+    /* ── Card body ── */
+    .post-body {
+      padding: 28px 32px 36px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-card:first-child .post-body {
+      padding: 36px 48px 48px;
+    }
+
+    .post-date {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 12px;
+    }
+
+    .post-title {
+      font-family: var(--serif);
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .post-card:first-child .post-title {
+      font-size: clamp(26px, 2.8vw, 40px);
+    }
+
+    .post-excerpt {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(10,10,10,0.5);
+      flex: 1;
+      max-width: 480px;
+    }
+
+    .post-read {
+      margin-top: 20px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.35;
+    }
+
+    /* ── Empty / loading ── */
+    .blog-empty {
+      grid-column: 1 / -1;
+      padding: 120px var(--gutter);
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 13px;
+      background: var(--black);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 32px var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
     .footer-links { display: flex; gap: 36px; list-style: none; }
     .footer-links a { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--white); }
     .footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
 
+    /* ── Responsive ── */
     @media (max-width: 900px) {
       :root { --gutter: 24px; }
       .nav-hamburger { display: flex; }
-      .nav-links { position: fixed; inset: 0; background: var(--ivory); flex-direction: column; align-items: center; justify-content: center; gap: 44px; z-index: 200; display: none; }
+      .nav-links {
+        position: fixed; inset: 0;
+        background: rgba(10,10,10,0.97);
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 44px; z-index: 200; display: none;
+      }
       .nav-links.is-open { display: flex; }
-      .nav-links a { font-size: 20px; letter-spacing: 0.2em; opacity: 0.75; }
-      .blog-header { padding: 120px var(--gutter) 56px; }
-      .blog-grid { grid-template-columns: repeat(2, 1fr); }
-      .post-card { padding: 28px 24px 36px; }
-      .post-card:nth-child(3n) { border-right: 1px solid rgba(10,10,10,0.08); }
-      .post-card:nth-child(2n) { border-right: none; }
+      .nav-links a { font-size: 20px; letter-spacing: 0.2em; color: rgba(255,255,255,0.75); }
+      .blog-grid { grid-template-columns: 1fr; }
+      .post-card:first-child { grid-column: auto; }
+      .post-collage { height: 280px; }
+      .post-card:first-child .post-collage { height: 340px; }
+      .post-body { padding: 24px 24px 32px; }
+      .post-card:first-child .post-body { padding: 24px 24px 32px; }
     }
     @media (max-width: 560px) {
-      .blog-grid { grid-template-columns: 1fr; }
-      .post-card { border-right: none; }
-      .post-card:nth-child(2n) { border-right: none; }
+      .blog-hero { height: 55vh; }
+      .post-collage { height: 240px; }
+      .post-card:first-child .post-collage { height: 280px; }
       footer { flex-direction: column; gap: 20px; text-align: center; }
     }
   </style>
@@ -125,14 +304,20 @@
   </button>
 </nav>
 
-<header class="blog-header">
-  <p class="eyebrow">Ash Mateu</p>
-  <h1>Notas <em>editoriales</em></h1>
+<header class="blog-hero" id="blogHero">
+  <div class="blog-hero-bg" id="heroBg">
+    <div class="blog-hero-bg-fallback"></div>
+  </div>
+  <div class="blog-hero-overlay"></div>
+  <div class="blog-hero-content">
+    <p class="eyebrow">Ash Mateu</p>
+    <h1>Notas <em>editoriales</em></h1>
+  </div>
 </header>
 
 <main>
   <div class="blog-grid" id="blogGrid">
-    <div class="blog-empty" style="grid-column:1/-1">Cargando...</div>
+    <div class="blog-empty">Cargando...</div>
   </div>
 </main>
 
@@ -167,22 +352,48 @@ function formatDate(d) {
   return new Date(d).toLocaleDateString('es-AR', { day:'2-digit', month:'long', year:'numeric' });
 }
 
+function collage(coverUrl, title, eager) {
+  if (!coverUrl) return '<div class="collage-placeholder"></div>';
+  const load = eager ? 'eager' : 'lazy';
+  return `
+    <figure class="collage-main">
+      <img src="${coverUrl}" alt="${title}" loading="${load}">
+    </figure>
+    <figure class="collage-crop">
+      <img src="${coverUrl}" alt="" loading="lazy" style="object-position:80% 15%">
+    </figure>
+    <figure class="collage-crop">
+      <img src="${coverUrl}" alt="" loading="lazy" style="object-position:20% 80%">
+    </figure>`;
+}
+
 async function loadPosts() {
   const grid = document.getElementById('blogGrid');
+  const heroBg = document.getElementById('heroBg');
+
   const { data, error } = await sb.from('posts').select('*').eq('active', true).order('published_at', { ascending: false });
+
   if (error || !data?.length) {
-    grid.innerHTML = '<div class="blog-empty" style="grid-column:1/-1">Las notas aparecen acá cuando Ash publique la primera.</div>';
+    grid.innerHTML = '<div class="blog-empty">Las notas aparecen acá cuando Ash publique la primera.</div>';
     return;
   }
-  grid.innerHTML = data.map(p => `
+
+  // Set hero background from first post
+  if (data[0].cover_url) {
+    heroBg.innerHTML = `<img src="${data[0].cover_url}" alt="" loading="eager">`;
+  }
+
+  grid.innerHTML = data.map((p, i) => `
     <a class="post-card" href="/blog/post.html?slug=${p.slug}">
-      <div class="post-cover">
-        ${p.cover_url ? `<img src="${p.cover_url}" alt="${p.title}" loading="lazy">` : '<div class="post-cover-placeholder"></div>'}
+      <div class="post-collage">
+        ${collage(p.cover_url, p.title, i === 0)}
       </div>
-      <span class="post-date">${formatDate(p.published_at)}</span>
-      <h2 class="post-title">${p.title}</h2>
-      <p class="post-excerpt">${p.excerpt ?? ''}</p>
-      <span class="post-read">Leer nota</span>
+      <div class="post-body">
+        <span class="post-date">${formatDate(p.published_at)}</span>
+        <h2 class="post-title">${p.title}</h2>
+        <p class="post-excerpt">${p.excerpt ?? ''}</p>
+        <span class="post-read">Leer nota →</span>
+      </div>
     </a>
   `).join('');
 }
