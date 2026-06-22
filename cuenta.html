@@ -1135,7 +1135,7 @@ async function loadPedidos(userId) {
 
     const { data, error } = await sb
         .from('orders')
-        .select('*, products(name)')
+        .select('id, created_at, status, amount, currency, order_items(product_name, quantity)')
         .eq('user_id', userId)
         .order('created_at', { ascending: false });
 
@@ -1146,22 +1146,26 @@ async function loadPedidos(userId) {
         return;
     }
 
-    const estados = { pendiente: 'pendiente', confirmado: 'confirmado', enviado: 'enviado' };
+    const ESTADO_SLUG  = { pendiente: 'pendiente', confirmado: 'confirmado', enviado: 'enviado', rechazado: 'rechazado' };
+    const ESTADO_LABEL = { pendiente: 'Pendiente', confirmado: 'Confirmado', enviado: 'Enviado', rechazado: 'Rechazado' };
 
     tbody.innerHTML = data.map(order => {
-        const estado   = estados[order.status] || 'pendiente';
-        const etiqueta = { pendiente: 'Pendiente', confirmado: 'Confirmado', enviado: 'Enviado' }[estado];
+        const estado   = ESTADO_SLUG[order.status]  || 'pendiente';
+        const etiqueta = ESTADO_LABEL[order.status] || 'Pendiente';
         const fecha    = new Date(order.created_at).toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
         const currency = order.currency || 'ARS';
         const precio   = currency === 'ARS'
             ? `<span class="currency">ARS</span>${Number(order.amount).toLocaleString('es-AR')}`
             : `<span class="currency">USD</span>${Number(order.amount).toFixed(0)}`;
+        const items    = order.order_items?.length
+            ? order.order_items.map(i => `${i.product_name}${i.quantity > 1 ? ` ×${i.quantity}` : ''}`).join(', ')
+            : 'Pedido';
 
         return `
             <tr>
                 <td>
-                    <span class="pedido-nombre">${order.products?.name || 'Producto'}</span>
-                    <span class="pedido-id">#${order.id}</span>
+                    <span class="pedido-nombre">${items}</span>
+                    <span class="pedido-id">#${order.id.slice(0, 8)}</span>
                 </td>
                 <td><span class="pedido-fecha">${fecha}</span></td>
                 <td><span class="pedido-estado ${estado}">${etiqueta}</span></td>
