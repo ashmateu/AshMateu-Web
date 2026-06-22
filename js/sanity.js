@@ -26,7 +26,7 @@ function toHtml(blocks = []) {
     return blocks.map(block => {
         if (block._type !== 'block') return '';
         const text = block.children.map(span => {
-            let t = span.text;
+            let t = span.text.replace(/^▎\s*/, '');
             if (span.marks?.includes('strong')) t = `<strong>${t}</strong>`;
             if (span.marks?.includes('em')) t = `<em>${t}</em>`;
             return t;
