@@ -206,6 +206,14 @@
             margin-bottom: 36px;
         }
 
+        .hero-kw {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+        }
+
         .hero-subtitle {
             font-size: 16px;
             font-weight: 300;
@@ -760,7 +768,7 @@
 <section id="hero">
     <div class="hero-content">
         <p class="hero-eyebrow">Ash Mateu</p>
-        <h1 class="hero-title" data-i18n-override="hero.title">Moda con intención.<br>La imagen desde adentro.</h1>
+        <h1 class="hero-title" data-i18n-override="hero.title"><span class="hero-kw">Moda</span> con <span class="hero-kw">intención</span>.<br>La <span class="hero-kw">imagen</span> desde adentro.</h1>
         <p class="hero-subtitle" data-i18n-override="hero.subtitle">Chanel, Miu Miu, Gucci. Tapas de Marie Claire.<br>Dolores Fonzi, Griselda Siciliani. Buenos Aires, Nueva York, París.</p>
         <div class="hero-ctas">
             <a href="#trabajo" class="cta-primary" data-i18n="hero.cta.primary">Ver trabajo</a>
@@ -1072,7 +1080,10 @@
         ]);
 
         if (home) {
-            if (home.heroTitle)      document.querySelector('.hero-title').innerHTML    = home.heroTitle.replace(/\n/g, '<br>');
+            if (home.heroTitle) {
+                const _raw = home.heroTitle.replace(/\n/g, '<br>');
+                document.querySelector('.hero-title').innerHTML = _raw.replace(/(Moda|intención|imagen)/g, '<span class="hero-kw">$1</span>');
+            }
             if (home.heroSubtitle)   document.querySelector('.hero-subtitle').innerHTML = home.heroSubtitle.replace(/\n/g, '<br>');
             if (home.heroEyebrow)    document.querySelector('.hero-eyebrow').textContent = home.heroEyebrow;
             if (home.heroLocations)  document.querySelector('.hero-location').textContent = home.heroLocations;
