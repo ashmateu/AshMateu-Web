@@ -23,9 +23,39 @@
     <link rel="preload" as="image" href="images/extracted/chanel-hc/img-005.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;0,6..96,800;1,6..96,300;1,6..96,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;0,6..96,800;1,6..96,300;1,6..96,400&display=swap" rel="stylesheet">
 
     <style>
+        @font-face {
+            font-family: 'Bebas Neue';
+            src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Amulya';
+            src: url('/fonts/Amulya-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Amulya';
+            src: url('/fonts/Amulya-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Amulya';
+            src: url('/fonts/Amulya-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Amulya';
+            src: url('/fonts/Amulya-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+        }
         /* ── Reset ── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -37,7 +67,7 @@
             --sand:   #B5A898;
             --gutter: 56px;
             --serif:  'Bodoni Moda', Georgia, serif;
-            --sans:   'Bodoni Moda', Georgia, serif;
+            --sans:   'Amulya', system-ui, sans-serif;
         }
 
         /* ── Base ── */
@@ -70,7 +100,7 @@
         }
 
         .nav-logo {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-size: 18px;
             font-weight: 600;
             letter-spacing: 0.12em;
@@ -186,7 +216,7 @@
         }
 
         .hero-eyebrow {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-size: 11px;
             font-weight: 400;
             letter-spacing: 0.24em;
@@ -408,7 +438,7 @@
         #vlog .section-label { margin-bottom: 16px; }
 
         .about-editorial-headline {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-style: normal;
             font-weight: 700;
             font-size: clamp(72px, 10vw, 152px);
@@ -597,7 +627,7 @@
         }
 
         .footer-logo {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 0.18em;
