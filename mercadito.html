@@ -89,18 +89,26 @@
 
         /* ── Header ── */
         .mercadito-header {
-            background: radial-gradient(ellipse at 28% 60%, #1e1610 0%, #0a0a0a 65%);
-            color: var(--white);
-            padding: 160px var(--gutter) 100px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 96px;
-            align-items: end;
-            position: relative;
+            display: flex;
+            align-items: stretch;
+            min-height: 520px;
             overflow: hidden;
+            position: relative;
         }
 
-        .mercadito-header::before {
+        .mercadito-header-left {
+            width: 56%;
+            flex-shrink: 0;
+            background: radial-gradient(ellipse at 28% 60%, #1e1610 0%, #0a0a0a 65%);
+            color: var(--white);
+            padding: 160px 80px 100px var(--gutter);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 90px) 100%, 0 100%);
+            z-index: 1;
+        }
+
+        .mercadito-header-left::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -113,11 +121,11 @@
         .mercadito-header-deco {
             position: absolute;
             font-family: var(--serif);
-            font-size: clamp(280px, 38vw, 560px);
+            font-size: clamp(200px, 28vw, 420px);
             font-weight: 400;
             color: rgba(255,255,255,0.028);
-            right: -30px;
-            bottom: -80px;
+            right: -10px;
+            bottom: -60px;
             line-height: 1;
             user-select: none;
             pointer-events: none;
@@ -129,6 +137,20 @@
         .mercadito-header-desc {
             position: relative;
             z-index: 1;
+        }
+
+        .mercadito-header-right {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mercadito-header-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.78) contrast(1.06) saturate(0.72);
         }
 
         .mercadito-header h1 {
@@ -443,9 +465,16 @@
             .nav-links a { font-size: 20px; letter-spacing: 0.2em; opacity: 0.75; }
 
             .mercadito-header {
-                grid-template-columns: 1fr;
-                gap: 40px;
+                flex-direction: column;
+                min-height: auto;
+            }
+            .mercadito-header-left {
+                width: 100%;
+                clip-path: none;
                 padding: 120px var(--gutter) 72px;
+            }
+            .mercadito-header-right {
+                height: 280px;
             }
 
             .products-grid {
@@ -1241,11 +1270,16 @@
 
 <!-- HEADER -->
 <header class="mercadito-header">
-    <span class="mercadito-header-deco" aria-hidden="true">Ash</span>
-    <h1>El Mercadito<br><em>de Ash</em></h1>
-    <div class="mercadito-header-desc">
-        <p>Piezas seleccionadas con criterio de stylist. Vintage que vale, accesorios que duran.</p>
-        <p>También: contenido digital para aprender a ver la moda de otra manera.</p>
+    <div class="mercadito-header-left">
+        <span class="mercadito-header-deco" aria-hidden="true">Ash</span>
+        <h1>El Mercadito<br><em>de Ash</em></h1>
+        <div class="mercadito-header-desc">
+            <p>Piezas seleccionadas con criterio de stylist. Vintage que vale, accesorios que duran.</p>
+            <p>También: contenido digital para aprender a ver la moda de otra manera.</p>
+        </div>
+    </div>
+    <div class="mercadito-header-right">
+        <img src="images/editorial-01.jpg" alt="El Mercadito de Ash">
     </div>
 </header>
 
