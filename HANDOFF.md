@@ -1,196 +1,152 @@
 # HANDOFF — ashmateu-web
 
-**Meta:** Portfolio web completo para Ash Mateu (stylist, directora creativa, consultora de moda) en ashmateu.com.
+## Meta
+Sitio portfolio de Ash Mateu (stylist, directora creativa) en ashmateu.com.
+Stack: HTML/CSS/JS puro, sin build system. Supabase para datos dinámicos. Vercel para deploy.
 
-**Estado:** Funcional en servidor local. Pendiente: deploy a producción y activar formulario Formspree.
-
-**Siguiente paso:** Activar Formspree (ver sección Pendientes) y hacer deploy en Netlify o GoDaddy.
-
----
-
-## Arquitectura del sitio
-
-```mermaid
-graph TD
-    A[index.html<br/>—<br/>Página principal] --> B[Hero]
-    A --> C[Trabajo — Carrusel horizontal]
-    A --> D[Servicios]
-    A --> E[Sobre — Video vlog]
-    A --> F[Contacto — Formspree]
-
-    C --> P1[projects/chanel-hc.html<br/>Chanel HC × Marie Claire]
-    C --> P2[projects/valentina-ferrer.html<br/>Valentina Ferrer × Miu Miu]
-    C --> P3[projects/leonie-hanne.html<br/>Leonie Hanne × Dolce & Gabbana]
-    C --> P4[projects/chanel-williamsburg.html<br/>Chanel Prêt-à-porter Williamsburg]
-    C --> P5[projects/dolores-fonzi.html<br/>Dolores Fonzi]
-    C --> P6[projects/calu-chinatown.html<br/>Calu Rivero — Chinese New Year]
-    C --> P7[projects/netflix-mf.html<br/>Netflix × Martín Fierro]
-    C --> P8[projects/gucci-rural.html<br/>Editorial Rural × Gucci]
-
-    P1 --> I1[images/extracted/chanel-hc/]
-    P2 --> I2[images/extracted/valentina-miumiu/]
-    P3 --> I3[images/extracted/leonie-dg/]
-    P4 --> I4[images/extracted/chanel-pap/]
-    P5 --> I5[images/extracted/dolores-fonzi/]
-    P6 --> I6[images/extracted/calu-chinatown/]
-    P7 --> I7[images/extracted/netflix-mf/]
-    P8 --> I8[images/extracted/gucci-rural/]
-
-    A --> CSS[css/case.css<br/>Estilos compartidos subpáginas]
-```
+## Estado actual
+Todo funcionando en producción. Branch `main` = live. Branch `develop` = trabajo activo.
 
 ---
 
-## Estructura de archivos
+## Arquitectura
 
-```
-ashmateu-web/
-├── index.html                  ← Página principal (todo el CSS inline + JS inline)
-├── css/
-│   └── case.css                ← Estilos compartidos de las 8 subpáginas editoriales
-├── projects/
-│   ├── chanel-hc.html
-│   ├── valentina-ferrer.html
-│   ├── leonie-hanne.html
-│   ├── chanel-williamsburg.html
-│   ├── dolores-fonzi.html
-│   ├── calu-chinatown.html
-│   ├── netflix-mf.html
-│   └── gucci-rural.html
-└── images/
-    ├── extracted/              ← Imágenes extraídas de PDFs con pdfimages (calidad original)
-    │   ├── chanel-hc/          12 JPEGs
-    │   ├── valentina-miumiu/   5 JPEGs
-    │   ├── leonie-dg/          10 JPEGs
-    │   ├── chanel-pap/         4 JPEGs
-    │   ├── dolores-fonzi/      7 JPEGs
-    │   ├── calu-chinatown/     6 JPEGs
-    │   ├── netflix-mf/         8 JPEGs (baja resolución — redes sociales)
-    │   └── gucci-rural/        3 JPEGs
-    ├── _xl_scan/               41 thumbnails de escaneo (xl-050 a xl-090, 72 DPI)
-    └── netflix-081.jpg         Slide renderizado, usado como hero en netflix-mf.html
-```
+### Stack
+- HTML/CSS/JS puro, sin framework ni build system
+- Supabase (REST API) para posts y press
+- Vercel para deploy + cron jobs
+- GitHub: `ashmateu/AshMateu-Web` — dos ramas: `develop` y `main`
 
----
+### URLs
+- Producción: `https://ashmateu.com`
+- Preview develop: `https://ashmateu-web-git-develop-mrosso25486-7169s-projects.vercel.app`
 
-## Decisiones técnicas clave
-
-| Decisión | Razón |
-|---|---|
-| Todo el CSS inline en index.html | Sitio estático de una sola página, sin build system |
-| `pdfimages` para extracción | Calidad original embebida vs re-renderizado con pdftoppm |
-| Carrusel horizontal con `overflow-x: scroll` | Sin dependencias, compatible con touch/mouse/trackpad |
-| Carrusel auto-scroll con `requestAnimationFrame` | Suave, se pausa en hover/touch, reinicia al llegar al final |
-| YouTube facade (img + click → iframe) | El iframe de YT no carga en HTTP local; la portada siempre se ve |
-| Formspree para el formulario | Compatible con cualquier hosting estático (no requiere Netlify) |
-| Mermaid en este HANDOFF | Gráfico de sitio sin dependencias extra, renderiza en GitHub |
-
----
-
-## Tokens y paleta de diseño
-
+### Tokens de diseño
 ```css
---black:  #0A0A0A
---ivory:  #F7F3EE
---white:  #FFFFFF
---sand:   #B5A898
---serif:  'Playfair Display', Georgia, serif
---sans:   'Inter', system-ui, sans-serif
---gutter: 56px (desktop) / 24px (mobile)
+--black: #0A0A0A
+--ivory: #F7F3EE
+--sand:  #B5A898
+--serif: 'Playfair Display', Georgia, serif
+--sans:  'Inter', system-ui, sans-serif
 ```
-
-Filtro CSS de imagen: `brightness(0.88) contrast(1.06) saturate(0.78)`
-
----
-
-## Comportamiento del carrusel
-
-- Auto-scroll: `0.6px/frame` via `requestAnimationFrame`, reinicia al final
-- Pausa: al hover (mouse), al touchstart, al clickar flechas
-- Reanuda: `1.2–1.5s` después de la última interacción
-- Trackpad: gesto horizontal (`|deltaX| > |deltaY|`) → carrusel. Vertical → página
-- Touch: detecta dirección en primer `touchmove`, swipe horizontal → carrusel
-- Flechas: ocultan con clase `.is-hidden` según posición de scroll
-- Loop: `scrollLeft = 0` cuando llega al final
+Filtro de imagen: `brightness(0.88) contrast(1.06) saturate(0.78)`
 
 ---
 
-## Tareas completadas
+## Supabase
 
-- [x] Extraer imágenes de PDFs de campañas (8 editoriales)
-- [x] Crear 8 subpáginas editoriales con layout completo (hero, bloques imagen-texto, créditos)
-- [x] Rediseñar portfolio como carrusel horizontal inspirado en artandcommerce.com
-- [x] Agregar video vlog YouTube (facade + autoplay al click)
-- [x] Auto-scroll del carrusel con pausa inteligente
-- [x] Scroll horizontal trackpad sin bloquear scroll vertical de página
-- [x] Swipe táctil en mobile
-- [x] Flechas de navegación con desaparición dinámica
-- [x] Nav hamburger para mobile
-- [x] Hero mobile corregido (sin espacio vacío excesivo)
-- [x] Overlay del carrusel simplificado en mobile (solo título)
-- [x] Duplicados de imágenes corregidos en subpáginas
-- [x] Formulario de contacto con feedback visual (Formspree)
-- [x] Imágenes convertidas a WebP (117 archivos, -21% peso total)
-- [x] `loading="lazy"` en todas las imágenes no-hero, `loading="eager" fetchpriority="high"` en heroes
-- [x] Meta tags completos en index.html: canonical, og:image, og:type, twitter:card
-- [x] Meta tags individuales en las 8 subpáginas (canonical, og, twitter)
-- [x] `sitemap.xml` con las 9 URLs del sitio
-- [x] `robots.txt` con permisos para AI crawlers (GPTBot, ClaudeBot, PerplexityBot)
-- [x] Rediseño Grand Magazine: titular Playfair italic gigante "Ash Mateu" en #sobre (fondo ivory), email+IG en sand small caps en #contacto
+- Proyecto: `jrxklahobxpxmtnncvst.supabase.co`
+- Anon key (pública, frontend): `sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd`
+- Service key: guardada en `~/.ashmateu_sb_key` (nunca hardcodear ni mostrar en código)
+
+### Tabla `posts` (Notas — artículos que escribe Ash)
+Campos: `id`, `slug`, `title`, `excerpt`, `cover_url`, `cover_url_2`, `cover_url_3`, `published_at`, `active`
+
+9 posts activos (los crea Ash manualmente):
+- el-guardarropa-que-no-falla
+- la-imagen-que-conecta
+- lo-que-un-set-ensena
+- azul-como-lenguaje
+- moda-argentina-lo-que-el-mundo-no-vio
+- chanel-y-el-peso-de-lo-real
+- cuando-el-arte-entra-al-set
+- miu-miu-y-la-femineidad-que-incomoda
+- calle-vitrina-y-moda-en-movimiento
+
+Imágenes: `https://ashmateu.com/images/extracted/<editorial>/img-NNN.jpg`
+Editoriales disponibles: calu-chinatown, chanel-hc, chanel-pap, dolores-fonzi, gucci-rural, leonie-dg, netflix-mf, valentina-miumiu
+
+Las columnas `cover_url_2` y `cover_url_3` se agregaron via ALTER TABLE en el dashboard de Supabase. Si se resetea la DB volver a crearlas.
+
+### Tabla `press` (Prensa — apariciones en medios)
+Campos: `id`, `title`, `excerpt`, `cover_url`, `publication_date`, `publication`, `url`, `featured`, `active`
+
+20 artículos activos, todos de Marie Claire Argentina. El campo `featured: true` muestra el artículo grande arriba.
+
+---
+
+## Secciones del sitio
+
+| Página | Archivo | Fuente de datos |
+|--------|---------|-----------------|
+| Home | `index.html` | Sanity CMS + i18n |
+| Prensa | `prensa.html` | Supabase `press` |
+| Notas | `blog.html` | Supabase `posts` |
+| Mercadito | `mercadito.html` | Estático + MP links |
+| Proyectos | `projects/<nombre>/index.html` | Estático |
+
+---
+
+## Automatizaciones
+
+### Sync Marie Claire → Supabase press
+- Archivo: `api/sync-press.js` (Vercel serverless function)
+- Cron: todos los días a las 9am UTC (`0 9 * * *` en `vercel.json`)
+- Qué hace: scrapea `marieclaire.perfil.com/autores/ashmateu`, detecta artículos nuevos, los inserta en `press`
+- Auth: requiere header `Authorization: Bearer <CRON_SECRET>`
+- Para disparar manualmente:
+  ```bash
+  curl "https://ashmateu.com/api/sync-press" -H "Authorization: Bearer <CRON_SECRET>"
+  ```
+- Env vars necesarias en Vercel: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `CRON_SECRET`
+
+---
+
+## Idiomas (i18n)
+
+- Archivo: `js/i18n.js`
+- Idiomas: ES (default), EN, FR
+- Elementos `data-i18n`: siempre se traducen (nav, formulario, footer)
+- Elementos `data-i18n-override`: contenido de Sanity (hero title, subtitle, about text)
+  - El sistema cachea el HTML original en español en `_esCache` al cargar la página
+  - Al volver a ES restaura desde el cache (fix aplicado 22 jun 2026 — antes quedaba pegado en EN/FR)
+- Idioma guardado en `localStorage` con clave `ash_lang`
+
+---
+
+## MCP Supabase (configurado, pendiente autenticación)
+
+Archivo `.mcp.json` en raíz del proyecto:
+```json
+{
+  "mcpServers": {
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=jrxklahobxpxmtnncvst"
+    }
+  }
+}
+```
+Para autenticar: correr `/mcp` en Claude Code → seleccionar `supabase` → hacer login.
+Cuando esté autenticado Claude puede operar la DB directamente sin scripts ni service key.
+
+---
+
+## Workflow Git
+
+**Regla estricta:** todos los cambios van a `develop` primero. Mergear a `main` solo cuando Ash dice "publicar" o "ok publicar".
+
+```bash
+# Publicar a producción
+git checkout main && git merge develop && git push origin main && git checkout develop
+```
 
 ---
 
 ## Pendientes
 
-### 1. Activar formulario Formspree (5 minutos)
-
-1. Ir a [formspree.io](https://formspree.io)
-2. Crear cuenta con `ash.mateu@gmail.com`
-3. Crear nuevo formulario, copiar el ID (ej: `xabcdefg`)
-4. En `index.html`, reemplazar la línea:
-   ```html
-   action="https://formspree.io/f/FORMSPREE_ID"
-   ```
-   por:
-   ```html
-   action="https://formspree.io/f/xabcdefg"
-   ```
-
-### 2. Deploy a producción
-
-**Vercel (preferido):**
-1. Crear cuenta en [vercel.com](https://vercel.com)
-2. "Add New Project" → "Import from filesystem" (o arrastrar carpeta)
-3. En GoDaddy, apuntar los nameservers de `ashmateu.com` a Vercel (Settings → Domains)
-4. Alternativa GoDaddy hosting: FTP a `public_html/`
-
-### 3. Mejoras futuras sugeridas
-- Menú hamburger mobile con animación de apertura más elaborada
-- Subpágina de netflix-mf con imágenes de mayor calidad (las actuales son de redes sociales)
-- Versión en inglés del copy para audiencia internacional
+- [ ] **Auth MCP Supabase**: autenticar el servidor MCP en Claude Code (`/mcp` → supabase → login)
+- [ ] **Formspree**: reemplazar `FORMSPREE_ID` en `index.html` con el ID real (email: ash.mateu@gmail.com)
+- [ ] **post.html**: revisar que `/blog/post.html?slug=...` esté terminado (existe el link desde blog.html)
 
 ---
 
-## Cómo correr localmente
+## Credenciales (nunca en código)
 
-```bash
-cd /Users/mariano_rosso/Downloads/ashmateu-web
-python3 -m http.server 8080
-# Abrir: http://localhost:8080
-# Desde el celu (mismo WiFi): http://192.168.0.130:8080
-```
-
----
-
-## Enfoques que NO funcionaron
-
-| Enfoque | Problema |
-|---|---|
-| `pdftoppm` para extracción de fotos | Re-renderiza como bitmap, pierde calidad vs JPEG original embebido |
-| `e.preventDefault()` en todo evento `wheel` | Bloqueaba el scroll vertical de la página con trackpad |
-| `justify-content: flex-end` en hero mobile | Creaba espacio vacío enorme arriba del 50% de pantalla |
-| iframe YouTube directo en HTTP local | No carga en mobile Chrome por política de mixed content |
-
----
-
-*Generado: 2026-06-19*
+| Variable | Dónde | Para qué |
+|----------|-------|----------|
+| Service key Supabase | `~/.ashmateu_sb_key` | Scripts locales de DB |
+| SUPABASE_SERVICE_KEY | Vercel env vars | api/sync-press.js |
+| CRON_SECRET | Vercel env vars | Protege /api/sync-press |
+| MP_ACCESS_TOKEN | Vercel env vars | MercadoPago |
+| SUPABASE_URL | Vercel env vars | URL del proyecto Supabase |
