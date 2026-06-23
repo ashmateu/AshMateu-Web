@@ -65,9 +65,9 @@
     .badge-digital { background: rgba(10,10,10,0.08); color: var(--black); }
     .badge-active { background: rgba(39,174,96,0.12); color: var(--green); }
     .badge-inactive { background: rgba(192,57,43,0.1); color: var(--red); }
-    .badge-approved { background: rgba(39,174,96,0.12); color: var(--green); }
-    .badge-pending { background: rgba(243,156,18,0.12); color: #b7770d; }
-    .badge-rejected { background: rgba(192,57,43,0.1); color: var(--red); }
+    .badge-approved, .badge-confirmado { background: rgba(39,174,96,0.12); color: var(--green); }
+    .badge-pending, .badge-pendiente { background: rgba(243,156,18,0.12); color: #b7770d; }
+    .badge-rejected, .badge-rechazado { background: rgba(192,57,43,0.1); color: var(--red); }
     .actions { display: flex; gap: 8px; }
     .btn-sm { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; }
     .stock-badge { font-size: 12px; font-weight: 500; }
@@ -167,10 +167,10 @@
   <div id="tab-ordenes" class="tab-content">
     <div id="statsRow" class="stat-cards"></div>
     <div class="filter-row">
-      <button class="filter-btn active" data-status="all" onclick="filterOrders('all', this)">Todas</button>
-      <button class="filter-btn" data-status="approved" onclick="filterOrders('approved', this)">Aprobadas</button>
-      <button class="filter-btn" data-status="pending" onclick="filterOrders('pending', this)">Pendientes</button>
-      <button class="filter-btn" data-status="rejected" onclick="filterOrders('rejected', this)">Rechazadas</button>
+      <button class="filter-btn active" data-status="all"        onclick="filterOrders('all', this)">Todas</button>
+      <button class="filter-btn" data-status="confirmado" onclick="filterOrders('confirmado', this)">Confirmadas</button>
+      <button class="filter-btn" data-status="pendiente"  onclick="filterOrders('pendiente', this)">Pendientes</button>
+      <button class="filter-btn" data-status="rechazado"  onclick="filterOrders('rechazado', this)">Rechazadas</button>
     </div>
     <div id="ordersContainer"><p class="loading">Cargando...</p></div>
   </div>
@@ -185,7 +185,9 @@
     <div class="field"><label>Slug (URL)</label><input type="text" id="ptSlug" placeholder="el-look-que-define-una-epoca"></div>
     <div class="field"><label>Bajada / Excerpt</label><textarea id="ptExcerpt" placeholder="Una línea que resume la nota..."></textarea></div>
     <div class="field"><label>Cuerpo (HTML permitido)</label><textarea id="ptBody" style="min-height:200px" placeholder="&lt;p&gt;El texto de la nota...&lt;/p&gt;"></textarea></div>
-    <div class="field"><label>URL imagen de portada</label><input type="url" id="ptCover" placeholder="https://..."></div>
+    <div class="field"><label>URL imagen 1 — portada (collage)</label><input type="url" id="ptCover" placeholder="https://..."></div>
+    <div class="field"><label>URL imagen 2 (collage, opcional)</label><input type="url" id="ptCover2" placeholder="https://..."></div>
+    <div class="field"><label>URL imagen 3 (collage, opcional)</label><input type="url" id="ptCover3" placeholder="https://..."></div>
     <div class="field"><label>Fecha de publicación</label><input type="datetime-local" id="ptDate"></div>
     <div class="field" id="postActiveField" style="display:none"><label>Estado</label>
       <select id="ptActive"><option value="true">Publicada</option><option value="false">Borrador</option></select>
@@ -208,6 +210,7 @@
     <div class="field"><label>Fecha</label><input type="date" id="prDate"></div>
     <div class="field"><label>URL del artículo</label><input type="url" id="prUrl" placeholder="https://marieclaire.com.ar/..."></div>
     <div class="field"><label>URL imagen de portada</label><input type="url" id="prCover" placeholder="https://..."></div>
+    <div class="field"><label>Bajada / Excerpt</label><textarea id="prExcerpt" placeholder="Breve descripción del artículo que aparece en prensa..."></textarea></div>
     <div class="field"><label>Destacado (aparece grande al inicio)</label>
       <select id="prFeatured"><option value="false">No</option><option value="true">Sí</option></select>
     </div>
@@ -455,7 +458,7 @@ async function deleteProduct(id, name) {
 async function loadOrders() {
   const container = document.getElementById('ordersContainer');
   const { data, error } = await sb
-    .from('orders').select('*, products(name)').order('created_at', { ascending: false });
+    .from('orders').select('*, order_items(product_name, quantity)').order('created_at', { ascending: false });
   if (error) { container.innerHTML = `<p style="color:red">${error.message}</p>`; return; }
 
   allOrders = data;
@@ -463,22 +466,30 @@ async function loadOrders() {
   renderOrders(data);
 }
 
+function statusLabel(s) {
+  return { confirmado: 'Confirmada', pendiente: 'Pendiente', pending: 'Pendiente', rechazado: 'Rechazada' }[s] ?? s;
+}
+
 function renderStats(data) {
-  const approved = data.filter(o => o.status === 'approved');
+  const approved   = data.filter(o => o.status === 'confirmado');
+  const pendientes = data.filter(o => o.status === 'pendiente' || o.status === 'pending');
   const totalARS = approved.filter(o => o.currency === 'ARS').reduce((s, o) => s + Number(o.amount), 0);
   const totalUSD = approved.filter(o => o.currency === 'USD').reduce((s, o) => s + Number(o.amount), 0);
   document.getElementById('statsRow').innerHTML = `
     <div class="stat-card"><div class="label">Total ventas</div><div class="value">${approved.length}</div></div>
     <div class="stat-card"><div class="label">Recaudado ARS</div><div class="value">$${totalARS.toLocaleString('es-AR')}</div></div>
     <div class="stat-card"><div class="label">Recaudado USD</div><div class="value">U$D ${totalUSD.toFixed(2)}</div></div>
-    <div class="stat-card"><div class="label">Pendientes</div><div class="value">${data.filter(o => o.status === 'pending').length}</div></div>
+    <div class="stat-card"><div class="label">Pendientes</div><div class="value">${pendientes.length}</div></div>
   `;
 }
 
 function filterOrders(status, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const filtered = status === 'all' ? allOrders : allOrders.filter(o => o.status === status);
+  const filtered = status === 'all' ? allOrders
+    : status === 'pendiente'
+      ? allOrders.filter(o => o.status === 'pendiente' || o.status === 'pending')
+      : allOrders.filter(o => o.status === status);
   renderOrders(filtered);
 }
 
@@ -495,10 +506,10 @@ function renderOrders(data) {
         ${data.map(o => `
           <tr>
             <td style="font-size:12px;white-space:nowrap">${new Date(o.created_at).toLocaleDateString('es-AR', {day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})}</td>
-            <td>${o.products?.name ?? '—'}</td>
-            <td style="font-size:12px">${o.buyer_name ?? '—'}<br><span style="color:var(--sand)">${o.buyer_email ?? ''}</span></td>
+            <td style="font-size:12px">${o.order_items?.map(i => `${i.product_name} x${i.quantity}`).join('<br>') ?? '—'}</td>
+            <td style="font-size:12px">${o.customer_name ?? o.buyer_name ?? '—'}<br><span style="color:var(--sand)">${o.buyer_email ?? ''}</span></td>
             <td>${o.currency} ${o.amount ? Number(o.amount).toLocaleString('es-AR') : '—'}</td>
-            <td><span class="badge badge-${o.status}">${o.status}</span></td>
+            <td><span class="badge badge-${o.status}">${statusLabel(o.status)}</span></td>
             <td style="font-size:11px;color:var(--sand)">${o.mp_payment_id ?? '—'}</td>
           </tr>
         `).join('')}
@@ -539,7 +550,9 @@ function openPostModal(post) {
   document.getElementById('ptSlug').value = post?.slug ?? '';
   document.getElementById('ptExcerpt').value = post?.excerpt ?? '';
   document.getElementById('ptBody').value = post?.body ?? '';
-  document.getElementById('ptCover').value = post?.cover_url ?? '';
+  document.getElementById('ptCover').value  = post?.cover_url   ?? '';
+  document.getElementById('ptCover2').value = post?.cover_url_2 ?? '';
+  document.getElementById('ptCover3').value = post?.cover_url_3 ?? '';
   document.getElementById('ptDate').value = post?.published_at ? post.published_at.slice(0,16) : new Date().toISOString().slice(0,16);
   document.getElementById('ptActive').value = post?.active === false ? 'false' : 'true';
   document.getElementById('postActiveField').style.display = post ? 'flex' : 'none';
@@ -559,7 +572,9 @@ async function savePost() {
     title, slug,
     excerpt: document.getElementById('ptExcerpt').value.trim() || null,
     body: document.getElementById('ptBody').value.trim() || null,
-    cover_url: document.getElementById('ptCover').value.trim() || null,
+    cover_url:   document.getElementById('ptCover').value.trim()  || null,
+    cover_url_2: document.getElementById('ptCover2').value.trim() || null,
+    cover_url_3: document.getElementById('ptCover3').value.trim() || null,
     published_at: document.getElementById('ptDate').value || new Date().toISOString(),
     active: document.getElementById('ptActive').value === 'true',
   };
@@ -602,7 +617,8 @@ function openPressModal(item) {
   document.getElementById('prPublication').value = item?.publication ?? '';
   document.getElementById('prDate').value = item?.publication_date ?? '';
   document.getElementById('prUrl').value = item?.url ?? '';
-  document.getElementById('prCover').value = item?.cover_url ?? '';
+  document.getElementById('prCover').value    = item?.cover_url ?? '';
+  document.getElementById('prExcerpt').value  = item?.excerpt ?? '';
   document.getElementById('prFeatured').value = item?.featured ? 'true' : 'false';
   document.getElementById('prActive').value = item?.active === false ? 'false' : 'true';
   document.getElementById('pressActiveField').style.display = item ? 'flex' : 'none';
@@ -621,8 +637,9 @@ async function savePress() {
   const payload = {
     title, publication,
     publication_date: document.getElementById('prDate').value || null,
-    url: document.getElementById('prUrl').value.trim() || null,
-    cover_url: document.getElementById('prCover').value.trim() || null,
+    url:      document.getElementById('prUrl').value.trim()     || null,
+    cover_url: document.getElementById('prCover').value.trim()  || null,
+    excerpt:  document.getElementById('prExcerpt').value.trim() || null,
     featured: document.getElementById('prFeatured').value === 'true',
     active: document.getElementById('prActive').value === 'true',
   };
