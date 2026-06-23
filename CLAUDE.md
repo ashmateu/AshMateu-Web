@@ -12,11 +12,12 @@ Portfolio web estático para Ash Mateu (stylist, directora creativa) en ashmateu
 ## Tokens de diseño
 
 ```css
---black: #0A0A0A
---ivory: #F7F3EE
---sand:  #B5A898
---serif: 'Playfair Display', Georgia, serif
---sans:  'Inter', system-ui, sans-serif
+--black:     #0A0A0A
+--ivory:     #F7F3EE
+--sand:      #B5A898
+--sand-text: #7A6A5A
+--serif:     'Bodoni Moda', Georgia, serif
+--sans:      'Inter', system-ui, sans-serif
 ```
 
 Filtro de imagen: `brightness(0.88) contrast(1.06) saturate(0.78)`
