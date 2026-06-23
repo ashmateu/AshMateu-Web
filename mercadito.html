@@ -384,7 +384,7 @@
 
         /* ── Aviso ── */
         .mercadito-aviso {
-            margin: 0 var(--gutter) 0;
+            margin: 0 var(--gutter);
             padding: 28px 0;
             border-top: 1px solid rgba(181,168,152,0.25);
             font-size: 11px;
@@ -392,6 +392,10 @@
             line-height: 1.8;
             color: rgba(10,10,10,0.45);
             letter-spacing: 0.01em;
+            text-align: center;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* ── Footer ── */
@@ -738,7 +742,8 @@
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            background: var(--black);
+            background: rgba(247,243,238,0.15);
+            border: 1px solid rgba(247,243,238,0.4);
             color: var(--ivory);
             font-family: var(--serif);
             font-size: 12px;
@@ -747,28 +752,37 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: background 0.4s, border-color 0.4s, color 0.4s;
+        }
+        nav.scrolled .nav-user-avatar {
+            background: var(--black);
+            border-color: transparent;
+            color: var(--ivory);
         }
 
         .nav-user-email {
             font-size: 10px;
             font-weight: 300;
             letter-spacing: 0.08em;
-            color: var(--black);
-            opacity: 0.6;
+            color: var(--white);
+            opacity: 0.7;
             max-width: 140px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            transition: color 0.4s;
         }
+        nav.scrolled .nav-user-email { color: var(--black); opacity: 0.6; }
 
         .nav-user-chevron {
             width: 10px;
             height: 10px;
-            color: var(--black);
-            opacity: 0.4;
-            transition: transform 0.2s;
+            color: var(--white);
+            opacity: 0.5;
+            transition: transform 0.2s, color 0.4s;
             flex-shrink: 0;
         }
+        nav.scrolled .nav-user-chevron { color: var(--black); opacity: 0.4; }
 
         .nav-user-trigger[aria-expanded="true"] .nav-user-chevron {
             transform: rotate(180deg);
