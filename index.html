@@ -388,21 +388,31 @@
         #clientes .section-inner { max-width: 1360px; margin: 0 auto; }
         .client-logos {
             list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            justify-content: center;
-            gap: 10px 52px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            row-gap: 28px;
+            align-items: center;
+            justify-items: center;
         }
         .client-logos li img {
-            height: clamp(16px, 1.6vw, 24px);
+            height: clamp(14px, 1.4vw, 20px);
             width: auto;
+            max-width: 160px;
             filter: brightness(0) invert(1);
             opacity: 0.28;
             transition: opacity 0.25s;
             display: block;
         }
         .client-logos li:hover img { opacity: 0.7; }
+        @media (max-width: 900px) {
+            #clientes { padding: 40px 24px; }
+            .client-logos { grid-template-columns: repeat(3, 1fr); row-gap: 24px; }
+            .client-logos li img { max-width: 110px; }
+        }
+        @media (max-width: 540px) {
+            .client-logos { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+            .client-logos li img { height: 14px; max-width: 120px; }
+        }
 
         #servicios { background: var(--ivory); }
 
@@ -956,11 +966,11 @@
             <li><img src="/images/logos/miu-miu.svg" alt="Miu Miu"></li>
             <li><img src="/images/logos/louis-vuitton.svg" alt="Louis Vuitton"></li>
             <li><img src="/images/logos/dolce-gabbana.svg" alt="Dolce & Gabbana"></li>
-            <li><img src="/images/logos/nike.svg" alt="Nike"></li>
+            <li><img src="/images/logos/marie-claire.svg" alt="Marie Claire"></li>
             <li><img src="/images/logos/loreal.svg" alt="L'Oréal"></li>
             <li><img src="/images/logos/mercedes-benz.svg" alt="Mercedes-Benz"></li>
             <li><img src="/images/logos/netflix.svg" alt="Netflix"></li>
-            <li><img src="/images/logos/marie-claire.svg" alt="Marie Claire"></li>
+            <li><img src="/images/logos/nike.svg" alt="Nike"></li>
         </ul>
     </div>
 </section>
