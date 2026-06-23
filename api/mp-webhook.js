@@ -58,7 +58,19 @@ export default async function handler(request) {
 
   const status = STATUS_MAP[payment.status] ?? payment.status;
 
-  // 2. PATCH la orden existente (creada en mercadito.html con user_id)
+  // 2. Idempotencia: si la orden ya está confirmada, ignorar el reintento
+  const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${orderId}&select=status`, {
+    headers: { ...sbHeaders, 'Accept': 'application/json' },
+  });
+  const checkData = await checkRes.json();
+  if (checkData?.[0]?.status === 'confirmado') {
+    return new Response(JSON.stringify({ ok: true, skipped: true, reason: 'already_confirmed' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  // 3. PATCH la orden existente (creada en mercadito.html con user_id)
   //    No insertamos fila nueva para no perder el user_id original.
   const sbHeaders = {
     'Content-Type': 'application/json',
@@ -85,13 +97,17 @@ export default async function handler(request) {
     return new Response(JSON.stringify({ error: 'Supabase PATCH failed', detail: err }), { status: 502 });
   }
 
-  // 3. Descontar stock solo cuando el pago fue aprobado
+  // 4. Descontar stock solo cuando el pago fue aprobado
   if (payment.status === 'approved') {
-    await fetch(`${SUPABASE_URL}/rest/v1/rpc/decrement_stock`, {
+    const rpcRes = await fetch(`${SUPABASE_URL}/rest/v1/rpc/decrement_stock`, {
       method: 'POST',
       headers: sbHeaders,
       body: JSON.stringify({ p_order_id: orderId }),
     });
+    if (!rpcRes.ok) {
+      const rpcErr = await rpcRes.text();
+      console.error('decrement_stock failed:', rpcErr);
+    }
   }
 
   return new Response(JSON.stringify({ ok: true }), {

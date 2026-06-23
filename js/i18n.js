@@ -243,12 +243,18 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
+    function init() {
         injectStyles();
         injectSwitcher();
         cacheEs();   // guardar HTML original antes de cualquier traducción
         apply();
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 
     window.i18n = { t: t, apply: apply, getLang: getLang, setLang: setLang };
 })();

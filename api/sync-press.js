@@ -64,10 +64,9 @@ function buildThumbnailMap(pageHtml, articleUrls) {
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
-  if (secret) {
-    const auth = req.headers['authorization'] ?? '';
-    if (auth !== `Bearer ${secret}`) return res.status(401).json({ error: 'Unauthorized' });
-  }
+  if (!secret) return res.status(500).json({ error: 'CRON_SECRET not configured' });
+  const auth = req.headers['authorization'] ?? '';
+  if (auth !== `Bearer ${secret}`) return res.status(401).json({ error: 'Unauthorized' });
 
   const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
   const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY
