@@ -22,7 +22,7 @@
     @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #0A0A0A; --ivory: #F7F3EE; --white: #fff; --sand: #B5A898;
+      --black: #0A0A0A; --ivory: #F7F3EE; --white: #fff; --sand: #B5A898; --sand-text: #7A6A5A;
       --gutter: 56px; --serif: 'Bodoni Moda', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
     }
     html { scroll-behavior: smooth; scrollbar-gutter: stable; }
@@ -71,7 +71,7 @@
       padding: 64px 56px; display: flex; flex-direction: column; justify-content: flex-end;
       border-left: 1px solid rgba(10,10,10,0.08);
     }
-    .press-pub { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sand); margin-bottom: 16px; }
+    .press-pub { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sand-text); margin-bottom: 16px; }
     .press-title-lg { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 48px); font-weight: 400; line-height: 1.15; margin-bottom: 16px; }
     .press-excerpt-lg { font-size: 15px; font-weight: 300; line-height: 1.8; color: rgba(10,10,10,0.6); margin-bottom: 24px; }
     .press-date { font-size: 11px; color: rgba(10,10,10,0.35); letter-spacing: 0.1em; margin-bottom: 28px; }
@@ -109,7 +109,7 @@
     .press-read { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
     .press-card:hover .press-read { opacity: 1; }
 
-    .press-empty { padding: 120px var(--gutter); text-align: center; color: var(--sand); font-size: 13px; }
+    .press-empty { padding: 120px var(--gutter); text-align: center; color: var(--sand-text); font-size: 13px; }
 
     footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
     .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
