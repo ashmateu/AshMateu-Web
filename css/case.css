@@ -1,7 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap');
 
 /* ── Case Study Shared Styles ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+    font-display: swap;
+}
 
 :root {
     --black:  #0A0A0A;
@@ -9,7 +15,7 @@
     --white:  #FFFFFF;
     --sand:   #B5A898;
     --gutter: 56px;
-    --serif:  'Playfair Display', Georgia, serif;
+    --serif:  'Bodoni Moda', Georgia, serif;
     --sans:   'Inter', system-ui, sans-serif;
     --ease:   cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -36,19 +42,21 @@ nav {
     transition: background 0.3s, padding 0.3s;
 }
 nav.scrolled {
-    background: transparent;
-    backdrop-filter: none;
-    border-bottom: none;
+    background: rgba(247,243,238,0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(181,168,152,0.2);
 }
 .nav-logo {
-    font-family: 'Aboreto', system-ui;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0.14em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     text-decoration: none;
     color: var(--white);
     transition: color 0.3s;
 }
+nav.scrolled .nav-logo { color: var(--black); }
 .nav-back {
     font-size: 12px;
     font-weight: 400;
@@ -62,6 +70,8 @@ nav.scrolled {
     gap: 8px;
 }
 .nav-back:hover { color: var(--white); }
+nav.scrolled .nav-back { color: var(--black); opacity: 0.6; }
+nav.scrolled .nav-back:hover { opacity: 1; }
 .nav-back::before { content: '←'; }
 
 /* ── Hero ── */
