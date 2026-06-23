@@ -29,6 +29,7 @@
 }
 </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preload" href="/fonts/BebasNeue-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -39,7 +40,7 @@
       --gutter: 56px; --serif: 'Bodoni Moda', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
       --gap: 3px;
     }
-    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: block; }
     html { scroll-behavior: smooth; scrollbar-gutter: stable; }
     body { font-family: var(--sans); font-weight: 300; color: var(--black); background: var(--black); -webkit-font-smoothing: antialiased; }
 
