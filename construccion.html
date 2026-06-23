@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ash Mateu — Próximamente</title>
+  <meta name="description" content="Ash Mateu — Stylist y directora creativa. Sitio en construcción.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0A0A0A; --ivory: #F7F3EE; --sand: #B5A898; --sand-text: #7A6A5A;
+      --serif: 'Bodoni Moda', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--sans); font-weight: 300; color: var(--black);
+      background: var(--ivory); -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column; min-height: 100vh;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    header {
+      padding: 36px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 20px; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); text-decoration: none;
+    }
+    .header-tag {
+      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sand-text);
+    }
+
+    main {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 40px 48px; position: relative; z-index: 1;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--sand-text); margin-bottom: 32px;
+    }
+
+    h1 {
+      font-family: var(--serif); font-size: clamp(52px, 9vw, 120px);
+      font-weight: 400; line-height: 0.92; letter-spacing: -0.02em;
+      color: var(--black); margin-bottom: 40px;
+    }
+    h1 em { font-style: italic; color: var(--sand); display: block; }
+
+    .subtitle {
+      font-size: clamp(13px, 1.4vw, 15px); font-weight: 300; line-height: 1.8;
+      color: rgba(10,10,10,0.5); max-width: 380px; margin: 0 auto 48px;
+    }
+
+    .divider {
+      width: 40px; height: 1px; background: var(--sand); margin: 0 auto 40px;
+    }
+
+    .contact-line {
+      font-size: 12px; letter-spacing: 0.1em; color: var(--sand-text);
+      margin-bottom: 10px;
+    }
+    .contact-line a {
+      color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(10,10,10,0.2);
+      transition: border-color 0.2s;
+    }
+    .contact-line a:hover { border-color: var(--black); }
+
+    footer {
+      padding: 28px 48px; text-align: center;
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(181,168,152,0.2);
+    }
+    .footer-copy { font-size: 10px; letter-spacing: 0.14em; color: var(--sand-text); }
+
+    @media (max-width: 600px) {
+      header { padding: 24px; }
+      .header-tag { display: none; }
+      main { padding: 32px 24px; }
+      footer { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Ash Mateu</a>
+  <span class="header-tag">Buenos Aires · Nueva York · París</span>
+</header>
+
+<main>
+  <p class="eyebrow">Stylist &amp; Directora Creativa</p>
+  <h1>Próxima<em>mente</em></h1>
+  <p class="subtitle">Estamos trabajando en algo nuevo. Volvemos muy pronto.</p>
+  <div class="divider"></div>
+  <p class="contact-line">
+    <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a>
+  </p>
+  <p class="contact-line">
+    <a href="mailto:ash.mateu@gmail.com">ash.mateu@gmail.com</a>
+  </p>
+</main>
+
+<footer>
+  <span class="footer-copy">&copy; 2026 Ash Mateu</span>
+</footer>
+
+</body>
+</html>
