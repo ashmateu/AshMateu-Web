@@ -295,3 +295,6 @@ nav.scrolled .nav-back:hover { opacity: 1; }
     .case-next { flex-direction: column; gap: 16px; align-items: flex-start; }
     .credits-grid { grid-template-columns: 120px 1fr; }
 }
+
+@view-transition { navigation: auto; }
+nav { view-transition-name: site-nav; }

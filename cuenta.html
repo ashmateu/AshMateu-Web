@@ -636,6 +636,8 @@
 
             .pedido-nombre { font-size: 14px; }
         }
+        @view-transition { navigation: auto; }
+        nav { view-transition-name: site-nav; }
     </style>
 </head>
 <body>
@@ -1056,7 +1058,9 @@ body.auth-open { overflow: hidden; }
     margin-top: 20px;
     line-height: 1.6;
 }
-</style>
+    @view-transition { navigation: auto; }
+        nav { view-transition-name: site-nav; }
+    </style>
 
 
 <script>
