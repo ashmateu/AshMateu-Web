@@ -28,15 +28,21 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 28px var(--gutter);
-      transition: background 0.4s;
+      transition: background 0.4s, color 0.4s;
     }
-    .nav-logo { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    nav.scrolled { background: rgba(247,243,238,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(181,168,152,0.25); }
+    .nav-logo { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.4s; }
     .nav-logo:hover { color: var(--white); }
+    nav.scrolled .nav-logo { color: var(--black); }
+    nav.scrolled .nav-logo:hover { color: var(--black); }
     .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.4s; }
     .nav-links a:hover, .nav-links a.active { color: rgba(255,255,255,0.9); }
+    nav.scrolled .nav-links a { color: var(--black); opacity: 0.55; }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { opacity: 1; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
     .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--white); transition: transform 0.25s, opacity 0.25s; }
+    nav.scrolled .nav-hamburger span { background: var(--black); }
     .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
@@ -185,14 +191,14 @@
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <a href="/" class="nav-logo">Ash Mateu</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="/#trabajo">Portfolio</a></li>
-    <li><a href="/prensa.html">Prensa</a></li>
-    <li><a href="/blog.html" class="active">Notas</a></li>
+    <li><a href="/prensa">Prensa</a></li>
+    <li><a href="/blog" class="active">Notas</a></li>
     <li><a href="/#vlog">Vlog</a></li>
-    <li><a href="/mercadito.html" style="font-weight:500;opacity:0.75">Mercadito</a></li>
+    <li><a href="/mercadito" style="font-weight:500;opacity:0.75">Mercadito</a></li>
     <li><a href="/#contacto">Contacto</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -233,6 +239,8 @@ const SUPABASE_ANON_KEY = 'sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 80); }, { passive: true });
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
 hamburger.addEventListener('click', () => {
@@ -291,5 +299,6 @@ async function loadPosts() {
 
 loadPosts();
 </script>
+<script src="/js/i18n.js"></script>
 </body>
 </html>
