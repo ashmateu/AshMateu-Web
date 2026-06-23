@@ -13,7 +13,8 @@
     --black:  #0A0A0A;
     --ivory:  #F7F3EE;
     --white:  #FFFFFF;
-    --sand:   #B5A898;
+    --sand:      #B5A898;
+    --sand-text: #7A6A5A;
     --gutter: 56px;
     --serif:  'Bodoni Moda', Georgia, serif;
     --sans:   'Inter', system-ui, sans-serif;
@@ -234,7 +235,7 @@ nav.scrolled .nav-back:hover { opacity: 1; }
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--sand);
+    color: var(--sand-text);
     margin-bottom: 32px;
 }
 .credits-grid {
@@ -247,7 +248,7 @@ nav.scrolled .nav-back:hover { opacity: 1; }
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--sand);
+    color: var(--sand-text);
 }
 .credits-val {
     font-size: 14px;

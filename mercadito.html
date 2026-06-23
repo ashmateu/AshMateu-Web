@@ -32,6 +32,7 @@
             --ivory:  #F7F3EE;
             --white:  #FFFFFF;
             --sand:   #B5A898;
+            --sand-text: #7A6A5A;
             --gutter: 56px;
             --serif:  'Bodoni Moda', Georgia, serif;
             --sans:   'Inter', system-ui, sans-serif;
@@ -290,7 +291,7 @@
             font-weight: 400;
             letter-spacing: 0.28em;
             text-transform: uppercase;
-            color: var(--sand);
+            color: var(--sand-text);
             margin-bottom: 8px;
         }
 
@@ -330,7 +331,7 @@
         .product-price .currency {
             font-size: 11px;
             font-weight: 300;
-            color: var(--sand);
+            color: var(--sand-text);
             margin-right: 3px;
         }
 
@@ -693,7 +694,7 @@
             text-align: right;
             font-size: 11px;
             font-weight: 300;
-            color: var(--sand);
+            color: var(--sand-text);
             text-decoration: none;
             margin-top: 14px;
             transition: color 0.15s;
@@ -923,7 +924,7 @@
         .cart-empty-msg {
             padding: 56px 0; text-align: center;
             font-family: var(--serif); font-size: 17px;
-            font-style: italic; color: var(--sand);
+            font-style: italic; color: var(--sand-text);
         }
         .cart-item {
             display: grid;
@@ -938,7 +939,7 @@
         .cart-item-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
         .cart-item-img-ph { width: 100%; height: 100%; background: rgba(10,10,10,0.05); }
         .cart-item-name { font-size: 13px; font-weight: 400; color: var(--black); margin-bottom: 5px; line-height: 1.35; }
-        .cart-item-price { font-size: 12px; color: var(--sand); }
+        .cart-item-price { font-size: 12px; color: var(--sand-text); }
         .cart-item-qty { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
         .qty-btn {
             width: 22px; height: 22px; background: none;
@@ -949,7 +950,7 @@
         .qty-btn:hover { border-color: var(--black); }
         .qty-val { font-size: 13px; min-width: 18px; text-align: center; }
         .cart-item-remove {
-            background: none; border: none; cursor: pointer; color: var(--sand);
+            background: none; border: none; cursor: pointer; color: var(--sand-text);
             font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
             transition: color 0.15s; padding: 2px 0; font-family: var(--sans);
             align-self: flex-start;
@@ -983,7 +984,7 @@
         .drawer-back {
             background: none; border: none; cursor: pointer;
             font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--sand); padding: 16px 28px; display: flex;
+            color: var(--sand-text); padding: 16px 28px; display: flex;
             align-items: center; gap: 6px; transition: color 0.15s;
             font-family: var(--sans); flex-shrink: 0; text-align: left;
         }
@@ -993,7 +994,7 @@
 
         .form-section-label {
             display: block; font-size: 9px; letter-spacing: 0.26em;
-            text-transform: uppercase; color: var(--sand);
+            text-transform: uppercase; color: var(--sand-text);
             margin: 20px 0 14px;
         }
         .form-field { margin-bottom: 12px; }
@@ -1034,7 +1035,7 @@
         .pay-btn:hover { opacity: 0.88; }
         .pay-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .pay-btn svg { width: 13px; height: 13px; }
-        .pay-note { font-size: 10px; color: var(--sand); text-align: center; margin-top: 10px; line-height: 1.6; }
+        .pay-note { font-size: 10px; color: var(--sand-text); text-align: center; margin-top: 10px; line-height: 1.6; }
 
         /* ── Card add-to-cart button ── */
         .btn-cart {
@@ -1308,7 +1309,7 @@
 <!-- PRODUCTS -->
 <section class="mercadito-section">
     <div class="products-grid" id="productsGrid">
-        <p id="loadingMsg" style="grid-column:1/-1;font-size:13px;color:var(--sand);padding:24px 0;">Cargando productos...</p>
+        <p id="loadingMsg" style="grid-column:1/-1;font-size:13px;color:var(--sand-text);padding:24px 0;">Cargando productos...</p>
     </div>
 </section>
 
