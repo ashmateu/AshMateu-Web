@@ -395,9 +395,9 @@
             justify-items: center;
         }
         .client-logos li img {
-            height: clamp(14px, 1.4vw, 20px);
+            height: clamp(18px, 2vw, 28px);
             width: auto;
-            max-width: 160px;
+            max-width: 240px;
             filter: brightness(0) invert(1);
             opacity: 0.28;
             transition: opacity 0.25s;
@@ -411,7 +411,7 @@
         }
         @media (max-width: 540px) {
             .client-logos { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
-            .client-logos li img { height: 14px; max-width: 120px; }
+            .client-logos li img { height: 16px; max-width: 140px; }
         }
 
         #servicios { background: var(--ivory); }
