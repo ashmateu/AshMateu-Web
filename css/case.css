@@ -14,7 +14,7 @@
     --ease:   cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
 body {
     font-family: var(--sans);
@@ -36,10 +36,9 @@ nav {
     transition: background 0.3s, padding 0.3s;
 }
 nav.scrolled {
-    background: rgba(247,243,238,0.96);
-    padding: 18px var(--gutter);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(181,168,152,0.2);
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
 }
 .nav-logo {
     font-family: 'Aboreto', system-ui;
@@ -50,8 +49,6 @@ nav.scrolled {
     color: var(--white);
     transition: color 0.3s;
 }
-nav.scrolled .nav-logo { color: var(--black); }
-
 .nav-back {
     font-size: 12px;
     font-weight: 400;
@@ -64,9 +61,7 @@ nav.scrolled .nav-logo { color: var(--black); }
     align-items: center;
     gap: 8px;
 }
-nav.scrolled .nav-back { color: var(--sand); }
 .nav-back:hover { color: var(--white); }
-nav.scrolled .nav-back:hover { color: var(--black); }
 .nav-back::before { content: '←'; }
 
 /* ── Hero ── */
