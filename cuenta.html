@@ -641,15 +641,15 @@
 </div>
 
 <!-- NAV -->
-<nav>
+<nav id="nav">
     <a href="/" class="nav-logo">Ash Mateu</a>
     <ul class="nav-links" id="navLinks">
-        <li><a href="/#trabajo">Trabajo</a></li>
-        <li><a href="/prensa.html">Prensa</a></li>
-        <li><a href="/blog.html">Notas</a></li>
-        <li><a href="/#vlog">Vlog</a></li>
-        <li><a href="/mercadito.html">Mercadito</a></li>
-        <li><a href="/#contacto">Contacto</a></li>
+        <li><a href="/#trabajo" data-i18n="nav.work">Portfolio</a></li>
+        <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
+        <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
+        <li><a href="/#vlog" data-i18n="nav.vlog">Vlog</a></li>
+        <li><a href="/mercadito" data-i18n="nav.shop">Mercadito</a></li>
+        <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
 
     <!-- Widget con sesión -->
@@ -1352,6 +1352,6 @@ async function handleForgot() {
     el.classList.add('visible');
 }
 </script>
-
+<script src="/js/i18n.js"></script>
 </body>
 </html>
