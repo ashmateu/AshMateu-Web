@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth UI — El Mercadito de Ash (Referencia)</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!--
+    ══════════════════════════════════════════════════════
+      ARCHIVO DE REFERENCIA — NO DEPLOY DIRECTAMENTE
+      Contiene todos los fragmentos de auth UI listos
+      para pegar en mercadito.html, index.html y cuenta.html
+    ══════════════════════════════════════════════════════
+    -->
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --black:  #0A0A0A;
+            --ivory:  #F7F3EE;
+            --white:  #FFFFFF;
+            --sand:   #B5A898;
+            --gutter: 56px;
+            --serif:  'Playfair Display', Georgia, serif;
+            --sans:   'Inter', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            font-weight: 300;
+            color: var(--black);
+            background: var(--ivory);
+            -webkit-font-smoothing: antialiased;
+            padding: 40px;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 400;
+            margin: 48px 0 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(10,10,10,0.08);
+        }
+
+        /* ══════════════════════════════════════════
+           PIEZA 1 — MODAL DE AUTENTICACIÓN
+        ══════════════════════════════════════════ */
+
+        .auth-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .auth-overlay.is-open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Prevenir scroll del body cuando el modal está abierto */
+        body.auth-open { overflow: hidden; }
+
+        .auth-modal {
+            background: var(--ivory);
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            transform: translateY(16px);
+            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .auth-overlay.is-open .auth-modal {
+            transform: translateY(0);
+        }
+
+        /* Franja negra superior — firma editorial */
+        .auth-modal-header {
+            background: var(--black);
+            padding: 28px 32px 20px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        .auth-modal-brand {
+            font-family: var(--serif);
+            font-size: 20px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--ivory);
+            letter-spacing: 0;
+        }
+
+        .auth-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(247, 243, 238, 0.45);
+            transition: color 0.15s;
+        }
+
+        .auth-modal-close:hover { color: var(--ivory); }
+
+        .auth-modal-close svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Tabs */
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid rgba(10,10,10,0.1);
+        }
+
+        .auth-tab-btn {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 18px 12px 16px;
+            cursor: pointer;
+            opacity: 0.35;
+            transition: opacity 0.15s, border-color 0.15s;
+            margin-bottom: -1px;
+        }
+
+        .auth-tab-btn.active {
+            opacity: 1;
+            border-bottom-color: var(--black);
+        }
+
+        /* Panels */
+        .auth-body { padding: 32px 32px 36px; }
+
+        .auth-panel { display: none; }
+        .auth-panel.active { display: block; }
+
+        /* Error message */
+        .auth-error {
+            font-size: 12px;
+            font-weight: 300;
+            color: #8B2020;
+            background: rgba(139, 32, 32, 0.06);
+            border-left: 2px solid #8B2020;
+            padding: 10px 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .auth-error.visible { display: block; }
+
+        /* Campos */
+        .auth-field {
+            margin-bottom: 16px;
+        }
+
+        .auth-label {
+            display: block;
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--black);
+            opacity: 0.5;
+            margin-bottom: 8px;
+        }
+
+        .auth-input {
+            width: 100%;
+            font-family: var(--sans);
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--black);
+            background: var(--white);
+            border: 1px solid rgba(10,10,10,0.15);
+            padding: 13px 14px;
+            outline: none;
+            border-radius: 0;
+            transition: border-color 0.15s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .auth-input::placeholder { color: rgba(10,10,10,0.3); }
+
+        .auth-input:focus {
+            border-color: var(--black);
+        }
+
+        /* Botón principal */
+        .auth-submit {
+            width: 100%;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--black);
+            border: none;
+            border-radius: 0;
+            padding: 16px 20px;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: opacity 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .auth-submit:hover { opacity: 0.75; }
+
+        .auth-submit:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .auth-submit svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
+        /* Loading state en botón */
+        .auth-spinner {
+            width: 13px;
+            height: 13px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+
+        .auth-submit.loading .auth-spinner { display: block; }
+        .auth-submit.loading .auth-btn-text { display: none; }
+        .auth-submit.loading svg { display: none; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Link recuperar contraseña */
+        .auth-forgot {
+            display: block;
+            text-align: right;
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--sand);
+            text-decoration: none;
+            margin-top: 14px;
+            transition: color 0.15s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: var(--sans);
+        }
+
+        .auth-forgot:hover { color: var(--black); }
+
+        /* Divisor o nota */
+        .auth-note {
+            font-size: 11px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.4);
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════════
+           PIEZA 2 — NAV CON SESIÓN INICIADA
+        ══════════════════════════════════════════ */
+
+        nav {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px var(--gutter);
+            background: rgba(247, 243, 238, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(181, 168, 152, 0.25);
+        }
+
+        .nav-logo {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active { opacity: 1; }
+
+        /* Widget de usuario en nav */
+        .nav-user-widget {
+            position: relative;
+            display: none; /* se muestra con JS cuando hay sesión */
+        }
+
+        .nav-user-trigger {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        /* Avatar con inicial */
+        .nav-user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--black);
+            color: var(--ivory);
+            font-family: var(--serif);
+            font-size: 12px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Email truncado */
+        .nav-user-email {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            color: var(--black);
+            opacity: 0.6;
+            max-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Chevron */
+        .nav-user-chevron {
+            width: 10px;
+            height: 10px;
+            color: var(--black);
+            opacity: 0.4;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .nav-user-trigger[aria-expanded="true"] .nav-user-chevron {
+            transform: rotate(180deg);
+        }
+
+        /* Dropdown */
+        .nav-user-dropdown {
+            position: absolute;
+            top: calc(100% + 16px);
+            right: 0;
+            background: var(--ivory);
+            border: 1px solid rgba(10,10,10,0.1);
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(10,10,10,0.1);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-6px);
+            transition: opacity 0.18s, transform 0.18s;
+        }
+
+        .nav-user-dropdown.is-open {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        .nav-user-dropdown a,
+        .nav-user-dropdown button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            background: none;
+            border: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.15s, background 0.15s;
+            border-bottom: 1px solid rgba(10,10,10,0.06);
+        }
+
+        .nav-user-dropdown a:last-child,
+        .nav-user-dropdown button:last-child {
+            border-bottom: none;
+        }
+
+        .nav-user-dropdown a:hover,
+        .nav-user-dropdown button:hover {
+            opacity: 1;
+            background: rgba(10,10,10,0.03);
+        }
+
+        .nav-user-dropdown .logout-btn {
+            color: rgba(10,10,10,0.45);
+            font-size: 10px;
+        }
+
+        /* Botón ingresá (sin sesión) */
+        .nav-login-btn {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: none;
+            border: 1px solid rgba(10,10,10,0.2);
+            padding: 9px 16px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+            border-radius: 0;
+        }
+
+        .nav-login-btn:hover {
+            background: var(--black);
+            color: var(--ivory);
+            border-color: var(--black);
+        }
+
+        /* ══════════════════════════════════════════
+           PIEZA 3 — BOTÓN "INGRESÁ PARA COMPRAR"
+        ══════════════════════════════════════════ */
+
+        /* Estado sin sesión — reemplaza btn-mp */
+        .btn-login-to-buy {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            color: var(--black);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 12px 18px;
+            border: 1px solid rgba(10,10,10,0.25);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+            border-radius: 0;
+        }
+
+        .btn-login-to-buy:hover {
+            background: var(--black);
+            color: var(--ivory);
+            border-color: var(--black);
+        }
+
+        .btn-login-to-buy svg {
+            width: 12px;
+            height: 12px;
+            flex-shrink: 0;
+            opacity: 0.5;
+        }
+
+        /* ══════════════════════════════════════════
+           PIEZA 4 — PÁGINA MI CUENTA (header section)
+        ══════════════════════════════════════════ */
+
+        .cuenta-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 140px var(--gutter) 72px;
+        }
+
+        .cuenta-saludo-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 14px;
+        }
+
+        .cuenta-saludo-nombre {
+            font-family: var(--serif);
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--white);
+        }
+
+        .cuenta-saludo-nombre em {
+            font-style: italic;
+            color: var(--sand);
+        }
+
+        .cuenta-saludo-email {
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.35);
+            margin-top: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        /* Sección pedidos */
+        .cuenta-section {
+            padding: 64px var(--gutter) 100px;
+        }
+
+        .cuenta-section-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 32px;
+        }
+
+        /* Estado vacío */
+        .pedidos-empty {
+            padding: 56px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .pedidos-empty-title {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 400;
+            font-style: italic;
+            color: rgba(10,10,10,0.4);
+        }
+
+        .pedidos-empty-text {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.4);
+            line-height: 1.7;
+        }
+
+        .pedidos-empty-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            background: var(--black);
+            color: var(--white);
+            padding: 14px 20px;
+            margin-top: 8px;
+            transition: opacity 0.15s;
+        }
+
+        .pedidos-empty-cta:hover { opacity: 0.7; }
+
+        /* Tabla de pedidos */
+        .pedidos-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pedidos-table th {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--black);
+            opacity: 0.35;
+            text-align: left;
+            padding: 0 0 16px;
+            border-bottom: 1px solid rgba(10,10,10,0.08);
+        }
+
+        .pedidos-table td {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(10,10,10,0.05);
+            vertical-align: top;
+        }
+
+        .pedidos-table td:first-child {
+            padding-right: 24px;
+        }
+
+        .pedido-nombre {
+            font-family: var(--serif);
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--black);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .pedido-id {
+            font-size: 10px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.35);
+            letter-spacing: 0.06em;
+        }
+
+        .pedido-fecha {
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(10,10,10,0.5);
+        }
+
+        .pedido-monto {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--black);
+        }
+
+        .pedido-monto .currency {
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--sand);
+            margin-right: 3px;
+        }
+
+        /* Badge de estado */
+        .pedido-estado {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 5px 9px;
+        }
+
+        .pedido-estado.pendiente {
+            background: rgba(181, 168, 152, 0.18);
+            color: #7A6A5A;
+        }
+
+        .pedido-estado.confirmado {
+            background: rgba(10, 10, 10, 0.06);
+            color: var(--black);
+        }
+
+        .pedido-estado.enviado {
+            background: rgba(10, 10, 10, 0.9);
+            color: var(--ivory);
+        }
+
+        /* Sección de ajustes rapidos en cuenta */
+        .cuenta-nav-strip {
+            display: flex;
+            gap: 2px;
+            border-bottom: 1px solid rgba(10,10,10,0.08);
+            margin-bottom: 48px;
+        }
+
+        .cuenta-nav-tab {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: none;
+            border: none;
+            border-bottom: 1px solid transparent;
+            padding: 14px 20px;
+            margin-bottom: -1px;
+            cursor: pointer;
+            opacity: 0.35;
+            transition: opacity 0.15s;
+        }
+
+        .cuenta-nav-tab.active {
+            opacity: 1;
+            border-bottom-color: var(--black);
+        }
+
+        /* Preview labels in reference file */
+        .ref-section {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .ref-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 4px;
+        }
+
+        .ref-preview {
+            border: 1px solid rgba(10,10,10,0.08);
+            padding: 40px;
+            margin-bottom: 64px;
+            background: var(--ivory);
+            position: relative;
+        }
+
+        .ref-preview-dark {
+            background: var(--black);
+        }
+
+        @media (max-width: 900px) {
+            :root { --gutter: 24px; }
+
+            .nav-user-email { display: none; }
+
+            .pedidos-table th:nth-child(3),
+            .pedidos-table td:nth-child(3) { display: none; }
+
+            .cuenta-header { padding: 120px var(--gutter) 60px; }
+        }
+
+        @media (max-width: 560px) {
+            body { padding: 20px; }
+
+            .pedidos-table th:nth-child(2),
+            .pedidos-table td:nth-child(2) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="ref-section">
+
+    <!-- ══════════════════════════════════════════
+         PIEZA 1 — MODAL (preview activable)
+    ══════════════════════════════════════════ -->
+    <h2>Pieza 1 — Modal de autenticación</h2>
+    <p class="ref-label">Click en "Abrir modal" para verlo en acción</p>
+    <div class="ref-preview" style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+        <button onclick="document.getElementById('authOverlay').classList.add('is-open');document.body.classList.add('auth-open')" style="font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;background:var(--black);color:var(--ivory);border:none;padding:12px 20px;cursor:pointer;">
+            Abrir modal
+        </button>
+        <button onclick="openAuthModal('register')" style="font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;background:none;color:var(--black);border:1px solid rgba(10,10,10,0.2);padding:12px 20px;cursor:pointer;">
+            Abrir en "Crear cuenta"
+        </button>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PIEZA 2 — NAV CON SESIÓN (preview)
+    ══════════════════════════════════════════ -->
+    <h2>Pieza 2 — Nav con sesión iniciada</h2>
+    <p class="ref-label">Estado sin sesión (izquierda) / con sesión (derecha)</p>
+    <div class="ref-preview" style="padding:0;">
+        <nav style="position:relative;padding:20px 32px;">
+            <a href="#" class="nav-logo">Ash Mateu</a>
+            <ul class="nav-links" style="display:flex;">
+                <li><a href="#">Trabajo</a></li>
+                <li><a href="#">Mercadito</a></li>
+            </ul>
+            <!-- Sin sesión -->
+            <button class="nav-login-btn" onclick="openAuthModal('login')">Ingresar</button>
+        </nav>
+        <nav style="position:relative;padding:20px 32px;border-top:1px solid rgba(10,10,10,0.06);">
+            <a href="#" class="nav-logo">Ash Mateu</a>
+            <ul class="nav-links" style="display:flex;">
+                <li><a href="#">Trabajo</a></li>
+                <li><a href="#">Mercadito</a></li>
+            </ul>
+            <!-- Con sesión -->
+            <div class="nav-user-widget" style="display:block;">
+                <button class="nav-user-trigger" aria-expanded="false" id="navUserTrigger" onclick="toggleUserDropdown()">
+                    <span class="nav-user-avatar" id="navAvatar">A</span>
+                    <span class="nav-user-email" id="navEmail">ash.mateu@gmail.com</span>
+                    <svg class="nav-user-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M1 1l4 4 4-4"/>
+                    </svg>
+                </button>
+                <div class="nav-user-dropdown" id="navUserDropdown">
+                    <a href="/cuenta.html">Mi cuenta</a>
+                    <button class="logout-btn" onclick="handleLogout()">Cerrar sesión</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PIEZA 3 — BOTÓN INGRESÁ PARA COMPRAR
+    ══════════════════════════════════════════ -->
+    <h2>Pieza 3 — Botón "Ingresá para comprar"</h2>
+    <p class="ref-label">Se muestra cuando el usuario no tiene sesión iniciada</p>
+    <div class="ref-preview" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <!-- Estado sin sesión -->
+        <button class="btn-login-to-buy" onclick="openAuthModal('login')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+            </svg>
+            Ingresá para comprar
+        </button>
+        <!-- Estado con sesión (referencia del btn-mp original) -->
+        <a class="btn-mp-demo" href="#" style="display:inline-flex;align-items:center;gap:8px;background:var(--black);color:#fff;font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;padding:12px 18px;border:none;cursor:pointer;transition:opacity 0.2s;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;flex-shrink:0;"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
+            Comprar
+        </a>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PIEZA 4 — HEADER MI CUENTA
+    ══════════════════════════════════════════ -->
+    <h2>Pieza 4 — Página Mi Cuenta</h2>
+    <p class="ref-label">Header + tabla de pedidos (con datos de ejemplo)</p>
+    <div class="ref-preview" style="padding:0;overflow:hidden;">
+
+        <div class="cuenta-header">
+            <p class="cuenta-saludo-label">Mi cuenta</p>
+            <h1 class="cuenta-saludo-nombre">Hola, <em>Ash</em></h1>
+            <p class="cuenta-saludo-email">ash.mateu@gmail.com</p>
+        </div>
+
+        <div class="cuenta-section">
+            <div class="cuenta-nav-strip">
+                <button class="cuenta-nav-tab active">Mis pedidos</button>
+                <button class="cuenta-nav-tab">Datos</button>
+            </div>
+
+            <p class="cuenta-section-label">Historial de compras</p>
+
+            <!-- Estado con pedidos -->
+            <table class="pedidos-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th style="text-align:right;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="pedido-nombre">Blazer vintage Cacharel</span>
+                            <span class="pedido-id">#MP-2026-001</span>
+                        </td>
+                        <td><span class="pedido-fecha">12 jun 2026</span></td>
+                        <td><span class="pedido-estado enviado">Enviado</span></td>
+                        <td style="text-align:right;">
+                            <span class="pedido-monto"><span class="currency">ARS</span>48.500</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="pedido-nombre">Guía de armado de capsule wardrobe</span>
+                            <span class="pedido-id">#MP-2026-002</span>
+                        </td>
+                        <td><span class="pedido-fecha">3 jun 2026</span></td>
+                        <td><span class="pedido-estado confirmado">Confirmado</span></td>
+                        <td style="text-align:right;">
+                            <span class="pedido-monto"><span class="currency">USD</span>12</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="pedido-nombre">Cinturón tejido artesanal</span>
+                            <span class="pedido-id">#MP-2026-003</span>
+                        </td>
+                        <td><span class="pedido-fecha">28 may 2026</span></td>
+                        <td><span class="pedido-estado pendiente">Pendiente</span></td>
+                        <td style="text-align:right;">
+                            <span class="pedido-monto"><span class="currency">ARS</span>12.000</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Estado vacío — descomentar para ver -->
+            <!--
+            <div class="pedidos-empty">
+                <p class="pedidos-empty-title">Todavía no tenés pedidos.</p>
+                <p class="pedidos-empty-text">Cuando comprés algo en el Mercadito, tu historial aparece acá.</p>
+                <a href="/mercadito.html" class="pedidos-empty-cta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0;"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
+                    Ir al Mercadito
+                </a>
+            </div>
+            -->
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     MODAL DE AUTH — va en todas las páginas
+══════════════════════════════════════════ -->
+<div class="auth-overlay" id="authOverlay" role="dialog" aria-modal="true" aria-label="Autenticación">
+
+    <!-- Click en overlay cierra -->
+    <div onclick="closeAuthModal()" style="position:absolute;inset:0;cursor:pointer;" aria-hidden="true"></div>
+
+    <div class="auth-modal" role="document">
+
+        <div class="auth-modal-header">
+            <span class="auth-modal-brand">El Mercadito</span>
+            <button class="auth-modal-close" onclick="closeAuthModal()" aria-label="Cerrar">
+                <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M1 1l16 16M17 1L1 17"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab-btn active" id="tabLogin" onclick="switchTab('login')">Ingresar</button>
+            <button class="auth-tab-btn" id="tabRegister" onclick="switchTab('register')">Crear cuenta</button>
+        </div>
+
+        <div class="auth-body">
+
+            <!-- Panel: Ingresar -->
+            <div class="auth-panel active" id="panelLogin">
+                <div class="auth-error" id="errorLogin" role="alert"></div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="loginEmail">Email</label>
+                    <input class="auth-input" type="email" id="loginEmail" name="email" autocomplete="email" placeholder="tu@email.com">
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="loginPassword">Contraseña</label>
+                    <input class="auth-input" type="password" id="loginPassword" name="password" autocomplete="current-password" placeholder="••••••••">
+                </div>
+
+                <button class="auth-submit" id="btnLogin" onclick="handleLogin()">
+                    <span class="auth-btn-text">Ingresar</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="auth-arrow">
+                        <path d="M3 12h18M12 3l9 9-9 9"/>
+                    </svg>
+                    <span class="auth-spinner"></span>
+                </button>
+
+                <button class="auth-forgot" onclick="handleForgot()">¿Olvidaste tu contraseña?</button>
+            </div>
+
+            <!-- Panel: Crear cuenta -->
+            <div class="auth-panel" id="panelRegister">
+                <div class="auth-error" id="errorRegister" role="alert"></div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="registerEmail">Email</label>
+                    <input class="auth-input" type="email" id="registerEmail" name="email" autocomplete="email" placeholder="tu@email.com">
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="registerPassword">Contraseña</label>
+                    <input class="auth-input" type="password" id="registerPassword" name="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="registerPasswordConfirm">Confirmar contraseña</label>
+                    <input class="auth-input" type="password" id="registerPasswordConfirm" name="password-confirm" autocomplete="new-password" placeholder="••••••••">
+                </div>
+
+                <button class="auth-submit" id="btnRegister" onclick="handleRegister()">
+                    <span class="auth-btn-text">Crear cuenta</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="auth-arrow">
+                        <path d="M3 12h18M12 3l9 9-9 9"/>
+                    </svg>
+                    <span class="auth-spinner"></span>
+                </button>
+
+                <p class="auth-note">Al crear tu cuenta aceptás recibir novedades del Mercadito.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  AUTH UI — lógica de interfaz (sin Supabase, solo UI)
+//  Para integrar con Supabase: reemplazar los console.log
+//  con las llamadas reales sb.auth.signIn / signUp / etc.
+// ══════════════════════════════════════════════════════════════
+
+// ── Modal ──
+function openAuthModal(tab) {
+    switchTab(tab || 'login');
+    document.getElementById('authOverlay').classList.add('is-open');
+    document.body.classList.add('auth-open');
+    // Focus primer campo
+    setTimeout(() => {
+        const firstInput = document.querySelector('#authOverlay .auth-panel.active .auth-input');
+        if (firstInput) firstInput.focus();
+    }, 100);
+}
+
+function closeAuthModal() {
+    document.getElementById('authOverlay').classList.remove('is-open');
+    document.body.classList.remove('auth-open');
+    clearErrors();
+}
+
+// Cerrar con ESC
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeAuthModal();
+});
+
+// ── Tabs ──
+function switchTab(tab) {
+    const isLogin = tab === 'login';
+    document.getElementById('tabLogin').classList.toggle('active', isLogin);
+    document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+    document.getElementById('panelLogin').classList.toggle('active', isLogin);
+    document.getElementById('panelRegister').classList.toggle('active', !isLogin);
+    clearErrors();
+}
+
+// ── Errores ──
+function showError(panelId, msg) {
+    const el = document.getElementById('error' + panelId);
+    el.textContent = msg;
+    el.classList.add('visible');
+}
+
+function clearErrors() {
+    document.querySelectorAll('.auth-error').forEach(el => {
+        el.textContent = '';
+        el.classList.remove('visible');
+    });
+}
+
+// ── Loading state ──
+function setLoading(btnId, loading) {
+    const btn = document.getElementById(btnId);
+    btn.classList.toggle('loading', loading);
+    btn.disabled = loading;
+}
+
+// ── Login ──
+async function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass  = document.getElementById('loginPassword').value;
+
+    if (!email || !pass) {
+        showError('Login', 'Completá email y contraseña para ingresar.');
+        return;
+    }
+
+    setLoading('btnLogin', true);
+
+    // ── INTEGRACIÓN SUPABASE ──
+    // const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+    // if (error) {
+    //     showError('Login', 'Email o contraseña incorrectos.');
+    //     setLoading('btnLogin', false);
+    //     return;
+    // }
+    // onAuthSuccess(data.user);
+
+    // Demo: simular éxito
+    await new Promise(r => setTimeout(r, 900));
+    console.log('[AUTH] Login:', email);
+    onAuthSuccess({ email, user_metadata: {} });
+}
+
+// ── Register ──
+async function handleRegister() {
+    const email    = document.getElementById('registerEmail').value.trim();
+    const pass     = document.getElementById('registerPassword').value;
+    const confirm  = document.getElementById('registerPasswordConfirm').value;
+
+    if (!email) {
+        showError('Register', 'Ingresá tu email.');
+        return;
+    }
+    if (pass.length < 8) {
+        showError('Register', 'La contraseña debe tener al menos 8 caracteres.');
+        return;
+    }
+    if (pass !== confirm) {
+        showError('Register', 'Las contraseñas no coinciden.');
+        return;
+    }
+
+    setLoading('btnRegister', true);
+
+    // ── INTEGRACIÓN SUPABASE ──
+    // const { data, error } = await sb.auth.signUp({ email, password: pass });
+    // if (error) {
+    //     showError('Register', error.message || 'Error al crear la cuenta. Intentá de nuevo.');
+    //     setLoading('btnRegister', false);
+    //     return;
+    // }
+    // if (data.user && !data.session) {
+    //     // Supabase envió email de confirmación
+    //     showError('Register', '');
+    //     document.getElementById('panelRegister').innerHTML = `
+    //         <p style="font-size:14px;font-weight:300;line-height:1.8;color:var(--black);padding:8px 0;">
+    //             Revisá tu email para confirmar tu cuenta.
+    //         </p>`;
+    //     setLoading('btnRegister', false);
+    //     return;
+    // }
+    // onAuthSuccess(data.user);
+
+    // Demo
+    await new Promise(r => setTimeout(r, 900));
+    console.log('[AUTH] Register:', email);
+    onAuthSuccess({ email, user_metadata: {} });
+}
+
+// ── Forgot password ──
+async function handleForgot() {
+    const email = document.getElementById('loginEmail').value.trim();
+    if (!email) {
+        showError('Login', 'Primero ingresá tu email para recuperar la contraseña.');
+        return;
+    }
+
+    // ── INTEGRACIÓN SUPABASE ──
+    // await sb.auth.resetPasswordForEmail(email, { redirectTo: 'https://ashmateu.com/cuenta.html' });
+
+    showError('Login', '');
+    const el = document.getElementById('errorLogin');
+    el.style.borderLeftColor = 'var(--sand)';
+    el.style.color = '#7A6A5A';
+    el.style.background = 'rgba(181,168,152,0.1)';
+    el.textContent = 'Si tu email está registrado, te enviamos un link para restablecer tu contraseña.';
+    el.classList.add('visible');
+}
+
+// ── Callback éxito ──
+function onAuthSuccess(user) {
+    closeAuthModal();
+    setLoading('btnLogin', false);
+    setLoading('btnRegister', false);
+    updateNavForUser(user);
+
+    // Si hay un producto pendiente de compra, redirigir
+    const pendingLink = sessionStorage.getItem('pending_mp_link');
+    if (pendingLink) {
+        sessionStorage.removeItem('pending_mp_link');
+        window.open(pendingLink, '_blank', 'noopener,noreferrer');
+    }
+}
+
+// ── Nav: actualizar para usuario logueado ──
+function updateNavForUser(user) {
+    const email   = user.email || '';
+    const initial = email.charAt(0).toUpperCase();
+
+    const widget = document.getElementById('navUserWidget');
+    const loginBtn = document.getElementById('navLoginBtn');
+
+    if (widget) {
+        widget.style.display = 'block';
+        document.getElementById('navAvatar').textContent = initial;
+        document.getElementById('navEmail').textContent  = email;
+    }
+    if (loginBtn) loginBtn.style.display = 'none';
+}
+
+// ── Dropdown de usuario en nav ──
+function toggleUserDropdown() {
+    const dropdown = document.getElementById('navUserDropdown');
+    const trigger  = document.getElementById('navUserTrigger');
+    const open = dropdown.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+// Cerrar dropdown si click fuera
+document.addEventListener('click', e => {
+    const widget = document.querySelector('.nav-user-widget');
+    if (widget && !widget.contains(e.target)) {
+        const dropdown = document.getElementById('navUserDropdown');
+        const trigger  = document.getElementById('navUserTrigger');
+        if (dropdown) dropdown.classList.remove('is-open');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+});
+
+// ── Logout ──
+async function handleLogout() {
+    // ── INTEGRACIÓN SUPABASE ──
+    // await sb.auth.signOut();
+    console.log('[AUTH] Logout');
+    // Recargar para resetear estado
+    window.location.href = '/mercadito.html';
+}
+
+// ── Botón "Ingresá para comprar" ──
+// Uso: <button class="btn-login-to-buy" onclick="loginToBuy('URL_MERCADOPAGO')">
+function loginToBuy(mpLink) {
+    sessionStorage.setItem('pending_mp_link', mpLink);
+    openAuthModal('login');
+}
+</script>
+
+</body>
+</html>
