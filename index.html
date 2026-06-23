@@ -11,7 +11,7 @@
     <meta property="og:title" content="Ash Mateu — Dirección Creativa & Styling">
     <meta property="og:description" content="Stylist y directora creativa. Chanel, Gucci, Miu Miu. Buenos Aires, Nueva York, París.">
     <meta property="og:url" content="https://ashmateu.com">
-    <meta property="og:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.webp">
+    <meta property="og:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="800">
     <meta property="og:image:alt" content="Ash Mateu — Editorial Chanel Haute Couture">
@@ -23,7 +23,7 @@
     <link rel="preload" as="image" href="images/extracted/chanel-hc/img-005.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;0,6..96,800;1,6..96,300;1,6..96,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;0,6..96,800;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
         @font-face {
@@ -43,7 +43,7 @@
             --sand:   #B5A898;
             --gutter: 56px;
             --serif:  'Bodoni Moda', Georgia, serif;
-            --sans:   'Bodoni Moda', Georgia, serif;
+            --sans:   'Inter', system-ui, sans-serif;
         }
 
         /* ── Base ── */
@@ -259,7 +259,9 @@
             text-transform: uppercase;
             text-decoration: none;
             color: var(--black);
-            opacity: 0.4;
+            border-bottom: 1px solid var(--black);
+            padding-bottom: 3px;
+            opacity: 0.85;
             transition: opacity 0.2s;
         }
 
@@ -697,7 +699,7 @@
             /* Work grid mobile */
             .work-item,
             .work-item:nth-child(4),
-            .work-item:nth-child(5) { grid-column: span 6; }
+            .work-item:nth-child(5) { grid-column: span 12; }
             .work-caption { padding: 14px 16px 28px; }
             .work-title { font-size: 13px; }
 
@@ -726,7 +728,11 @@
       "description": "Stylist y directora creativa. Chanel, Louis Vuitton, Miu Miu, Dolce & Gabbana, Gucci. Buenos Aires, Nueva York, París.",
       "url": "https://ashmateu.com",
       "email": "ash.mateu@gmail.com",
-      "sameAs": ["https://www.instagram.com/ashmateu"],
+      "sameAs": [
+        "https://www.instagram.com/ashmateu",
+        "https://www.marieclaire.com.ar",
+        "https://www.vogue.com.ar"
+      ],
       "knowsAbout": ["Fashion Styling", "Creative Direction", "Fashion Consulting", "Editorial Photography", "Fashion Education"],
       "workLocation": [
         { "@type": "City", "name": "Buenos Aires" },
@@ -858,13 +864,13 @@
             </div>
         </a>
 
-        <a class="work-item" href="projects/chanel-williamsburg.html">
+        <a class="work-item" href="projects/calu-chinatown.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/chanel-pap/img-001.webp" alt="Chanel Prêt-à-porter Williamsburg" loading="lazy">
+                <img class="work-img" src="images/extracted/calu-chinatown/img-004.webp" alt="Calu Rivero — Chinese New Year" loading="lazy">
             </div>
             <div class="work-caption">
-                <span class="work-meta">Styling &nbsp;— Brooklyn, Nueva York</span>
-                <h3 class="work-title">Chanel Prêt-à-porter Williamsburg</h3>
+                <span class="work-meta">Styling &nbsp;— Chinatown, Manhattan</span>
+                <h3 class="work-title">Calu Rivero — Chinese New Year</h3>
             </div>
         </a>
 
@@ -894,8 +900,8 @@
 <!-- SOBRE -->
 <section id="vlog">
     <div class="section-inner">
-        <span class="section-label">Vlog</span>
-        <h2 class="about-editorial-headline">Vlog</h2>
+        <span class="section-label">Proceso</span>
+        <h2 class="about-editorial-headline">Proceso</h2>
         <div class="about-inner">
             <div class="about-video-wrap" id="ytFacade">
                 <img class="yt-thumb" src="https://i.ytimg.com/vi/7lB4UjBaTyQ/maxresdefault.jpg" alt="Ash Mateu Vlog" loading="lazy">
