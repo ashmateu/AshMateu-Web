@@ -394,16 +394,15 @@
             justify-content: center;
             gap: 10px 52px;
         }
-        .client-logos li {
-            font-family: var(--serif);
-            font-style: italic;
-            font-size: clamp(17px, 1.8vw, 24px);
-            color: var(--ivory);
-            opacity: 0.3;
-            letter-spacing: 0.02em;
+        .client-logos li img {
+            height: clamp(16px, 1.6vw, 24px);
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.28;
             transition: opacity 0.25s;
+            display: block;
         }
-        .client-logos li:hover { opacity: 0.7; }
+        .client-logos li:hover img { opacity: 0.7; }
 
         #servicios { background: var(--ivory); }
 
@@ -952,16 +951,16 @@
 <section id="clientes">
     <div class="section-inner">
         <ul class="client-logos">
-            <li>Chanel</li>
-            <li>Gucci</li>
-            <li>Miu Miu</li>
-            <li>Louis Vuitton</li>
-            <li>Dolce & Gabbana</li>
-            <li>Nike</li>
-            <li>L'Oréal</li>
-            <li>Mercedes-Benz</li>
-            <li>Netflix</li>
-            <li>Marie Claire</li>
+            <li><img src="/images/logos/chanel.svg" alt="Chanel"></li>
+            <li><img src="/images/logos/gucci.svg" alt="Gucci"></li>
+            <li><img src="/images/logos/miu-miu.svg" alt="Miu Miu"></li>
+            <li><img src="/images/logos/louis-vuitton.svg" alt="Louis Vuitton"></li>
+            <li><img src="/images/logos/dolce-gabbana.svg" alt="Dolce & Gabbana"></li>
+            <li><img src="/images/logos/nike.svg" alt="Nike"></li>
+            <li><img src="/images/logos/loreal.svg" alt="L'Oréal"></li>
+            <li><img src="/images/logos/mercedes-benz.svg" alt="Mercedes-Benz"></li>
+            <li><img src="/images/logos/netflix.svg" alt="Netflix"></li>
+            <li><img src="/images/logos/marie-claire.svg" alt="Marie Claire"></li>
         </ul>
     </div>
 </section>
