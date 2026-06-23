@@ -54,7 +54,7 @@
             top: 0; left: 0; right: 0;
             z-index: 100;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             padding: 28px var(--gutter);
             background: rgba(247,243,238,0.96); backdrop-filter: blur(10px);
@@ -75,6 +75,14 @@
             display: flex;
             gap: 36px;
             list-style: none;
+            margin-left: auto;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 24px;
         }
 
         .nav-links a {
@@ -1069,28 +1077,30 @@
         <li><a href="/mercadito" class="active" style="font-weight:500" data-i18n="nav.shop">Mercadito</a></li>
         <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
-    <button class="cart-icon-btn" id="cartBtn" aria-label="Carrito">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/>
-        </svg>
-        <span class="cart-badge" id="cartBadge">0</span>
-    </button>
-    <div class="nav-user" id="navUser">
-        <button class="nav-user-trigger" aria-expanded="false" id="navUserTrigger">
-            <span class="nav-user-avatar" id="navUserAvatar">A</span>
-            <span class="nav-user-email" id="navUserEmail"></span>
-            <svg class="nav-user-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M1 1l4 4 4-4"/>
+    <div class="nav-actions">
+        <button class="cart-icon-btn" id="cartBtn" aria-label="Carrito">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/>
             </svg>
+            <span class="cart-badge" id="cartBadge">0</span>
         </button>
-        <div class="nav-user-dropdown" id="navUserDropdown">
-            <a href="/cuenta.html">Mi cuenta</a>
-            <button class="nav-user-logout" id="navLogout">Cerrar sesión</button>
+        <div class="nav-user" id="navUser">
+            <button class="nav-user-trigger" aria-expanded="false" id="navUserTrigger">
+                <span class="nav-user-avatar" id="navUserAvatar">A</span>
+                <span class="nav-user-email" id="navUserEmail"></span>
+                <svg class="nav-user-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M1 1l4 4 4-4"/>
+                </svg>
+            </button>
+            <div class="nav-user-dropdown" id="navUserDropdown">
+                <a href="/cuenta.html">Mi cuenta</a>
+                <button class="nav-user-logout" id="navLogout">Cerrar sesión</button>
+            </div>
         </div>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+            <span></span><span></span><span></span>
+        </button>
     </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
-        <span></span><span></span><span></span>
-    </button>
 </nav>
 
 <!-- AUTH MODAL -->
