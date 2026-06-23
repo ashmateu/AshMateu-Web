@@ -861,12 +861,13 @@
             position: relative;
             background: none; border: none; cursor: pointer;
             padding: 6px; display: flex; align-items: center;
-            color: var(--black); margin-right: 4px;
+            color: var(--white); margin-right: 4px; transition: color 0.4s;
         }
+        nav.scrolled .cart-icon-btn { color: var(--black); }
         .cart-icon-btn svg { width: 20px; height: 20px; }
         .cart-badge {
             position: absolute; top: 0; right: 0;
-            background: var(--black); color: var(--ivory);
+            background: var(--ivory); color: var(--black);
             font-size: 8px; font-weight: 500;
             min-width: 15px; height: 15px; border-radius: 8px;
             display: none; align-items: center; justify-content: center;
