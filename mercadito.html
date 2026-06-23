@@ -240,8 +240,8 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 72px 48px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 120px 56px;
         }
 
         /* ── Product card ── */
@@ -254,7 +254,7 @@
 
         .product-img {
             width: 100%;
-            aspect-ratio: 3 / 4;
+            aspect-ratio: 2 / 3;
             background: #EDE9E3;
             overflow: hidden;
             position: relative;
@@ -302,11 +302,11 @@
 
         .product-name {
             font-family: var(--serif);
-            font-size: clamp(16px, 1.4vw, 20px);
+            font-size: clamp(18px, 1.8vw, 26px);
             font-weight: 400;
-            line-height: 1.25;
+            line-height: 1.2;
             color: var(--black);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .product-desc {
@@ -327,7 +327,7 @@
         }
 
         .product-price {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 400;
             color: var(--black);
             letter-spacing: -0.01em;
@@ -497,13 +497,12 @@
             }
 
             .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 48px 24px;
+                gap: 80px 24px;
             }
         }
 
-        @media (max-width: 560px) {
-            .products-grid { grid-template-columns: 1fr; }
+        @media (max-width: 640px) {
+            .products-grid { grid-template-columns: 1fr; gap: 64px 0; }
             .mercadito-filters { gap: 0; }
             footer {
                 flex-direction: column;
@@ -1749,7 +1748,8 @@ function formatPrice(price, currency) {
     return `<span class="currency">USD</span>${n % 1 === 0 ? n : n.toFixed(2)}`;
 }
 
-function cardHTML(p) {
+function cardHTML(p, idx) {
+    const num = String(idx + 1).padStart(2, '0');
     const soldOut = p.stock === 0 ? 'sold-out' : '';
     const img = p.image_url
         ? `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`
@@ -1769,7 +1769,7 @@ function cardHTML(p) {
     return `
         <article class="product-card ${soldOut}" data-cat="${p.category}">
             <div class="product-img">${img}</div>
-            <span class="product-cat-tag">${catLabel}</span>
+            <span class="product-cat-tag"><span style="opacity:0.4;margin-right:12px">${num}</span>${catLabel}</span>
             <h2 class="product-name">${p.name}</h2>
             <p class="product-desc">${p.description ?? ''}</p>
             <div class="product-footer">
@@ -1784,7 +1784,7 @@ function renderProducts() {
     const grid = document.getElementById('productsGrid');
     window._products = {};
     allProducts.forEach(p => { window._products[p.id] = p; });
-    grid.innerHTML = allProducts.map(cardHTML).join('');
+    grid.innerHTML = allProducts.map((p, i) => cardHTML(p, i)).join('');
     applyFilter(activeFilter);
 }
 
