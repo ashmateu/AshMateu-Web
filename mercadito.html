@@ -69,20 +69,22 @@
             text-transform: uppercase;
             color: var(--black);
             text-decoration: none;
+            flex: none;
         }
 
         .nav-links {
             display: flex;
             gap: 36px;
             list-style: none;
-            margin-left: auto;
+            flex: 1;
+            justify-content: center;
         }
 
         .nav-actions {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-left: 24px;
+            flex: none;
         }
 
         .nav-links a {
@@ -1063,7 +1065,6 @@
             .form-grid-2 { grid-template-columns: 1fr; }
         }
         @view-transition { navigation: auto; }
-        nav { view-transition-name: site-nav; }
     </style>
 </head>
 <body>
@@ -1098,10 +1099,10 @@
                 <button class="nav-user-logout" id="navLogout">Cerrar sesión</button>
             </div>
         </div>
-        <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
-            <span></span><span></span><span></span>
-        </button>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
 
 <!-- AUTH MODAL -->
