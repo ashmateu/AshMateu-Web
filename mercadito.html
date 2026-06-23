@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Mercadito de Ash — Ash Mateu</title>
     <meta name="description" content="Piezas seleccionadas y contenido digital curado por Ash Mateu. Vintage, accesorios y recursos de moda.">
-    <link rel="canonical" href="https://ashmateu.com/mercadito.html">
+    <link rel="canonical" href="https://ashmateu.com/mercadito">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="El Mercadito de Ash — Ash Mateu">
     <meta property="og:description" content="Piezas seleccionadas y contenido digital curado por Ash Mateu.">
-    <meta property="og:url" content="https://ashmateu.com/mercadito.html">
+    <meta property="og:url" content="https://ashmateu.com/mercadito">
     <meta property="og:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.jpg">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <meta name="twitter:card" content="summary_large_image">
@@ -1735,7 +1735,7 @@ document.getElementById('btnReset').addEventListener('click', async () => {
     if (!email) { showError('resetError', 'Ingresá tu email.'); return; }
     btn.disabled = true; btn.textContent = 'Enviando…';
     const { error } = await sb.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ashmateu.com/mercadito.html'
+        redirectTo: 'https://ashmateu.com/mercadito'
     });
     btn.disabled = false; btn.textContent = 'Enviar link';
     if (error) { showError('resetError', error.message); return; }

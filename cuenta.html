@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Cuenta — El Mercadito de Ash</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="https://ashmateu.com/cuenta.html">
+    <link rel="canonical" href="https://ashmateu.com/cuenta">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1346,7 +1346,7 @@ async function handleForgot() {
     }
 
     await sb.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ashmateu.com/cuenta.html'
+        redirectTo: 'https://ashmateu.com/cuenta'
     });
 
     const el = document.getElementById('errorLogin');
