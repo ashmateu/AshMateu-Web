@@ -52,10 +52,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 28px var(--gutter);
-            background: rgba(247, 243, 238, 0.96);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(181, 168, 152, 0.25);
+            transition: background 0.4s, color 0.4s;
         }
+        nav.scrolled { background: rgba(247,243,238,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(181,168,152,0.25); }
 
         .nav-logo {
             font-family: var(--sans);
@@ -63,9 +62,11 @@
             font-weight: 400;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: var(--black);
+            color: var(--white);
             text-decoration: none;
+            transition: color 0.4s;
         }
+        nav.scrolled .nav-logo { color: var(--black); }
 
         .nav-links {
             display: flex;
@@ -78,11 +79,12 @@
             font-weight: 400;
             letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: var(--black);
+            color: var(--white);
             text-decoration: none;
             opacity: 0.5;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, color 0.4s;
         }
+        nav.scrolled .nav-links a { color: var(--black); }
 
         .nav-links a:hover,
         .nav-links a.active { opacity: 1; }
@@ -1050,14 +1052,14 @@
 </head>
 <body>
 
-<nav>
+<nav id="nav">
     <a href="/" class="nav-logo">Ash Mateu</a>
     <ul class="nav-links" id="navLinks">
         <li><a href="/#trabajo">Portfolio</a></li>
-        <li><a href="/prensa.html">Prensa</a></li>
-        <li><a href="/blog.html">Notas</a></li>
+        <li><a href="/prensa">Prensa</a></li>
+        <li><a href="/blog">Notas</a></li>
         <li><a href="/#vlog">Vlog</a></li>
-        <li><a href="/mercadito.html" class="active" style="font-weight:500">Mercadito</a></li>
+        <li><a href="/mercadito" class="active" style="font-weight:500">Mercadito</a></li>
         <li><a href="/#contacto">Contacto</a></li>
     </ul>
     <button class="cart-icon-btn" id="cartBtn" aria-label="Carrito">
@@ -1318,6 +1320,8 @@
 
 <script>
 // ── Nav hamburger ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 80); }, { passive: true });
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
 if (hamburger && navLinks) {
@@ -1791,6 +1795,6 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 
 loadProducts();
 </script>
-
+<script src="/js/i18n.js"></script>
 </body>
 </html>
