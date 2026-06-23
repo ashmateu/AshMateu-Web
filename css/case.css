@@ -297,4 +297,3 @@ nav.scrolled .nav-back:hover { opacity: 1; }
 }
 
 @view-transition { navigation: auto; }
-nav { view-transition-name: site-nav; }
