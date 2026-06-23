@@ -10,6 +10,39 @@ const STATUS_MAP = {
   refunded:    'rechazado',
 };
 
+async function verifyMPSignature(request, body) {
+  const secret = process.env.MP_WEBHOOK_SECRET;
+  if (!secret) return true; // sin secreto configurado, skip (modo dev)
+
+  const sigHeader = request.headers.get('x-signature') ?? '';
+  const requestId = request.headers.get('x-request-id') ?? '';
+
+  const tsMatch  = sigHeader.match(/ts=([^,]+)/);
+  const v1Match  = sigHeader.match(/v1=([^,]+)/);
+  if (!tsMatch || !v1Match) return false;
+
+  const ts       = tsMatch[1];
+  const expected = v1Match[1];
+
+  // Manifest: id:<data.id>;request-id:<x-request-id>;ts:<ts>;
+  const dataId = body?.data?.id ?? '';
+  const manifest = `id:${dataId};request-id:${requestId};ts:${ts};`;
+
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const sigBuf  = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(manifest));
+  const computed = Array.from(new Uint8Array(sigBuf))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+
+  return computed === expected;
+}
+
 export default async function handler(request) {
   if (request.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 });
@@ -22,6 +55,11 @@ export default async function handler(request) {
     return new Response('Invalid JSON', { status: 400 });
   }
 
+  const valid = await verifyMPSignature(request, body);
+  if (!valid) {
+    return new Response('Invalid signature', { status: 401 });
+  }
+
   const { type, data } = body;
 
   if (type !== 'payment' || !data?.id) {
@@ -32,9 +70,16 @@ export default async function handler(request) {
   }
 
   const paymentId = data.id;
-  const SUPABASE_URL      = process.env.SUPABASE_URL;
+  const SUPABASE_URL         = process.env.SUPABASE_URL;
   const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
-  const MP_ACCESS_TOKEN   = process.env.MP_ACCESS_TOKEN;
+  const MP_ACCESS_TOKEN      = process.env.MP_ACCESS_TOKEN;
+
+  const sbHeaders = {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_SERVICE_KEY,
+    'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+    'Prefer': 'return=minimal',
+  };
 
   // 1. Obtener detalle del pago desde MercadoPago
   const mpRes = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
@@ -49,7 +94,6 @@ export default async function handler(request) {
   const orderId = payment.external_reference;
 
   if (!orderId) {
-    // Pago sin referencia de orden (ej. prueba manual) — ignorar sin error
     return new Response(JSON.stringify({ ok: true, skipped: true, reason: 'no_external_reference' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
@@ -71,14 +115,6 @@ export default async function handler(request) {
   }
 
   // 3. PATCH la orden existente (creada en mercadito.html con user_id)
-  //    No insertamos fila nueva para no perder el user_id original.
-  const sbHeaders = {
-    'Content-Type': 'application/json',
-    'apikey': SUPABASE_SERVICE_KEY,
-    'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
-    'Prefer': 'return=minimal',
-  };
-
   const patchRes = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${orderId}`, {
     method: 'PATCH',
     headers: sbHeaders,
