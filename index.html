@@ -381,6 +381,30 @@
         .work-item:hover .work-title { opacity: 0.55; }
 
         /* ── Services ── */
+        #clientes {
+            background: var(--black);
+            padding: 52px var(--gutter);
+        }
+        #clientes .section-inner { max-width: 1360px; margin: 0 auto; }
+        .client-logos {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: center;
+            gap: 10px 52px;
+        }
+        .client-logos li {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: clamp(17px, 1.8vw, 24px);
+            color: var(--ivory);
+            opacity: 0.3;
+            letter-spacing: 0.02em;
+            transition: opacity 0.25s;
+        }
+        .client-logos li:hover { opacity: 0.7; }
+
         #servicios { background: var(--ivory); }
 
         .services-list { list-style: none; }
@@ -766,10 +790,10 @@
     <a href="#hero" class="nav-logo">Ash Mateu</a>
     <ul class="nav-links" id="navLinks">
         <li><a href="#trabajo" data-i18n="nav.work">Portfolio</a></li>
-        <li><a href="/prensa.html" data-i18n="nav.press">Prensa</a></li>
-        <li><a href="/blog.html" data-i18n="nav.notes">Notas</a></li>
+        <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
+        <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
         <li><a href="#vlog" data-i18n="nav.vlog">Vlog</a></li>
-        <li><a href="/mercadito.html" style="font-weight:500;opacity:0.75" data-i18n="nav.shop">Mercadito</a></li>
+        <li><a href="/mercadito" style="font-weight:500;opacity:0.75" data-i18n="nav.shop">Mercadito</a></li>
         <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -781,11 +805,11 @@
 <section id="hero">
     <div class="hero-content">
         <p class="hero-eyebrow">Ash Mateu</p>
-        <h1 class="hero-title" data-i18n-override="hero.title"><span class="hero-kw">Moda</span> con <span class="hero-kw">intención</span>.<br>La <span class="hero-kw">imagen</span> <span class="hero-small">desde adentro</span>.</h1>
+        <h1 class="hero-title" data-i18n-override="hero.title"><span class="hero-kw">Styling</span> que construye <span class="hero-kw">narrativa</span>.<br>La <span class="hero-kw">imagen</span> <span class="hero-small">como argumento</span>.</h1>
         <p class="hero-subtitle" data-i18n-override="hero.subtitle">Chanel, Miu Miu, Gucci. Tapas de Marie Claire.<br>Dolores Fonzi, Griselda Siciliani. Buenos Aires, Nueva York, París.</p>
         <div class="hero-ctas">
             <a href="#trabajo" class="cta-primary" data-i18n="hero.cta.primary">Ver portfolio</a>
-            <a href="#contacto" class="cta-secondary" data-i18n="hero.cta.secondary">Contacto</a>
+            <a href="#contacto" class="cta-secondary" data-i18n="hero.cta.secondary">Trabajemos juntos</a>
         </div>
     </div>
     <div class="hero-visuals">
@@ -914,13 +938,31 @@
             </div>
             <div class="about-text-block">
                 <div class="about-text" data-i18n-override="about.text">
-                    <p>Ash Mateu trabaja en moda desde que moda era otra cosa. Stylist, directora creativa, consultora: los títulos cambian según el proyecto, pero el trabajo siempre es el mismo. Encontrar la imagen que conecta.</p>
+                    <p>Ash trabaja desde la narrativa hacia el look, no al revés. Cada producción empieza con una pregunta sobre qué tiene que decir la imagen, y termina cuando la respuesta está en el cuadro.</p>
                     <p>Chanel, Louis Vuitton, Miu Miu, Dolce & Gabbana, Gucci, Nike, L'Oréal, Mercedes Benz. Tapa de Marie Claire Argentina más veces de las que recuerda con exactitud. Styling para Dolores Fonzi, Griselda Siciliani, Valentina Zenere y buena parte del elenco de Netflix Argentina.</p>
                     <p>En 2015 fundó Inside Studios, escuela de moda online que llegó a tener más de 20.000 estudiantes en toda la región.</p>
-                    <p>Disponible para proyectos editoriales, campañas y colaboraciones de marca.</p>
+                    <p>Disponible para proyectos en 2026. El formulario de abajo es el camino más directo.</p>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- CLIENTES -->
+<section id="clientes">
+    <div class="section-inner">
+        <ul class="client-logos">
+            <li>Chanel</li>
+            <li>Gucci</li>
+            <li>Miu Miu</li>
+            <li>Louis Vuitton</li>
+            <li>Dolce & Gabbana</li>
+            <li>Nike</li>
+            <li>L'Oréal</li>
+            <li>Mercedes-Benz</li>
+            <li>Netflix</li>
+            <li>Marie Claire</li>
+        </ul>
     </div>
 </section>
 
