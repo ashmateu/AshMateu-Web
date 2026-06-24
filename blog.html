@@ -52,7 +52,13 @@
       background: rgba(247,243,238,0.96); backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(181,168,152,0.25);
     }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+        .nav-logo { display: flex; align-items: stretch; text-decoration: none; gap: 0; }
+    .nav-logo-left { display: flex; flex-direction: column; justify-content: space-between; padding-right: 14px; border-right: 0.5px solid rgba(181,168,152,0.5); }
+    .nav-logo-ash { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 46px; color: var(--black); text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.88; }
+    .nav-logo-year { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 5.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A6A5A; }
+    .nav-logo-right { padding-left: 14px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+    .nav-logo-tag { font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 5.5px; color: #7A6A5A; text-transform: uppercase; letter-spacing: 0.32em; line-height: 1.85; }
+    .nav-logo-mateu { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 13px; color: var(--black); text-transform: uppercase; letter-spacing: 0.36em; }
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
     .nav-links a:hover, .nav-links a.active { opacity: 1; }
@@ -208,7 +214,16 @@
 <body>
 
 <nav id="nav">
-  <a href="/" class="nav-logo">Ash Mateu</a>
+  <a href="/" class="nav-logo">
+      <div class="nav-logo-left">
+        <div class="nav-logo-ash">Ash</div>
+        <div class="nav-logo-year">Est. 2011</div>
+      </div>
+      <div class="nav-logo-right">
+        <div class="nav-logo-tag">Creative<br>Direction &<br>Styling</div>
+        <div class="nav-logo-mateu">Mateu</div>
+      </div>
+    </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="/#trabajo" data-i18n="nav.work">Portfolio</a></li>
     <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
