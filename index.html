@@ -870,7 +870,7 @@
 <section id="hero">
     <div class="hero-content">
         <p class="hero-eyebrow">Ash Mateu</p>
-        <h1 class="hero-title" data-i18n-override="hero.title"><span class="hero-kw">Styling</span> que construye <span class="hero-kw">narrativa</span>.<br>La <span class="hero-kw">imagen</span> <span class="hero-small">como argumento</span>.</h1>
+        <h1 class="hero-title" data-i18n-override="hero.title"><span class="hero-kw">Moda</span> con <span class="hero-kw">intención</span>.<br>La <span class="hero-kw">imagen</span> <span class="hero-small">desde adentro</span>.</h1>
         <p class="hero-subtitle" data-i18n-override="hero.subtitle">Chanel, Miu Miu, Gucci. Tapas de Marie Claire.<br>Dolores Fonzi, Griselda Siciliani. Buenos Aires, Nueva York, París.</p>
         <div class="hero-ctas">
             <a href="#trabajo" class="cta-primary" data-i18n="hero.cta.primary">Ver portfolio</a>
@@ -933,13 +933,13 @@
             </div>
         </a>
 
-        <a class="work-item" href="projects/chanel-williamsburg.html">
+        <a class="work-item" href="projects/calu-chinatown.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/chanel-pap/img-000.webp" alt="Chanel Prêt-à-porter Williamsburg" loading="lazy">
+                <img class="work-img" src="images/extracted/calu-chinatown/img-004.webp" alt="Calu Rivero — Chinese New Year" loading="lazy">
             </div>
             <div class="work-caption">
-                <span class="work-meta">Styling &nbsp;— Brooklyn, Nueva York</span>
-                <h3 class="work-title">Chanel Prêt-à-porter Williamsburg</h3>
+                <span class="work-meta">Styling &nbsp;— Chinatown, Manhattan</span>
+                <h3 class="work-title">Calu Rivero — Chinese New Year</h3>
             </div>
         </a>
 
@@ -953,13 +953,13 @@
             </div>
         </a>
 
-        <a class="work-item" href="projects/calu-chinatown.html">
+        <a class="work-item" href="projects/chanel-williamsburg.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/calu-chinatown/img-004.webp" alt="Calu Rivero — Chinese New Year" loading="lazy">
+                <img class="work-img" src="images/extracted/chanel-pap/img-000.webp" alt="Chanel Prêt-à-porter Williamsburg" loading="lazy">
             </div>
             <div class="work-caption">
-                <span class="work-meta">Styling &nbsp;— Chinatown, Manhattan</span>
-                <h3 class="work-title">Calu Rivero — Chinese New Year</h3>
+                <span class="work-meta">Styling &nbsp;— Brooklyn, Nueva York</span>
+                <h3 class="work-title">Chanel Prêt-à-porter Williamsburg</h3>
             </div>
         </a>
 
@@ -1190,73 +1190,6 @@
     }
 </script>
 
-<script src="/js/sanity.js"></script>
-<script>
-(async () => {
-    try {
-        const [home, projects] = await Promise.all([
-            sanityFetch(`*[_type == "homePage"][0]`),
-            sanityFetch(`*[_type == "project"] | order(order asc) {title, "slug": slug.current, category, stripMeta, localStripImage}`),
-        ]);
-
-        if (home) {
-            if (home.heroTitle) {
-                const _raw = home.heroTitle.replace(/\n/g, '<br>');
-                document.querySelector('.hero-title').innerHTML = _raw.replace(/(Moda|intención|imagen)/g, '<span class="hero-kw">$1</span>').replace(/desde adentro/g, '<span class="hero-small">desde adentro</span>');
-            }
-            if (home.heroSubtitle)   document.querySelector('.hero-subtitle').innerHTML = home.heroSubtitle.replace(/\n/g, '<br>');
-            if (home.heroEyebrow)    document.querySelector('.hero-eyebrow').textContent = home.heroEyebrow;
-            if (home.heroLocations)  document.querySelector('.hero-location').textContent = home.heroLocations;
-            if (home.aboutText)      document.querySelector('.about-text').innerHTML    = toHtml(home.aboutText);
-            if (home.contactHeadline) document.querySelector('.contact-headline').textContent = home.contactHeadline;
-            if (home.services?.length) {
-                const items = document.querySelectorAll('.service-item');
-                home.services.forEach((svc, i) => {
-                    if (!items[i]) return;
-                    if (svc.title)       items[i].querySelector('.service-name').textContent = svc.title;
-                    if (svc.description) items[i].querySelector('.service-desc').textContent = svc.description;
-                });
-            }
-        }
-
-        if (projects?.length) {
-            const grid = document.querySelector('.work-grid');
-            if (grid) {
-                let chanelWilliamsburgSeen = false;
-                const renderedProjects = projects.map(p => {
-                    if (p.slug === 'chanel-williamsburg' && !chanelWilliamsburgSeen) {
-                        chanelWilliamsburgSeen = true;
-                        return { slug: 'calu-chinatown', title: 'Calu Rivero — Chinese New Year', stripMeta: 'Styling — Chinatown, Manhattan', localStripImage: 'images/extracted/calu-chinatown/img-004.webp' };
-                    }
-                    if (p.slug === 'calu-chinatown') {
-                        return { slug: 'chanel-williamsburg', title: 'Chanel Prêt-à-porter Williamsburg', stripMeta: 'Styling — Brooklyn, Nueva York', localStripImage: 'images/extracted/chanel-pap/img-001.webp' };
-                    }
-                    if (p.slug === 'gucci-rural') {
-                        return { ...p, localStripImage: 'images/extracted/gucci-rural/img-strip.jpg' };
-                    }
-                    return p;
-                });
-                if (renderedProjects.length > 6) {
-                    [renderedProjects[5], renderedProjects[6]] = [renderedProjects[6], renderedProjects[5]];
-                }
-                grid.innerHTML = renderedProjects.map((p, i) => `
-                    <a class="work-item" href="projects/${p.slug}.html">
-                        <div class="work-img-wrap">
-                            <img class="work-img" src="${p.localStripImage || ''}" alt="${p.title}" loading="${i === 0 ? 'eager' : 'lazy'}" ${i === 0 ? 'fetchpriority="high"' : ''}>
-                        </div>
-                        <div class="work-caption">
-                            <span class="work-meta">${p.stripMeta || p.category || ''}</span>
-                            <h3 class="work-title">${p.title}</h3>
-                        </div>
-                    </a>`).join('');
-                if (window.i18n) window.i18n.apply();
-            }
-        }
-    } catch (e) {
-        // Sanity no disponible, usa contenido hardcodeado
-    }
-})();
-</script>
 
 <script src="/js/effects.js"></script>
 <script>
