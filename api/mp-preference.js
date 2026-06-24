@@ -29,6 +29,8 @@ export default async function handler(request) {
     });
   }
 
+  const siteBase = new URL(request.url).origin;
+
   const preference = {
     items: items.map(i => ({
       id: String(i.id),
@@ -49,9 +51,9 @@ export default async function handler(request) {
       },
     },
     back_urls: {
-      success: 'https://ashmateu.com/cuenta.html',
-      failure: 'https://ashmateu.com/mercadito.html',
-      pending: 'https://ashmateu.com/cuenta.html',
+      success: `${siteBase}/cuenta`,
+      failure: `${siteBase}/mercadito`,
+      pending: `${siteBase}/cuenta`,
     },
     auto_return: 'approved',
     external_reference: String(order_id || ''),
