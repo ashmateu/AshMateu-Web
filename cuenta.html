@@ -12,7 +12,7 @@
     <link rel="preload" href="/fonts/BebasNeue-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap&family=Montserrat:wght@100;200;900" rel="stylesheet">
 
     <style>
         @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: block; }
@@ -648,7 +648,16 @@
 
 <!-- NAV -->
 <nav id="nav">
-    <a href="/" class="nav-logo">Ash Mateu</a>
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-left">
+        <div class="nav-logo-ash">Ash</div>
+        <div class="nav-logo-year">Est. 2011</div>
+      </div>
+      <div class="nav-logo-right">
+        <div class="nav-logo-tag">Creative<br>Direction &<br>Styling</div>
+        <div class="nav-logo-mateu">Mateu</div>
+      </div>
+    </a>
     <ul class="nav-links" id="navLinks">
         <li><a href="/#trabajo" data-i18n="nav.work">Portfolio</a></li>
         <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
