@@ -720,29 +720,119 @@
             color: rgba(255,255,255,0.2);
         }
 
+        /* ── Mobile Menu Overlay ── */
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 80px 40px 60px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s;
+        }
+        #mobile-menu.is-open {
+            visibility: visible;
+            opacity: 1;
+        }
+        .mobile-menu-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+        .mobile-menu-links li {
+            border-bottom: 0.5px solid rgba(181,168,152,0.12);
+            transform: translateY(16px);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #mobile-menu.is-open .mobile-menu-links li:nth-child(1) { transition-delay: 0.06s; opacity: 1; transform: none; }
+        #mobile-menu.is-open .mobile-menu-links li:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: none; }
+        #mobile-menu.is-open .mobile-menu-links li:nth-child(3) { transition-delay: 0.14s; opacity: 1; transform: none; }
+        #mobile-menu.is-open .mobile-menu-links li:nth-child(4) { transition-delay: 0.18s; opacity: 1; transform: none; }
+        #mobile-menu.is-open .mobile-menu-links li:nth-child(5) { transition-delay: 0.22s; opacity: 1; transform: none; }
+        #mobile-menu.is-open .mobile-menu-links li:nth-child(6) { transition-delay: 0.26s; opacity: 1; transform: none; }
+        .mobile-menu-links a {
+            display: block;
+            font-family: 'Bodoni Moda', Georgia, serif;
+            font-size: 34px;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            color: rgba(247,243,238,0.85);
+            text-decoration: none;
+            padding: 13px 0;
+            transition: color 0.2s;
+        }
+        .mobile-menu-links a:active { color: var(--ivory); }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            width: 44px;
+            height: 44px;
+        }
+        .mobile-menu-close span {
+            display: block;
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 22px;
+            height: 1px;
+            background: rgba(247,243,238,0.6);
+        }
+        .mobile-menu-close span:first-child { transform: translate(-50%,-50%) rotate(45deg); }
+        .mobile-menu-close span:last-child  { transform: translate(-50%,-50%) rotate(-45deg); }
+        .mobile-menu-lang {
+            display: flex;
+            gap: 24px;
+            margin-top: 36px;
+        }
+        .btn-lang-m {
+            background: none;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 200;
+            letter-spacing: 0.3em;
+            color: rgba(181,168,152,0.45);
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .btn-lang-m:hover { color: var(--sand); }
+        .mobile-menu-brand {
+            position: absolute;
+            bottom: 28px;
+            left: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 7px;
+            font-weight: 200;
+            letter-spacing: 0.25em;
+            color: rgba(181,168,152,0.25);
+            text-transform: uppercase;
+            margin: 0;
+        }
+        /* On desktop, hide mobile-menu entirely */
+        @media (min-width: 901px) {
+            #mobile-menu { display: none !important; }
+        }
+
         /* ── Responsive ── */
         @media (max-width: 900px) {
             :root { --gutter: 24px; }
 
-            /* Nav: hamburger visible, links como overlay */
+            /* Nav: hamburger visible, desktop links ocultos */
             .nav-hamburger { display: flex; }
-            .nav-links {
-                position: fixed;
-                inset: 0;
-                background: var(--ivory);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 44px;
-                z-index: 200;
-                display: none;
-            }
-            .nav-links.is-open { display: flex; }
-            .nav-links a {
-                font-size: 20px;
-                letter-spacing: 0.2em;
-                opacity: 0.75;
-            }
+            .nav-links { display: none; }
 
             /* Hero mobile */
             #hero {
@@ -865,6 +955,26 @@
         <span></span><span></span><span></span>
     </button>
 </nav>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+        <span></span><span></span>
+    </button>
+    <ul class="mobile-menu-links">
+        <li><a href="#trabajo" data-i18n="nav.work">Portfolio</a></li>
+        <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
+        <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
+        <li><a href="#vlog" data-i18n="nav.vlog">Vlog</a></li>
+        <li><a href="/mercadito" data-i18n="nav.shop">Mercadito</a></li>
+        <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+    </ul>
+    <div class="mobile-menu-lang">
+        <button onclick="setLang('es')" class="btn-lang-m">ES</button>
+        <button onclick="setLang('en')" class="btn-lang-m">EN</button>
+        <button onclick="setLang('fr')" class="btn-lang-m">FR</button>
+    </div>
+    <p class="mobile-menu-brand">Ash Mateu — Creative Direction &amp; Styling</p>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -1139,21 +1249,22 @@
     }
 
     // Hamburger nav
-    const hamburger = document.getElementById('navHamburger');
-    const navLinks  = document.getElementById('navLinks');
-    if (hamburger && navLinks) {
+    const hamburger    = document.getElementById('navHamburger');
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const mobileClose  = document.getElementById('mobileMenuClose');
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+    if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', () => {
-            const open = navLinks.classList.toggle('is-open');
+            const open = mobileMenu.classList.toggle('is-open');
             hamburger.classList.toggle('is-open', open);
             document.body.style.overflow = open ? 'hidden' : '';
         });
-        navLinks.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                navLinks.classList.remove('is-open');
-                hamburger.classList.remove('is-open');
-                document.body.style.overflow = '';
-            });
-        });
+        mobileClose?.addEventListener('click', closeMobileMenu);
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
     }
 
     // Formulario Formspree con feedback visual
