@@ -22,7 +22,7 @@
         <link rel="preload" href="/fonts/BebasNeue-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap&family=Montserrat:wght@100;200;900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Montserrat:wght@100;200;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/case.css?v=2">
 
 <script type="application/ld+json">
@@ -42,6 +42,7 @@
 </script>
 </head>
 <body data-slug="dolores-fonzi">
+<a href="#main-content" class="skip-link">Ir al contenido</a>
 
 <nav id="nav">
     <a href="/" class="nav-logo">
@@ -57,6 +58,7 @@
     <a href="/#trabajo" class="nav-back">Portfolio</a>
 </nav>
 
+<main id="main-content">
 <section class="case-hero">
     <img class="case-hero-img" src="../images/extracted/dolores-fonzi/img-003.webp" alt="Dolores Fonzi" loading="eager" fetchpriority="high">
     <div class="case-hero-overlay">
@@ -107,6 +109,7 @@
     </div>
 </div>
 
+</main>
 <div class="case-next">
     <p class="case-next-label">Próximo proyecto</p>
     <a class="case-next-link" href="calu-chinatown.html">
@@ -121,7 +124,7 @@
 <script src="/js/project-page.js"></script>
 <script src="/js/effects.js"></script>
 <script>
-if (typeof gsap !== 'undefined') {
+if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     gsap.from('.case-hero-overlay', { opacity: 0, y: 28, duration: 1.1, ease: 'power2.out', delay: 0.2 });
     gsap.from('.case-hero-img', { scale: 1.04, duration: 1.6, ease: 'power2.out' });
 }
