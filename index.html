@@ -37,6 +37,15 @@
         /* ── Reset ── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+        :focus-visible {
+            outline: 2px solid var(--sand);
+            outline-offset: 3px;
+        }
+        #mobile-menu *:focus-visible,
+        #contacto *:focus-visible {
+            outline-color: var(--ivory);
+        }
+
         /* ── Tokens ── */
         :root {
             --black:  #0A0A0A;
@@ -657,7 +666,7 @@
 
         .form-field textarea { min-height: 88px; }
 
-        ::placeholder { color: rgba(255,255,255,0.2); }
+        ::placeholder { color: rgba(255,255,255,0.45); }
 
         .form-submit {
             margin-top: 44px;
@@ -1262,6 +1271,7 @@
             const open = mobileMenu.classList.toggle('is-open');
             hamburger.classList.toggle('is-open', open);
             document.body.style.overflow = open ? 'hidden' : '';
+            if (open) mobileMenu.querySelector('a, button')?.focus();
         });
         mobileClose?.addEventListener('click', closeMobileMenu);
         mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
