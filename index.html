@@ -615,6 +615,8 @@
             text-transform: uppercase;
             color: var(--sand);
             text-decoration: none;
+            display: inline-block;
+            padding: 10px 0;
         }
 
         .contact-form {
@@ -864,10 +866,10 @@
             }
             .hero-bottom { padding: 18px 0 24px; }
 
-            /* Work grid mobile */
+            /* Work grid mobile: 2 columnas */
             .work-item,
             .work-item:nth-child(4),
-            .work-item:nth-child(5) { grid-column: span 12; }
+            .work-item:nth-child(5) { grid-column: span 6; }
             .work-caption { padding: 14px 16px 28px; }
             .work-title { font-size: 13px; }
 
@@ -993,11 +995,13 @@
         <div class="hero-img-main">
             <img src="images/ash/bts-set.jpg"
                  alt="Ash Mateu en set — Marie Claire"
+                 width="1080" height="1271"
                  loading="eager" fetchpriority="high">
         </div>
         <div class="hero-img-float">
             <img src="images/ash/frontrow.jpg"
                  alt="Ash Mateu — front row"
+                 width="1080" height="1426"
                  loading="eager">
         </div>
     </div>
@@ -1017,7 +1021,7 @@
 
         <a class="work-item" href="projects/chanel-hc.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/chanel-hc/img-005.webp" alt="Chanel Haute Couture" loading="eager" fetchpriority="high">
+                <img class="work-img" src="images/extracted/chanel-hc/img-005.webp" alt="Chanel Haute Couture" width="1536" height="2048" loading="eager" fetchpriority="high">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Dirección Creativa &nbsp;— Nueva York</span>
@@ -1027,7 +1031,7 @@
 
         <a class="work-item" href="projects/valentina-ferrer.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/valentina-miumiu/img-000.webp" alt="Valentina Ferrer Miu Miu" loading="lazy">
+                <img class="work-img" src="images/extracted/valentina-miumiu/img-000.webp" alt="Valentina Ferrer Miu Miu" width="1555" height="2048" loading="lazy">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Styling &nbsp;— Portada &nbsp;— Nueva York 2023</span>
@@ -1037,7 +1041,7 @@
 
         <a class="work-item" href="projects/leonie-hanne.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/leonie-dg/img-003.webp" alt="Leonie Hanne Dolce & Gabbana" loading="lazy">
+                <img class="work-img" src="images/extracted/leonie-dg/img-003.webp" alt="Leonie Hanne Dolce & Gabbana" width="1490" height="2048" loading="lazy">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Dirección Creativa &nbsp;— Nueva York 2024</span>
@@ -1047,7 +1051,7 @@
 
         <a class="work-item" href="projects/calu-chinatown.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/calu-chinatown/img-004.webp" alt="Calu Rivero — Chinese New Year" loading="lazy">
+                <img class="work-img" src="images/extracted/calu-chinatown/img-004.webp" alt="Calu Rivero — Chinese New Year" width="1365" height="2048" loading="lazy">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Styling &nbsp;— Chinatown, Manhattan</span>
@@ -1057,7 +1061,7 @@
 
         <a class="work-item" href="projects/dolores-fonzi.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/dolores-fonzi/img-003.webp" alt="Dolores Fonzi" loading="lazy">
+                <img class="work-img" src="images/extracted/dolores-fonzi/img-003.webp" alt="Dolores Fonzi" width="1586" height="1982" loading="lazy">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Celebrity Styling</span>
@@ -1067,7 +1071,7 @@
 
         <a class="work-item" href="projects/chanel-williamsburg.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/chanel-pap/img-000.webp" alt="Chanel Prêt-à-porter Williamsburg" loading="lazy">
+                <img class="work-img" src="images/extracted/chanel-pap/img-000.webp" alt="Chanel Prêt-à-porter Williamsburg" width="1363" height="2048" loading="lazy">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Styling &nbsp;— Brooklyn, Nueva York</span>
@@ -1077,7 +1081,7 @@
 
         <a class="work-item" href="projects/netflix-mf.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/netflix-mf/img-000.webp" alt="Netflix Martín Fierro" loading="lazy">
+                <img class="work-img" src="images/extracted/netflix-mf/img-000.webp" alt="Netflix Martín Fierro" width="768" height="1024" loading="lazy">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Celebrity Styling &nbsp;— Red Carpet</span>
@@ -1087,7 +1091,7 @@
 
         <a class="work-item" href="projects/gucci-rural.html">
             <div class="work-img-wrap">
-                <img class="work-img" src="images/extracted/gucci-rural/img-001.webp" alt="Editorial Rural Gucci" loading="lazy">
+                <img class="work-img" src="images/extracted/gucci-rural/img-001.webp" alt="Editorial Rural Gucci" width="1366" height="2048" loading="lazy">
             </div>
             <div class="work-caption">
                 <span class="work-meta">Styling &nbsp;— Upstate New York</span>
@@ -1104,7 +1108,7 @@
         <h2 class="about-editorial-headline">Vlog</h2>
         <div class="about-inner">
             <div class="about-video-wrap" id="ytFacade">
-                <img class="yt-thumb" src="https://i.ytimg.com/vi/7lB4UjBaTyQ/maxresdefault.jpg" alt="Ash Mateu Vlog" loading="lazy">
+                <img class="yt-thumb" src="https://i.ytimg.com/vi/7lB4UjBaTyQ/maxresdefault.jpg" alt="Ash Mateu Vlog" width="1280" height="720" loading="lazy">
                 <div class="yt-play">
                     <svg viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="68" height="48" rx="10" fill="#FF0000"/>
@@ -1224,8 +1228,12 @@
 <script src="/js/i18n.js"></script>
 
 <!-- Smooth scroll + animations -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+        integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+        integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
+        crossorigin="anonymous"></script>
 
 <script>
     const nav = document.getElementById('nav');
