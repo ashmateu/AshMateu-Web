@@ -1,0 +1,24 @@
+{
+  "slug": "blog-html",
+  "target": "blog.html",
+  "date": "2026-06-27",
+  "score": 30,
+  "scoreMax": 40,
+  "grade": "Acceptable",
+  "p0": 0,
+  "p1": 2,
+  "p2": 3,
+  "p3": 2,
+  "detectorFindings": [
+    { "rule": "overused-font", "value": "Montserrat", "verdict": "false-positive", "note": "Uso exclusivo en nav logo (900/100); no como cuerpo" }
+  ],
+  "issues": [
+    { "priority": "P1", "id": "font-display-block", "title": "font-display: block en Bebas Neue — bloquea render hasta 3s", "fixed": true },
+    { "priority": "P1", "id": "skip-link-missing", "title": "Sin skip-link — usuarios de teclado no pueden saltar la nav", "fixed": true },
+    { "priority": "P2", "id": "excerpt-contrast", "title": "post-excerpt rgba(10,10,10,0.5) sobre ivory = 3.6:1 — falla WCAG AA a 13px", "fixed": true },
+    { "priority": "P2", "id": "hamburger-focus", "title": "Mobile hamburger sin Escape key ni gestión de foco al abrir/cerrar", "fixed": true },
+    { "priority": "P2", "id": "xss-innerhtml", "title": "grid.innerHTML con title/excerpt crudos de Supabase — sin sanitizar", "fixed": false, "note": "Riesgo bajo dado que el contenido lo controla Ash via admin; requiere DOMPurify para fix completo" },
+    { "priority": "P3", "id": "supabase-no-sri", "title": "CDN Supabase sin integridad (SRI)" },
+    { "priority": "P3", "id": "nav-scrolled-dead", "title": "JS toglea nav.scrolled pero no hay CSS .nav.scrolled — clase muerta" }
+  ]
+}

@@ -40,7 +40,9 @@
       --gutter: 56px; --serif: 'Bodoni Moda', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
       --gap: 3px;
     }
-    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+    .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: var(--white); padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
+    .skip-link:focus { top: 16px; }
     html { scroll-behavior: smooth; scrollbar-gutter: stable; }
     body { font-family: var(--sans); font-weight: 300; color: var(--black); background: var(--black); -webkit-font-smoothing: antialiased; }
 
@@ -164,7 +166,7 @@
     .post-date { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sand-text); margin-bottom: 12px; }
     .post-title { font-family: var(--serif); font-size: clamp(18px, 1.8vw, 24px); font-weight: 400; line-height: 1.2; margin-bottom: 12px; }
     .post-card:first-child .post-title { font-size: clamp(26px, 2.8vw, 40px); }
-    .post-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.5); flex: 1; max-width: 480px; }
+    .post-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.72); flex: 1; max-width: 480px; }
     .post-read { margin-top: 20px; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); opacity: 0.35; }
 
     /* ── Empty ── */
@@ -212,6 +214,7 @@
     </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Ir al contenido</a>
 
 <nav id="nav">
   <a href="/" class="nav-logo">
@@ -248,7 +251,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
   <div class="blog-grid" id="blogGrid">
     <div class="blog-empty">Cargando...</div>
   </div>
@@ -274,14 +277,20 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 80); }, { passive: true });
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
+function closeMenu() {
+  hamburger.classList.remove('is-open');
+  navLinks.classList.remove('is-open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.focus();
+}
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('is-open');
   navLinks.classList.toggle('is-open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  if (open) { const first = navLinks.querySelector('a'); if (first) first.focus(); }
 });
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  hamburger.classList.remove('is-open');
-  navLinks.classList.remove('is-open');
-}));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && hamburger.classList.contains('is-open')) closeMenu(); });
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
 function formatDate(d) {
   return new Date(d).toLocaleDateString('es-AR', { day:'2-digit', month:'long', year:'numeric' });
