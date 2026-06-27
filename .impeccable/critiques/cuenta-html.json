@@ -1,0 +1,26 @@
+{
+  "slug": "cuenta-html",
+  "target": "cuenta.html",
+  "date": "2026-06-27",
+  "score": 25,
+  "scoreMax": 40,
+  "grade": "Needs Work",
+  "p0": 0,
+  "p1": 2,
+  "p2": 7,
+  "p3": 2,
+  "issues": [
+    { "priority": "P1", "id": "font-display-block", "title": "font-display: block en Bebas Neue — bloquea render hasta 3s", "fixed": true },
+    { "priority": "P1", "id": "skip-link-no-main", "title": "Sin skip-link ni landmark <main>", "fixed": true },
+    { "priority": "P2", "id": "cuenta-saludo-email-contrast", "title": "cuenta-saludo-email rgba(255,255,255,0.3) sobre negro = ~3.1:1 — falla WCAG AA a 13px", "fixed": true },
+    { "priority": "P2", "id": "cuenta-nav-tab-opacity", "title": "cuenta-nav-tab opacity:0.35 = 2.2:1 — falla WCAG AA a 10px", "fixed": true },
+    { "priority": "P2", "id": "pedidos-table-th-opacity", "title": "pedidos-table th opacity:0.35 = 2.2:1 — falla WCAG AA a 9px", "fixed": true },
+    { "priority": "P2", "id": "pedido-id-contrast", "title": "pedido-id rgba(10,10,10,0.3) sobre ivory = 1.8:1 — falla WCAG AA a 10px", "fixed": true },
+    { "priority": "P2", "id": "pedido-fecha-contrast", "title": "pedido-fecha rgba(10,10,10,0.45) sobre ivory = 2.9:1 — falla WCAG AA a 12px", "fixed": true },
+    { "priority": "P2", "id": "pedidos-empty-text-contrast", "title": "pedidos-empty-text rgba(10,10,10,0.4) sobre ivory = 2.5:1 — falla WCAG AA a 13px", "fixed": true },
+    { "priority": "P2", "id": "acceso-denegado-text-contrast", "title": "acceso-denegado-text rgba(10,10,10,0.5) sobre ivory = 3.3:1 — falla WCAG AA a 14px", "fixed": true },
+    { "priority": "P2", "id": "hamburger-focus", "title": "Mobile hamburger sin Escape key ni gestión de foco", "fixed": true },
+    { "priority": "P3", "id": "auth-modal-no-trap", "title": "Auth modal sin focus trap — Tab escapa al contenido detrás del overlay" },
+    { "priority": "P3", "id": "supabase-no-sri", "title": "CDN Supabase sin integridad (SRI)" }
+  ]
+}

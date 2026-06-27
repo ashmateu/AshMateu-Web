@@ -15,7 +15,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap&family=Montserrat:wght@100;200;900" rel="stylesheet">
 
     <style>
-        @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: block; }
+        @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+        .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: var(--white); padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
+        .skip-link:focus { top: 16px; }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -268,7 +270,7 @@
         .cuenta-saludo-email {
             font-size: 12px;
             font-weight: 300;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.55);
             margin-top: 12px;
             letter-spacing: 0.04em;
         }
@@ -292,19 +294,20 @@
             font-weight: 400;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--black);
+            color: rgba(10,10,10,0.52);
             background: none;
             border: none;
             border-bottom: 1px solid transparent;
             padding: 14px 20px;
             margin-bottom: -1px;
             cursor: pointer;
-            opacity: 0.35;
-            transition: opacity 0.15s;
+            transition: color 0.15s;
         }
 
+        .cuenta-nav-tab:hover { color: rgba(10,10,10,0.76); }
+
         .cuenta-nav-tab.active {
-            opacity: 1;
+            color: var(--black);
             border-bottom-color: var(--black);
         }
 
@@ -328,8 +331,7 @@
             font-weight: 400;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: var(--black);
-            opacity: 0.35;
+            color: rgba(10,10,10,0.52);
             text-align: left;
             padding: 0 24px 16px 0;
             border-bottom: 1px solid rgba(10,10,10,0.08);
@@ -364,14 +366,14 @@
         .pedido-id {
             font-size: 10px;
             font-weight: 300;
-            color: rgba(10,10,10,0.3);
+            color: rgba(10,10,10,0.55);
             letter-spacing: 0.06em;
         }
 
         .pedido-fecha {
             font-size: 12px;
             font-weight: 300;
-            color: rgba(10,10,10,0.45);
+            color: rgba(10,10,10,0.65);
             white-space: nowrap;
         }
 
@@ -430,13 +432,13 @@
             font-size: 24px;
             font-weight: 400;
             font-style: italic;
-            color: rgba(10,10,10,0.35);
+            color: rgba(10,10,10,0.55);
         }
 
         .pedidos-empty-text {
             font-size: 13px;
             font-weight: 300;
-            color: rgba(10,10,10,0.4);
+            color: rgba(10,10,10,0.65);
             line-height: 1.8;
         }
 
@@ -498,7 +500,7 @@
         .acceso-denegado-text {
             font-size: 14px;
             font-weight: 300;
-            color: rgba(10,10,10,0.5);
+            color: rgba(10,10,10,0.65);
             line-height: 1.8;
             max-width: 380px;
         }
@@ -638,6 +640,7 @@
     </style>
 </head>
 <body>
+<a href="#cuentaMain" class="skip-link">Ir al contenido</a>
 
 <!-- Pantalla de carga mientras verificamos sesión -->
 <div class="page-loading" id="pageLoading">
@@ -685,6 +688,8 @@
     </button>
 </nav>
 
+
+<main id="cuentaMain">
 
 <!-- VISTA: No logueada -->
 <div class="acceso-denegado" id="vistaNoAuth">
@@ -775,7 +780,7 @@
         <!-- Panel datos (placeholder) -->
         <div id="panelDatos" style="display:none;">
             <p class="cuenta-section-label">Mis datos</p>
-            <p style="font-size:13px;font-weight:300;color:rgba(10,10,10,0.45);line-height:1.8;">
+            <p style="font-size:13px;font-weight:300;color:rgba(10,10,10,0.65);line-height:1.8;">
                 Para modificar tus datos de contacto escribí a <strong style="font-weight:400;">ash.mateu@gmail.com</strong>.
             </p>
         </div>
@@ -784,6 +789,7 @@
 
 </div>
 
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -1059,7 +1065,7 @@ body.auth-open { overflow: hidden; }
 .auth-note {
     font-size: 11px;
     font-weight: 300;
-    color: rgba(10,10,10,0.4);
+    color: rgba(10,10,10,0.65);
     text-align: center;
     margin-top: 20px;
     line-height: 1.6;
@@ -1232,11 +1238,21 @@ document.getElementById('navLogoutBtn').addEventListener('click', async () => {
 // ── Hamburger nav ──
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
+function closeNavMenu() {
+    if (!hamburger) return;
+    hamburger.classList.remove('is-open');
+    navLinks.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.focus();
+}
 if (hamburger) {
     hamburger.addEventListener('click', () => {
         const open = hamburger.classList.toggle('is-open');
         navLinks.classList.toggle('is-open', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+        if (open) { const first = navLinks.querySelector('a'); if (first) first.focus(); }
     });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNavMenu));
 }
 
 
@@ -1265,7 +1281,9 @@ function closeAuthModal() {
 }
 
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeAuthModal();
+    if (e.key !== 'Escape') return;
+    closeAuthModal();
+    if (hamburger?.classList.contains('is-open')) closeNavMenu();
 });
 
 function switchAuthTab(tab) {
