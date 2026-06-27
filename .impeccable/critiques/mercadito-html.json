@@ -1,0 +1,23 @@
+{
+  "slug": "mercadito-html",
+  "target": "mercadito.html",
+  "date": "2026-06-27",
+  "score": 29,
+  "scoreMax": 40,
+  "grade": "Acceptable",
+  "p0": 0,
+  "p1": 2,
+  "p2": 5,
+  "p3": 2,
+  "issues": [
+    { "priority": "P1", "id": "font-display-block", "title": "font-display: block en Bebas Neue", "fixed": true },
+    { "priority": "P1", "id": "skip-link-no-main", "title": "Sin skip-link ni landmark <main>", "fixed": true },
+    { "priority": "P2", "id": "product-desc-contrast", "title": "product-desc rgba(10,10,10,0.55) sobre ivory = 4.45:1 — falla WCAG AA a 13px", "fixed": true },
+    { "priority": "P2", "id": "cat-btn-contrast", "title": "cat-btn opacity:0.35 = 2.2:1 — falla WCAG AA a 10px", "fixed": true },
+    { "priority": "P2", "id": "header-secondary-contrast", "title": "mercadito-header p+p rgba(255,255,255,0.36) sobre negro = 3.4:1 — falla AA a 11px", "fixed": true },
+    { "priority": "P2", "id": "hamburger-focus", "title": "Mobile hamburger sin Escape key ni gestión de foco", "fixed": true },
+    { "priority": "P2", "id": "auth-modal-no-trap", "title": "Auth modal sin focus trap — Tab escapa al contenido detrás del overlay" },
+    { "priority": "P3", "id": "window-products-global", "title": "window._products como almacén global de productos — anti-patrón" },
+    { "priority": "P3", "id": "supabase-no-sri", "title": "CDN Supabase sin integridad (SRI)" }
+  ]
+}
