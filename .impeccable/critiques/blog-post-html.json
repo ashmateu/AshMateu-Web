@@ -1,0 +1,22 @@
+{
+  "slug": "blog-post-html",
+  "target": "blog/post.html",
+  "date": "2026-06-27",
+  "score": 28,
+  "scoreMax": 40,
+  "grade": "Acceptable",
+  "p0": 0,
+  "p1": 1,
+  "p2": 4,
+  "p3": 2,
+  "issues": [
+    { "priority": "P1", "id": "skip-link-no-main", "title": "Sin skip-link ni landmark <main>", "fixed": true },
+    { "priority": "P2", "id": "nav-links-opacity", "title": "nav-links a opacity:0.5 sobre ivory = 3.45:1 — falla WCAG AA a 11px", "fixed": true },
+    { "priority": "P2", "id": "footer-logo-contrast", "title": "footer-logo rgba(255,255,255,0.35) sobre negro = 3.1:1 — falla WCAG AA a 10px", "fixed": true },
+    { "priority": "P2", "id": "footer-links-contrast", "title": "footer-links a rgba(255,255,255,0.35) sobre negro = 3.1:1 — falla WCAG AA a 10px", "fixed": true },
+    { "priority": "P2", "id": "footer-copy-contrast", "title": "footer-copy rgba(255,255,255,0.2) sobre negro = 1.7:1 — falla WCAG AA a 10px", "fixed": true },
+    { "priority": "P2", "id": "hamburger-focus", "title": "Mobile hamburger sin Escape key ni gestión de foco", "fixed": true },
+    { "priority": "P3", "id": "bebas-preload-no-font-face", "title": "Preload de BebasNeue sin @font-face correspondiente — recurso desperdiciado" },
+    { "priority": "P3", "id": "xss-innerhtml-body", "title": "data.body inyectado como innerHTML sin sanitizar — riesgo bajo (contenido controlado por Ash)" }
+  ]
+}

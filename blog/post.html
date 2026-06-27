@@ -34,8 +34,8 @@
     .nav-logo-tag { font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 5.5px; color: #7A6A5A; text-transform: uppercase; letter-spacing: 0.32em; line-height: 1.85; }
     .nav-logo-mateu { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 13px; color: var(--black); text-transform: uppercase; letter-spacing: 0.36em; }
     .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
-    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(10,10,10,0.52); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
     .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--black); transition: transform 0.25s, opacity 0.25s; }
     .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -104,11 +104,11 @@
     .not-found { text-align: center; padding: 200px var(--gutter); color: var(--sand); font-size: 13px; }
 
     footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
-    .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
     .footer-links { display: flex; gap: 36px; list-style: none; }
-    .footer-links a { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer-links a { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--white); }
-    .footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); }
+    .footer-copy { font-size: 10px; color: rgba(255,255,255,0.5); }
 
     @media (max-width: 900px) {
       :root { --gutter: 24px; }
@@ -122,9 +122,12 @@
       footer { flex-direction: column; gap: 20px; text-align: center; }
     }
       @view-transition { navigation: auto; }
+    .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: #fff; padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
+    .skip-link:focus { top: 16px; }
     </style>
 </head>
 <body>
+<a href="#postMain" class="skip-link">Ir al contenido</a>
 
 <nav>
   <a href="/" class="nav-logo">
@@ -150,7 +153,9 @@
   </button>
 </nav>
 
+<main id="postMain">
 <div id="postContent"></div>
+</main>
 
 <footer>
   <span class="footer-logo">Ash Mateu</span>
@@ -170,14 +175,20 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
+function closeNavMenu() {
+  hamburger.classList.remove('is-open');
+  navLinks.classList.remove('is-open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.focus();
+}
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('is-open');
   navLinks.classList.toggle('is-open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  if (open) { const first = navLinks.querySelector('a'); if (first) first.focus(); }
 });
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  hamburger.classList.remove('is-open');
-  navLinks.classList.remove('is-open');
-}));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNavMenu));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && hamburger.classList.contains('is-open')) closeNavMenu(); });
 
 function formatDate(d) {
   return new Date(d).toLocaleDateString('es-AR', { day:'2-digit', month:'long', year:'numeric' });
