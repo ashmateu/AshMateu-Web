@@ -33,7 +33,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&family=Montserrat:wght@100;200;900&display=swap" rel="stylesheet">
   <style>
-    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: block; }
+    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+    .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: var(--white); padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
+    .skip-link:focus { top: 16px; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --black: #0A0A0A; --ivory: #F7F3EE; --white: #fff; --sand: #B5A898; --sand-text: #7A6A5A;
@@ -91,7 +93,7 @@
     .press-pub { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sand-text); margin-bottom: 16px; }
     .press-title-lg { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 48px); font-weight: 400; line-height: 1.15; margin-bottom: 16px; }
     .press-excerpt-lg { font-size: 15px; font-weight: 300; line-height: 1.8; color: rgba(10,10,10,0.6); margin-bottom: 24px; }
-    .press-date { font-size: 11px; color: rgba(10,10,10,0.35); letter-spacing: 0.1em; margin-bottom: 28px; }
+    .press-date { font-size: 11px; color: rgba(10,10,10,0.60); letter-spacing: 0.1em; margin-bottom: 28px; }
     .press-link {
       display: inline-flex; align-items: center; gap: 10px;
       font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
@@ -121,10 +123,10 @@
     .press-card-img-placeholder { width: 100%; height: 100%; background: #ddd; }
     .press-card .press-pub { margin-bottom: 10px; }
     .press-card-title { font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.25; margin-bottom: 10px; }
-    .press-card-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.55); flex: 1; margin-bottom: 16px; }
+    .press-card-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.72); flex: 1; margin-bottom: 16px; }
     .press-card .press-date { margin-bottom: 12px; }
-    .press-read { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
-    .press-card:hover .press-read { opacity: 1; }
+    .press-read { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(10,10,10,0.60); }
+    .press-card:hover .press-read { color: var(--black); }
 
     .press-empty { padding: 120px var(--gutter); text-align: center; color: var(--sand-text); font-size: 13px; }
 
@@ -158,6 +160,7 @@
     </style>
 </head>
 <body>
+<a href="#pressMain" class="skip-link">Ir al contenido</a>
 
 <nav id="nav">
   <a href="/" class="nav-logo">
@@ -212,14 +215,20 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 80); }, { passive: true });
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
+function closeMenu() {
+  hamburger.classList.remove('is-open');
+  navLinks.classList.remove('is-open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.focus();
+}
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('is-open');
   navLinks.classList.toggle('is-open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  if (open) { const first = navLinks.querySelector('a'); if (first) first.focus(); }
 });
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  hamburger.classList.remove('is-open');
-  navLinks.classList.remove('is-open');
-}));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && hamburger.classList.contains('is-open')) closeMenu(); });
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
 function formatDate(d) {
   if (!d) return '';
