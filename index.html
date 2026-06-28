@@ -644,7 +644,8 @@
         }
 
         .form-field input,
-        .form-field textarea {
+        .form-field textarea,
+        .form-field select {
             background: transparent;
             border: none;
             outline: none;
@@ -654,11 +655,21 @@
             color: var(--white);
             width: 100%;
             resize: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-field select option {
+            background: var(--black);
+            color: var(--white);
         }
 
         .form-field textarea { min-height: 88px; }
 
         ::placeholder { color: rgba(255,255,255,0.45); }
+
+        .form-field select:invalid,
+        .form-field select option[value=""] { color: rgba(255,255,255,0.45); }
 
         .form-submit {
             margin-top: 44px;
@@ -1193,6 +1204,22 @@
                 <div class="form-field">
                     <label class="form-label" for="nombre" data-i18n="form.name.label">Nombre</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" data-i18n="form.name.placeholder" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="empresa">Empresa / Publicación</label>
+                    <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu marca o revista">
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="tipo_proyecto">Tipo de proyecto</label>
+                    <select id="tipo_proyecto" name="tipo_proyecto" required>
+                        <option value="" disabled selected>Seleccioná una opción</option>
+                        <option value="Editorial / Revista">Editorial / Revista</option>
+                        <option value="Campaña de marca">Campaña de marca</option>
+                        <option value="Celebrity styling">Celebrity styling</option>
+                        <option value="Dirección creativa">Dirección creativa</option>
+                        <option value="Consultoría">Consultoría</option>
+                        <option value="Otro">Otro</option>
+                    </select>
                 </div>
                 <div class="form-field">
                     <label class="form-label" for="email" data-i18n="form.email.label">Email</label>
