@@ -175,6 +175,52 @@
       text-align: center; color: rgba(255,255,255,0.3); font-size: 13px; background: var(--black);
     }
 
+    /* ── Newsletter ── */
+    .newsletter-section {
+      background: var(--black); padding: 96px var(--gutter);
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0;
+    }
+    .newsletter-kicker {
+      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--sand); margin-bottom: 20px;
+    }
+    .newsletter-title {
+      font-family: var(--serif); font-size: clamp(28px, 4vw, 52px);
+      font-weight: 400; color: var(--white); line-height: 1.1; margin-bottom: 16px;
+    }
+    .newsletter-sub {
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45);
+      max-width: 380px; line-height: 1.7; margin-bottom: 48px;
+    }
+    .newsletter-form {
+      display: flex; gap: 0; width: 100%; max-width: 420px;
+    }
+    .newsletter-input {
+      flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+      border-right: none; padding: 14px 20px; font-size: 13px; font-weight: 300;
+      color: var(--white); outline: none; font-family: var(--sans);
+      transition: border-color 0.2s;
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+    .newsletter-input:focus { border-color: rgba(255,255,255,0.4); }
+    .newsletter-btn {
+      background: var(--white); color: var(--black); border: none;
+      padding: 14px 28px; font-size: 10px; letter-spacing: 0.22em;
+      text-transform: uppercase; cursor: pointer; font-family: var(--sans);
+      font-weight: 500; transition: background 0.2s, color 0.2s; white-space: nowrap;
+    }
+    .newsletter-btn:hover { background: var(--sand); color: var(--white); }
+    .newsletter-btn:disabled { opacity: 0.5; cursor: default; }
+    .newsletter-msg {
+      margin-top: 16px; font-size: 12px; letter-spacing: 0.1em;
+      min-height: 18px; color: var(--sand);
+    }
+    .newsletter-msg.error { color: #e07070; }
+    @media (max-width: 560px) {
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid rgba(255,255,255,0.15); border-bottom: none; }
+    }
+
     /* ── Footer ── */
     footer {
       background: var(--black); border-top: 1px solid rgba(255,255,255,0.07);
@@ -255,6 +301,18 @@
   <div class="blog-grid" id="blogGrid">
     <div class="blog-empty">Cargando...</div>
   </div>
+
+  <section class="newsletter-section" aria-label="Newsletter">
+    <p class="newsletter-kicker">Notas editoriales</p>
+    <h2 class="newsletter-title">Recibí las notas<br><em>en tu correo.</em></h2>
+    <p class="newsletter-sub">Sin spam. Solo cuando hay algo que vale la pena leer.</p>
+    <form class="newsletter-form" id="newsletterForm" novalidate>
+      <input class="newsletter-input" id="newsletterEmail" type="email"
+        placeholder="tu@email.com" autocomplete="email" required aria-label="Correo electrónico">
+      <button class="newsletter-btn" type="submit" id="newsletterBtn">Suscribirme</button>
+    </form>
+    <p class="newsletter-msg" id="newsletterMsg" role="status" aria-live="polite"></p>
+  </section>
 </main>
 
 <footer>
@@ -338,6 +396,37 @@ async function loadPosts() {
 }
 
 loadPosts();
+
+// Newsletter
+document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('newsletterEmail').value.trim();
+  const btn   = document.getElementById('newsletterBtn');
+  const msg   = document.getElementById('newsletterMsg');
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  msg.textContent = '';
+  msg.className = 'newsletter-msg';
+
+  const { error } = await sb.from('subscribers').insert({ email });
+
+  if (error) {
+    if (error.code === '23505') {
+      msg.textContent = 'Ya estás suscripta.';
+    } else {
+      msg.textContent = 'Algo falló. Intentá de nuevo.';
+      msg.classList.add('error');
+      btn.disabled = false;
+      btn.textContent = 'Suscribirme';
+    }
+    return;
+  }
+
+  msg.textContent = 'Listo. Te escribimos cuando haya algo nuevo.';
+  document.getElementById('newsletterEmail').value = '';
+  btn.textContent = 'Listo';
+});
 </script>
 <script src="/js/i18n.js"></script>
 </body>
