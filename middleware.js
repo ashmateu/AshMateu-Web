@@ -6,5 +6,5 @@ export default function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!construccion|_vercel|favicon\\.svg|api/).*)'],
+  matcher: ['/((?!construccion|_vercel|favicon\\.svg|api/|images/).*)'],
 };
