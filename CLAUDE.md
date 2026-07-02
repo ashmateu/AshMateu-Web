@@ -51,8 +51,11 @@ Activar con: "Activa el agente `ui-designer` y revisa el hero de la página prin
 
 ## Pendientes críticos
 
-1. Formspree: reemplazar `FORMSPREE_ID` en `index.html` (email: ash.mateu@gmail.com)
-2. Deploy: arrastrar carpeta a Netlify o FTP a GoDaddy `public_html/`
+1. `MP_WEBHOOK_SECRET`: configurar en Vercel (Settings → Environment Variables). Sin él, `api/mp-webhook.js` acepta requests sin verificar firma HMAC.
+2. Middleware redirige todo el dominio a `/construccion`; quitar cuando se lance el sitio.
+3. Supabase Auth: activar "Leaked password protection" en el dashboard (Auth → Providers → Password).
+
+Resueltos: Formspree configurado (`xeebjqpq`). RLS endurecido (escrituras solo admin via `is_admin()`, migración `harden_rls_admin_only_writes`).
 
 ## Referencias de diseño
 

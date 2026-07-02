@@ -6,7 +6,7 @@
   <title id="pageTitle">Nota — Ash Mateu</title>
   <meta name="description" id="pageMeta" content="Notas editoriales de Ash Mateu.">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="preload" href="/fonts/BebasNeue-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Montserrat:wght@100;200;900&display=swap" rel="stylesheet">
@@ -145,7 +145,7 @@
     <li><a href="/prensa.html">Prensa</a></li>
     <li><a href="/blog.html" class="active">Notas</a></li>
     <li><a href="/#vlog">Vlog</a></li>
-    <li><a href="/mercadito.html" style="font-weight:500;opacity:0.75">Mercadito</a></li>
+    <li><a href="/mercadito.html">Mercadito</a></li>
     <li><a href="/#contacto">Contacto</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -194,6 +194,10 @@ function formatDate(d) {
   return new Date(d).toLocaleDateString('es-AR', { day:'2-digit', month:'long', year:'numeric' });
 }
 
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
 async function loadPost() {
   const slug = new URLSearchParams(location.search).get('slug');
   const container = document.getElementById('postContent');
@@ -214,11 +218,11 @@ async function loadPost() {
       <div class="post-hero-inner">
         <a class="back-link" href="/blog.html">← Volver a notas</a>
         <p class="post-date">${formatDate(data.published_at)}</p>
-        <h1 class="post-title">${data.title}</h1>
-        ${data.excerpt ? `<p class="post-excerpt">${data.excerpt}</p>` : ''}
+        <h1 class="post-title">${esc(data.title)}</h1>
+        ${data.excerpt ? `<p class="post-excerpt">${esc(data.excerpt)}</p>` : ''}
       </div>
     </div>
-    ${data.cover_url ? `<div class="post-cover-full"><img src="${data.cover_url}" alt="${data.title}"></div>` : ''}
+    ${data.cover_url ? `<div class="post-cover-full"><img src="${esc(data.cover_url)}" alt="${esc(data.title)}"></div>` : ''}
     <div class="post-body-wrap">
       <div class="post-body">${data.body ?? ''}</div>
     </div>

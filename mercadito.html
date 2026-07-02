@@ -19,13 +19,13 @@
     <meta name="twitter:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.jpg">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="preload" href="/fonts/BebasNeue-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&display=swap&family=Montserrat:wght@100;200;900" rel="stylesheet">
 
     <style>
-        @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.woff2') format('woff2'), url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
         .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: var(--white); padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
         .skip-link:focus { top: 16px; }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1324,17 +1324,18 @@
     <button class="cat-btn" data-filter="digital">Digital</button>
 </div>
 
-<!-- AVISO -->
-<p class="mercadito-aviso" style="margin-top:32px;">
-    Pagos procesados por MercadoPago. Envíos a todo el país. Para consultas escribí a <strong>ash.mateu@gmail.com</strong> o por Instagram <strong>@ashmateu</strong>.
-</p>
-
 <!-- PRODUCTS -->
 <section class="mercadito-section">
     <div class="products-grid" id="productsGrid">
-        <p id="loadingMsg" style="grid-column:1/-1;font-size:13px;color:var(--sand-text);padding:24px 0;">Cargando productos...</p>
+        <p id="loadingMsg" style="grid-column:1/-1;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--sand-text);padding:40px 0;text-align:center;animation:blogPulse 1.6s ease-in-out infinite;">Cargando productos...</p>
+        <style>@keyframes blogPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.8; } }</style>
     </div>
 </section>
+
+<!-- AVISO -->
+<p class="mercadito-aviso" style="margin-top:48px;">
+    Pagos procesados por MercadoPago. Envíos a todo el país. Para consultas escribí a <strong>ash.mateu@gmail.com</strong> o por Instagram <strong>@ashmateu</strong>.
+</p>
 
 </main>
 
@@ -1443,6 +1444,10 @@ function priceTxt(price, currency) {
     return `USD ${n % 1 === 0 ? n : n.toFixed(2)}`;
 }
 
+function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
 function renderCartItems() {
     const list = document.getElementById('cartItemsList');
     const btn  = document.getElementById('btnContinue');
@@ -1458,10 +1463,10 @@ function renderCartItems() {
     list.innerHTML = cart.map(item => `
         <div class="cart-item">
             <div class="cart-item-img">
-                ${item.image_url ? `<img src="${item.image_url}" alt="${item.name}" loading="lazy">` : '<div class="cart-item-img-ph"></div>'}
+                ${item.image_url ? `<img src="${esc(item.image_url)}" alt="${esc(item.name)}" loading="lazy">` : '<div class="cart-item-img-ph"></div>'}
             </div>
             <div>
-                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-name">${esc(item.name)}</div>
                 <div class="cart-item-price">${priceTxt(item.price, item.currency)}</div>
                 <div class="cart-item-qty">
                     <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
@@ -1774,7 +1779,7 @@ function cardHTML(p, idx) {
     const num = String(idx + 1).padStart(2, '0');
     const soldOut = p.stock === 0 ? 'sold-out' : '';
     const img = p.image_url
-        ? `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`
+        ? `<img src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy">`
         : `<div class="product-img-placeholder"><span>Imagen próximamente</span></div>`;
     const catLabel = p.category === 'digital' ? 'Digital' : 'Pieza';
 
@@ -1792,8 +1797,8 @@ function cardHTML(p, idx) {
         <article class="product-card ${soldOut}" data-cat="${p.category}">
             <div class="product-img">${img}</div>
             <span class="product-cat-tag"><span style="opacity:0.4;margin-right:12px">${num}</span>${catLabel}</span>
-            <h2 class="product-name">${p.name}</h2>
-            <p class="product-desc">${p.description ?? ''}</p>
+            <h2 class="product-name">${esc(p.name)}</h2>
+            <p class="product-desc">${esc(p.description)}</p>
             <div class="product-footer">
                 <span class="product-price">${formatPrice(p.price, p.currency)}</span>
                 ${btnContent}

@@ -29,7 +29,7 @@
 }
 </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="preload" href="/fonts/BebasNeue-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&family=Montserrat:wght@100;200;900&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
       --gutter: 56px; --serif: 'Bodoni Moda', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
       --gap: 3px;
     }
-    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.woff2') format('woff2'), url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
     .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: var(--white); padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
     .skip-link:focus { top: 16px; }
     html { scroll-behavior: smooth; scrollbar-gutter: stable; }
@@ -172,8 +172,11 @@
     /* ── Empty ── */
     .blog-empty {
       grid-column: 1 / -1; padding: 120px var(--gutter);
-      text-align: center; color: rgba(255,255,255,0.3); font-size: 13px; background: var(--black);
+      text-align: center; color: var(--sand); background: var(--black);
+      font-family: var(--serif); font-style: italic; font-size: 20px;
+      animation: blogPulse 1.6s ease-in-out infinite;
     }
+    @keyframes blogPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.8; } }
 
     /* ── Newsletter ── */
     .newsletter-section {
@@ -278,7 +281,7 @@
     <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
     <li><a href="/blog" class="active" data-i18n="nav.notes">Notas</a></li>
     <li><a href="/#vlog" data-i18n="nav.vlog">Vlog</a></li>
-    <li><a href="/mercadito" style="font-weight:500;opacity:0.75" data-i18n="nav.shop">Mercadito</a></li>
+    <li><a href="/mercadito" data-i18n="nav.shop">Mercadito</a></li>
     <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -354,19 +357,23 @@ function formatDate(d) {
   return new Date(d).toLocaleDateString('es-AR', { day:'2-digit', month:'long', year:'numeric' });
 }
 
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
 function collage(p, eager) {
   const u1 = p.cover_url, u2 = p.cover_url_2, u3 = p.cover_url_3;
   if (!u1) return '<div class="collage-placeholder"></div>';
   const load = eager ? 'eager' : 'lazy';
   return `
     <figure class="collage-main">
-      <img src="${u1}" alt="${p.title}" loading="${load}">
+      <img src="${esc(u1)}" alt="${esc(p.title)}" loading="${load}">
     </figure>
     <figure class="collage-crop">
-      <img src="${u2 || u1}" alt="" loading="lazy" style="object-position:center top">
+      <img src="${esc(u2 || u1)}" alt="" loading="lazy" style="object-position:center top">
     </figure>
     <figure class="collage-crop">
-      <img src="${u3 || u1}" alt="" loading="lazy" style="object-position:center bottom">
+      <img src="${esc(u3 || u1)}" alt="" loading="lazy" style="object-position:center bottom">
     </figure>`;
 }
 
@@ -381,14 +388,14 @@ async function loadPosts() {
   }
 
   grid.innerHTML = data.map((p, i) => `
-    <a class="post-card" href="/blog/post.html?slug=${p.slug}">
+    <a class="post-card" href="/blog/post.html?slug=${encodeURIComponent(p.slug)}">
       <div class="post-collage">
         ${collage(p, i === 0)}
       </div>
       <div class="post-body">
         <span class="post-date">${formatDate(p.published_at)}</span>
-        <h2 class="post-title">${p.title}</h2>
-        <p class="post-excerpt">${p.excerpt ?? ''}</p>
+        <h2 class="post-title">${esc(p.title)}</h2>
+        <p class="post-excerpt">${esc(p.excerpt)}</p>
         <span class="post-read">Leer nota →</span>
       </div>
     </a>
@@ -400,9 +407,15 @@ loadPosts();
 // Newsletter
 document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const email = document.getElementById('newsletterEmail').value.trim();
+  const email = document.getElementById('newsletterEmail').value.trim().toLowerCase();
   const btn   = document.getElementById('newsletterBtn');
   const msg   = document.getElementById('newsletterMsg');
+
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) {
+    msg.textContent = 'Ingresá un email válido.';
+    msg.className = 'newsletter-msg error';
+    return;
+  }
 
   btn.disabled = true;
   btn.textContent = 'Enviando...';

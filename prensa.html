@@ -28,12 +28,12 @@
 }
 </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="preload" href="/fonts/BebasNeue-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500&family=Montserrat:wght@100;200;900&display=swap" rel="stylesheet">
   <style>
-    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.woff2') format('woff2'), url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
     .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: var(--white); padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
     .skip-link:focus { top: 16px; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -120,7 +120,8 @@
     .press-card-img { aspect-ratio: 3/2; overflow: hidden; margin-bottom: 24px; background: #eee; }
     .press-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.5s; }
     .press-card:hover .press-card-img img { transform: scale(1.03); }
-    .press-card-img-placeholder { width: 100%; height: 100%; background: #ddd; }
+    .press-card-img-placeholder { width: 100%; height: 100%; background: var(--black); display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .press-card-img-placeholder span { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--sand); text-align: center; line-height: 1.2; }
     .press-card .press-pub { margin-bottom: 10px; }
     .press-card-title { font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.25; margin-bottom: 10px; }
     .press-card-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.72); flex: 1; margin-bottom: 16px; }
@@ -178,7 +179,7 @@
     <li><a href="/prensa" class="active" data-i18n="nav.press">Prensa</a></li>
     <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
     <li><a href="/#vlog" data-i18n="nav.vlog">Vlog</a></li>
-    <li><a href="/mercadito" style="font-weight:500;opacity:0.75" data-i18n="nav.shop">Mercadito</a></li>
+    <li><a href="/mercadito" data-i18n="nav.shop">Mercadito</a></li>
     <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -235,6 +236,10 @@ function formatDate(d) {
   return new Date(d).toLocaleDateString('es-AR', { month:'long', year:'numeric' });
 }
 
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
 async function loadPress() {
   const main = document.getElementById('pressMain');
   const { data, error } = await sb.from('press').select('*').eq('active', true).order('publication_date', { ascending: false });
@@ -250,27 +255,27 @@ async function loadPress() {
   const featuredHTML = `
     <div class="press-featured">
       <div class="press-featured-img">
-        ${featured.cover_url ? `<img src="${featured.cover_url}" alt="${featured.title}" loading="lazy">` : ''}
+        ${featured.cover_url ? `<img src="${esc(featured.cover_url)}" alt="${esc(featured.title)}" loading="lazy">` : ''}
       </div>
       <div class="press-featured-body">
-        <span class="press-pub">${featured.publication}</span>
-        <h2 class="press-title-lg">${featured.title}</h2>
-        ${featured.excerpt ? `<p class="press-excerpt-lg">${featured.excerpt}</p>` : ''}
+        <span class="press-pub">${esc(featured.publication)}</span>
+        <h2 class="press-title-lg">${esc(featured.title)}</h2>
+        ${featured.excerpt ? `<p class="press-excerpt-lg">${esc(featured.excerpt)}</p>` : ''}
         <span class="press-date">${formatDate(featured.publication_date)}</span>
-        ${featured.url ? `<a class="press-link" href="${featured.url}" target="_blank" rel="noopener">Leer en ${featured.publication} →</a>` : ''}
+        ${featured.url ? `<a class="press-link" href="${esc(featured.url)}" target="_blank" rel="noopener">Leer en ${esc(featured.publication)} →</a>` : ''}
       </div>
     </div>`;
 
   const gridHTML = rest.length ? `
     <div class="press-grid">
       ${rest.map(p => `
-        <${p.url ? `a href="${p.url}" target="_blank" rel="noopener"` : 'div'} class="press-card">
+        <${p.url ? `a href="${esc(p.url)}" target="_blank" rel="noopener"` : 'div'} class="press-card">
           <div class="press-card-img">
-            ${p.cover_url ? `<img src="${p.cover_url}" alt="${p.title}" loading="lazy">` : '<div class="press-card-img-placeholder"></div>'}
+            ${p.cover_url ? `<img src="${esc(p.cover_url)}" alt="${esc(p.title)}" loading="lazy">` : `<div class="press-card-img-placeholder"><span>${esc(p.publication)}</span></div>`}
           </div>
-          <span class="press-pub">${p.publication}</span>
-          <h3 class="press-card-title">${p.title}</h3>
-          ${p.excerpt ? `<p class="press-card-excerpt">${p.excerpt}</p>` : ''}
+          <span class="press-pub">${esc(p.publication)}</span>
+          <h3 class="press-card-title">${esc(p.title)}</h3>
+          ${p.excerpt ? `<p class="press-card-excerpt">${esc(p.excerpt)}</p>` : ''}
           <span class="press-date">${formatDate(p.publication_date)}</span>
           ${p.url ? `<span class="press-read">Leer artículo →</span>` : ''}
         </${p.url ? 'a' : 'div'}>
