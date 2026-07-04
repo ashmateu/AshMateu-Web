@@ -151,6 +151,8 @@
       filter: brightness(0.88) contrast(1.06) saturate(0.78);
       transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+    /* retratos: el rostro suele estar en el tercio superior, nunca cortarlo */
+    .collage-main img { object-position: center 20%; }
     .post-card:hover .collage-main img,
     .post-card:hover .collage-crop img { transform: scale(1.04); }
 
@@ -392,7 +394,7 @@ function collage(p, eager) {
       <img src="${esc(u2 || u1)}" alt="" loading="lazy" style="object-position:center top">
     </figure>
     <figure class="collage-crop">
-      <img src="${esc(u3 || u1)}" alt="" loading="lazy" style="object-position:center bottom">
+      <img src="${esc(u3 || u1)}" alt="" loading="lazy" style="object-position:center ${u3 ? '20%' : 'bottom'}">
     </figure>`;
 }
 
