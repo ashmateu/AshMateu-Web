@@ -36,7 +36,7 @@ export default async function handler() {
       headers: {
         // Quirk de Tiendanube: el header es "Authentication", no "Authorization"
         'Authentication': `bearer ${token}`,
-        'User-Agent': 'ashmateu-web (ash.mateu@gmail.com)',
+        'User-Agent': 'ashmateu-web (info@ashmateu.com)',
         'Content-Type': 'application/json',
       },
     },
