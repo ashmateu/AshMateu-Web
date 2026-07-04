@@ -13,7 +13,7 @@
     @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.woff2') format('woff2'), url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #0A0A0A; --ivory: #F7F3EE; --sand: #B5A898;
+      --black: #0A0A0A; --ivory: #F7F3EE; --sand: #B5A898; --sand-text: #7A6A5A;
       --gutter: 56px;
       --serif: 'Bodoni Moda', Georgia, serif;
       --sans: 'Inter', system-ui, sans-serif;
@@ -51,17 +51,17 @@
     }
     .error-label {
       font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--sand); margin-bottom: 24px;
+      color: var(--sand-text); margin-bottom: 24px;
     }
     .error-title {
       font-family: var(--serif); font-size: clamp(52px, 8vw, 96px);
       font-weight: 400; line-height: 1.0; letter-spacing: -0.01em;
       color: var(--black); margin-bottom: 32px;
     }
-    .error-title em { font-style: italic; color: var(--sand); }
+    .error-title em { font-style: italic; color: var(--sand-text); }
     .error-desc {
       font-size: 15px; font-weight: 300; line-height: 1.75;
-      color: rgba(10,10,10,0.55); max-width: 400px; margin-bottom: 48px;
+      color: rgba(10,10,10,0.65); max-width: 400px; margin-bottom: 48px;
     }
     .error-links { display: flex; gap: 32px; flex-wrap: wrap; }
     .btn-primary {
@@ -79,7 +79,7 @@
 
     footer { background: var(--black); padding: 24px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
     .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-    .footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); }
+    .footer-copy { font-size: 10px; color: rgba(255,255,255,0.55); }
 
     @media (max-width: 900px) {
       :root { --gutter: 24px; }
@@ -92,6 +92,20 @@
       .nav-links.is-open { display: flex; }
       .nav-links a { font-size: 20px; letter-spacing: 0.2em; opacity: 0.75; }
       footer { flex-direction: column; gap: 12px; }
+    }
+
+    /* Estados de foco visibles (teclado) */
+    .nav-links a:focus-visible,
+    .nav-hamburger:focus-visible,
+    .btn-primary:focus-visible,
+    .error-links a:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
