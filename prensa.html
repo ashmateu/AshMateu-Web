@@ -84,7 +84,7 @@
     .press-featured-img {
       aspect-ratio: 4/3; overflow: hidden; background: #111;
     }
-    .press-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.5s; }
+    .press-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .press-featured:hover .press-featured-img img { transform: scale(1.03); }
     .press-featured-body {
       padding: 64px 56px; display: flex; flex-direction: column; justify-content: flex-end;
@@ -118,7 +118,7 @@
     .press-card:nth-child(3n) { border-right: none; }
     .press-card:hover { background: rgba(10,10,10,0.02); }
     .press-card-img { aspect-ratio: 3/2; overflow: hidden; margin-bottom: 24px; background: #eee; }
-    .press-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.5s; }
+    .press-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.06) saturate(0.78); transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .press-card:hover .press-card-img img { transform: scale(1.03); }
     .press-card-img-placeholder { width: 100%; height: 100%; background: var(--black); display: flex; align-items: center; justify-content: center; padding: 24px; }
     .press-card-img-placeholder span { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--sand); text-align: center; line-height: 1.2; }
@@ -130,6 +130,29 @@
     .press-card:hover .press-read { color: var(--black); }
 
     .press-empty { padding: 120px var(--gutter); text-align: center; color: var(--sand-text); font-size: 13px; }
+    .press-loading {
+      padding: 120px var(--gutter); text-align: center; color: var(--sand-text);
+      font-family: var(--serif); font-style: italic; font-size: 18px;
+      animation: pressPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pressPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.8; } }
+
+    /* Estados de foco visibles (teclado) */
+    a.press-card:focus-visible,
+    .press-link:focus-visible,
+    .nav-links a:focus-visible,
+    .nav-hamburger:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .press-loading { animation: none; opacity: 0.7; }
+      .press-card-img img, .press-featured-img img, .nav-links a, .press-read { transition: none; }
+      .press-card:hover .press-card-img img,
+      .press-featured:hover .press-featured-img img { transform: none; }
+      html { scroll-behavior: auto; }
+    }
 
     footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
     .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
@@ -194,7 +217,9 @@
   </div>
 </header>
 
-<main id="pressMain"></main>
+<main id="pressMain">
+  <p class="press-loading">Cargando artículos...</p>
+</main>
 
 <footer>
   <span class="footer-logo">Ash Mateu</span>
@@ -255,7 +280,7 @@ async function loadPress() {
   const featuredHTML = `
     <div class="press-featured">
       <div class="press-featured-img">
-        ${featured.cover_url ? `<img src="${esc(featured.cover_url)}" alt="${esc(featured.title)}" loading="lazy">` : ''}
+        ${featured.cover_url ? `<img src="${esc(featured.cover_url)}" alt="${esc(featured.title)}" loading="lazy">` : `<div class="press-card-img-placeholder"><span>${esc(featured.publication)}</span></div>`}
       </div>
       <div class="press-featured-body">
         <span class="press-pub">${esc(featured.publication)}</span>
