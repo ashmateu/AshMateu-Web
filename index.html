@@ -63,6 +63,8 @@
 
         /* ── Base ── */
         html { scroll-behavior: auto; scrollbar-gutter: stable; }
+        /* Anchors no quedan tapados por el nav fijo */
+        section[id], [id="trabajo"], [id="vlog"], [id="contacto"] { scroll-margin-top: 96px; }
 
         body {
             font-family: var(--sans);
