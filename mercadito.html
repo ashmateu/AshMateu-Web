@@ -512,218 +512,6 @@
             }
         }
 
-        /* ── Auth Modal ── */
-        body.auth-open { overflow: hidden; }
-
-        .auth-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 900;
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-        }
-
-        .auth-overlay.open {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .auth-modal {
-            background: var(--ivory);
-            width: 100%;
-            max-width: 420px;
-            position: relative;
-            transform: translateY(16px);
-            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .auth-overlay.open .auth-modal {
-            transform: translateY(0);
-        }
-
-        /* Franja negra superior */
-        .auth-modal-header {
-            background: var(--black);
-            padding: 28px 32px 20px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-        }
-
-        .auth-modal-brand {
-            font-family: var(--serif);
-            font-size: 20px;
-            font-weight: 400;
-            font-style: italic;
-            color: var(--ivory);
-        }
-
-        .auth-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(247, 243, 238, 0.4);
-            transition: color 0.15s;
-        }
-
-        .auth-close:hover { color: var(--ivory); }
-        .auth-close svg { width: 18px; height: 18px; }
-
-        /* Tabs */
-        .auth-tabs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-bottom: 1px solid rgba(10,10,10,0.1);
-        }
-
-        .auth-tab {
-            font-family: var(--sans);
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--black);
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            padding: 18px 12px 16px;
-            cursor: pointer;
-            opacity: 0.35;
-            transition: opacity 0.15s, border-color 0.15s;
-            margin-bottom: -1px;
-        }
-
-        .auth-tab.active {
-            opacity: 1;
-            border-bottom-color: var(--black);
-        }
-
-        /* Body del modal */
-        .auth-body { padding: 32px 32px 36px; }
-
-        .auth-field { margin-bottom: 16px; }
-
-        .auth-field label {
-            display: block;
-            font-size: 9px;
-            font-weight: 400;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--black);
-            opacity: 0.5;
-            margin-bottom: 8px;
-        }
-
-        .auth-field input {
-            width: 100%;
-            font-family: var(--sans);
-            font-size: 14px;
-            font-weight: 300;
-            color: var(--black);
-            background: var(--white);
-            border: 1px solid rgba(10,10,10,0.15);
-            padding: 13px 14px;
-            outline: none;
-            border-radius: 0;
-            transition: border-color 0.15s;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-        .auth-field input::placeholder { color: rgba(10,10,10,0.3); }
-        .auth-field input:focus { border-color: var(--black); }
-
-        .auth-btn {
-            width: 100%;
-            font-family: var(--sans);
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--white);
-            background: var(--black);
-            border: none;
-            border-radius: 0;
-            padding: 16px 20px;
-            cursor: pointer;
-            margin-top: 24px;
-            transition: opacity 0.15s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .auth-btn:hover { opacity: 0.75; }
-        .auth-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-        .auth-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-
-        .auth-error {
-            font-size: 12px;
-            font-weight: 300;
-            color: #8B2020;
-            background: rgba(139,32,32,0.06);
-            border-left: 2px solid #8B2020;
-            padding: 10px 14px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            display: none;
-        }
-
-        .auth-error.show { display: block; }
-
-        .auth-success {
-            font-size: 12px;
-            font-weight: 300;
-            color: #2A6A3A;
-            background: rgba(42,106,58,0.06);
-            border-left: 2px solid #2A6A3A;
-            padding: 10px 14px;
-            margin-top: 16px;
-            line-height: 1.6;
-            display: none;
-        }
-
-        .auth-success.show { display: block; }
-
-        .auth-forgot {
-            display: block;
-            text-align: right;
-            font-size: 11px;
-            font-weight: 300;
-            color: var(--sand-text);
-            text-decoration: none;
-            margin-top: 14px;
-            transition: color 0.15s;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
-            font-family: var(--sans);
-        }
-
-        .auth-forgot:hover { color: var(--black); }
-
-        .auth-note {
-            font-size: 11px;
-            font-weight: 300;
-            color: rgba(10,10,10,0.4);
-            text-align: center;
-            margin-top: 20px;
-            line-height: 1.6;
-        }
 
         /* ── Nav: widget de usuario con sesión ── */
         .nav-user {
@@ -844,32 +632,6 @@
             color: var(--black);
         }
 
-        /* Botón comprar sin sesión */
-        .btn-auth {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: none;
-            color: var(--black);
-            font-family: var(--sans);
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            padding: 12px 18px;
-            border: 1px solid rgba(10,10,10,0.25);
-            cursor: pointer;
-            transition: background 0.15s, color 0.15s, border-color 0.15s;
-            border-radius: 0;
-        }
-
-        .btn-auth:hover {
-            background: var(--black);
-            color: var(--ivory);
-            border-color: var(--black);
-        }
-
-        .btn-auth svg { width: 13px; height: 13px; flex-shrink: 0; }
 
         /* ── Card add-to-cart button ── */
         .btn-cart {
@@ -878,11 +640,52 @@
             letter-spacing: 0.18em; text-transform: uppercase;
             background: var(--black); color: var(--ivory);
             border: 1px solid var(--black); padding: 11px 16px;
-            cursor: pointer; transition: opacity 0.15s;
+            cursor: pointer; text-decoration: none;
+            transition: background 0.2s cubic-bezier(0.16,1,0.3,1), color 0.2s cubic-bezier(0.16,1,0.3,1);
         }
-        .btn-cart:hover { opacity: 0.75; }
+        .btn-cart:hover { background: var(--ivory); color: var(--black); }
         .btn-cart svg { width: 13px; height: 13px; flex-shrink: 0; }
-        .btn-cart.in-cart { background: var(--ivory); color: var(--black); }
+
+        /* Estados de foco visibles (teclado) */
+        .btn-cart:focus-visible,
+        .cat-btn:focus-visible,
+        .nav-links a:focus-visible {
+            outline: 1px solid var(--black);
+            outline-offset: 3px;
+        }
+
+        /* Estado vacío */
+        .mercadito-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 96px 24px 80px;
+        }
+        .mercadito-empty-title {
+            font-family: var(--serif);
+            font-size: clamp(28px, 3.5vw, 44px);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .mercadito-empty-title em { font-style: italic; color: var(--sand-text); }
+        .mercadito-empty-sub {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--sand-text);
+            max-width: 44ch;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .mercadito-empty-sub a { color: var(--black); text-decoration: underline; text-underline-offset: 3px; }
+
+        @keyframes blogPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.8; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            #loadingMsg { animation: none; opacity: 0.6; }
+            .product-img img, .btn-cart, .cat-btn, .nav-links a { transition: none; }
+            .product-card:hover .product-img img { transform: none; }
+            html { scroll-behavior: auto; }
+        }
 
         @media (max-width: 900px) {
             .form-grid-2 { grid-template-columns: 1fr; }
@@ -932,91 +735,6 @@
     </button>
 </nav>
 
-<!-- AUTH MODAL -->
-<div class="auth-overlay" id="authOverlay" role="dialog" aria-modal="true" aria-label="Autenticación">
-
-    <!-- Click en overlay cierra -->
-    <div onclick="document.getElementById('authOverlay').classList.remove('open');document.body.classList.remove('auth-open');" style="position:absolute;inset:0;cursor:pointer;" aria-hidden="true"></div>
-
-    <div class="auth-modal">
-
-        <div class="auth-modal-header">
-            <span class="auth-modal-brand">El Mercadito</span>
-            <button class="auth-close" id="authClose" aria-label="Cerrar">
-                <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M1 1l16 16M17 1L1 17"/>
-                </svg>
-            </button>
-        </div>
-
-        <div class="auth-tabs">
-            <button class="auth-tab active" data-tab="login">Ingresar</button>
-            <button class="auth-tab" data-tab="register">Crear cuenta</button>
-        </div>
-
-        <div class="auth-body">
-
-            <!-- Login -->
-            <div id="formLogin">
-                <div class="auth-error" id="loginError"></div>
-                <div class="auth-field">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" autocomplete="email" placeholder="tu@email.com">
-                </div>
-                <div class="auth-field">
-                    <label for="loginPassword">Contraseña</label>
-                    <input type="password" id="loginPassword" autocomplete="current-password" placeholder="••••••••">
-                </div>
-                <button class="auth-btn" id="btnLogin">
-                    Ingresar
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
-                </button>
-                <button class="auth-forgot" id="linkForgot">¿Olvidaste tu contraseña?</button>
-            </div>
-
-            <!-- Register -->
-            <div id="formRegister" style="display:none">
-                <div class="auth-error" id="regError"></div>
-                <div class="auth-field">
-                    <label for="regName">Nombre</label>
-                    <input type="text" id="regName" autocomplete="name" placeholder="Tu nombre">
-                </div>
-                <div class="auth-field">
-                    <label for="regEmail">Email</label>
-                    <input type="email" id="regEmail" autocomplete="email" placeholder="tu@email.com">
-                </div>
-                <div class="auth-field">
-                    <label for="regPassword">Contraseña</label>
-                    <input type="password" id="regPassword" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
-                </div>
-                <button class="auth-btn" id="btnRegister">
-                    Crear cuenta
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
-                </button>
-                <p class="auth-success" id="regSuccess">Cuenta creada. Revisá tu email para confirmar.</p>
-                <p class="auth-note">Al crear tu cuenta aceptás recibir novedades del Mercadito.</p>
-            </div>
-
-            <!-- Reset password -->
-            <div id="formReset" style="display:none">
-                <p style="font-size:13px;font-weight:300;color:rgba(10,10,10,0.5);margin-bottom:24px;line-height:1.8">Ingresá tu email y te enviamos un link para restablecer tu contraseña.</p>
-                <div class="auth-error" id="resetError"></div>
-                <div class="auth-field">
-                    <label for="resetEmail">Email</label>
-                    <input type="email" id="resetEmail" autocomplete="email" placeholder="tu@email.com">
-                </div>
-                <button class="auth-btn" id="btnReset">
-                    Enviar link
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
-                </button>
-                <p class="auth-success" id="resetSuccess">Link enviado. Revisá tu email.</p>
-                <button class="auth-forgot" id="linkBackToLogin">← Volver</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 
 <!-- HEADER -->
 <header class="mercadito-header">
@@ -1045,13 +763,12 @@
 <section class="mercadito-section">
     <div class="products-grid" id="productsGrid">
         <p id="loadingMsg" style="grid-column:1/-1;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--sand-text);padding:40px 0;text-align:center;animation:blogPulse 1.6s ease-in-out infinite;">Cargando productos...</p>
-        <style>@keyframes blogPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.8; } }</style>
     </div>
 </section>
 
 <!-- AVISO -->
 <p class="mercadito-aviso" style="margin-top:48px;">
-    Pagos procesados por MercadoPago. Envíos a todo el país. Para consultas escribí a <strong>info@ashmateu.com</strong> o por Instagram <strong>@ashmateu</strong>.
+    Compra con checkout seguro de Tiendanube. Envíos a todo el país. Para consultas escribí a <strong>info@ashmateu.com</strong> o por Instagram <strong>@ashmateu</strong>.
 </p>
 
 </main>
@@ -1152,115 +869,9 @@ document.getElementById('navLogout').addEventListener('click', async () => {
     await sb.auth.signOut();
 });
 
-// ── Auth modal ──
-function openAuthModal() {
-    document.getElementById('authOverlay').classList.add('open');
-    document.body.classList.add('auth-open');
-    setTimeout(() => document.getElementById('loginEmail').focus(), 80);
-}
-
-function closeAuthModal() {
-    document.getElementById('authOverlay').classList.remove('open');
-    document.body.classList.remove('auth-open');
-    clearAuthErrors();
-}
-
-document.getElementById('authClose').addEventListener('click', closeAuthModal);
-
-// ESC para cerrar modal y menú
+// ESC cierra el menú mobile
 document.addEventListener('keydown', e => {
-    if (e.key !== 'Escape') return;
-    closeAuthModal();
-    if (hamburger?.classList.contains('is-open')) closeNavMenu();
-});
-
-// Tabs
-document.querySelectorAll('.auth-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const mode = tab.dataset.tab;
-        document.getElementById('formLogin').style.display = mode === 'login' ? 'block' : 'none';
-        document.getElementById('formRegister').style.display = mode === 'register' ? 'block' : 'none';
-        document.getElementById('formReset').style.display = 'none';
-        clearAuthErrors();
-    });
-});
-
-// Olvidé contraseña
-document.getElementById('linkForgot').addEventListener('click', e => {
-    e.preventDefault();
-    document.getElementById('formLogin').style.display = 'none';
-    document.getElementById('formRegister').style.display = 'none';
-    document.getElementById('formReset').style.display = 'block';
-});
-document.getElementById('linkBackToLogin').addEventListener('click', e => {
-    e.preventDefault();
-    document.getElementById('formReset').style.display = 'none';
-    document.getElementById('formLogin').style.display = 'block';
-});
-
-function clearAuthErrors() {
-    ['loginError','regError','resetError'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.textContent = ''; el.classList.remove('show'); }
-    });
-    ['regSuccess','resetSuccess'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.remove('show');
-    });
-}
-
-function showError(id, msg) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = msg;
-    el.classList.add('show');
-}
-
-// Login
-document.getElementById('btnLogin').addEventListener('click', async () => {
-    const btn = document.getElementById('btnLogin');
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    if (!email || !password) { showError('loginError', 'Completá todos los campos.'); return; }
-    btn.disabled = true; btn.textContent = 'Ingresando…';
-    const { error } = await sb.auth.signInWithPassword({ email, password });
-    btn.disabled = false; btn.textContent = 'Ingresar';
-    if (error) { showError('loginError', 'Email o contraseña incorrectos.'); return; }
-    closeAuthModal();
-});
-
-// Register
-document.getElementById('btnRegister').addEventListener('click', async () => {
-    const btn = document.getElementById('btnRegister');
-    const name = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const password = document.getElementById('regPassword').value;
-    if (!email || !password) { showError('regError', 'Completá todos los campos.'); return; }
-    if (password.length < 6) { showError('regError', 'La contraseña debe tener al menos 6 caracteres.'); return; }
-    btn.disabled = true; btn.textContent = 'Creando cuenta…';
-    const { error } = await sb.auth.signUp({
-        email, password,
-        options: { data: { full_name: name } }
-    });
-    btn.disabled = false; btn.textContent = 'Crear cuenta';
-    if (error) { showError('regError', error.message); return; }
-    document.getElementById('regSuccess').classList.add('show');
-});
-
-// Reset
-document.getElementById('btnReset').addEventListener('click', async () => {
-    const btn = document.getElementById('btnReset');
-    const email = document.getElementById('resetEmail').value.trim();
-    if (!email) { showError('resetError', 'Ingresá tu email.'); return; }
-    btn.disabled = true; btn.textContent = 'Enviando…';
-    const { error } = await sb.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ashmateu.com/mercadito'
-    });
-    btn.disabled = false; btn.textContent = 'Enviar link';
-    if (error) { showError('resetError', error.message); return; }
-    document.getElementById('resetSuccess').classList.add('show');
+    if (e.key === 'Escape' && hamburger?.classList.contains('is-open')) closeNavMenu();
 });
 
 // ── Products ──
@@ -1319,6 +930,14 @@ function applyFilter(filter) {
     });
 }
 
+function showEmptyState() {
+    document.getElementById('productsGrid').innerHTML = `
+        <div class="mercadito-empty">
+            <p class="mercadito-empty-title">El Mercadito está<br><em>entre colecciones</em></p>
+            <p class="mercadito-empty-sub">Las próximas piezas se están eligiendo. Mientras tanto, seguí las novedades en <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a>.</p>
+        </div>`;
+}
+
 async function loadProducts() {
     // 1) Tiendanube (headless via /api/tn-products). El token vive en Vercel, nunca acá.
     try {
@@ -1338,7 +957,7 @@ async function loadProducts() {
         .from('products').select('*')
         .eq('active', true)
         .order('created_at', { ascending: false });
-    if (error || !data) { document.getElementById('loadingMsg')?.remove(); return; }
+    if (error || !data?.length) { showEmptyState(); return; }
     allProducts = data;
     renderProducts();
 }
