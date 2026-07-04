@@ -7,7 +7,15 @@ export const config = { runtime: 'edge' };
 const CACHE_SECONDS = 300;
 
 function stripHtml(s) {
-  return String(s ?? '').replace(/<[^>]*>/g, '').trim();
+  return String(s ?? '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .trim();
 }
 
 export default async function handler() {
