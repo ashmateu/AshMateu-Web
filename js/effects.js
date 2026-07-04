@@ -1,13 +1,5 @@
 (function () {
-    if (typeof Lenis === 'undefined' || typeof gsap === 'undefined') return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const lenis = new Lenis({ lerp: 0.08, smoothWheel: true, syncTouch: false });
-
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-
+    // El estado scrolled del nav no depende de las librerías de animación
     const nav = document.getElementById('nav');
 
     if (nav) {
@@ -15,6 +7,18 @@
             nav.classList.toggle('scrolled', window.scrollY > 48);
         }, { passive: true });
     }
+
+    if (typeof Lenis === 'undefined' || typeof gsap === 'undefined') return;
+
+    // Respetar prefers-reduced-motion: solo animaciones, el resto sigue
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis({ lerp: 0.08, smoothWheel: true, syncTouch: false });
+
+    gsap.ticker.add((t) => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
 
     lenis.on('scroll', () => ScrollTrigger.update());
 

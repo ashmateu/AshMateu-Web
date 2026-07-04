@@ -300,3 +300,18 @@ nav.scrolled .nav-back:hover { opacity: 1; }
 }
 
 @view-transition { navigation: auto; }
+
+/* Estados de foco visibles (teclado) */
+.nav-back:focus-visible,
+.case-next-link:focus-visible,
+.skip-link:focus-visible,
+a:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .case-hero:hover .case-hero-img { transform: none; }
+    html { scroll-behavior: auto; }
+}
