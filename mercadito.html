@@ -1788,6 +1788,9 @@ function cardHTML(p, idx) {
         btnContent = `<span class="btn-cart" style="opacity:0.25;pointer-events:none">${arrowSvg} Vendido</span>`;
     } else if (!p.active) {
         btnContent = `<span class="btn-cart" style="opacity:0.25;pointer-events:none">${arrowSvg} Próximamente</span>`;
+    } else if (p.buy_url) {
+        // Producto de Tiendanube: el checkout es allá
+        btnContent = `<a class="btn-cart" href="${esc(p.buy_url)}" target="_blank" rel="noopener">${arrowSvg} Comprar</a>`;
     } else {
         const inCart = cart.some(i => i.id === p.id);
         btnContent = `<button class="btn-cart${inCart ? ' in-cart' : ''}" onclick="addToCart(window._products['${p.id}'])">${arrowSvg} ${inCart ? 'En carrito' : 'Agregar'}</button>`;
@@ -1824,6 +1827,20 @@ function applyFilter(filter) {
 }
 
 async function loadProducts() {
+    // 1) Tiendanube (headless via /api/tn-products). El token vive en Vercel, nunca acá.
+    try {
+        const res = await fetch('/api/tn-products');
+        if (res.ok) {
+            const items = await res.json();
+            if (items.length) {
+                allProducts = items.filter(p => p.active);
+                renderProducts();
+                return;
+            }
+        }
+    } catch (_) { /* sin conexión al endpoint: cae al fallback */ }
+
+    // 2) Fallback: catálogo propio en Supabase (comportamiento original)
     const { data, error } = await sb
         .from('products').select('*')
         .eq('active', true)
