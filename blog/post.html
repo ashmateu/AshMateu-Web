@@ -9,12 +9,12 @@
   <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Montserrat:wght@100;200;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@300;400;500&family=Montserrat:wght@100;200;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --black: #0A0A0A; --ivory: #F7F3EE; --white: #fff; --sand: #B5A898;
-      --gutter: 56px; --serif: 'Playfair Display', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+      --gutter: 56px; --serif: 'Bodoni Moda', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
     }
     html { scroll-behavior: smooth; }
     body { font-family: var(--sans); font-weight: 300; color: var(--black); background: var(--ivory); -webkit-font-smoothing: antialiased; }
@@ -124,6 +124,21 @@
       @view-transition { navigation: auto; }
     .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: #fff; padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
     .skip-link:focus { top: 16px; }
+
+    /* Estados de foco visibles (teclado) */
+    .nav-links a:focus-visible,
+    .nav-hamburger:focus-visible,
+    .back-link:focus-visible,
+    .post-body a:focus-visible,
+    .post-footer a:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nav-links a, .back-link, .post-footer a { transition: none; }
+      html { scroll-behavior: auto; }
+    }
     </style>
 </head>
 <body>
