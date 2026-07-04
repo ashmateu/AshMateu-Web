@@ -11,8 +11,9 @@ function stripHtml(s) {
 }
 
 export default async function handler() {
-  const storeId = process.env.TN_STORE_ID;
-  const token   = process.env.TN_ACCESS_TOKEN;
+  // trim(): tolera espacios o saltos de línea pegados al copiar el valor en Vercel
+  const storeId = (process.env.TN_STORE_ID ?? '').trim();
+  const token   = (process.env.TN_ACCESS_TOKEN ?? '').trim();
 
   if (!storeId || !token) {
     return new Response(JSON.stringify({ error: 'tiendanube_not_configured' }), {
