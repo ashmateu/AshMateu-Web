@@ -51,9 +51,16 @@ Activar con: "Activa el agente `ui-designer` y revisa el hero de la página prin
 
 ## Pendientes críticos
 
-1. `MP_WEBHOOK_SECRET`: configurar en Vercel (Settings → Environment Variables). Sin él, `api/mp-webhook.js` acepta requests sin verificar firma HMAC.
-2. Middleware redirige todo el dominio a `/construccion`; quitar cuando se lance el sitio.
-3. Supabase Auth: activar "Leaked password protection" en el dashboard (Auth → Providers → Password).
+1. Middleware redirige todo el dominio a `/construccion`; quitar cuando se lance el sitio.
+2. Supabase Auth: activar "Leaked password protection" en el dashboard (Auth → Providers → Password).
+
+## Mercadito (Tiendanube headless)
+
+- Catálogo se administra en el panel de Tiendanube (tienda `ashmateu2.mitiendanube.com`, store_id `7924900`).
+- `api/tn-products.js` proxya el catálogo (caché edge 5 min); credenciales en env vars de Vercel (`TN_STORE_ID`, `TN_ACCESS_TOKEN`) y en `.env` local (gitignoreado). Token también en `~/.ashmateu_tn_token.json`.
+- El checkout es de Tiendanube ("Comprar" abre la tienda). El carrito propio + MercadoPago fueron eliminados (commit que borra `api/mp-preference.js` y `api/mp-webhook.js`).
+- Fallback: si Tiendanube está vacía o falla, el mercadito muestra `products` de Supabase con botón "Consultar" → Instagram.
+- Categoría "Digital" en Tiendanube → filtro Digital en la web; el resto es "Pieza".
 
 Resueltos: Formspree configurado (`xeebjqpq`). RLS endurecido (escrituras solo admin via `is_admin()`, migración `harden_rls_admin_only_writes`).
 
