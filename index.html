@@ -59,6 +59,11 @@
             --gutter: 56px;
             --serif:  'Bodoni Moda', Georgia, serif;
             --sans:   'Inter', system-ui, sans-serif;
+            /* Título hero de esta página. Mismo rol que --text-hero en cuenta.html,
+               mercadito.html, prensa.html, 404.html, blog.html, blog/post.html y
+               .case-title en case.css — cada archivo define su propio valor porque
+               el sitio no tiene una hoja de estilos compartida entre plantillas. */
+            --text-hero: clamp(44px, 5.2vw, 76px);
         }
 
         /* ── Base ── */
@@ -116,7 +121,7 @@
             font-size: 5.5px;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: #7A6A5A;
+            color: var(--sand-text);
         }
         .nav-logo-right {
             padding-left: 7px;
@@ -129,7 +134,7 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 100;
             font-size: 5.5px;
-            color: #7A6A5A;
+            color: var(--sand-text);
             text-transform: uppercase;
             letter-spacing: 0.32em;
             line-height: 1.85;
@@ -261,7 +266,7 @@
 
         .hero-title {
             font-family: var(--serif);
-            font-size: clamp(44px, 5.2vw, 76px);
+            font-size: var(--text-hero);
             font-weight: 400;
             line-height: 1.05;
             letter-spacing: -0.015em;

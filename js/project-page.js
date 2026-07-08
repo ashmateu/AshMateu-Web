@@ -19,6 +19,20 @@
         return dict[field];
     }
 
+    // Pull quote editorial por caso — no viene de Sanity (no es un campo del
+    // schema), se agrega solo en el front. ES es la fuente; EN/FR viven en
+    // CASE_I18N junto con el resto de la traducción de cada caso.
+    const PULL_QUOTES = {
+        'chanel-hc': 'Una esquina de Manhattan a las dos de la mañana con un vestido de lentejuelas Chanel: eso es la imagen.',
+        'valentina-ferrer': 'Tiene una presencia que llena el cuadro. El styling tenía que ser un soporte, no una competencia.',
+        'leonie-hanne': 'Impecable no es lo mismo que sorprendente.',
+        'calu-chinatown': 'La mejor foto de la producción no fue la que habíamos imaginado.',
+        'dolores-fonzi': 'Tiene un criterio estético muy claro y una relación con la ropa que viene de adentro.',
+        'chanel-williamsburg': 'A veces la locación te da algo que no pediste y es exactamente lo que necesitabas.',
+        'netflix-mf': 'Esa es la diferencia entre styling y costume.',
+        'gucci-rural': 'La tensión entre ambos mundos es la imagen.',
+    };
+
     let _project = null;
 
     function render(project) {
@@ -55,6 +69,12 @@
         if (project.blocks?.length) {
             const bodyEl = document.querySelector('.case-body');
             if (bodyEl) {
+                const quoteEs = PULL_QUOTES[slug];
+                const quoteText = quoteEs ? (dict?.pullQuote || quoteEs) : null;
+                const quoteHtml = quoteText
+                    ? `<div class="case-pull-quote"><p>${quoteText}</p></div>`
+                    : '';
+
                 bodyEl.innerHTML = project.blocks.map((block, i) => {
                     const trBlock = dict?.blocks?.[i];
                     const heading = trBlock?.heading || block.heading;
@@ -69,10 +89,12 @@
                             ${heading ? `<h2>${heading}</h2>` : ''}
                             ${bodyHtml}
                         </div>`;
-                    return `
+                    const blockHtml = `
                         <div class="case-block${block.reversed ? ' case-block--reverse' : ''}">
                             ${imgHtml}${textHtml}
                         </div>`;
+                    // El pull quote rompe el flujo después del primer bloque.
+                    return i === 0 ? blockHtml + quoteHtml : blockHtml;
                 }).join('');
             }
         }
@@ -87,6 +109,16 @@
                     const value = trCredits?.[i]?.value || c.value;
                     return `<span class="credits-key">${key}</span><span class="credits-val">${value}</span>`;
                 }).join('');
+            }
+
+            // Byline del hero: primer crédito ("Styling · Ash Mateu"), la misma
+            // fuente que el primer renglón de .credits-grid.
+            const bylineEl = document.querySelector('.case-byline');
+            if (bylineEl) {
+                const first = project.credits[0];
+                const key = dict?.credits?.[0]?.key || first.key;
+                const value = dict?.credits?.[0]?.value || first.value;
+                bylineEl.textContent = `${key} · ${value}`;
             }
         }
 

@@ -19,6 +19,9 @@
     --serif:  'Bodoni Moda', Georgia, serif;
     --sans:   'Inter', system-ui, sans-serif;
     --ease:   cubic-bezier(0.16, 1, 0.3, 1);
+    /* Mismo rol que --text-hero en index.html, cuenta.html, mercadito.html,
+       prensa.html, 404.html, blog.html y blog/post.html. */
+    --text-hero: clamp(36px, 5.5vw, 72px);
 }
 
 html { scroll-behavior: smooth; scrollbar-gutter: stable; }
@@ -123,7 +126,7 @@ nav.scrolled .lang-switcher-sep { color: rgba(181,168,152,0.25); }
 }
 .case-title {
     font-family: var(--serif);
-    font-size: clamp(36px, 5.5vw, 72px);
+    font-size: var(--text-hero);
     font-weight: 400;
     color: var(--white);
     line-height: 1.06;
@@ -143,6 +146,40 @@ nav.scrolled .lang-switcher-sep { color: rgba(181,168,152,0.25); }
     color: rgba(255,255,255,0.55);
 }
 
+/* ── Byline (línea de crédito tipo masthead) ── */
+.case-byline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--sand);
+}
+.case-byline::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--sand);
+    opacity: 0.6;
+}
+
+/* ── Índice del portfolio (01/08...) ── */
+.case-index {
+    position: absolute;
+    top: 32px;
+    right: var(--gutter);
+    font-family: var(--serif);
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.55);
+    z-index: 2;
+}
+.case-index .case-index-current { color: var(--white); font-style: normal; }
+
 /* ── Intro / Lede ── */
 .case-intro {
     padding: 96px var(--gutter);
@@ -158,6 +195,24 @@ nav.scrolled .lang-switcher-sep { color: rgba(181,168,152,0.25); }
     color: var(--black);
     font-weight: 400;
 }
+
+/* ── Pull quote ── */
+.case-pull-quote {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px var(--gutter);
+    text-align: center;
+}
+.case-pull-quote p {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.6vw, 44px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--black);
+}
+.case-pull-quote p::before { content: '\201C'; }
+.case-pull-quote p::after { content: '\201D'; }
 
 /* ── Body blocks ── */
 .case-body { padding: 0 var(--gutter); }

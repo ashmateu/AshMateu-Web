@@ -39,6 +39,10 @@
             --gutter: 56px;
             --serif:  'Bodoni Moda', Georgia, serif;
             --sans:   'Inter', system-ui, sans-serif;
+            /* Mismo rol que --text-hero en index.html, cuenta.html, prensa.html,
+               404.html, blog.html, blog/post.html y .case-title en case.css.
+               Idéntico a --text-hero de prensa.html (mismo tamaño hoy). */
+            --text-hero: clamp(52px, 7vw, 104px);
         }
 
         html { scroll-behavior: smooth; scrollbar-gutter: stable; }
@@ -67,9 +71,9 @@
         .nav-logo { display: flex; align-items: stretch; text-decoration: none; gap: 0; }
     .nav-logo-left { display: flex; flex-direction: column; justify-content: space-between; padding-right: 14px; border-right: 0.5px solid rgba(181,168,152,0.5); }
     .nav-logo-ash { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 46px; color: var(--black); text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.88; }
-    .nav-logo-year { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 5.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A6A5A; }
+    .nav-logo-year { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 5.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sand-text); }
     .nav-logo-right { padding-left: 7px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
-    .nav-logo-tag { font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 5.5px; color: #7A6A5A; text-transform: uppercase; letter-spacing: 0.32em; line-height: 1.85; }
+    .nav-logo-tag { font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 5.5px; color: var(--sand-text); text-transform: uppercase; letter-spacing: 0.32em; line-height: 1.85; }
     .nav-logo-mateu { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 13px; color: var(--black); text-transform: uppercase; letter-spacing: 0.36em; }
 
         .nav-links {
@@ -168,7 +172,7 @@
         .mercadito-header h1 {
             font-family: var(--serif);
             font-weight: 400;
-            font-size: clamp(52px, 7vw, 104px);
+            font-size: var(--text-hero);
             line-height: 0.95;
             letter-spacing: -0.01em;
         }
@@ -341,33 +345,6 @@
             margin-right: 3px;
         }
 
-        /* Botón MercadoPago */
-        .btn-mp {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--black);
-            color: var(--white);
-            font-family: var(--sans);
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 12px 18px;
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .btn-mp:hover { opacity: 0.7; }
-
-        .btn-mp svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-        }
-
         /* Sold out state */
         .product-card.sold-out .product-img::after {
             content: 'Vendido';
@@ -381,11 +358,6 @@
             color: var(--black);
             background: rgba(247,243,238,0.9);
             padding: 6px 10px;
-        }
-
-        .product-card.sold-out .btn-mp {
-            opacity: 0.3;
-            pointer-events: none;
         }
 
         /* ── Aviso ── */
