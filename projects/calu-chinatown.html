@@ -55,7 +55,7 @@
         <div class="nav-logo-mateu">Mateu</div>
       </div>
     </a>
-    <a href="/#trabajo" class="nav-back">Portfolio</a>
+    <a href="/#trabajo" class="nav-back" data-i18n="nav.work">Portfolio</a>
 </nav>
 
 <main id="main-content">
@@ -108,7 +108,7 @@
 </div>
 
 <div class="case-credits">
-    <p class="credits-label">Créditos</p>
+    <p class="credits-label" data-i18n="case.creditsLabel">Créditos</p>
     <div class="credits-grid">
         <span class="credits-key">Styling</span>
         <span class="credits-val">Ash Mateu</span>
@@ -121,7 +121,7 @@
 
 </main>
 <div class="case-next">
-    <p class="case-next-label">Próximo proyecto</p>
+    <p class="case-next-label" data-i18n="case.nextLabel">Próximo proyecto</p>
     <a class="case-next-link" href="netflix-mf.html">
         Netflix × Martín Fierro <span class="case-next-arrow">→</span>
     </a>
@@ -131,7 +131,8 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="/js/sanity.js"></script>
-<script src="/js/project-page.js"></script>
+<script src="/js/case-i18n.js"></script>
+<script src="/js/project-page.js?v=2"></script>
 <script src="/js/effects.js"></script>
 <script>
 if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -139,6 +140,6 @@ if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: 
     gsap.from('.case-hero-img', { scale: 1.04, duration: 1.6, ease: 'power2.out' });
 }
 </script>
-<script src="/js/i18n.js"></script>
+<script src="/js/i18n.js?v=2"></script>
 </body>
 </html>

@@ -678,12 +678,12 @@
             </svg>
         </button>
         <div class="nav-user-dropdown" id="navUserDropdown">
-            <a href="/cuenta.html">Mi cuenta</a>
-            <button class="logout-btn" id="navLogoutBtn">Cerrar sesión</button>
+            <a href="/cuenta.html" data-i18n="nav.myaccount">Mi cuenta</a>
+            <button class="logout-btn" id="navLogoutBtn" data-i18n="nav.logout">Cerrar sesión</button>
         </div>
     </div>
 
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+    <button class="nav-hamburger" id="navHamburger" data-i18n="nav.menuLabel" aria-label="Menú">
         <span></span><span></span><span></span>
     </button>
 </nav>
@@ -693,14 +693,14 @@
 
 <!-- VISTA: No logueada -->
 <div class="acceso-denegado" id="vistaNoAuth">
-    <p class="acceso-denegado-label">Mi cuenta</p>
-    <h1 class="acceso-denegado-title">Para ver tu cuenta<br><em>ingresá primero.</em></h1>
-    <p class="acceso-denegado-text">Acá vas a encontrar el historial de tus pedidos y tus datos de contacto.</p>
+    <p class="acceso-denegado-label" data-i18n="cuenta.label">Mi cuenta</p>
+    <h1 class="acceso-denegado-title" data-i18n-override="cuenta.noauth.title">Para ver tu cuenta<br><em>ingresá primero.</em></h1>
+    <p class="acceso-denegado-text" data-i18n="cuenta.noauth.text">Acá vas a encontrar el historial de tus pedidos y tus datos de contacto.</p>
     <button class="btn-acceso" id="btnAbrirModal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
         </svg>
-        Ingresar
+        <span data-i18n="auth.signin">Ingresar</span>
     </button>
 </div>
 
@@ -709,7 +709,7 @@
 <div id="vistaAuth" style="display:none;">
 
     <header class="cuenta-header">
-        <p class="cuenta-saludo-label">Mi cuenta</p>
+        <p class="cuenta-saludo-label" data-i18n="cuenta.label">Mi cuenta</p>
         <h1 class="cuenta-saludo-nombre">Hola, <em id="saludoNombre">.</em></h1>
         <p class="cuenta-saludo-email" id="saludoEmail"></p>
     </header>
@@ -717,22 +717,22 @@
     <section class="cuenta-section">
 
         <div class="cuenta-nav-strip">
-            <button class="cuenta-nav-tab active" id="tabPedidos">Mis pedidos</button>
-            <button class="cuenta-nav-tab" id="tabDatos">Datos</button>
+            <button class="cuenta-nav-tab active" id="tabPedidos" data-i18n="cuenta.tab.orders">Mis pedidos</button>
+            <button class="cuenta-nav-tab" id="tabDatos" data-i18n="cuenta.tab.data">Datos</button>
         </div>
 
         <!-- Panel pedidos -->
         <div id="panelPedidos">
-            <p class="cuenta-section-label">Historial de compras</p>
+            <p class="cuenta-section-label" data-i18n="cuenta.orders.historyLabel">Historial de compras</p>
 
             <!-- Skeleton mientras carga -->
             <table class="pedidos-table" id="pedidosSkeleton">
                 <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                        <th style="text-align:right;">Total</th>
+                        <th data-i18n="cuenta.orders.thProduct">Producto</th>
+                        <th data-i18n="cuenta.orders.thDate">Fecha</th>
+                        <th data-i18n="cuenta.orders.thStatus">Estado</th>
+                        <th style="text-align:right;" data-i18n="cuenta.orders.thTotal">Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -755,10 +755,10 @@
             <table class="pedidos-table" id="pedidosTable" style="display:none;">
                 <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                        <th style="text-align:right;">Total</th>
+                        <th data-i18n="cuenta.orders.thProduct">Producto</th>
+                        <th data-i18n="cuenta.orders.thDate">Fecha</th>
+                        <th data-i18n="cuenta.orders.thStatus">Estado</th>
+                        <th style="text-align:right;" data-i18n="cuenta.orders.thTotal">Total</th>
                     </tr>
                 </thead>
                 <tbody id="pedidosBody"></tbody>
@@ -766,21 +766,21 @@
 
             <!-- Estado vacío -->
             <div class="pedidos-empty" id="pedidosEmpty" style="display:none;">
-                <p class="pedidos-empty-title">Todavía no tenés pedidos.</p>
-                <p class="pedidos-empty-text">Cuando comprés algo en el Mercadito, tu historial aparece acá.</p>
+                <p class="pedidos-empty-title" data-i18n="cuenta.orders.empty.title">Todavía no tenés pedidos.</p>
+                <p class="pedidos-empty-text" data-i18n="cuenta.orders.empty.text">Cuando comprés algo en el Mercadito, tu historial aparece acá.</p>
                 <a href="/mercadito" class="pedidos-empty-cta">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M3 12h18M12 3l9 9-9 9"/>
                     </svg>
-                    Ir al Mercadito
+                    <span data-i18n="cuenta.orders.empty.cta">Ir al Mercadito</span>
                 </a>
             </div>
         </div>
 
         <!-- Panel datos (placeholder) -->
         <div id="panelDatos" style="display:none;">
-            <p class="cuenta-section-label">Mis datos</p>
-            <p style="font-size:13px;font-weight:300;color:rgba(10,10,10,0.65);line-height:1.8;">
+            <p class="cuenta-section-label" data-i18n="cuenta.data.label">Mis datos</p>
+            <p style="font-size:13px;font-weight:300;color:rgba(10,10,10,0.65);line-height:1.8;" data-i18n-override="cuenta.data.text">
                 Para modificar tus datos de contacto escribí a <strong style="font-weight:400;">info@ashmateu.com</strong>.
             </p>
         </div>
@@ -796,8 +796,8 @@
     <span class="footer-logo">Ash Mateu</span>
     <ul class="footer-links">
         <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
-        <li><a href="/mercadito">Mercadito</a></li>
-        <li><a href="/#contacto">Contacto</a></li>
+        <li><a href="/mercadito" data-i18n="nav.shop">Mercadito</a></li>
+        <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <span class="footer-copy">&#169; 2026</span>
 </footer>
@@ -816,8 +816,8 @@
             </button>
         </div>
         <div class="auth-tabs">
-            <button class="auth-tab-btn active" id="tabLogin" onclick="switchAuthTab('login')">Ingresar</button>
-            <button class="auth-tab-btn" id="tabRegister" onclick="switchAuthTab('register')">Crear cuenta</button>
+            <button class="auth-tab-btn active" id="tabLogin" onclick="switchAuthTab('login')" data-i18n="auth.signin">Ingresar</button>
+            <button class="auth-tab-btn" id="tabRegister" onclick="switchAuthTab('register')" data-i18n="auth.createAccount">Crear cuenta</button>
         </div>
         <div class="auth-body">
             <div class="auth-panel active" id="panelLogin">
@@ -827,15 +827,15 @@
                     <input class="auth-input" type="email" id="loginEmail" autocomplete="email" placeholder="tu@email.com">
                 </div>
                 <div class="auth-field">
-                    <label class="auth-label" for="loginPassword">Contraseña</label>
+                    <label class="auth-label" for="loginPassword" data-i18n="auth.label.password">Contraseña</label>
                     <input class="auth-input" type="password" id="loginPassword" autocomplete="current-password" placeholder="••••••••">
                 </div>
                 <button class="auth-submit" id="btnLogin" onclick="handleLogin()">
-                    <span class="auth-btn-text">Ingresar</span>
+                    <span class="auth-btn-text" data-i18n="auth.signin">Ingresar</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="auth-arrow" style="width:13px;height:13px;flex-shrink:0;"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
                     <span class="auth-spinner"></span>
                 </button>
-                <button class="auth-forgot" onclick="handleForgot()">¿Olvidaste tu contraseña?</button>
+                <button class="auth-forgot" onclick="handleForgot()" data-i18n="auth.forgot">¿Olvidaste tu contraseña?</button>
             </div>
             <div class="auth-panel" id="panelRegister">
                 <div class="auth-error" id="errorRegister" role="alert"></div>
@@ -844,19 +844,19 @@
                     <input class="auth-input" type="email" id="registerEmail" autocomplete="email" placeholder="tu@email.com">
                 </div>
                 <div class="auth-field">
-                    <label class="auth-label" for="registerPassword">Contraseña</label>
-                    <input class="auth-input" type="password" id="registerPassword" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+                    <label class="auth-label" for="registerPassword" data-i18n="auth.label.password">Contraseña</label>
+                    <input class="auth-input" type="password" id="registerPassword" autocomplete="new-password" data-i18n="auth.placeholder.passwordMin" placeholder="Mínimo 8 caracteres">
                 </div>
                 <div class="auth-field">
-                    <label class="auth-label" for="registerPasswordConfirm">Confirmar contraseña</label>
+                    <label class="auth-label" for="registerPasswordConfirm" data-i18n="auth.label.passwordConfirm">Confirmar contraseña</label>
                     <input class="auth-input" type="password" id="registerPasswordConfirm" autocomplete="new-password" placeholder="••••••••">
                 </div>
                 <button class="auth-submit" id="btnRegister" onclick="handleRegister()">
-                    <span class="auth-btn-text">Crear cuenta</span>
+                    <span class="auth-btn-text" data-i18n="auth.createAccount">Crear cuenta</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="auth-arrow" style="width:13px;height:13px;flex-shrink:0;"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
                     <span class="auth-spinner"></span>
                 </button>
-                <p class="auth-note">Al crear tu cuenta aceptás recibir novedades del Mercadito.</p>
+                <p class="auth-note" data-i18n="auth.registerNote">Al crear tu cuenta aceptás recibir novedades del Mercadito.</p>
             </div>
         </div>
     </div>
@@ -1101,13 +1101,16 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 
 // ── Init ──
+let _currentUserId = null;
+
 (async function init() {
     const { data: { session } } = await sb.auth.getSession();
     hideSplash();
 
     if (session && session.user) {
         showCuenta(session.user);
-        loadPedidos(session.user.id);
+        _currentUserId = session.user.id;
+        loadPedidos(_currentUserId);
     } else {
         showNoAuth();
     }
@@ -1117,13 +1120,20 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         if (event === 'SIGNED_IN' && session) {
             closeAuthModal();
             showCuenta(session.user);
-            loadPedidos(session.user.id);
+            _currentUserId = session.user.id;
+            loadPedidos(_currentUserId);
         }
         if (event === 'SIGNED_OUT') {
+            _currentUserId = null;
             showNoAuth();
         }
     });
 })();
+
+// Re-carga la tabla de pedidos (etiquetas de estado) si cambia el idioma
+window.addEventListener('ash:langchange', () => {
+    if (_currentUserId) loadPedidos(_currentUserId);
+});
 
 
 // ── Splash ──
@@ -1185,11 +1195,16 @@ async function loadPedidos(userId) {
     }
 
     const ESTADO_SLUG  = { pendiente: 'pendiente', confirmado: 'confirmado', enviado: 'enviado', rechazado: 'rechazado' };
-    const ESTADO_LABEL = { pendiente: 'Pendiente', confirmado: 'Confirmado', enviado: 'Enviado', rechazado: 'Rechazado' };
+    const ESTADO_LABEL = {
+        pendiente:  window.i18n.t('order.status.pending'),
+        confirmado: window.i18n.t('order.status.confirmed'),
+        enviado:    window.i18n.t('order.status.shipped'),
+        rechazado:  window.i18n.t('order.status.rejected'),
+    };
 
     tbody.innerHTML = data.map(order => {
         const estado   = ESTADO_SLUG[order.status]  || 'pendiente';
-        const etiqueta = ESTADO_LABEL[order.status] || 'Pendiente';
+        const etiqueta = ESTADO_LABEL[order.status] || ESTADO_LABEL.pendiente;
         const fecha    = new Date(order.created_at).toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
         const currency = order.currency || 'ARS';
         const precio   = currency === 'ARS'
@@ -1197,7 +1212,7 @@ async function loadPedidos(userId) {
             : `<span class="currency">USD</span>${Number(order.amount).toFixed(0)}`;
         const items    = order.order_items?.length
             ? order.order_items.map(i => `${i.product_name}${i.quantity > 1 ? ` ×${i.quantity}` : ''}`).join(', ')
-            : 'Pedido';
+            : window.i18n.t('cuenta.order.fallbackItem');
 
         return `
             <tr>
@@ -1338,7 +1353,7 @@ async function handleLogin() {
     const pass  = document.getElementById('loginPassword').value;
 
     if (!email || !pass) {
-        showAuthError('Login', 'Completá email y contraseña para ingresar.');
+        showAuthError('Login', window.i18n.t('auth.err.loginRequired'));
         return;
     }
 
@@ -1347,7 +1362,7 @@ async function handleLogin() {
     const { error } = await sb.auth.signInWithPassword({ email, password: pass });
 
     if (error) {
-        showAuthError('Login', 'Email o contraseña incorrectos.');
+        showAuthError('Login', window.i18n.t('auth.err.loginFailed'));
         setLoading('btnLogin', false);
     }
     // El éxito lo maneja onAuthStateChange
@@ -1358,16 +1373,16 @@ async function handleRegister() {
     const pass    = document.getElementById('registerPassword').value;
     const confirm = document.getElementById('registerPasswordConfirm').value;
 
-    if (!email) { showAuthError('Register', 'Ingresá tu email.'); return; }
-    if (pass.length < 8) { showAuthError('Register', 'La contraseña debe tener al menos 8 caracteres.'); return; }
-    if (pass !== confirm) { showAuthError('Register', 'Las contraseñas no coinciden.'); return; }
+    if (!email) { showAuthError('Register', window.i18n.t('auth.err.emailRequired')); return; }
+    if (pass.length < 8) { showAuthError('Register', window.i18n.t('auth.err.passwordTooShort')); return; }
+    if (pass !== confirm) { showAuthError('Register', window.i18n.t('auth.err.passwordMismatch')); return; }
 
     setLoading('btnRegister', true);
 
     const { data, error } = await sb.auth.signUp({ email, password: pass });
 
     if (error) {
-        showAuthError('Register', error.message || 'Error al crear la cuenta. Intentá de nuevo.');
+        showAuthError('Register', error.message || window.i18n.t('auth.err.registerFailed'));
         setLoading('btnRegister', false);
         return;
     }
@@ -1376,8 +1391,8 @@ async function handleRegister() {
         // Email de confirmación enviado
         document.getElementById('panelRegister').innerHTML = `
             <p style="font-size:14px;font-weight:300;line-height:1.9;color:var(--black);padding:8px 0 4px;">
-                Revisá tu email para confirmar tu cuenta.<br>
-                <span style="color:rgba(10,10,10,0.45);font-size:12px;">Si no llega en unos minutos, revisá la carpeta de spam.</span>
+                ${window.i18n.t('auth.confirmEmail.title')}<br>
+                <span style="color:rgba(10,10,10,0.45);font-size:12px;">${window.i18n.t('auth.confirmEmail.spam')}</span>
             </p>`;
     }
     // Si ya hay sesión, onAuthStateChange lo maneja
@@ -1386,7 +1401,7 @@ async function handleRegister() {
 async function handleForgot() {
     const email = document.getElementById('loginEmail').value.trim();
     if (!email) {
-        showAuthError('Login', 'Primero ingresá tu email para recuperar la contraseña.');
+        showAuthError('Login', window.i18n.t('auth.err.forgotEmailRequired'));
         return;
     }
 
@@ -1398,10 +1413,10 @@ async function handleForgot() {
     el.style.borderLeftColor = 'var(--sand)';
     el.style.color = '#7A6A5A';
     el.style.background = 'rgba(181,168,152,0.1)';
-    el.textContent = 'Si tu email está registrado, te enviamos un link para restablecer tu contraseña.';
+    el.textContent = window.i18n.t('auth.forgotSent');
     el.classList.add('visible');
 }
 </script>
-<script src="/js/i18n.js"></script>
+<script src="/js/i18n.js?v=2"></script>
 </body>
 </html>

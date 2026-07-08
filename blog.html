@@ -305,7 +305,7 @@
     <li><a href="/mercadito" data-i18n="nav.shop">Mercadito</a></li>
     <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
   </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+  <button class="nav-hamburger" id="navHamburger" data-i18n="nav.menuLabel" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -317,23 +317,23 @@
   <div class="blog-hero-overlay"></div>
   <div class="blog-hero-content">
     <p class="eyebrow">Ash Mateu</p>
-    <h1>Notas <em>editoriales</em></h1>
+    <h1 data-i18n-override="blog.hero.title">Notas <em>editoriales</em></h1>
   </div>
 </header>
 
 <main id="main-content">
   <div class="blog-grid" id="blogGrid">
-    <div class="blog-empty">Cargando...</div>
+    <div class="blog-empty" data-i18n="blog.loading">Cargando...</div>
   </div>
 
   <section class="newsletter-section" aria-label="Newsletter">
-    <p class="newsletter-kicker">Notas editoriales</p>
-    <h2 class="newsletter-title">Recibí las notas<br><em>en tu correo.</em></h2>
-    <p class="newsletter-sub">Sin spam. Solo cuando hay algo que vale la pena leer.</p>
+    <p class="newsletter-kicker" data-i18n="blog.newsletter.kicker">Notas editoriales</p>
+    <h2 class="newsletter-title" data-i18n-override="blog.newsletter.title">Recibí las notas<br><em>en tu correo.</em></h2>
+    <p class="newsletter-sub" data-i18n="blog.newsletter.sub">Sin spam. Solo cuando hay algo que vale la pena leer.</p>
     <form class="newsletter-form" id="newsletterForm" novalidate>
       <input class="newsletter-input" id="newsletterEmail" type="email"
-        placeholder="tu@email.com" autocomplete="email" required aria-label="Correo electrónico">
-      <button class="newsletter-btn" type="submit" id="newsletterBtn">Suscribirme</button>
+        placeholder="tu@email.com" autocomplete="email" required data-i18n="blog.newsletter.emailLabel" aria-label="Correo electrónico">
+      <button class="newsletter-btn" type="submit" id="newsletterBtn" data-i18n="blog.newsletter.submit">Suscribirme</button>
     </form>
     <p class="newsletter-msg" id="newsletterMsg" role="status" aria-live="polite"></p>
   </section>
@@ -343,8 +343,8 @@
   <span class="footer-logo">Ash Mateu</span>
   <ul class="footer-links">
     <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
-    <li><a href="/">Inicio</a></li>
-    <li><a href="/#contacto">Contacto</a></li>
+    <li><a href="/" data-i18n="footer.home">Inicio</a></li>
+    <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
   </ul>
   <span class="footer-copy">&copy; 2026</span>
 </footer>
@@ -404,7 +404,7 @@ async function loadPosts() {
   const { data, error } = await sb.from('posts').select('*').eq('active', true).order('published_at', { ascending: false });
 
   if (error || !data?.length) {
-    grid.innerHTML = '<div class="blog-empty">Las notas aparecen acá cuando Ash publique la primera.</div>';
+    grid.innerHTML = `<div class="blog-empty">${window.i18n.t('blog.empty')}</div>`;
     return;
   }
 
@@ -417,7 +417,7 @@ async function loadPosts() {
         <span class="post-date">${formatDate(p.published_at)}</span>
         <h2 class="post-title">${esc(p.title)}</h2>
         <p class="post-excerpt">${esc(p.excerpt)}</p>
-        <span class="post-read">Leer nota →</span>
+        <span class="post-read">${window.i18n.t('blog.readMore')}</span>
       </div>
     </a>
   `).join('');
@@ -433,13 +433,13 @@ document.getElementById('newsletterForm').addEventListener('submit', async (e) =
   const msg   = document.getElementById('newsletterMsg');
 
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) {
-    msg.textContent = 'Ingresá un email válido.';
+    msg.textContent = window.i18n.t('blog.newsletter.err.invalidEmail');
     msg.className = 'newsletter-msg error';
     return;
   }
 
   btn.disabled = true;
-  btn.textContent = 'Enviando...';
+  btn.textContent = window.i18n.t('blog.newsletter.sending');
   msg.textContent = '';
   msg.className = 'newsletter-msg';
 
@@ -447,21 +447,21 @@ document.getElementById('newsletterForm').addEventListener('submit', async (e) =
 
   if (error) {
     if (error.code === '23505') {
-      msg.textContent = 'Ya estás suscripta.';
+      msg.textContent = window.i18n.t('blog.newsletter.err.alreadySubscribed');
     } else {
-      msg.textContent = 'Algo falló. Intentá de nuevo.';
+      msg.textContent = window.i18n.t('blog.newsletter.err.generic');
       msg.classList.add('error');
       btn.disabled = false;
-      btn.textContent = 'Suscribirme';
+      btn.textContent = window.i18n.t('blog.newsletter.submit');
     }
     return;
   }
 
-  msg.textContent = 'Listo. Te escribimos cuando haya algo nuevo.';
+  msg.textContent = window.i18n.t('blog.newsletter.success');
   document.getElementById('newsletterEmail').value = '';
-  btn.textContent = 'Listo';
+  btn.textContent = window.i18n.t('blog.newsletter.done');
 });
 </script>
-<script src="/js/i18n.js"></script>
+<script src="/js/i18n.js?v=2"></script>
 </body>
 </html>

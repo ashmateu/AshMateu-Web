@@ -725,12 +725,12 @@
                 </svg>
             </button>
             <div class="nav-user-dropdown" id="navUserDropdown">
-                <a href="/cuenta.html">Mi cuenta</a>
-                <button class="nav-user-logout" id="navLogout">Cerrar sesión</button>
+                <a href="/cuenta.html" data-i18n="nav.myaccount">Mi cuenta</a>
+                <button class="nav-user-logout" id="navLogout" data-i18n="nav.logout">Cerrar sesión</button>
             </div>
         </div>
     </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+    <button class="nav-hamburger" id="navHamburger" data-i18n="nav.menuLabel" aria-label="Menú">
         <span></span><span></span><span></span>
     </button>
 </nav>
@@ -740,10 +740,10 @@
 <header class="mercadito-header">
     <div class="mercadito-header-left">
         <span class="mercadito-header-deco" aria-hidden="true">Ash</span>
-        <h1>El Mercadito<br><em>de Ash</em></h1>
+        <h1 data-i18n-override="mercadito.hero.title">El Mercadito<br><em>de Ash</em></h1>
         <div class="mercadito-header-desc">
-            <p>Piezas seleccionadas con criterio de stylist. Vintage que vale, accesorios que duran.</p>
-            <p>También: contenido editorial para aprender a ver la moda de otra manera.</p>
+            <p data-i18n="mercadito.hero.desc1">Piezas seleccionadas con criterio de stylist. Vintage que vale, accesorios que duran.</p>
+            <p data-i18n="mercadito.hero.desc2">También: contenido editorial para aprender a ver la moda de otra manera.</p>
         </div>
     </div>
     <div class="mercadito-header-right">
@@ -754,20 +754,20 @@
 <main id="mercaditoMain">
 <!-- FILTERS -->
 <div class="mercadito-filters">
-    <button class="cat-btn active" data-filter="all">Todos</button>
-    <button class="cat-btn" data-filter="pieza">Piezas</button>
-    <button class="cat-btn" data-filter="digital">Digital</button>
+    <button class="cat-btn active" data-filter="all" data-i18n="mercadito.tab.all">Todos</button>
+    <button class="cat-btn" data-filter="pieza" data-i18n="mercadito.tab.pieces">Piezas</button>
+    <button class="cat-btn" data-filter="digital" data-i18n="mercadito.tab.digital">Digital</button>
 </div>
 
 <!-- PRODUCTS -->
 <section class="mercadito-section">
     <div class="products-grid" id="productsGrid">
-        <p id="loadingMsg" style="grid-column:1/-1;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--sand-text);padding:40px 0;text-align:center;animation:blogPulse 1.6s ease-in-out infinite;">Cargando productos...</p>
+        <p id="loadingMsg" data-i18n="mercadito.loading" style="grid-column:1/-1;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--sand-text);padding:40px 0;text-align:center;animation:blogPulse 1.6s ease-in-out infinite;">Cargando productos...</p>
     </div>
 </section>
 
 <!-- AVISO -->
-<p class="mercadito-aviso" style="margin-top:48px;">
+<p class="mercadito-aviso" data-i18n-override="mercadito.aviso" style="margin-top:48px;">
     Compra con checkout seguro de Tiendanube. Envíos a todo el país. Para consultas escribí a <strong>info@ashmateu.com</strong> o por Instagram <strong>@ashmateu</strong>.
 </p>
 
@@ -778,8 +778,8 @@
     <span class="footer-logo">Ash Mateu</span>
     <ul class="footer-links">
         <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/#contacto">Contacto</a></li>
+        <li><a href="/" data-i18n="footer.home">Inicio</a></li>
+        <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <span class="footer-copy">&#169; 2026</span>
 </footer>
@@ -886,20 +886,20 @@ function cardHTML(p, idx) {
     const soldOut = p.stock === 0 ? 'sold-out' : '';
     const img = p.image_url
         ? `<img src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy">`
-        : `<div class="product-img-placeholder"><span>Imagen próximamente</span></div>`;
-    const catLabel = p.category === 'digital' ? 'Digital' : 'Pieza';
+        : `<div class="product-img-placeholder"><span>${window.i18n.t('mercadito.product.imagesoon')}</span></div>`;
+    const catLabel = p.category === 'digital' ? window.i18n.t('mercadito.product.digital') : window.i18n.t('mercadito.product.piece');
 
     let btnContent;
     if (p.stock === 0) {
-        btnContent = `<span class="btn-cart" style="opacity:0.25;pointer-events:none">${arrowSvg} Vendido</span>`;
+        btnContent = `<span class="btn-cart" style="opacity:0.25;pointer-events:none">${arrowSvg} ${window.i18n.t('mercadito.product.soldout')}</span>`;
     } else if (!p.active) {
-        btnContent = `<span class="btn-cart" style="opacity:0.25;pointer-events:none">${arrowSvg} Próximamente</span>`;
+        btnContent = `<span class="btn-cart" style="opacity:0.25;pointer-events:none">${arrowSvg} ${window.i18n.t('mercadito.product.comingsoon')}</span>`;
     } else if (p.buy_url) {
         // El checkout es en Tiendanube
-        btnContent = `<a class="btn-cart" href="${esc(p.buy_url)}" target="_blank" rel="noopener">${arrowSvg} Comprar</a>`;
+        btnContent = `<a class="btn-cart" href="${esc(p.buy_url)}" target="_blank" rel="noopener">${arrowSvg} ${window.i18n.t('mercadito.product.buy')}</a>`;
     } else {
         // Producto sin link de compra (catálogo legado): consulta por Instagram
-        btnContent = `<a class="btn-cart" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">${arrowSvg} Consultar</a>`;
+        btnContent = `<a class="btn-cart" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">${arrowSvg} ${window.i18n.t('mercadito.product.inquire')}</a>`;
     }
 
     return `
@@ -933,8 +933,8 @@ function applyFilter(filter) {
 function showEmptyState() {
     document.getElementById('productsGrid').innerHTML = `
         <div class="mercadito-empty">
-            <p class="mercadito-empty-title">El Mercadito está<br><em>entre colecciones</em></p>
-            <p class="mercadito-empty-sub">Las próximas piezas se están eligiendo. Mientras tanto, seguí las novedades en <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a>.</p>
+            <p class="mercadito-empty-title">${window.i18n.t('mercadito.empty.title')}</p>
+            <p class="mercadito-empty-sub">${window.i18n.t('mercadito.empty.sub')}</p>
         </div>`;
 }
 
@@ -966,8 +966,13 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
     btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
 });
 
+// Re-renderiza las cards (botones, etiquetas) si cambia el idioma después de cargar
+window.addEventListener('ash:langchange', () => {
+    if (allProducts.length) renderProducts();
+});
+
 loadProducts();
 </script>
-<script src="/js/i18n.js"></script>
+<script src="/js/i18n.js?v=2"></script>
 </body>
 </html>
