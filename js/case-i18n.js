@@ -309,7 +309,7 @@ window.CASE_I18N = {
 
     'gucci-rural': {
         en: {
-            title: 'Editorial Rural × Gucci',
+            title: 'Rural Editorial × Gucci',
             category: 'Styling',
             location: 'Upstate New York',
             categoryLine: 'Styling — Editorial — Upstate New York',
@@ -329,7 +329,7 @@ window.CASE_I18N = {
             nextTitle: 'Back to portfolio',
         },
         fr: {
-            title: 'Editorial Rural × Gucci',
+            title: 'Éditorial rural × Gucci',
             category: 'Styling',
             location: 'Upstate New York',
             categoryLine: 'Styling — Éditorial — Upstate New York',
