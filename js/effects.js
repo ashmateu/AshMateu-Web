@@ -55,6 +55,10 @@
     document.body.appendChild(grain);
 
     // ── Custom cursor (solo desktop) ───────────────────────────────────
+    // mix-blend-mode: difference se auto-invierte sobre fotos oscurecidas
+    // (brightness 0.7-0.88 en todo el sitio) y sobre fondos claros por igual;
+    // un cursor #0A0A0A liso queda invisible contra las fotos, que son casi
+    // todas oscuras a propósito.
     if (!('ontouchstart' in window) && window.innerWidth > 768) {
         const cursorStyle = document.createElement('style');
         cursorStyle.textContent = `
@@ -62,54 +66,55 @@
 
             .cur-dot {
                 position: fixed; top: 0; left: 0;
-                width: 5px; height: 5px;
-                background: #0A0A0A; border-radius: 50%;
+                width: 6px; height: 6px;
+                background: var(--sand, #B5A898); border-radius: 50%;
                 pointer-events: none; z-index: 9999;
                 transform: translate(-50%,-50%);
+                mix-blend-mode: difference;
                 will-change: transform;
                 transition: transform 0.06s;
             }
             .cur-ring {
                 position: fixed; top: 0; left: 0;
-                width: 36px; height: 36px;
-                border: 1px solid rgba(10,10,10,0.42);
+                width: 34px; height: 34px;
+                border: 1px solid var(--sand, #B5A898);
                 border-radius: 50%;
                 pointer-events: none; z-index: 9998;
                 transform: translate(-50%,-50%);
+                mix-blend-mode: difference;
                 will-change: transform;
-                transition: width 0.3s cubic-bezier(0.16,1,0.3,1),
-                            height 0.3s cubic-bezier(0.16,1,0.3,1),
-                            border-color 0.3s,
-                            background 0.3s,
+                transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
+                            height 0.35s cubic-bezier(0.16,1,0.3,1),
                             opacity 0.3s;
             }
-            .cur-ring.is-link  { width: 52px; height: 52px; border-color: #0A0A0A; }
-            .cur-ring.is-image { width: 76px; height: 76px; background: rgba(10,10,10,0.07); border-color: transparent; }
+            .cur-ring.is-link  { width: 44px; height: 44px; }
+            .cur-ring.is-image { width: 82px; height: 82px; }
             .cur-ring.is-hidden { opacity: 0; }
 
             .cur-label {
                 position: fixed; top: 0; left: 0;
-                width: 76px; height: 76px;
+                width: 82px; height: 82px;
                 border-radius: 50%;
                 display: flex; align-items: center; justify-content: center;
-                font-family: 'Inter', system-ui, sans-serif;
-                font-size: 9px; font-weight: 400;
-                letter-spacing: 0.18em; text-transform: uppercase;
-                color: #0A0A0A;
+                font-family: var(--serif, 'Bodoni Moda', Georgia, serif);
+                font-size: 13px; font-style: italic; font-weight: 400;
+                color: var(--sand, #B5A898);
                 pointer-events: none; z-index: 9997;
-                transform: translate(-50%,-50%);
-                will-change: transform;
+                transform: translate(-50%,-50%) scale(0.82);
+                mix-blend-mode: difference;
+                will-change: transform, opacity;
                 opacity: 0;
-                transition: opacity 0.25s;
+                transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1),
+                            transform 0.35s cubic-bezier(0.16,1,0.3,1);
             }
-            .cur-ring.is-image ~ .cur-label { opacity: 1; }
+            .cur-ring.is-image ~ .cur-label { opacity: 1; transform: translate(-50%,-50%) scale(1); }
         `;
         document.head.appendChild(cursorStyle);
 
         const dot   = document.createElement('div'); dot.className = 'cur-dot';
         const ring  = document.createElement('div'); ring.className = 'cur-ring';
         const label = document.createElement('div'); label.className = 'cur-label';
-        label.textContent = 'VER';
+        label.textContent = 'Ver';
         document.body.append(dot, ring, label);
 
         let mx = -100, my = -100, rx = -100, ry = -100;
