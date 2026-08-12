@@ -503,6 +503,24 @@
             max-width: 560px;
         }
 
+        .service-item.featured {
+            grid-template-columns: 1fr;
+            background: rgba(181, 168, 152, 0.16);
+            padding: 44px 40px;
+            margin: 12px 0;
+            border-top: none;
+        }
+        .service-item.featured .service-eyebrow {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--sand-text);
+            margin-bottom: 12px;
+        }
+        .service-item.featured .service-name { font-size: clamp(28px, 2.6vw, 40px); margin-bottom: 14px; }
+        .service-item.featured .service-desc { opacity: 0.85; max-width: 640px; }
+
         /* ── About ── */
         #vlog { background: var(--ivory); }
 
@@ -532,6 +550,7 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            border: 1px solid rgba(181,168,152,0.3);
         }
         .about-video-wrap iframe {
             width: 100%;
@@ -546,24 +565,103 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            filter: brightness(0.92);
+            transition: transform 0.4s ease;
         }
+        .about-video-wrap:hover .yt-thumb { transform: scale(1.02); }
         .yt-play {
             position: absolute;
             inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.18);
+            background: rgba(0,0,0,0.22);
             transition: background 0.2s;
         }
-        .yt-play:hover { background: rgba(0,0,0,0.32); }
+        .yt-play:hover { background: rgba(0,0,0,0.38); }
         .yt-play svg {
-            width: 56px;
-            height: 56px;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+            transition: transform 0.2s;
+        }
+        .about-video-wrap:hover .yt-play svg { transform: scale(1.08); }
+        
+        .yt-active-meta {
+            padding: 12px 0 16px;
+            border-bottom: 1px solid rgba(181,168,152,0.25);
+            margin-bottom: 16px;
+        }
+        .yt-active-tag {
+            font-size: 9.5px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--sand-text);
+            margin-bottom: 4px;
+        }
+        .yt-active-title {
+            font-family: var(--serif);
+            font-size: 19px;
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--black);
         }
 
-        .about-text-block { padding-top: 8px; }
+        .yt-playlist-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .yt-thumb-card {
+            background: rgba(181,168,152,0.12);
+            border: 1px solid rgba(181,168,152,0.3);
+            cursor: pointer;
+            padding: 6px;
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+            text-align: left;
+        }
+        .yt-thumb-card:hover {
+            border-color: var(--black);
+            background: rgba(181,168,152,0.24);
+            transform: translateY(-2px);
+        }
+        .yt-thumb-card.active {
+            border-color: var(--black);
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .yt-card-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .yt-card-title {
+            font-size: 10px;
+            line-height: 1.35;
+            color: var(--black);
+            font-weight: 400;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .yt-more-link {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 10.5px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--sand-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .yt-more-link:hover { color: var(--black); }
+
+        .about-text-block { padding-top: 4px; }
 
         .about-text {
             font-size: 16px;
@@ -574,6 +672,8 @@
         }
 
         .about-text p + p { margin-top: 28px; }
+        .about-text a { color: var(--black); text-decoration: underline; text-decoration-color: var(--sand); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
+        .about-text a:hover { text-decoration-color: var(--black); }
 
         /* ── Contact ── */
         #contacto {
@@ -968,6 +1068,10 @@
         <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
         <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
         <li><a href="#vlog" data-i18n="nav.vlog">Vlog</a></li>
+
+        <li><a href="/como-trabajo" data-i18n="nav.services">Cómo trabajo</a></li>
+
+        <li><a href="/galeria" data-i18n="nav.gallery">Galería</a></li>
         <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -984,6 +1088,10 @@
         <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
         <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
         <li><a href="#vlog" data-i18n="nav.vlog">Vlog</a></li>
+
+        <li><a href="/como-trabajo" data-i18n="nav.services">Cómo trabajo</a></li>
+
+        <li><a href="/galeria" data-i18n="nav.gallery">Galería</a></li>
         <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="mobile-menu-lang">
@@ -1118,26 +1226,59 @@
     </div>
 </section>
 
-<!-- SOBRE -->
+<!-- VLOG & CONTENIDO AUDIOVISUAL -->
 <section id="vlog">
     <div class="section-inner">
-        <h2 class="about-editorial-headline">Vlog</h2>
+        <h2 class="about-editorial-headline">Vlog &amp; Masterclasses</h2>
         <div class="about-inner">
-            <div class="about-video-wrap" id="ytFacade">
-                <img class="yt-thumb" src="https://i.ytimg.com/vi/7lB4UjBaTyQ/maxresdefault.jpg" alt="Ash Mateu Vlog" width="1280" height="720" loading="lazy">
-                <div class="yt-play">
-                    <svg viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="68" height="48" rx="10" fill="#FF0000"/>
-                        <path d="M27 16l20 8-20 8V16z" fill="white"/>
-                    </svg>
+            <div class="vlog-player-column">
+                <div class="about-video-wrap" id="ytFacade" data-videoid="7lB4UjBaTyQ">
+                    <img class="yt-thumb" id="ytActiveThumb" src="https://i.ytimg.com/vi/7lB4UjBaTyQ/hqdefault.jpg" alt="Ash Mateu Vlog" width="1280" height="720" loading="lazy">
+                    <div class="yt-play">
+                        <svg viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="68" height="48" rx="10" fill="#FF0000"/>
+                            <path d="M27 16l20 8-20 8V16z" fill="white"/>
+                        </svg>
+                    </div>
                 </div>
+                <div class="yt-active-meta">
+                    <p class="yt-active-tag" id="ytActiveCategory">Vlog Oficial · Episodio 01</p>
+                    <h3 class="yt-active-title" id="ytActiveTitle">Styling Gime Accardi — Martín Fierro de Teatro 2025</h3>
+                </div>
+
+                <div class="yt-playlist-strip" id="ytPlaylistStrip">
+                    <div class="yt-thumb-card active" data-vid="7lB4UjBaTyQ" data-cat="Vlog Oficial" data-title="Styling Gime Accardi — Martín Fierro de Teatro 2025">
+                        <img class="yt-card-img" src="https://i.ytimg.com/vi/7lB4UjBaTyQ/hqdefault.jpg" alt="Gime Accardi Martín Fierro">
+                        <p class="yt-card-title">Vlog #1: Gime Accardi en Martín Fierro</p>
+                    </div>
+                    <div class="yt-thumb-card" data-vid="kZi7vIXiWPM" data-cat="Paris Fashion Week" data-title="CHANEL StreetStyle &amp; Best Outfits — Paris Fashion Week">
+                        <img class="yt-card-img" src="https://i.ytimg.com/vi/kZi7vIXiWPM/hqdefault.jpg" alt="Chanel Paris Fashion Week">
+                        <p class="yt-card-title">Chanel: Paris Fashion Week</p>
+                    </div>
+                    <div class="yt-thumb-card" data-vid="rlonZK0tUVE" data-cat="Masterclass" data-title="Masterclass de Tendencias en Marketing &amp; Comunicación de Moda">
+                        <img class="yt-card-img" src="https://i.ytimg.com/vi/rlonZK0tUVE/hqdefault.jpg" alt="Masterclass Marketing">
+                        <p class="yt-card-title">Masterclass Marketing &amp; Moda</p>
+                    </div>
+                    <div class="yt-thumb-card" data-vid="Bq9Sk8tE5z0" data-cat="Keynote" data-title="Masterclass Lujo &amp; Legado: El impacto global de París">
+                        <img class="yt-card-img" src="https://i.ytimg.com/vi/Bq9Sk8tE5z0/hqdefault.jpg" alt="Lujo & Legado">
+                        <p class="yt-card-title">Lujo &amp; Legado: Pasarelas París</p>
+                    </div>
+                </div>
+
+                <a class="yt-more-link" href="https://www.youtube.com/playlist?list=PLHRzKysY3DfkOeyVYBN-SSvv9Za6PHv81" target="_blank" rel="noopener">
+                    Ver playlist completa en YouTube (37 videos) →
+                </a>
             </div>
+
             <div class="about-text-block">
                 <div class="about-text" data-i18n-override="about.text">
-                    <p>Ash trabaja desde la narrativa hacia el look, no al revés. Cada producción empieza con una pregunta sobre qué tiene que decir la imagen, y termina cuando la respuesta está en el cuadro.</p>
-                    <p>Chanel, Louis Vuitton, Miu Miu, Dolce & Gabbana, Gucci, Nike, L'Oréal, Mercedes Benz. Tapa de Marie Claire Argentina más veces de las que recuerda con exactitud. Styling para Dolores Fonzi, Griselda Siciliani, Valentina Zenere y buena parte del elenco de Netflix Argentina.</p>
-                    <p>En 2015 fundó Inside Studios, escuela de moda online que llegó a tener más de 20.000 estudiantes en toda la región.</p>
-                    <p>Disponible para proyectos en 2026. El formulario de abajo es el camino más directo.</p>
+                    <p>Descendiente de españoles, nací en un barrio fundado por alemanes. Desde los seis años hasta la adolescencia fui gimnasta de alto rendimiento, y ahí aprendí casi todo lo que después me sirvió para trabajar: disciplina, convicción en los procesos y esa capacidad un poco absurda de repetir algo durante meses confiando en que eventualmente iba a salir.</p>
+                    <p>A los 19 años ya trabajaba en Editorial Perfil montando producciones de moda. Ese universo editorial terminó convirtiéndose en otra universidad y en una relación que todavía continúa: hoy trabajo en Marie Claire Argentina investigando, escribiendo y realizando coberturas internacionales.</p>
+                    <p>Chanel, Louis Vuitton, Miu Miu, Dolce &amp; Gabbana, Gucci, Nike, L'Oréal, Mercedes Benz. Tapa de Marie Claire Argentina más veces de las que recuerdo con exactitud. Styling para Dolores Fonzi, Griselda Siciliani, Valentina Zenere y buena parte del elenco de Netflix Argentina.</p>
+                    <p>En 2015 fundé Inside Studios, escuela de moda online que llegó a tener más de 150.000 Insiders en toda la región.</p>
+                    <p>Si tengo que encontrar un hilo entre todo esto, es bastante simple: me gusta leer. Leer personas, marcas, culturas, momentos, y transformar eso en una identidad, una estrategia o una idea que pueda salir al mundo.</p>
+                    <p><a href="/historia" data-i18n="about.readMore">Leer la historia completa →</a></p>
+                    <p>Disponible para proyectos y conferencias en 2026. El formulario de abajo es el camino más directo.</p>
                 </div>
             </div>
         </div>
@@ -1157,19 +1298,29 @@
                 <h3 class="service-name" data-i18n-override="service.2.name">Styling editorial y publicitario</h3>
                 <p class="service-desc" data-i18n-override="service.2.desc">Construyo looks para producciones fotográficas y audiovisuales. Trabajo directo con marcas, fotógrafos y equipos completos de producción.</p>
             </li>
-            <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.3.name">Celebrity styling</h3>
-                <p class="service-desc" data-i18n-override="service.3.desc">Red carpets, eventos, prensa, apariciones. El styling para figuras públicas tiene sus propias reglas y su propio ritmo.</p>
+            <li class="service-item featured">
+                <span class="service-eyebrow">Styling personal</span>
+                <h3 class="service-name" data-i18n-override="service.3.name">Dress to Kill</h3>
+                <p class="service-desc" data-i18n-override="service.3.desc">Styling para novias, alfombras rojas, galas y eventos que no se repiten. Consultoría de imagen para quienes buscan seguridad e identidad: que nunca nadie olvide tu vestido.</p>
             </li>
             <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.4.name">Consultoría de marca</h3>
-                <p class="service-desc" data-i18n-override="service.4.desc">Moda, belleza, cultura. Trabajo sobre identidad visual y tono de comunicación con marcas que necesitan una perspectiva que viene del set, no de una presentación de PowerPoint.</p>
+                <h3 class="service-name" data-i18n-override="service.4.name">Celebrity styling</h3>
+                <p class="service-desc" data-i18n-override="service.4.desc">Red carpets, eventos, prensa, apariciones. El styling para figuras públicas tiene sus propias reglas y su propio ritmo.</p>
             </li>
             <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.5.name">Trend research</h3>
-                <p class="service-desc" data-i18n-override="service.5.desc">Analizo qué está pasando en la cultura antes de que aparezca en las tendencias, y lo traduzco en decisiones concretas de comunicación.</p>
+                <h3 class="service-name" data-i18n-override="service.5.name">Consultoría de marca</h3>
+                <p class="service-desc" data-i18n-override="service.5.desc">Moda, belleza, cultura. Trabajo sobre identidad visual y tono de comunicación con marcas que necesitan una perspectiva que viene del set, no de una presentación de PowerPoint.</p>
+            </li>
+            <li class="service-item">
+                <h3 class="service-name" data-i18n-override="service.6.name">Speaker especializada &amp; Tendencias</h3>
+                <p class="service-desc" data-i18n-override="service.6.desc">Análisis de nuevas oportunidades de negocio, estudios de tendencias mundiales con bajada local y sociología del consumo. Keynotes y masterclasses.</p>
             </li>
         </ul>
+        <div style="text-align: center; margin-top: 48px;">
+            <a href="/como-trabajo" style="display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 16px 32px; background: var(--black); color: var(--white); text-decoration: none; transition: opacity 0.2s;">
+                Ver detalle de servicios &amp; cómo trabajo →
+            </a>
+        </div>
     </div>
 </section>
 
@@ -1272,20 +1423,49 @@
         nav.classList.toggle('scrolled', window.scrollY > 80);
     }, { passive: true });
 
-    // YouTube facade → iframe al click
+    // YouTube facade & dynamic playlist switcher
     const ytFacade = document.getElementById('ytFacade');
+    const ytActiveThumb = document.getElementById('ytActiveThumb');
+    const ytActiveCategory = document.getElementById('ytActiveCategory');
+    const ytActiveTitle = document.getElementById('ytActiveTitle');
+    const ytCards = document.querySelectorAll('.yt-thumb-card');
+
+    function playVideo(videoId) {
+        if (!ytFacade) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+        ytFacade.innerHTML = '';
+        ytFacade.appendChild(iframe);
+        ytFacade.style.cursor = 'default';
+    }
+
     if (ytFacade) {
         ytFacade.addEventListener('click', () => {
-            const iframe = document.createElement('iframe');
-            iframe.src = 'https://www.youtube.com/embed/7lB4UjBaTyQ?autoplay=1&rel=0';
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-            iframe.allowFullscreen = true;
-            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
-            ytFacade.innerHTML = '';
-            ytFacade.appendChild(iframe);
-            ytFacade.style.cursor = 'default';
+            const currentVid = ytFacade.getAttribute('data-videoid') || '7lB4UjBaTyQ';
+            playVideo(currentVid);
         });
     }
+
+    ytCards.forEach(card => {
+        card.addEventListener('click', () => {
+            ytCards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            const vid = card.getAttribute('data-vid');
+            const cat = card.getAttribute('data-cat');
+            const title = card.getAttribute('data-title');
+
+            if (ytActiveCategory) ytActiveCategory.textContent = cat;
+            if (ytActiveTitle) ytActiveTitle.textContent = title;
+            if (ytFacade) ytFacade.setAttribute('data-videoid', vid);
+
+            // Automatically play the newly selected video
+            playVideo(vid);
+        });
+    });
 
     // Hamburger nav
     const hamburger    = document.getElementById('navHamburger');

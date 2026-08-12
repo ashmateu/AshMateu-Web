@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería — Ash Mateu | Notas, Proyectos &amp; Videoteca</title>
+  <meta name="description" content="Notas editoriales, proyectos, portadas, videoteca de YouTube y moodboards de Ash Mateu, directora creativa y stylist.">
+  <link rel="canonical" href="https://ashmateu.com/galeria">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Galería — Ash Mateu">
+  <meta property="og:url" content="https://ashmateu.com/galeria">
+  <meta property="og:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.jpg">
+  <meta property="og:description" content="Notas editoriales, proyectos, portadas, videoteca de YouTube y moodboards de Ash Mateu.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Galería — Ash Mateu">
+  <meta name="twitter:description" content="Notas editoriales, proyectos, portadas y videoteca de YouTube de Ash Mateu.">
+  <meta name="twitter:image" content="https://ashmateu.com/images/extracted/chanel-hc/img-005.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Galería — Ash Mateu",
+  "url": "https://ashmateu.com/galeria",
+  "about": { "@id": "https://ashmateu.com/#ash" },
+  "inLanguage": "es"
+}
+</script>
+  <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@100;200;300;900&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Regular.woff2') format('woff2'), url('/fonts/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+    .skip-link { position: absolute; top: -40px; left: 16px; background: var(--black); color: var(--white); padding: 8px 16px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; z-index: 9999; transition: top 0.2s; }
+    .skip-link:focus { top: 16px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0A0A0A; --ivory: #F7F3EE; --white: #fff; --sand: #B5A898; --sand-text: #7A6A5A;
+      --gutter: 56px; --serif: 'Bodoni Moda', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+      --text-hero: clamp(52px, 7vw, 104px);
+    }
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body { font-family: var(--sans); font-weight: 300; color: var(--black); background: var(--ivory); -webkit-font-smoothing: antialiased; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px var(--gutter);
+      background: rgba(247,243,238,0.96); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(181,168,152,0.25);
+    }
+    .nav-logo { display: flex; align-items: stretch; text-decoration: none; gap: 0; }
+    .nav-logo-left { display: flex; flex-direction: column; justify-content: space-between; padding-right: 14px; border-right: 0.5px solid rgba(181,168,152,0.5); }
+    .nav-logo-ash { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 46px; color: var(--black); text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.88; }
+    .nav-logo-year { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 5.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sand-text); }
+    .nav-logo-right { padding-left: 7px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+    .nav-logo-tag { font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 5.5px; color: var(--sand-text); text-transform: uppercase; letter-spacing: 0.32em; line-height: 1.85; }
+    .nav-logo-mateu { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 13px; color: var(--black); text-transform: uppercase; letter-spacing: 0.36em; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--black); transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .gal-header { background: var(--black); color: var(--white); padding: 160px var(--gutter) 88px; }
+    .gal-eyebrow { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sand); margin-bottom: 20px; }
+    .gal-header h1 { font-family: var(--serif); font-size: var(--text-hero); font-weight: 400; line-height: 0.95; }
+
+    .gal-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(10,10,10,0.08);
+    }
+    .gal-card {
+      padding: 56px 44px; min-height: 260px;
+      border-right: 1px solid rgba(10,10,10,0.08);
+      border-bottom: 1px solid rgba(10,10,10,0.08);
+      text-decoration: none; color: var(--black);
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: background 0.2s;
+    }
+    .gal-card:nth-child(3n) { border-right: none; }
+    .gal-card.is-live:hover { background: rgba(10,10,10,0.02); }
+    .gal-card-title { font-family: var(--serif); font-size: 26px; font-weight: 400; margin-bottom: 12px; }
+    .gal-card-desc { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(10,10,10,0.6); }
+    .gal-card-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 24px; }
+    .gal-card.is-live .gal-card-tag { color: rgba(10,10,10,0.6); }
+    .gal-card.is-live:hover .gal-card-tag { color: var(--black); }
+    .gal-card.is-pending { opacity: 0.55; cursor: default; }
+    .gal-card.is-pending .gal-card-tag { color: var(--sand-text); }
+
+    .gal-card.has-photo { position: relative; padding: 0; color: var(--white); min-height: 340px; }
+    .gal-card.has-photo img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.62) contrast(1.05) saturate(0.85); transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .gal-card.has-photo:hover img { transform: scale(1.04); }
+    .gal-card.has-photo > div, .gal-card.has-photo > span { position: relative; z-index: 1; }
+    .gal-card.has-photo { padding: 44px; }
+    .gal-card.has-photo .gal-card-desc { color: rgba(255,255,255,0.75); }
+    .gal-card.has-photo .gal-card-tag { color: rgba(255,255,255,0.85); }
+    .gal-card.has-photo:hover .gal-card-tag { color: var(--white); }
+
+    /* YouTube Videoteca Strip */
+    .yt-section {
+      padding: 72px var(--gutter);
+      background: #FAF7F2;
+      border-top: 1px solid rgba(181,168,152,0.25);
+    }
+    .yt-section-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 32px;
+    }
+    .yt-section-head h2 { font-family: var(--serif); font-size: clamp(24px, 2.5vw, 36px); font-weight: 400; }
+    .yt-section-head a { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sand-text); text-decoration: none; font-weight: 500; }
+    .yt-section-head a:hover { color: var(--black); }
+
+    .yt-video-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .yt-video-item {
+      background: var(--white); border: 1px solid rgba(181,168,152,0.25);
+      text-decoration: none; color: var(--black); display: flex; flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .yt-video-item:hover {
+      transform: translateY(-4px); border-color: var(--black);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    }
+    .yt-thumb-wrapper {
+      position: relative; aspect-ratio: 16/9; overflow: hidden; background: #000;
+    }
+    .yt-thumb-wrapper img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .yt-video-item:hover .yt-thumb-wrapper img { transform: scale(1.05); }
+    .yt-play-badge {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.2); transition: background 0.2s;
+    }
+    .yt-video-item:hover .yt-play-badge { background: rgba(0,0,0,0.35); }
+    .yt-play-badge svg { width: 44px; height: 44px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)); }
+    .yt-video-info { padding: 18px 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .yt-video-category { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand-text); margin-bottom: 6px; }
+    .yt-video-title { font-family: var(--serif); font-size: 16px; font-weight: 400; line-height: 1.35; color: var(--black); }
+
+    /* Instagram Strip */
+    .ig-strip {
+      padding: 64px var(--gutter) 80px;
+      border-top: 1px solid rgba(10,10,10,0.08);
+    }
+    .ig-strip-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 24px;
+    }
+    .ig-strip-head h2 { font-family: var(--serif); font-size: 22px; font-weight: 400; }
+    .ig-strip-head a { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sand-text); text-decoration: none; }
+    .ig-strip-head a:hover { color: var(--black); }
+    .ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+    .ig-grid a { aspect-ratio: 1; overflow: hidden; display: block; background: #eee; }
+    .ig-grid img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.94) contrast(1.05) saturate(0.88); transition: transform 0.5s ease; }
+    .ig-grid a:hover img { transform: scale(1.06); }
+    @media (max-width: 900px) { .yt-video-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) {
+      .ig-grid { grid-template-columns: repeat(3, 1fr); }
+      .yt-video-grid { grid-template-columns: 1fr; }
+    }
+
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 36px; list-style: none; }
+    .footer-links a { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); }
+
+    a:focus-visible, .nav-hamburger:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    @media (max-width: 900px) {
+      :root { --gutter: 24px; }
+      .nav-hamburger { display: flex; }
+      .nav-links { position: fixed; inset: 0; background: var(--ivory); flex-direction: column; align-items: center; justify-content: center; gap: 44px; z-index: 200; display: none; }
+      .nav-links.is-open { display: flex; }
+      .nav-links a { font-size: 20px; letter-spacing: 0.2em; opacity: 0.75; }
+      .gal-header { padding: 120px var(--gutter) 64px; }
+      .gal-grid { grid-template-columns: repeat(2, 1fr); }
+      .gal-card:nth-child(3n) { border-right: 1px solid rgba(10,10,10,0.08); }
+      .gal-card:nth-child(2n) { border-right: none; }
+      footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .gal-grid { grid-template-columns: 1fr; }
+      .gal-card { border-right: none; }
+    }
+    @view-transition { navigation: auto; }
+  </style>
+</head>
+<body>
+<a href="#galMain" class="skip-link">Ir al contenido</a>
+
+<nav id="nav">
+  <a href="/" class="nav-logo">
+      <div class="nav-logo-left">
+        <div class="nav-logo-ash">Ash</div>
+        <div class="nav-logo-year">Est. 2011</div>
+      </div>
+      <div class="nav-logo-right">
+        <div class="nav-logo-tag">Creative<br>Direction &<br>Styling</div>
+        <div class="nav-logo-mateu">Mateu</div>
+      </div>
+    </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/#trabajo" data-i18n="nav.work">Portfolio</a></li>
+    <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
+    <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
+    <li><a href="/#vlog" data-i18n="nav.vlog">Vlog</a></li>
+    <li><a href="/como-trabajo" data-i18n="nav.services">Cómo trabajo</a></li>
+    <li><a href="/galeria" class="active" data-i18n="nav.gallery">Galería</a></li>
+    <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" data-i18n="nav.menuLabel" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<header class="gal-header">
+  <p class="gal-eyebrow">Ash Mateu · Archivo Editorial</p>
+  <h1>Galería</h1>
+</header>
+
+<main id="galMain">
+  <!-- GRILLA PRINCIPAL DE CATEGORÍAS -->
+  <div class="gal-grid">
+    <a class="gal-card is-live" href="/blog">
+      <div>
+        <h2 class="gal-card-title">Capítulos del blog</h2>
+        <p class="gal-card-desc">Notas sobre moda, cultura, coberturas internacionales de Marie Claire Argentina e investigaciones de tendencias.</p>
+      </div>
+      <span class="gal-card-tag">Ver notas →</span>
+    </a>
+
+    <a class="gal-card is-live" href="/#trabajo">
+      <div>
+        <h2 class="gal-card-title">Proyectos &amp; Editoriales</h2>
+        <p class="gal-card-desc">Los editoriales del portfolio: Chanel, Miu Miu, Dolce &amp; Gabbana, Gucci, Dolores Fonzi y más.</p>
+      </div>
+      <span class="gal-card-tag">Ver portfolio →</span>
+    </a>
+
+    <a class="gal-card is-live" href="https://www.youtube.com/playlist?list=PLHRzKysY3DfkOeyVYBN-SSvv9Za6PHv81" target="_blank" rel="noopener">
+      <div>
+        <h2 class="gal-card-title">Capítulos del Vlog</h2>
+        <p class="gal-card-desc">Videoteca en YouTube: coberturas de Paris Fashion Week, detrás de escena en alfombras rojas y masterclasses.</p>
+      </div>
+      <span class="gal-card-tag">Ver en YouTube (37 videos) →</span>
+    </a>
+
+    <div class="gal-card is-pending">
+      <div>
+        <h2 class="gal-card-title">Nuevas portadas</h2>
+        <p class="gal-card-desc">Tapas de Marie Claire Argentina y publicaciones editoriales internacionales.</p>
+      </div>
+      <span class="gal-card-tag">Próximamente</span>
+    </div>
+
+    <div class="gal-card is-pending">
+      <div>
+        <h2 class="gal-card-title">Moodboards</h2>
+        <p class="gal-card-desc">El proceso creativo y conceptual detrás de cada producción antes del resultado final.</p>
+      </div>
+      <span class="gal-card-tag">Próximamente</span>
+    </div>
+
+    <div class="gal-card is-pending">
+      <div>
+        <h2 class="gal-card-title">Taylor Made</h2>
+        <p class="gal-card-desc">Proyectos y estilismos hechos a la carta para novias, eventos de gala y marcas.</p>
+      </div>
+      <span class="gal-card-tag">Próximamente</span>
+    </div>
+  </div>
+
+  <!-- VIDEOTECA DESTACADA DE YOUTUBE -->
+  <section class="yt-section">
+    <div class="yt-section-head">
+      <h2>Vlog &amp; Notas Audiovisuales</h2>
+      <a href="https://www.youtube.com/playlist?list=PLHRzKysY3DfkOeyVYBN-SSvv9Za6PHv81" target="_blank" rel="noopener">Ver playlist completa (37 videos) →</a>
+    </div>
+    <div class="yt-video-grid">
+      <a class="yt-video-item" href="https://www.youtube.com/watch?v=7lB4UjBaTyQ" target="_blank" rel="noopener">
+        <div class="yt-thumb-wrapper">
+          <img src="https://i.ytimg.com/vi/7lB4UjBaTyQ/hqdefault.jpg" alt="Vlog #1 Gime Accardi" loading="lazy">
+          <div class="yt-play-badge">
+            <svg viewBox="0 0 68 48" fill="none"><rect width="68" height="48" rx="10" fill="#FF0000"/><path d="M27 16l20 8-20 8V16z" fill="white"/></svg>
+          </div>
+        </div>
+        <div class="yt-video-info">
+          <span class="yt-video-category">Vlog Oficial</span>
+          <h3 class="yt-video-title">Styling Gime Accardi · Martín Fierro de Teatro</h3>
+        </div>
+      </a>
+
+      <a class="yt-video-item" href="https://www.youtube.com/watch?v=kZi7vIXiWPM" target="_blank" rel="noopener">
+        <div class="yt-thumb-wrapper">
+          <img src="https://i.ytimg.com/vi/kZi7vIXiWPM/hqdefault.jpg" alt="Chanel Paris Fashion Week" loading="lazy">
+          <div class="yt-play-badge">
+            <svg viewBox="0 0 68 48" fill="none"><rect width="68" height="48" rx="10" fill="#FF0000"/><path d="M27 16l20 8-20 8V16z" fill="white"/></svg>
+          </div>
+        </div>
+        <div class="yt-video-info">
+          <span class="yt-video-category">Paris Fashion Week</span>
+          <h3 class="yt-video-title">Chanel StreetStyle &amp; Best Outfits</h3>
+        </div>
+      </a>
+
+      <a class="yt-video-item" href="https://www.youtube.com/watch?v=rlonZK0tUVE" target="_blank" rel="noopener">
+        <div class="yt-thumb-wrapper">
+          <img src="https://i.ytimg.com/vi/rlonZK0tUVE/hqdefault.jpg" alt="Masterclass Tendencias" loading="lazy">
+          <div class="yt-play-badge">
+            <svg viewBox="0 0 68 48" fill="none"><rect width="68" height="48" rx="10" fill="#FF0000"/><path d="M27 16l20 8-20 8V16z" fill="white"/></svg>
+          </div>
+        </div>
+        <div class="yt-video-info">
+          <span class="yt-video-category">Masterclass</span>
+          <h3 class="yt-video-title">Tendencias en Marketing &amp; Comunicación de Moda</h3>
+        </div>
+      </a>
+
+      <a class="yt-video-item" href="https://www.youtube.com/watch?v=tCLJ5-m6yJI" target="_blank" rel="noopener">
+        <div class="yt-thumb-wrapper">
+          <img src="https://i.ytimg.com/vi/tCLJ5-m6yJI/hqdefault.jpg" alt="Editorial Leonie Hanne" loading="lazy">
+          <div class="yt-play-badge">
+            <svg viewBox="0 0 68 48" fill="none"><rect width="68" height="48" rx="10" fill="#FF0000"/><path d="M27 16l20 8-20 8V16z" fill="white"/></svg>
+          </div>
+        </div>
+        <div class="yt-video-info">
+          <span class="yt-video-category">Inside New York</span>
+          <h3 class="yt-video-title">Editorial Marie Claire con Leonie Hanne</h3>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM REEL STRIP -->
+  <section class="ig-strip">
+    <div class="ig-strip-head">
+      <h2>Últimos posteos</h2>
+      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu →</a>
+    </div>
+    <div class="ig-grid">
+      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post1.jpg" alt="Instagram @ashmateu" width="512" height="640" loading="lazy"></a>
+      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post2.jpg" alt="Instagram @ashmateu" width="512" height="640" loading="lazy"></a>
+      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post3.jpg" alt="Instagram @ashmateu" width="544" height="640" loading="lazy"></a>
+      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post4.jpg" alt="Instagram @ashmateu" width="480" height="640" loading="lazy"></a>
+      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post5.jpg" alt="Instagram @ashmateu" width="480" height="640" loading="lazy"></a>
+      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post6.jpg" alt="Instagram @ashmateu" width="480" height="640" loading="lazy"></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="footer-logo">Ash Mateu</span>
+  <ul class="footer-links">
+    <li><a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu</a></li>
+    <li><a href="/" data-i18n="footer.home">Inicio</a></li>
+    <li><a href="/#contacto" data-i18n="nav.contact">Contacto</a></li>
+  </ul>
+  <span class="footer-copy">&copy; 2026 Ash Mateu</span>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger?.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('is-open');
+    hamburger.classList.toggle('is-open', isOpen);
+  });
+</script>
+<script src="/js/i18n.js?v=2"></script>
+</body>
+</html>
