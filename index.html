@@ -1190,14 +1190,11 @@
         </div>
     </a>
     <ul class="nav-links" id="navLinks">
-        <li><a href="#trabajo" data-i18n="nav.work">Portfolio</a></li>
-        <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
-        <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
-        <li><a href="#vlog" data-i18n="nav.vlog">Vlog</a></li>
-
-        <li><a href="/como-trabajo" data-i18n="nav.services">Cómo trabajo</a></li>
-
+        <li><a href="/historia" data-i18n="nav.history">Mi Historia</a></li>
+        <li><a href="/como-trabajo" data-i18n="nav.services">¿Cómo Trabajo?</a></li>
         <li><a href="/galeria" data-i18n="nav.gallery">Galería</a></li>
+        <li><a href="/como-trabajo#servicios" data-i18n="nav.styling">Servicios</a></li>
+        <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
         <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -1210,14 +1207,11 @@
         <span></span><span></span>
     </button>
     <ul class="mobile-menu-links">
-        <li><a href="#trabajo" data-i18n="nav.work">Portfolio</a></li>
-        <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
-        <li><a href="/blog" data-i18n="nav.notes">Notas</a></li>
-        <li><a href="#vlog" data-i18n="nav.vlog">Vlog</a></li>
-
-        <li><a href="/como-trabajo" data-i18n="nav.services">Cómo trabajo</a></li>
-
+        <li><a href="/historia" data-i18n="nav.history">Mi Historia</a></li>
+        <li><a href="/como-trabajo" data-i18n="nav.services">¿Cómo Trabajo?</a></li>
         <li><a href="/galeria" data-i18n="nav.gallery">Galería</a></li>
+        <li><a href="/como-trabajo#servicios" data-i18n="nav.styling">Servicios</a></li>
+        <li><a href="/prensa" data-i18n="nav.press">Prensa</a></li>
         <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="mobile-menu-lang">
@@ -1233,25 +1227,28 @@
 <!-- HERO -->
 <section id="hero">
     <div class="hero-content">
-        <p class="hero-eyebrow">Ash Mateu</p>
-        <h1 class="hero-title" data-i18n-override="hero.title"><span class="hero-kw">Moda</span> con <span class="hero-kw">intención</span>.<br>La <span class="hero-kw">imagen</span> <span class="hero-small">desde adentro</span>.</h1>
-        <p class="hero-subtitle" data-i18n-override="hero.subtitle">Chanel, Miu Miu, Gucci. Tapas de Marie Claire.<br>Dolores Fonzi, Griselda Siciliani. Buenos Aires, Nueva York, París.</p>
+        <p class="hero-eyebrow">Ash Mateu Prieto</p>
+        <h1 class="hero-title" data-i18n-override="hero.title">Styling <span class="hero-kw">people</span>,<br><span class="hero-kw">brands</span> and <span class="hero-kw">ideas</span>.</h1>
+        <p class="hero-subtitle" data-i18n-override="hero.subtitle">Creative Director &amp; Fashion Consultant</p>
+        <blockquote style="margin: 20px 0 28px; padding-left: 16px; border-left: 2px solid var(--sand); font-style: italic; font-size: 14px; line-height: 1.6; color: rgba(10,10,10,0.75);" data-i18n-override="hero.manifest">
+            ‘Construyo identidad a través de estrategias de branding y comunicación. Soy especialista en posicionar imagen de marcas y personas.’
+        </blockquote>
         <div class="hero-ctas">
-            <a href="#trabajo" class="cta-primary" data-i18n="hero.cta.primary">Ver portfolio</a>
-            <a href="#contacto" class="cta-secondary" data-i18n="hero.cta.secondary">Trabajemos juntos</a>
+            <a href="/como-trabajo" class="cta-primary" data-i18n="hero.cta.primary">¿Cómo Trabajo?</a>
+            <a href="https://wa.me/5491138580228?text=Hola%20Ash,%20te%20escribo%20desde%20tu%20sitio%20web" target="_blank" rel="noopener" class="cta-secondary" data-i18n="hero.cta.secondary">Escribime por WhatsApp ↗</a>
         </div>
     </div>
     <div class="hero-visuals">
         <div class="hero-img-main">
-            <img src="images/ash/bts-set.jpg"
-                 alt="Ash Mateu en set — Marie Claire"
-                 width="1080" height="1271"
+            <img src="/images/hero_studio/MARIECLAIRE_2608064304_web.webp"
+                 alt="Ash Mateu Prieto — Creative Director & Fashion Consultant"
+                 width="1601" height="2400"
                  loading="eager" fetchpriority="high">
         </div>
         <div class="hero-img-float">
-            <img src="images/ash/frontrow.jpg"
-                 alt="Ash Mateu — front row"
-                 width="1080" height="1426"
+            <img src="/images/hero_studio/MARIECLAIRE_2608064351_web.webp"
+                 alt="Ash Mateu — Marie Claire Studio"
+                 width="1601" height="2400"
                  loading="eager">
         </div>
     </div>
@@ -1411,68 +1408,64 @@
     </div>
 </section>
 
-<!-- SERVICIOS -->
+<!-- CÓMO TRABAJO / SERVICIOS -->
 <section id="servicios">
     <div class="section-inner">
-        <h2 class="services-section-title" data-i18n="section.services">Servicios</h2>
-        <ul class="services-list">
+        <p class="section-kicker" style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sand-text); margin-bottom: 12px;">Servicios para los que me podés contratar</p>
+        <h2 class="services-section-title" data-i18n="section.services">¿Cómo Trabajo?</h2>
+        
+        <ul class="services-list" style="grid-template-columns: repeat(3, 1fr);">
+            <!-- PILAR 1 -->
             <li class="service-item">
                 <div>
-                    <span class="service-eyebrow">Para Marcas · Campañas &amp; Arte</span>
-                    <h3 class="service-name" data-i18n-override="service.1.name">Dirección Creativa</h3>
-                    <p class="service-desc" data-i18n-override="service.1.desc">De la idea al resultado. Concibo y dirijo editoriales, campañas y universos visuales para marcas globales de moda, belleza y lujo en Buenos Aires, Nueva York y París.</p>
+                    <span class="service-eyebrow">01 · Personas · Dress to Kill</span>
+                    <h3 class="service-name">Dress to Kill</h3>
+                    <p class="service-desc">
+                        <strong>Styling para novias:</strong> <em>Que nunca nadie olvide tu vestido.</em><br>
+                        <strong>Consultoría en Imagen:</strong> En busca de seguridad e identidad.<br>
+                        <strong>Alfombras rojas &amp; galas:</strong> Un ojo experto y detallista para ocasiones únicas.<br>
+                        <strong>Fiestas &amp; eventos:</strong> Para quienes quieren vestir para matar.
+                    </p>
                 </div>
-                <a class="service-link" href="/como-trabajo">Ver cómo trabajo →</a>
+                <a class="service-link" href="/como-trabajo#personas">Conocer Dress to Kill →</a>
             </li>
 
+            <!-- PILAR 2 -->
             <li class="service-item">
                 <div>
-                    <span class="service-eyebrow">Para Medios &amp; Marcas · Set &amp; Casting</span>
-                    <h3 class="service-name" data-i18n-override="service.2.name">Styling Editorial &amp; Publicitario</h3>
-                    <p class="service-desc" data-i18n-override="service.2.desc">Construcción de looks de alto impacto para producciones fotográficas y audiovisuales. Trabajo directo con marcas, directores de arte, fotógrafos internacionales y equipos de producción.</p>
+                    <span class="service-eyebrow">02 · Empresas &amp; Marcas</span>
+                    <h3 class="service-name">Styling &amp; Producciones</h3>
+                    <p class="service-desc">
+                        <strong>Campañas y contenidos:</strong> Dirección de producciones en Buenos Aires, Nueva York y París.<br>
+                        <strong>Styling editorial &amp; publicitario:</strong> Construcción de looks de alto impacto para cine, TV, revistas y marcas globales.<br>
+                        <strong>Curaduría de diseño y producto:</strong> Concepto, estética y narrativa de colección.
+                    </p>
                 </div>
-                <a class="service-link" href="/como-trabajo">Ver producciones →</a>
+                <a class="service-link" href="/como-trabajo#marcas">Ver producciones &amp; marcas →</a>
             </li>
 
+            <!-- PILAR 3 -->
             <li class="service-item">
                 <div>
-                    <span class="service-eyebrow">Para Personas · Novias &amp; Eventos Únicos</span>
-                    <h3 class="service-name" data-i18n-override="service.3.name">Dress to Kill</h3>
-                    <p class="service-desc" data-i18n-override="service.3.desc">Styling para novias (<em>"Que nunca nadie olvide tu vestido"</em>), galas, alfombras rojas y eventos que no se repiten. Consultoría de imagen para quienes buscan seguridad, distinción e identidad.</p>
+                    <span class="service-eyebrow">03 · Consultoría &amp; Conferencias</span>
+                    <h3 class="service-name">Consultoría &amp; Speaker</h3>
+                    <p class="service-desc">
+                        <strong>Branding y posicionamiento:</strong> Estrategia de innovación, marketing y comunicación.<br>
+                        <strong>Speaker especializada:</strong> Análisis de nuevas oportunidades de mercado, estudios de tendencias mundiales con bajadas locales, y sociología del comportamiento del consumidor.
+                    </p>
                 </div>
-                <a class="service-link" href="/como-trabajo">Conocer Dress to Kill →</a>
-            </li>
-
-            <li class="service-item">
-                <div>
-                    <span class="service-eyebrow">Para Figuras Públicas · Galas &amp; Prensa</span>
-                    <h3 class="service-name" data-i18n-override="service.4.name">Celebrity Styling</h3>
-                    <p class="service-desc" data-i18n-override="service.4.desc">Red carpets, festivales internacionales, entregas de premios, entrevistas y junkets de prensa. El styling para figuras públicas con códigos de alta costura, confidencialidad y ritmo de set.</p>
-                </div>
-                <a class="service-link" href="/como-trabajo">Ver portfolio celebrities →</a>
-            </li>
-
-            <li class="service-item">
-                <div>
-                    <span class="service-eyebrow">Para Empresas · Branding &amp; Innovación</span>
-                    <h3 class="service-name" data-i18n-override="service.5.name">Consultoría de Marca &amp; Curaduría</h3>
-                    <p class="service-desc" data-i18n-override="service.5.desc">Branding, posicionamiento de marca, curaduría de diseño y producto. Estrategia de comunicación y marketing de moda con una perspectiva que viene del set real, no de una presentación teórica.</p>
-                </div>
-                <a class="service-link" href="/como-trabajo">Consultar para marcas →</a>
-            </li>
-
-            <li class="service-item">
-                <div>
-                    <span class="service-eyebrow">Conferencias &amp; Formación · Macrotendencias</span>
-                    <h3 class="service-name" data-i18n-override="service.6.name">Speaker Especializada &amp; Tendencias</h3>
-                    <p class="service-desc" data-i18n-override="service.6.desc">Análisis de nuevas oportunidades de mercado, estudios de tendencias mundiales con bajadas comerciales locales y sociología del comportamiento del consumidor. Keynotes y masterclasses.</p>
-                </div>
-                <a class="service-link" href="/como-trabajo">Agendar conferencia →</a>
+                <a class="service-link" href="/como-trabajo#consultoria">Agendar consultoría o charla →</a>
             </li>
         </ul>
-        <div style="text-align: center; margin-top: 56px;">
-            <a href="/como-trabajo" style="display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 18px 36px; background: var(--black); color: var(--white); text-decoration: none; transition: opacity 0.2s, transform 0.2s;">
-                Ver detalle de servicios &amp; cómo trabajo →
+
+        <!-- DIFERENCIAL -->
+        <div style="margin-top: 48px; padding: 32px 36px; background: rgba(181,168,152,0.14); border: 1px solid rgba(181,168,152,0.35); text-align: center;">
+            <p style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sand-text); margin-bottom: 8px;">Mi diferencial</p>
+            <p style="font-family: var(--serif); font-size: clamp(20px, 2.2vw, 30px); font-weight: 400; color: var(--black); line-height: 1.35; margin-bottom: 20px;">
+                ‘Estrategias de precisión, creatividad y recordación.’
+            </p>
+            <a href="/como-trabajo" style="display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 14px 30px; background: var(--black); color: var(--white); text-decoration: none; transition: opacity 0.2s;">
+                Ver detalle de modalidades &amp; tarifario →
             </a>
         </div>
     </div>
