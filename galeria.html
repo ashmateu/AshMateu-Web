@@ -148,26 +148,124 @@
     .yt-video-category { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand-text); margin-bottom: 6px; }
     .yt-video-title { font-family: var(--serif); font-size: 16px; font-weight: 400; line-height: 1.35; color: var(--black); }
 
-    /* Instagram Strip */
+    /* Instagram Preponderance Section */
     .ig-strip {
-      padding: 64px var(--gutter) 80px;
-      border-top: 1px solid rgba(10,10,10,0.08);
+      padding: 96px var(--gutter) 112px;
+      background: var(--black);
+      color: var(--white);
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
     .ig-strip-head {
-      display: flex; justify-content: space-between; align-items: baseline;
-      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      gap: 32px;
+      flex-wrap: wrap;
     }
-    .ig-strip-head h2 { font-family: var(--serif); font-size: 22px; font-weight: 400; }
-    .ig-strip-head a { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sand-text); text-decoration: none; }
-    .ig-strip-head a:hover { color: var(--black); }
-    .ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
-    .ig-grid a { aspect-ratio: 1; overflow: hidden; display: block; background: #eee; }
-    .ig-grid img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.94) contrast(1.05) saturate(0.88); transition: transform 0.5s ease; }
-    .ig-grid a:hover img { transform: scale(1.06); }
-    @media (max-width: 900px) { .yt-video-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) {
-      .ig-grid { grid-template-columns: repeat(3, 1fr); }
-      .yt-video-grid { grid-template-columns: 1fr; }
+    .ig-strip-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 12px;
+    }
+    .ig-strip-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 54px);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--ivory);
+      margin-bottom: 10px;
+    }
+    .ig-strip-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      max-width: 52ch;
+      line-height: 1.6;
+    }
+    .ig-follow-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--white);
+      color: var(--black);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .ig-follow-btn:hover {
+      background: var(--sand);
+      transform: translateY(-2px);
+    }
+    .ig-follow-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .ig-post-card {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-decoration: none;
+      display: block;
+    }
+    .ig-post-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.92) contrast(1.05) saturate(0.9);
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+    .ig-post-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px 28px;
+      transition: opacity 0.3s ease;
+    }
+    .ig-post-card:hover .ig-post-overlay { opacity: 1; }
+    .ig-post-card:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.8) contrast(1.1) saturate(1.05);
+    }
+    .ig-post-tag {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 6px;
+    }
+    .ig-post-action {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--white);
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 900px) {
+      .ig-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .ig-strip { padding: 64px var(--gutter) 80px; }
+    }
+    @media (max-width: 560px) {
+      .ig-grid { grid-template-columns: 1fr; gap: 16px; }
     }
 
     footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px var(--gutter); display: flex; justify-content: space-between; align-items: center; }
@@ -345,19 +443,86 @@
     </div>
   </section>
 
-  <!-- INSTAGRAM REEL STRIP -->
+  <!-- INSTAGRAM PREPONDERANCE STRIP -->
   <section class="ig-strip">
     <div class="ig-strip-head">
-      <h2>Últimos posteos</h2>
-      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener">@ashmateu →</a>
+      <div>
+        <p class="ig-strip-eyebrow">Diario Visual · Tiempo Real</p>
+        <h2 class="ig-strip-title">@ashmateu en Instagram</h2>
+        <p class="ig-strip-desc">Front rows, coberturas internacionales, alfombras rojas, estilismos en set y el detrás de escena de la industria de la moda desde París, Nueva York y Buenos Aires.</p>
+      </div>
+      <a class="ig-follow-btn" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Seguir en Instagram
+      </a>
     </div>
+
     <div class="ig-grid">
-      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post1.jpg" alt="Instagram @ashmateu" width="512" height="640" loading="lazy"></a>
-      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post2.jpg" alt="Instagram @ashmateu" width="512" height="640" loading="lazy"></a>
-      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post3.jpg" alt="Instagram @ashmateu" width="544" height="640" loading="lazy"></a>
-      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post4.jpg" alt="Instagram @ashmateu" width="480" height="640" loading="lazy"></a>
-      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post5.jpg" alt="Instagram @ashmateu" width="480" height="640" loading="lazy"></a>
-      <a href="https://instagram.com/ashmateu" target="_blank" rel="noopener"><img src="/images/instagram/post6.jpg" alt="Instagram @ashmateu" width="480" height="640" loading="lazy"></a>
+      <a class="ig-post-card" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">
+        <img src="/images/instagram/post1.jpg" alt="Instagram Post @ashmateu" width="512" height="640" loading="lazy">
+        <div class="ig-post-overlay">
+          <span class="ig-post-tag">Backstage &amp; Set</span>
+          <div class="ig-post-action">
+            <span>Ver en Instagram</span>
+            <span>↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="ig-post-card" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">
+        <img src="/images/instagram/post2.jpg" alt="Instagram Post @ashmateu" width="512" height="640" loading="lazy">
+        <div class="ig-post-overlay">
+          <span class="ig-post-tag">Paris Fashion Week</span>
+          <div class="ig-post-action">
+            <span>Ver en Instagram</span>
+            <span>↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="ig-post-card" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">
+        <img src="/images/instagram/post3.jpg" alt="Instagram Post @ashmateu" width="544" height="640" loading="lazy">
+        <div class="ig-post-overlay">
+          <span class="ig-post-tag">Red Carpet &amp; Gala</span>
+          <div class="ig-post-action">
+            <span>Ver en Instagram</span>
+            <span>↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="ig-post-card" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">
+        <img src="/images/instagram/post4.jpg" alt="Instagram Post @ashmateu" width="480" height="640" loading="lazy">
+        <div class="ig-post-overlay">
+          <span class="ig-post-tag">Producción Editorial</span>
+          <div class="ig-post-action">
+            <span>Ver en Instagram</span>
+            <span>↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="ig-post-card" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">
+        <img src="/images/instagram/post5.jpg" alt="Instagram Post @ashmateu" width="480" height="640" loading="lazy">
+        <div class="ig-post-overlay">
+          <span class="ig-post-tag">Styling &amp; Fitting</span>
+          <div class="ig-post-action">
+            <span>Ver en Instagram</span>
+            <span>↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="ig-post-card" href="https://instagram.com/ashmateu" target="_blank" rel="noopener">
+        <img src="/images/instagram/post6.jpg" alt="Instagram Post @ashmateu" width="480" height="640" loading="lazy">
+        <div class="ig-post-overlay">
+          <span class="ig-post-tag">Front Row &amp; StreetStyle</span>
+          <div class="ig-post-action">
+            <span>Ver en Instagram</span>
+            <span>↗</span>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 </main>
