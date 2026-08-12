@@ -471,46 +471,40 @@
 
         #servicios { background: var(--ivory); }
 
-        .services-list { list-style: none; }
+        .services-section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(64px, 8vw, 120px);
+            line-height: 0.88;
+            color: var(--black);
+            margin-bottom: 48px;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .services-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
 
         .service-item {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 48px;
-            padding: 40px 0;
-            border-top: 1px solid rgba(181, 168, 152, 0.38);
-            align-items: baseline;
-        }
-
-        .service-item:last-child {
-            border-bottom: 1px solid rgba(181, 168, 152, 0.38);
-        }
-
-        .service-name {
-            font-family: var(--serif);
-            font-size: clamp(22px, 1.8vw, 28px);
-            font-weight: 400;
-            line-height: 1.25;
-        }
-
-        .service-desc {
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 1.65;
-            letter-spacing: 0.015em;
-            color: var(--black);
-            opacity: 0.62;
-            max-width: 560px;
-        }
-
-        .service-item.featured {
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             background: rgba(181, 168, 152, 0.16);
+            border: 1px solid rgba(181, 168, 152, 0.35);
             padding: 44px 40px;
-            margin: 12px 0;
-            border-top: none;
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
         }
-        .service-item.featured .service-eyebrow {
+        .service-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--black);
+            background: rgba(181, 168, 152, 0.24);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+        }
+
+        .service-eyebrow {
             display: block;
             font-size: 11px;
             letter-spacing: 0.24em;
@@ -518,8 +512,43 @@
             color: var(--sand-text);
             margin-bottom: 12px;
         }
-        .service-item.featured .service-name { font-size: clamp(28px, 2.6vw, 40px); margin-bottom: 14px; }
-        .service-item.featured .service-desc { opacity: 0.85; max-width: 640px; }
+
+        .service-name {
+            font-family: var(--serif);
+            font-size: clamp(26px, 2.3vw, 36px);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--black);
+            margin-bottom: 14px;
+        }
+
+        .service-desc {
+            font-size: 15.5px;
+            font-weight: 300;
+            line-height: 1.7;
+            letter-spacing: 0.012em;
+            color: rgba(10, 10, 10, 0.85);
+            margin-bottom: 24px;
+        }
+
+        .service-link {
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .service-link:hover { opacity: 0.65; }
+
+        @media (max-width: 900px) {
+            .services-list { grid-template-columns: 1fr; gap: 20px; }
+            .service-item { padding: 32px 24px; }
+        }
 
         /* ── About ── */
         #vlog { background: var(--ivory); }
@@ -1288,36 +1317,64 @@
 <!-- SERVICIOS -->
 <section id="servicios">
     <div class="section-inner">
-        <h2 class="sr-only" data-i18n="section.services">Servicios</h2>
+        <h2 class="services-section-title" data-i18n="section.services">Servicios</h2>
         <ul class="services-list">
             <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.1.name">Dirección creativa</h3>
-                <p class="service-desc" data-i18n-override="service.1.desc">De la idea al resultado. Concibo y produzco editoriales, campañas y contenidos para marcas que necesitan más que un proveedor.</p>
+                <div>
+                    <span class="service-eyebrow">Para Marcas · Campañas &amp; Arte</span>
+                    <h3 class="service-name" data-i18n-override="service.1.name">Dirección Creativa</h3>
+                    <p class="service-desc" data-i18n-override="service.1.desc">De la idea al resultado. Concibo y dirijo editoriales, campañas y universos visuales para marcas globales de moda, belleza y lujo en Buenos Aires, Nueva York y París.</p>
+                </div>
+                <a class="service-link" href="/como-trabajo">Ver cómo trabajo →</a>
             </li>
+
             <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.2.name">Styling editorial y publicitario</h3>
-                <p class="service-desc" data-i18n-override="service.2.desc">Construyo looks para producciones fotográficas y audiovisuales. Trabajo directo con marcas, fotógrafos y equipos completos de producción.</p>
+                <div>
+                    <span class="service-eyebrow">Para Medios &amp; Marcas · Set &amp; Casting</span>
+                    <h3 class="service-name" data-i18n-override="service.2.name">Styling Editorial &amp; Publicitario</h3>
+                    <p class="service-desc" data-i18n-override="service.2.desc">Construcción de looks de alto impacto para producciones fotográficas y audiovisuales. Trabajo directo con marcas, directores de arte, fotógrafos internacionales y equipos de producción.</p>
+                </div>
+                <a class="service-link" href="/como-trabajo">Ver producciones →</a>
             </li>
-            <li class="service-item featured">
-                <span class="service-eyebrow">Styling personal</span>
-                <h3 class="service-name" data-i18n-override="service.3.name">Dress to Kill</h3>
-                <p class="service-desc" data-i18n-override="service.3.desc">Styling para novias, alfombras rojas, galas y eventos que no se repiten. Consultoría de imagen para quienes buscan seguridad e identidad: que nunca nadie olvide tu vestido.</p>
-            </li>
+
             <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.4.name">Celebrity styling</h3>
-                <p class="service-desc" data-i18n-override="service.4.desc">Red carpets, eventos, prensa, apariciones. El styling para figuras públicas tiene sus propias reglas y su propio ritmo.</p>
+                <div>
+                    <span class="service-eyebrow">Para Personas · Novias &amp; Eventos Únicos</span>
+                    <h3 class="service-name" data-i18n-override="service.3.name">Dress to Kill</h3>
+                    <p class="service-desc" data-i18n-override="service.3.desc">Styling para novias (<em>"Que nunca nadie olvide tu vestido"</em>), galas, alfombras rojas y eventos que no se repiten. Consultoría de imagen para quienes buscan seguridad, distinción e identidad.</p>
+                </div>
+                <a class="service-link" href="/como-trabajo">Conocer Dress to Kill →</a>
             </li>
+
             <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.5.name">Consultoría de marca</h3>
-                <p class="service-desc" data-i18n-override="service.5.desc">Moda, belleza, cultura. Trabajo sobre identidad visual y tono de comunicación con marcas que necesitan una perspectiva que viene del set, no de una presentación de PowerPoint.</p>
+                <div>
+                    <span class="service-eyebrow">Para Figuras Públicas · Galas &amp; Prensa</span>
+                    <h3 class="service-name" data-i18n-override="service.4.name">Celebrity Styling</h3>
+                    <p class="service-desc" data-i18n-override="service.4.desc">Red carpets, festivales internacionales, entregas de premios, entrevistas y junkets de prensa. El styling para figuras públicas con códigos de alta costura, confidencialidad y ritmo de set.</p>
+                </div>
+                <a class="service-link" href="/como-trabajo">Ver portfolio celebrities →</a>
             </li>
+
             <li class="service-item">
-                <h3 class="service-name" data-i18n-override="service.6.name">Speaker especializada &amp; Tendencias</h3>
-                <p class="service-desc" data-i18n-override="service.6.desc">Análisis de nuevas oportunidades de negocio, estudios de tendencias mundiales con bajada local y sociología del consumo. Keynotes y masterclasses.</p>
+                <div>
+                    <span class="service-eyebrow">Para Empresas · Branding &amp; Innovación</span>
+                    <h3 class="service-name" data-i18n-override="service.5.name">Consultoría de Marca &amp; Curaduría</h3>
+                    <p class="service-desc" data-i18n-override="service.5.desc">Branding, posicionamiento de marca, curaduría de diseño y producto. Estrategia de comunicación y marketing de moda con una perspectiva que viene del set real, no de una presentación teórica.</p>
+                </div>
+                <a class="service-link" href="/como-trabajo">Consultar para marcas →</a>
+            </li>
+
+            <li class="service-item">
+                <div>
+                    <span class="service-eyebrow">Conferencias &amp; Formación · Macrotendencias</span>
+                    <h3 class="service-name" data-i18n-override="service.6.name">Speaker Especializada &amp; Tendencias</h3>
+                    <p class="service-desc" data-i18n-override="service.6.desc">Análisis de nuevas oportunidades de mercado, estudios de tendencias mundiales con bajadas comerciales locales y sociología del comportamiento del consumidor. Keynotes y masterclasses.</p>
+                </div>
+                <a class="service-link" href="/como-trabajo">Agendar conferencia →</a>
             </li>
         </ul>
-        <div style="text-align: center; margin-top: 48px;">
-            <a href="/como-trabajo" style="display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 16px 32px; background: var(--black); color: var(--white); text-decoration: none; transition: opacity 0.2s;">
+        <div style="text-align: center; margin-top: 56px;">
+            <a href="/como-trabajo" style="display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 18px 36px; background: var(--black); color: var(--white); text-decoration: none; transition: opacity 0.2s, transform 0.2s;">
                 Ver detalle de servicios &amp; cómo trabajo →
             </a>
         </div>
