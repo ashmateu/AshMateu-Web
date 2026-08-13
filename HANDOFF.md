@@ -1,10 +1,24 @@
 # Handoff: ashmateu.com — Reconstrucción Next.js 16 + High-End Luxury Design System
 
-**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **Zod**, **Formspree**, **Supabase** y frameworks de diseño editorial de alta gama (**Stitch Design Taste** + **High-End Visual Design**).
+**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **NVIDIA NIM AI (OpenAI SDK)**, **Zod**, **Formspree**, **Supabase** y frameworks de diseño editorial de alta gama (**Stitch Design Taste** + **High-End Visual Design**).
 
 ---
 
 ## 1. Estado Actual del Proyecto & Últimos Hitos
+
+### 🤖 Concierge Editorial VIP & Creative Briefing con IA (NVIDIA NIM)
+- **Motor de Inteligencia Artificial**:
+  - Proveedor: **NVIDIA NIM** vía OpenAI SDK (`https://integrate.api.nvidia.com/v1`).
+  - Modelo: `meta/llama-3.3-70b-instruct` (calibrado para respuestas sofisticadas de alta costura).
+  - Configuración Singleton: `src/lib/nvidia-ai.ts`.
+  - Endpoint API: `src/app/api/concierge/route.ts` con manejo robusto de errores y fallback editorial.
+- **Componente de Interfaz (`src/components/concierge/ConciergeDrawer.tsx`)**:
+  - Modal / Slide-over lateral con fondo marfil `#F7F3EE`, contrastes `#0A0A0A`, bordes capilares `#B5A898/40` y tipografía *Bodoni Moda*.
+  - Disparador flotante discreto en esquina inferior con badge de alta costura e indicador pulsante.
+  - Chips de consulta rápida (Campañas, Novias, Dirección Creativa, Consultoría).
+  - Exportación con un click directo a WhatsApp (`https://wa.me/5491123823297`) con el brief formateado.
+- **Banner Interactivo en Servicios**:
+  - `src/components/concierge/ConciergeTriggerBanner.tsx` integrado en `/como-trabajo`.
 
 ### 🏛️ Highlights de Carrera: Diseño "Avant-Garde Editorial" (Stitch)
 - **Collage Asimétrico en Grilla de 12 Columnas**:
@@ -86,6 +100,7 @@
 ## 3. Arquitectura y Stack
 
 - **Framework**: Next.js 16.3.0 (Turbopack, App Router, RSC, SSR/SSG).
+- **IA & Concierge**: NVIDIA NIM vía OpenAI SDK (`meta/llama-3.3-70b-instruct`) con streaming y fallback editorial.
 - **Estilos**: Tailwind CSS v4 con tokens de diseño editorial (`globals.css`).
 - **Tipografía**: Bodoni Moda (Google Fonts) para display numbers y títulos de pasarela; Montserrat para etiquetas de catálogo; Inter para textos de lectura.
 - **Validación de Formularios & Email**: Zod con esquema isomórfico (`src/lib/validations/contact.ts`), API Route (`/api/contact`) y despacho a Formspree (`xeebjqpq`).
@@ -98,10 +113,13 @@
 ## 4. Mapa de Rutas
 
 - `/` (`src/app/page.tsx`): HeroCover, HighlightsGrid, ServicesPillars, EditorialGaleria, PortfolioGallery, VlogSection, ClientsStrip, InstagramStrip, ContactForm.
-- `/como-trabajo` (`src/app/como-trabajo/page.tsx`): 3 pilares de servicio con cotización directa.
+- `/como-trabajo` (`src/app/como-trabajo/page.tsx`): 3 pilares de servicio con cotización directa + Banner Concierge IA.
 - `/historia` (`src/app/historia/page.tsx`): Biografía, retratos Marie Claire y trayectoria.
 - `/galeria` (`src/app/galeria/page.tsx`): Archivo visual interactivo con filtros URL (`nuqs`).
 - `/blog` (`src/app/blog/page.tsx`): Tendencias y macrotendencias editoriales.
 - `/newsletter` (`src/app/newsletter/page.tsx`): Suscripción y artículos de investigación.
 - `/prensa` (`src/app/prensa/page.tsx`): Tapas y notas en Marie Claire.
 - `/projects/[slug]` (`src/app/projects/[slug]/page.tsx`): Páginas individuales para 8 proyectos editoriales.
+- `API Routes`:
+  - `POST /api/contact`: Validación Zod y despacho a Formspree.
+  - `POST /api/concierge`: Inferencia con NVIDIA NIM OpenAI SDK.
