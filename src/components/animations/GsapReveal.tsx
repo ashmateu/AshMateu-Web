@@ -17,7 +17,7 @@ export default function GsapReveal({
   className = "",
   delay = 0,
   direction = "up",
-  duration = 0.9,
+  duration = 0.85,
 }: GsapRevealProps) {
   const elRef = useRef<HTMLDivElement>(null);
 
@@ -30,10 +30,10 @@ export default function GsapReveal({
     let x = 0;
     let y = 0;
 
-    if (direction === "up") y = 35;
-    if (direction === "down") y = -35;
-    if (direction === "left") x = 35;
-    if (direction === "right") x = -35;
+    if (direction === "up") y = 30;
+    if (direction === "down") y = -30;
+    if (direction === "left") x = 30;
+    if (direction === "right") x = -30;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -52,8 +52,8 @@ export default function GsapReveal({
           ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            // Trigger threshold: 3er tercio de la pantalla (2/3 visibles, 1/3 inferior)
-            start: "top 66.6%",
+            // Activación en la parte baja de la pantalla (apenas entra por el borde inferior)
+            start: "top 90%",
             toggleActions: "play none none reverse",
           },
         }
