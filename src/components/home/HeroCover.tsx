@@ -1,15 +1,57 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Sliders, Check, RotateCcw, Copy } from "lucide-react";
 import gsap from "gsap";
 
 export default function HeroCover() {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
+
+  // Live framing state (persisted in localStorage)
+  const [posX, setPosX] = useState(58);
+  const [posY, setPosY] = useState(18);
+  const [zoom, setZoom] = useState(100);
+  const [showCalibrator, setShowCalibrator] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const savedFraming = localStorage.getItem("ash_hero_framing");
+    if (savedFraming) {
+      try {
+        const parsed = JSON.parse(savedFraming);
+        if (parsed.x !== undefined) setPosX(parsed.x);
+        if (parsed.y !== undefined) setPosY(parsed.y);
+        if (parsed.zoom !== undefined) setZoom(parsed.zoom);
+      } catch (e) {
+        console.error("Error loading saved framing", e);
+      }
+    }
+  }, []);
+
+  const updateFraming = (x: number, y: number, z: number) => {
+    setPosX(x);
+    setPosY(y);
+    setZoom(z);
+    localStorage.setItem(
+      "ash_hero_framing",
+      JSON.stringify({ x, y, zoom: z })
+    );
+  };
+
+  const handleReset = () => {
+    updateFraming(58, 18, 100);
+  };
+
+  const handleCopy = () => {
+    const code = `objectPosition: "${posX}% ${posY}%", transform: "scale(${zoom / 100})"`;
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -39,7 +81,7 @@ export default function HeroCover() {
 
   return (
     <section className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]">
-      {/* FULL-SCREEN HERO BACKGROUND IMAGE (FULL-BLEED PPTX BLUEPRINT) */}
+      {/* FULL-SCREEN HERO BACKGROUND IMAGE WITH LIVE ADJUSTABLE FRAMING */}
       <div ref={heroRef} className="absolute inset-0 w-full h-full">
         <Image
           src="/images/hero/hero_cover_pptx.webp"
@@ -47,16 +89,23 @@ export default function HeroCover() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[50%_15%] sm:object-[60%_18%] filter brightness-[0.92] contrast-[1.03]"
+          style={{
+            objectFit: "cover",
+            objectPosition: `${posX}% ${posY}%`,
+            transform: `scale(${zoom / 100})`,
+            transformOrigin: `${posX}% ${posY}%`,
+            transition: "object-position 0.1s ease-out, transform 0.1s ease-out",
+          }}
+          className="filter brightness-[0.92] contrast-[1.03]"
         />
         {/* EDITORIAL VIGNETTE GRADIENT */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/25 pointer-events-none" />
       </div>
 
-      {/* HERO OVERLAID CONTENT (BOTTOM-LEFT ALIGNED LIKE POWERPOINT SLIDE 1 & 2) */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 pb-14 md:pb-20">
+      {/* HERO OVERLAID CONTENT */}
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 pb-14 md:pb-20 pointer-events-none">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-          <div ref={textRef} className="max-w-2xl text-white">
+          <div ref={textRef} className="max-w-2xl text-white pointer-events-auto">
             {/* MICROSCOPIC EYEBROW BADGE WITH RED ACCENT DOT */}
             <div className="inline-flex items-center gap-2 border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[9.5px] tracking-[0.26em] uppercase text-[#b5a898] mb-4 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638] animate-pulse" />
@@ -104,21 +153,132 @@ export default function HeroCover() {
             </div>
           </div>
 
-          {/* LOCATIONS & SCROLL INDICATOR */}
+          {/* LOCATIONS & CALIBRATOR TOGGLE BUTTON */}
           <div
             ref={badgeRef}
-            className="flex flex-col items-start lg:items-end text-white/70 text-[10px] tracking-[0.24em] uppercase gap-2.5"
+            className="flex flex-col items-start lg:items-end text-white/70 text-[10px] tracking-[0.24em] uppercase gap-2.5 pointer-events-auto"
           >
             <div className="flex items-center gap-2 border-b border-white/20 pb-1">
               <span>Buenos Aires · Nueva York · París</span>
             </div>
-            <div className="flex items-center gap-2 text-[#b5a898] animate-bounce mt-1">
-              <span className="text-xs">Scroll</span>
-              <span>↓</span>
-            </div>
+
+            {/* CALIBRATE ENCUADRE TRIGGER */}
+            <button
+              onClick={() => setShowCalibrator(!showCalibrator)}
+              className="mt-2 inline-flex items-center gap-1.5 bg-black/60 hover:bg-white text-white hover:text-black border border-white/30 px-3 py-1.5 rounded-full text-[9px] tracking-[0.2em] font-medium transition-all backdrop-blur-md cursor-pointer shadow-lg active:scale-95"
+            >
+              <Sliders size={12} className="text-[#b5a898]" />
+              <span>Ajustar Encuadre</span>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* LIVE ENCUADRE CALIBRATOR MODAL WIDGET */}
+      {showCalibrator && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0a0a0a]/95 border border-white/25 text-white rounded-2xl p-5 shadow-2xl backdrop-blur-2xl w-80 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="flex items-center gap-2">
+              <Sliders size={14} className="text-[#c9a84c]" />
+              <span className="text-xs font-semibold tracking-wider uppercase text-white">
+                Calibrador de Encuadre
+              </span>
+            </div>
+            <button
+              onClick={() => setShowCalibrator(false)}
+              className="text-white/50 hover:text-white text-xs p-1 cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="space-y-4 py-4 text-xs">
+            {/* POS X (HORIZONTAL) */}
+            <div>
+              <div className="flex justify-between text-[10px] tracking-wider uppercase text-[#b5a898] mb-1.5">
+                <span>Posición Horizontal (X)</span>
+                <span className="text-white font-mono">{posX}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={posX}
+                onChange={(e) =>
+                  updateFraming(Number(e.target.value), posY, zoom)
+                }
+                className="w-full accent-[#b5a898] cursor-pointer"
+              />
+              <div className="flex justify-between text-[8.5px] text-white/40 mt-0.5">
+                <span>Izquierda (0%)</span>
+                <span>Centro (50%)</span>
+                <span>Derecha (100%)</span>
+              </div>
+            </div>
+
+            {/* POS Y (VERTICAL) */}
+            <div>
+              <div className="flex justify-between text-[10px] tracking-wider uppercase text-[#b5a898] mb-1.5">
+                <span>Posición Vertical (Y)</span>
+                <span className="text-white font-mono">{posY}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={posY}
+                onChange={(e) =>
+                  updateFraming(posX, Number(e.target.value), zoom)
+                }
+                className="w-full accent-[#b5a898] cursor-pointer"
+              />
+              <div className="flex justify-between text-[8.5px] text-white/40 mt-0.5">
+                <span>Arriba (0%)</span>
+                <span>Encuadre Ideal (~18%)</span>
+                <span>Abajo (100%)</span>
+              </div>
+            </div>
+
+            {/* ZOOM / SCALE */}
+            <div>
+              <div className="flex justify-between text-[10px] tracking-wider uppercase text-[#b5a898] mb-1.5">
+                <span>Escala / Zoom</span>
+                <span className="text-white font-mono">{zoom}%</span>
+              </div>
+              <input
+                type="range"
+                min="95"
+                max="140"
+                value={zoom}
+                onChange={(e) =>
+                  updateFraming(posX, posY, Number(e.target.value))
+                }
+                className="w-full accent-[#b5a898] cursor-pointer"
+              />
+            </div>
+          </div>
+
+          {/* ACTION BUTTONS & PRESETS */}
+          <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+            <button
+              onClick={handleReset}
+              className="inline-flex items-center gap-1 text-[9.5px] text-white/60 hover:text-white py-1 px-2 rounded border border-white/10 hover:border-white/30 cursor-pointer"
+              title="Restablecer posición inicial"
+            >
+              <RotateCcw size={11} />
+              <span>Reset</span>
+            </button>
+
+            <button
+              onClick={handleCopy}
+              className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-wider uppercase bg-[#b5a898] hover:bg-white text-black py-1.5 px-3 rounded-full shadow cursor-pointer transition-all active:scale-95"
+            >
+              {copied ? <Check size={12} /> : <Copy size={12} />}
+              <span>{copied ? "¡Copiado!" : "Guardar"}</span>
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
