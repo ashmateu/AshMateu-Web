@@ -34,6 +34,12 @@
 - **Suscripción a Newsletter (`/newsletter`)**:
   - Conectado al Form ID oficial de Formspree **`mqaeavog`** (`https://formspree.io/f/mqaeavog`).
 
+### ✉️ Unificación de Correo Electrónico
+- Correo oficial unificado en **`info@ashmateu.com`**:
+  - **ContactForm**: Enlace directo y visualización de `info@ashmateu.com`.
+  - **Footer**: Enlace directo `mailto:info@ashmateu.com` con icono vectorial.
+  - **Navbar Mobile Drawer**: Enlace directo `mailto:info@ashmateu.com`.
+
 ### 🎯 Optimización de Conversión & Click-Paths
 - **`¿Cómo Trabajo?` (`/como-trabajo`)**:
   - Se agregaron botones de acción rápida directos a WhatsApp con mensajes pre-cargados en **todos los pilares** (Novias, Galas, Imagen Personal, Fiestas, Campañas de Marca, Styling Editorial, Branding y Speaker Keynotes).
