@@ -66,7 +66,7 @@ export default function HistoriaPage() {
                 alt="Ash Mateu Marie Claire Studio"
                 fill
                 sizes="(max-width: 768px) 100vw, 30vw"
-                className="object-cover"
+                className="object-cover object-[center_16%]"
               />
             </div>
             <div className="relative aspect-[3/4] bg-neutral-200 overflow-hidden shadow-lg border border-[#b5a898]/30 sm:translate-y-8">
@@ -75,7 +75,7 @@ export default function HistoriaPage() {
                 alt="Ash Mateu Editorial Portrait"
                 fill
                 sizes="(max-width: 768px) 100vw, 30vw"
-                className="object-cover"
+                className="object-cover object-[center_16%]"
               />
             </div>
           </div>

@@ -70,7 +70,7 @@ export default function PortfolioGallery() {
                     alt={project.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white text-[9px] tracking-[0.2em] uppercase px-2.5 py-1">
                     {project.category}

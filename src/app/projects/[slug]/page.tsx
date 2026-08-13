@@ -75,7 +75,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-[center_18%]"
           />
         </div>
 
@@ -98,7 +98,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 alt={`${project.title} - ${i + 1}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover hover:scale-105 transition-transform duration-700 ease-out"
+                className="object-cover object-[center_18%] hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
           ))}

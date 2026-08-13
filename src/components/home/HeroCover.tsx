@@ -46,7 +46,7 @@ export default function HeroCover() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.92] contrast-[1.03]"
+          className="object-cover object-[50%_15%] sm:object-[60%_18%] filter brightness-[0.92] contrast-[1.03]"
         />
         {/* EDITORIAL GRADIENT OVERLAY */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20" />
