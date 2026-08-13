@@ -9,9 +9,10 @@
 ### 🤖 Concierge Editorial VIP & Creative Briefing con IA (NVIDIA NIM)
 - **Motor de Inteligencia Artificial**:
   - Proveedor: **NVIDIA NIM** vía OpenAI SDK (`https://integrate.api.nvidia.com/v1`).
-  - Modelo: `meta/llama-3.3-70b-instruct` (calibrado para respuestas sofisticadas de alta costura).
-  - Configuración Singleton: `src/lib/nvidia-ai.ts`.
-  - Endpoint API: `src/app/api/concierge/route.ts` con manejo robusto de errores y fallback editorial.
+  - Modelo Primario: `openai/gpt-oss-120b` (alta capacidad y velocidad de respuesta en ~2s).
+  - Modelo Secundario / Fallback: `meta/llama-3.1-8b-instruct` (sub-segundo ~500ms).
+  - Configuración Singleton: `src/lib/nvidia-ai.ts` con timeout de 15s.
+  - Endpoint API: `src/app/api/concierge/route.ts` con routing automático de modelos y fallback editorial.
 - **Componente de Interfaz (`src/components/concierge/ConciergeDrawer.tsx`)**:
   - Modal / Slide-over lateral con fondo marfil `#F7F3EE`, contrastes `#0A0A0A`, bordes capilares `#B5A898/40` y tipografía *Bodoni Moda*.
   - Disparador flotante discreto en esquina inferior con badge de alta costura e indicador pulsante.
