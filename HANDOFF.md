@@ -73,6 +73,7 @@
 
 ### 📸 Hero Cover & Background 4K Nativo
 - **Master Image**: Fotografía editorial 4K UHD nativa (`3840 × 2160 px`) en `public/images/hero/hero_cover_pptx.webp`.
+- **Estructura Tipográfica**: El badge con punto rojo (*Ash Mateu Prieto*) está ubicado debajo del título principal (*Styling people, brands and ideas.*) y del subtítulo (*Creative Director & Fashion Consultant.*).
 - **Encuadres Calibrados**:
   - **Móvil (9:16 vertical)**: Centrado en el rostro de la modelo (`X: 70%`, `Y: 22%`, `Zoom: 100%`).
   - **Desktop (16:9 horizontal)**: Encuadre panorámico con aire superior (`X: 50%`, `Y: 20%`, `Zoom: 100%`).
