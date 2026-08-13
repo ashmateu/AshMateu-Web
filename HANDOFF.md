@@ -1,56 +1,74 @@
 # Handoff: ashmateu.com — Reconstrucción Next.js 16 + High-End Luxury Design System
 
-**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **Zod**, **Supabase** y frameworks de diseño editorial de alta gama.
+**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **Zod**, **Supabase** y frameworks de diseño editorial de alta gama (**Stitch Design Taste** + **High-End Visual Design**).
 
 ---
 
 ## 1. Estado Actual del Proyecto & Últimos Hitos
 
+### 🏛️ Highlights de Carrera: Diseño "Avant-Garde Editorial" (Stitch)
+- **Collage Asimétrico en Grilla de 12 Columnas**:
+  - Se eliminaron las cajas cuadradas y contenedores tradicionales, disponiendo los 11 hitos en una composición manual de pasarela sobre lienzo marfil (`#F7F3EE`).
+  - **Separadores Capilares de 1px**: Cada hito se separa con una línea vertical tenue (`border-l border-[#B5A898]/40 pl-5 md:pl-6`).
+  - **Escala al 70%**: Números display en *Bodoni Moda Italic* calibrados a `48px - 68px` (escala al 70%) para una integración equilibrada.
+  - **Offsets Asimétricos Tighter**: Desplazamientos verticales y horizontales compactos (`md:mt-4`, `md:mt-8`, `md:mt-12`), logrando dinamismo sin vacíos innecesarios.
+
+### 🏷️ Isologos Oficiales de Marcas & Publicaciones
+- **Vectores Oficiales Integrados**: Se reemplazaron los nombres en texto por los isologos vectoriales auténticos de las 10 marcas colaboradoras:
+  - **Chanel** (`chanel.webp`) — Doble C entrelazada y tipografía.
+  - **Louis Vuitton** (`louis_vuitton.webp`) — Monograma LV y wordmark.
+  - **Gucci** (`gucci.webp`) — Wordmark serif oficial corregido y centrado.
+  - **Miu Miu** (`miu_miu.webp`) — Logotipo geométrico de bloque.
+  - **Dolce & Gabbana** (`dolce_gabbana.webp`) — Logotipo con ampersand.
+  - **Marie Claire** (`marie_claire.webp`) — Cabecera de revista oficial.
+  - **Nike** (`nike.webp`) — Swoosh oficial.
+  - **L'Oréal Paris** (`loreal.webp`) — Wordmark de belleza oficial.
+  - **Mercedes-Benz** (`mercedes_benz.webp`) — Estrella de 3 puntas.
+  - **Netflix** (`netflix.webp`) — Wordmark arqueado oficial.
+- **Normalización Óptica**: Cada logo recortado a sus límites de píxel reales y alojado en contenedores homogéneos de `140px × 56px` con `opacity: 0.65` y hover a `1.0`.
+
+### 📏 Compactación Integral de Distancias y Rellenos
+- Se redujeron sistemáticamente los rellenos verticales en todas las secciones para un ritmo de navegación ágil y cómodo:
+  - **Highlights**: `py-16 md:py-20 lg:py-24` (antes `py-44`).
+  - **¿Cómo Trabajo? (3 Pilares)**: `py-16 md:py-20 lg:py-24` (antes `py-36`).
+  - **Galería Editorial**: `py-16 md:py-20 lg:py-24`.
+  - **Selected Works (Portfolio)**: `py-16 md:py-20 lg:py-24`.
+  - **Vlog & Redes**: `py-16 md:py-20 lg:py-24`.
+  - **Marcas & Instagram**: `py-12 md:py-16 lg:py-20`.
+  - **Formulario de Contacto**: `py-16 md:py-20 lg:py-24`.
+
 ### 📸 Hero Cover & Background 4K Nativo
 - **Master Image**: Integrada la fotografía editorial 4K UHD nativa (`3840 × 2160 px`) en `public/images/hero/hero_cover_pptx.webp`.
-- **Encuadre Calibrado y Responsive**:
-  - **Móvil (9:16 vertical)**: Centrado en el rostro y busto de la modelo (`X: 70%`, `Y: 22%`, `Zoom: 100%`).
+- **Encuadres Calibrados**:
+  - **Móvil (9:16 vertical)**: Centrado en el rostro de la modelo (`X: 70%`, `Y: 22%`, `Zoom: 100%`).
   - **Desktop (16:9 horizontal)**: Encuadre panorámico con aire superior (`X: 50%`, `Y: 20%`, `Zoom: 100%`).
-- **Iluminación & Luminosidad**: Calibrada a `brightness(115%) contrast(1.03) saturate(1.04)` con degradé superior transparente y fondo azul luminoso.
-- **Panel de Calibración en Vivo**: `HeroCover.tsx` incluye panel interactivo con sliders de X, Y, Zoom (hasta 300%), Brillo y pestañas independientes para Móvil / Desktop con persistencia en `localStorage`.
-
-### 📝 Highlights de Carrera (Notas de Papel de Colores / Moodboard Editorial)
-- Las 11 tarjetas de carrera se rediseñaron con estética de **notas de papel y papelería de atelier**:
-  - Paleta pastel suave: Rosa blush (`#FDF0F4`), Amarillo mantequilla (`#FEFAE8`), Menta salvia (`#EFF7F2`), Lavanda (`#F5F0FB`), Azul cielo (`#EDF5FD`), Durazno (`#FFF2EB`) y Marfil (`#FAF7F0`).
-  - Tiras de cinta washi tape translúcida (`repeating-linear-gradient`).
-  - Clips metálicos dorados en tarjetas destacadas.
-  - Inclinaciones orgánicas (`-1.2°`, `+1.4°`, `-0.6°`) que se alinean al hacer hover (`hover:rotate-0`).
-  - Tipografía oscura ultra legible (`#121212`) con números serif y stickers para celebridades/ciudades.
+- **Luminosidad**: `brightness(115%) contrast(1.03) saturate(1.04)`.
+- **Panel Interactivo de Calibración**: Disponible en `HeroCover.tsx` para ajustes en vivo con guardado en `localStorage`.
 
 ### ⚡ Animaciones de Scroll (GSAP ScrollTrigger)
-- **Efecto Híbrido**: Combinación de **Foco Óptico Blur** (`blur(5px)` ➔ `blur(0px)`) + **Micro-Zoom de Profundidad** (`scale: 0.97` ➔ `scale: 1.0`) + micro-elevación de `10px`.
-- **Velocidad Optimizada**: `duration: 0.55s` con curva `power2.out`.
-- **Punto de Activación**: `start: "top 88%"` (se activa suavemente al entrar por la parte baja de la pantalla).
-- **Rendimiento**: Aceleración por hardware con `will-change: transform, opacity, filter`.
+- **Efecto Híbrido**: Foco Óptico Blur (`blur(5px)` ➔ `blur(0px)`) + Micro-Zoom (`scale: 0.97` ➔ `1.0`) + micro-desplazamiento de `10px`.
+- **Velocidad**: `duration: 0.55s` con curva `power2.out` y `start: "top 88%"`.
 
 ### 🟢 Botón y Enlaces de WhatsApp
-- Color de marca oficial de WhatsApp **`#25D366`** aplicado al icono vectorizado y al texto en `Navbar.tsx` y `Footer.tsx`.
-- Teléfono directo unificado en todo el sitio: **`+54 9 11 2382-3297`** (`https://wa.me/5491123823297`).
-
-### 🏷️ Logotipo Oficial
-- Logotipo oficial de **Ash Mateu Prieto** (*creative director — STYLING & CREATIVE DIRECTION*) restaurado en alta definición en `public/images/logo/ash_mateu_logo_white.webp` con un 30% más de escala para presencia de marca.
+- Isotipo oficial y texto en `#25D366` en `Navbar.tsx` y `Footer.tsx`.
+- Teléfono directo unificado: **`+54 9 11 2382-3297`** (`https://wa.me/5491123823297`).
 
 ---
 
-## 2. Backup de Seguridad Creado
+## 2. Ramas de Git y Resguardo
 
-Para comparar con Ash la versión anterior (tarjetas blancas minimalistas) vs la versión actual (notas de papel de colores):
-- **Rama de Backup**: `backup/antes-de-papel-notas` (apunta al commit `f0d794fe`).
-- **Rama Activa**: `preview/sitio-completo`.
-- **Para restaurar la versión anterior con 1 comando**: `git checkout backup/antes-de-papel-notas` o cherry-pick/merge según decisión de Ash.
+- **Rama de Trabajo Activa**: `preview/sitio-completo`.
+- **Rama de Backup**: `backup/antes-de-papel-notas` (apunta al commit `f0d794fe` con tarjetas blancas previas).
+- **Comando de Push**: `env -u GITHUB_TOKEN git push origin preview/sitio-completo`.
+- **Vercel Preview**: [ashmateu-web-git-preview-siti-c3f8cd-mrosso25486-7169s-projects.vercel.app](https://ashmateu-web-git-preview-siti-c3f8cd-mrosso25486-7169s-projects.vercel.app/)
 
 ---
 
 ## 3. Arquitectura y Stack
 
 - **Framework**: Next.js 16.3.0 (Turbopack, App Router, RSC, SSR/SSG).
-- **Estilos**: Tailwind CSS v4 con tokens de diseño de lujo (`globals.css`).
-- **Tipografía**: Bodoni Moda (Google Fonts) para títulos de alta costura y Montserrat para textos geométricos e índices técnicos.
+- **Estilos**: Tailwind CSS v4 con tokens de diseño editorial (`globals.css`).
+- **Tipografía**: Bodoni Moda (Google Fonts) para display numbers y títulos de pasarela; Montserrat para etiquetas de catálogo; Inter para textos de lectura.
 - **Validación de Formularios**: Zod con esquema isomórfico (`src/lib/validations/contact.ts`) y endpoint API (`/api/contact`).
 - **Gestión de Estado de URL**: `nuqs` con `<NuqsAdapter>` en el layout raíz para filtros de galería compartibles.
 - **Interactividad & Motion**: GSAP ScrollTrigger (`src/components/animations/GsapReveal.tsx`).
@@ -68,12 +86,3 @@ Para comparar con Ash la versión anterior (tarjetas blancas minimalistas) vs la
 - `/newsletter` (`src/app/newsletter/page.tsx`): Suscripción y artículos de investigación.
 - `/prensa` (`src/app/prensa/page.tsx`): Tapas y notas en Marie Claire.
 - `/projects/[slug]` (`src/app/projects/[slug]/page.tsx`): Páginas individuales para 8 proyectos editoriales.
-
----
-
-## 5. Reglas de Git y Despliegue
-
-- **Rama de Trabajo Activa**: `preview/sitio-completo`.
-- **Rama de Backup**: `backup/antes-de-papel-notas`.
-- **Comando de Push**: `env -u GITHUB_TOKEN git push origin preview/sitio-completo`.
-- **Vercel Preview**: [ashmateu-web-git-preview-siti-c3f8cd-mrosso25486-7169s-projects.vercel.app](https://ashmateu-web-git-preview-siti-c3f8cd-mrosso25486-7169s-projects.vercel.app/)
