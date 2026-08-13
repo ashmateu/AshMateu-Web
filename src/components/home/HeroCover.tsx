@@ -81,14 +81,14 @@ export default function HeroCover() {
 
   return (
     <section className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]">
-      {/* FULL-SCREEN HERO BACKGROUND IMAGE WITH LIVE ADJUSTABLE FRAMING */}
+      {/* FULL-SCREEN HERO BACKGROUND IMAGE (2.5K ULTRA-HD WITH SHARPNESS ENHANCEMENT) */}
       <div ref={heroRef} className="absolute inset-0 w-full h-full">
         <Image
           src="/images/hero/hero_cover_pptx.webp"
           alt="Ash Mateu — Creative Direction & High Fashion Styling"
           fill
           priority
-          sizes="100vw"
+          unoptimized
           style={{
             objectFit: "cover",
             objectPosition: `${posX}% ${posY}%`,
