@@ -201,25 +201,29 @@ export default function HeroCover() {
               personas.’
             </blockquote>
 
-            {/* BUTTON-IN-BUTTON NESTED ACTION LINKS */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs tracking-[0.2em] uppercase font-medium">
+            {/* MINIMAL EDITORIAL ACTION LINKS (TEXT + ARROW ONLY) */}
+            <div className="flex flex-wrap items-center gap-6 sm:gap-8 text-xs tracking-[0.22em] uppercase font-medium pt-1">
               <Link
                 href="/historia"
-                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-white text-black pl-4 sm:pl-5 pr-2 py-1.5 sm:py-2 rounded-full font-semibold transition-all duration-300 hover:bg-[#b5a898] active:scale-[0.98] shadow-md text-[10.5px] sm:text-xs"
+                className="group inline-flex items-center gap-1.5 text-white hover:text-[#b5a898] transition-colors duration-300 text-[11px] sm:text-xs tracking-[0.22em] uppercase font-medium border-b border-white/40 hover:border-[#b5a898] pb-1"
               >
                 <span>Mi Historia</span>
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  <ArrowUpRight size={12} strokeWidth={2.2} />
-                </div>
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={2}
+                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
               </Link>
               <Link
                 href="/como-trabajo"
-                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 pl-4 sm:pl-5 pr-2 py-1.5 sm:py-2 rounded-full font-medium transition-all duration-300 active:scale-[0.98] backdrop-blur-sm text-[10.5px] sm:text-xs"
+                className="group inline-flex items-center gap-1.5 text-white/85 hover:text-white transition-colors duration-300 text-[11px] sm:text-xs tracking-[0.22em] uppercase font-medium border-b border-white/30 hover:border-white pb-1"
               >
                 <span>¿Cómo Trabajo?</span>
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/20 text-white flex items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  <ArrowUpRight size={12} strokeWidth={2.2} />
-                </div>
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={2}
+                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
               </Link>
             </div>
           </div>
