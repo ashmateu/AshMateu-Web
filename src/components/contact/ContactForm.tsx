@@ -70,29 +70,29 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contacto" className="py-24 md:py-36 bg-[#0a0a0a] text-white border-t border-white/10 relative overflow-hidden">
+    <section id="contacto" className="py-16 md:py-20 lg:py-24 bg-[#0a0a0a] text-white border-t border-white/10 relative overflow-hidden">
       {/* BACKGROUND GLOW */}
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#EA2638]/10 blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div className="max-w-[1300px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* LEFT COLUMN: EDITORIAL DIRECT MESSAGE */}
           <div className="lg:col-span-5">
             <GsapReveal>
-              <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-3 py-1 rounded-full text-[9.5px] tracking-[0.26em] uppercase text-[#b5a898] mb-3 font-medium">
+              <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#b5a898] mb-2.5 font-medium">
                 <span>07 · Contacto &amp; Bookings 2026</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-white mb-6 leading-[1.1] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-[42px] font-normal text-white mb-4 leading-[1.1] tracking-tight">
                 Empecemos a trabajar juntos<span className="text-[#EA2638]">.</span>
               </h2>
-              <p className="text-xs md:text-sm text-white/70 leading-relaxed mb-8 font-light">
+              <p className="text-xs sm:text-[13px] text-white/70 leading-relaxed mb-6 font-light">
                 Disponible para proyectos de dirección creativa, styling editorial,
                 campañas de moda en Buenos Aires, Nueva York y París, consultoría de marca y conferencias.
               </p>
 
-              <div className="space-y-5 pt-8 border-t border-white/15 text-xs tracking-wider">
-                <div className="p-4 bg-white/5 border border-white/10">
-                  <span className="text-[#b5a898] uppercase text-[9.5px] tracking-[0.22em] block mb-1 font-semibold">
+              <div className="space-y-3.5 pt-6 border-t border-white/15 text-xs tracking-wider">
+                <div className="p-3.5 bg-white/5 border border-white/10">
+                  <span className="text-[#b5a898] uppercase text-[9px] tracking-[0.22em] block mb-1 font-semibold">
                     Email directo
                   </span>
                   <a
@@ -103,8 +103,8 @@ export default function ContactForm() {
                   </a>
                 </div>
 
-                <div className="p-4 bg-white/5 border border-white/10">
-                  <span className="text-[#b5a898] uppercase text-[9.5px] tracking-[0.22em] block mb-1 font-semibold">
+                <div className="p-3.5 bg-white/5 border border-white/10">
+                  <span className="text-[#b5a898] uppercase text-[9px] tracking-[0.22em] block mb-1 font-semibold">
                     WhatsApp directo
                   </span>
                   <a
@@ -114,12 +114,12 @@ export default function ContactForm() {
                     className="text-white hover:text-[#b5a898] transition-colors font-medium flex items-center justify-between"
                   >
                     <span>+54 9 11 2382-3297</span>
-                    <ArrowUpRight size={14} className="text-[#b5a898]" />
+                    <ArrowUpRight size={13} className="text-[#b5a898]" />
                   </a>
                 </div>
 
-                <div className="p-4 bg-white/5 border border-white/10">
-                  <span className="text-[#b5a898] uppercase text-[9.5px] tracking-[0.22em] block mb-1 font-semibold">
+                <div className="p-3.5 bg-white/5 border border-white/10">
+                  <span className="text-[#b5a898] uppercase text-[9px] tracking-[0.22em] block mb-1 font-semibold">
                     Ciudades &amp; Cobertura
                   </span>
                   <span className="text-white/80 font-medium">
@@ -132,146 +132,110 @@ export default function ContactForm() {
 
           {/* RIGHT COLUMN: FORM */}
           <div className="lg:col-span-7">
-            <GsapReveal delay={0.15} className="bg-[#121214] p-8 md:p-12 border border-white/15 shadow-2xl">
+            <GsapReveal delay={0.12} className="bg-[#121214] p-6 md:p-8 border border-white/15 shadow-xl">
               {status === "success" ? (
-                <div className="py-12 text-center">
-                  <div className="w-14 h-14 bg-[#b5a898] text-black rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
+                <div className="py-10 text-center">
+                  <div className="w-12 h-12 bg-[#b5a898] text-black rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold shadow-md">
                     ✓
                   </div>
-                  <h3 className="font-serif text-2xl sm:text-3xl text-white mb-3">
-                    Mensaje enviado correctamente
+                  <h3 className="font-serif text-2xl text-white mb-2 font-normal">
+                    Mensaje Recibido
                   </h3>
-                  <p className="text-xs md:text-sm text-white/70 mb-8 max-w-md mx-auto leading-relaxed font-light">
-                    Gracias por ponerte en contacto. Ash Mateu y su equipo revisarán tu propuesta a la brevedad.
+                  <p className="text-xs text-white/70 max-w-md mx-auto font-light leading-relaxed mb-6">
+                    Gracias por ponerte en contacto. Ash Mateu o su equipo responderán a la brevedad para coordinar una reunión de trabajo o llamada de consulta.
                   </p>
                   <button
                     onClick={() => setStatus("idle")}
-                    className="px-8 py-3.5 bg-white text-black text-xs tracking-[0.2em] uppercase font-semibold hover:bg-[#b5a898] transition-colors rounded-full"
+                    className="px-6 py-2.5 bg-white text-black text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-[#b5a898] transition-colors"
                   >
                     Enviar otro mensaje
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {errorMessage && (
-                    <div className="p-4 bg-red-950/60 border border-red-800 text-red-200 text-xs">
-                      {errorMessage}
-                    </div>
-                  )}
-
-                  {/* NOMBRE */}
-                  <div>
-                    <label className="block text-[10px] tracking-[0.22em] uppercase text-[#b5a898] mb-2 font-semibold">
-                      Nombre Completo *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.nombre || ""}
-                      onChange={(e) =>
-                        setFormData({ ...formData, nombre: e.target.value })
-                      }
-                      placeholder="Tu nombre y apellido"
-                      className="w-full bg-black/60 border border-white/20 px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#b5a898] transition-colors"
-                    />
-                    {errors.nombre && (
-                      <p className="text-xs text-red-400 mt-1">{errors.nombre}</p>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* EMPRESA */}
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] tracking-[0.22em] uppercase text-[#b5a898] mb-2 font-semibold">
-                        Empresa o Marca
+                      <label className="block text-[9.5px] tracking-[0.22em] uppercase text-[#b5a898] mb-1.5 font-semibold">
+                        Nombre Completo *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.nombre || ""}
+                        onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                        placeholder="Ej: Clara Martínez"
+                        className="w-full bg-[#1c1c1f] border border-white/15 px-3.5 py-2.5 text-xs text-white placeholder-white/30 focus:border-[#b5a898] focus:outline-none transition-colors"
+                      />
+                      {errors.nombre && <p className="text-[#EA2638] text-[10px] mt-1">{errors.nombre}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-[9.5px] tracking-[0.22em] uppercase text-[#b5a898] mb-1.5 font-semibold">
+                        Empresa / Marca (Opcional)
                       </label>
                       <input
                         type="text"
                         value={formData.empresa || ""}
-                        onChange={(e) =>
-                          setFormData({ ...formData, empresa: e.target.value })
-                        }
-                        placeholder="Ej: Chanel / Marca Propia / Personal"
-                        className="w-full bg-black/60 border border-white/20 px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#b5a898] transition-colors"
+                        onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
+                        placeholder="Ej: Vogue / Particular"
+                        className="w-full bg-[#1c1c1f] border border-white/15 px-3.5 py-2.5 text-xs text-white placeholder-white/30 focus:border-[#b5a898] focus:outline-none transition-colors"
                       />
                     </div>
+                  </div>
 
-                    {/* EMAIL */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] tracking-[0.22em] uppercase text-[#b5a898] mb-2 font-semibold">
+                      <label className="block text-[9.5px] tracking-[0.22em] uppercase text-[#b5a898] mb-1.5 font-semibold">
                         Email de Contacto *
                       </label>
                       <input
                         type="email"
                         value={formData.email || ""}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        placeholder="tu@email.com"
-                        className="w-full bg-black/60 border border-white/20 px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#b5a898] transition-colors"
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="clara@ejemplo.com"
+                        className="w-full bg-[#1c1c1f] border border-white/15 px-3.5 py-2.5 text-xs text-white placeholder-white/30 focus:border-[#b5a898] focus:outline-none transition-colors"
                       />
-                      {errors.email && (
-                        <p className="text-xs text-red-400 mt-1">{errors.email}</p>
-                      )}
+                      {errors.email && <p className="text-[#EA2638] text-[10px] mt-1">{errors.email}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-[9.5px] tracking-[0.22em] uppercase text-[#b5a898] mb-1.5 font-semibold">
+                        Tipo de Proyecto
+                      </label>
+                      <select
+                        value={formData.tipoProyecto || "Editorial & Campañas"}
+                        onChange={(e) => setFormData({ ...formData, tipoProyecto: e.target.value as ContactFormData["tipoProyecto"] })}
+                        className="w-full bg-[#1c1c1f] border border-white/15 px-3.5 py-2.5 text-xs text-white focus:border-[#b5a898] focus:outline-none transition-colors"
+                      >
+                        {projectTypes.map((type) => (
+                          <option key={type} value={type} className="bg-[#121214] text-white">
+                            {type}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
-                  {/* TIPO DE PROYECTO */}
                   <div>
-                    <label className="block text-[10px] tracking-[0.22em] uppercase text-[#b5a898] mb-2 font-semibold">
-                      Tipo de Proyecto *
-                    </label>
-                    <select
-                      value={formData.tipoProyecto}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          tipoProyecto: e.target.value as ContactFormData["tipoProyecto"],
-                        })
-                      }
-                      className="w-full bg-black/60 border border-white/20 px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#b5a898] transition-colors cursor-pointer"
-                    >
-                      {projectTypes.map((type) => (
-                        <option key={type} value={type} className="bg-[#161616]">
-                          {type}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.tipoProyecto && (
-                      <p className="text-xs text-red-400 mt-1">
-                        {errors.tipoProyecto}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* MENSAJE */}
-                  <div>
-                    <label className="block text-[10px] tracking-[0.22em] uppercase text-[#b5a898] mb-2 font-semibold">
-                      Detalles del Proyecto o Fechas Estimadas *
+                    <label className="block text-[9.5px] tracking-[0.22em] uppercase text-[#b5a898] mb-1.5 font-semibold">
+                      Detalle del Proyecto / Mensaje *
                     </label>
                     <textarea
                       rows={4}
                       value={formData.mensaje || ""}
-                      onChange={(e) =>
-                        setFormData({ ...formData, mensaje: e.target.value })
-                      }
-                      placeholder="Contame sobre tu idea, objetivos, fechas estimadas y locación..."
-                      className="w-full bg-black/60 border border-white/20 px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#b5a898] transition-colors resize-none"
+                      onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
+                      placeholder="Contanos sobre las fechas, tipo de producción o evento..."
+                      className="w-full bg-[#1c1c1f] border border-white/15 px-3.5 py-2.5 text-xs text-white placeholder-white/30 focus:border-[#b5a898] focus:outline-none transition-colors"
                     />
-                    {errors.mensaje && (
-                      <p className="text-xs text-red-400 mt-1">{errors.mensaje}</p>
-                    )}
+                    {errors.mensaje && <p className="text-[#EA2638] text-[10px] mt-1">{errors.mensaje}</p>}
                   </div>
 
-                  {/* BUTTON-IN-BUTTON SUBMIT */}
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="group flex items-center justify-between gap-3 w-full py-3.5 pl-6 pr-2 bg-[#b5a898] hover:bg-white text-black font-semibold text-xs tracking-[0.24em] uppercase transition-all duration-300 disabled:opacity-50 cursor-pointer shadow-lg active:scale-[0.98] rounded-full"
+                    className="w-full bg-[#b5a898] hover:bg-white text-black py-3 text-[11px] tracking-[0.2em] uppercase font-semibold transition-all duration-300 active:scale-[0.99] shadow-md flex items-center justify-center gap-2 mt-2"
                   >
-                    <span>{status === "submitting" ? "Enviando Solicitud..." : "Enviar Propuesta"}</span>
-                    <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <ArrowUpRight size={15} strokeWidth={2.2} />
-                    </div>
+                    <span>{status === "submitting" ? "Enviando..." : "Enviar Consulta de Proyecto"}</span>
+                    <ArrowUpRight size={13} strokeWidth={2.2} />
                   </button>
                 </form>
               )}
