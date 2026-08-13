@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Sliders, Check, RotateCcw, Copy, ZoomIn } from "lucide-react";
+import { ArrowUpRight, Sliders, Check, RotateCcw, Copy, ZoomIn, Sun } from "lucide-react";
 import gsap from "gsap";
 
 export default function HeroCover() {
@@ -11,10 +11,11 @@ export default function HeroCover() {
   const textRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
 
-  // Live framing state (persisted in localStorage)
+  // Live framing & lighting state (persisted in localStorage)
   const [posX, setPosX] = useState(50);
   const [posY, setPosY] = useState(20);
   const [zoom, setZoom] = useState(100);
+  const [brightness, setBrightness] = useState(115);
   const [showCalibrator, setShowCalibrator] = useState(true);
   const [copied, setCopied] = useState(false);
 
@@ -26,28 +27,30 @@ export default function HeroCover() {
         if (parsed.x !== undefined) setPosX(parsed.x);
         if (parsed.y !== undefined) setPosY(parsed.y);
         if (parsed.zoom !== undefined) setZoom(parsed.zoom);
+        if (parsed.brightness !== undefined) setBrightness(parsed.brightness);
       } catch (e) {
         console.error("Error loading saved framing", e);
       }
     }
   }, []);
 
-  const updateFraming = (x: number, y: number, z: number) => {
+  const updateFraming = (x: number, y: number, z: number, b: number = brightness) => {
     setPosX(x);
     setPosY(y);
     setZoom(z);
+    setBrightness(b);
     localStorage.setItem(
       "ash_hero_new_framing",
-      JSON.stringify({ x, y, zoom: z })
+      JSON.stringify({ x, y, zoom: z, brightness: b })
     );
   };
 
   const handleReset = () => {
-    updateFraming(50, 20, 100);
+    updateFraming(50, 20, 100, 115);
   };
 
   const handleCopy = () => {
-    const code = `objectPosition: "${posX}% ${posY}%", transform: "scale(${zoom / 100})"`;
+    const code = `objectPosition: "${posX}% ${posY}%", transform: "scale(${zoom / 100})", filter: "brightness(${brightness / 100}) contrast(1.02)"`;
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -80,10 +83,11 @@ export default function HeroCover() {
   }, []);
 
   const zoomPresets = [100, 125, 150, 180, 220, 260];
+  const brightnessPresets = [100, 110, 120, 130, 140];
 
   return (
     <section className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]">
-      {/* FULL-SCREEN HERO BACKGROUND IMAGE (4K UHD NATIVE) */}
+      {/* FULL-SCREEN HERO BACKGROUND IMAGE (4K UHD NATIVE WITH DYNAMIC BRIGHTNESS) */}
       <div ref={heroRef} className="absolute inset-0 w-full h-full">
         <Image
           src="/images/hero/hero_cover_pptx.webp"
@@ -96,12 +100,12 @@ export default function HeroCover() {
             objectPosition: `${posX}% ${posY}%`,
             transform: `scale(${zoom / 100})`,
             transformOrigin: `${posX}% ${posY}%`,
-            transition: "object-position 0.1s ease-out, transform 0.1s ease-out",
+            filter: `brightness(${brightness / 100}) contrast(1.03) saturate(1.04)`,
+            transition: "object-position 0.1s ease-out, transform 0.1s ease-out, filter 0.15s ease-out",
           }}
-          className="filter brightness-[0.94] contrast-[1.02]"
         />
-        {/* EDITORIAL VIGNETTE GRADIENT */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/25 pointer-events-none" />
+        {/* EDITORIAL VIGNETTE GRADIENT (LIGHTENED FOR MAXIMUM LUMINOSITY & MODEL VISIBILITY) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent pointer-events-none" />
       </div>
 
       {/* HERO OVERLAID CONTENT */}
@@ -176,14 +180,14 @@ export default function HeroCover() {
         </div>
       </div>
 
-      {/* LIVE ENCUADRE CALIBRATOR PANEL */}
+      {/* LIVE ENCUADRE & LIGHTING CALIBRATOR PANEL */}
       {showCalibrator && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#0a0a0a]/95 border border-white/25 text-white rounded-2xl p-5 shadow-2xl backdrop-blur-2xl w-84 max-w-[calc(100vw-2rem)] animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0a0a0a]/95 border border-white/25 text-white rounded-2xl p-5 shadow-2xl backdrop-blur-2xl w-84 max-w-[calc(100vw-2rem)] animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto max-h-[85vh] overflow-y-auto">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <Sliders size={14} className="text-[#c9a84c]" />
               <span className="text-xs font-semibold tracking-wider uppercase text-white">
-                Ajuste de Encuadre &amp; Zoom
+                Ajuste de Encuadre &amp; Brillo
               </span>
             </div>
             <button
@@ -207,7 +211,7 @@ export default function HeroCover() {
                 max="100"
                 value={posX}
                 onChange={(e) =>
-                  updateFraming(Number(e.target.value), posY, zoom)
+                  updateFraming(Number(e.target.value), posY, zoom, brightness)
                 }
                 className="w-full accent-[#b5a898] cursor-pointer"
               />
@@ -230,7 +234,7 @@ export default function HeroCover() {
                 max="100"
                 value={posY}
                 onChange={(e) =>
-                  updateFraming(posX, Number(e.target.value), zoom)
+                  updateFraming(posX, Number(e.target.value), zoom, brightness)
                 }
                 className="w-full accent-[#b5a898] cursor-pointer"
               />
@@ -241,12 +245,12 @@ export default function HeroCover() {
               </div>
             </div>
 
-            {/* ZOOM / SCALE (EXPANDED TO 300%) */}
+            {/* ZOOM / SCALE */}
             <div>
               <div className="flex justify-between text-[10px] tracking-wider uppercase text-[#b5a898] mb-1.5">
                 <span className="flex items-center gap-1">
                   <ZoomIn size={11} className="text-[#c9a84c]" />
-                  <span>Escala / Zoom Máximo</span>
+                  <span>Escala / Zoom</span>
                 </span>
                 <span className="text-white font-mono font-bold">{zoom}%</span>
               </div>
@@ -257,16 +261,16 @@ export default function HeroCover() {
                 step="1"
                 value={zoom}
                 onChange={(e) =>
-                  updateFraming(posX, posY, Number(e.target.value))
+                  updateFraming(posX, posY, Number(e.target.value), brightness)
                 }
                 className="w-full accent-[#b5a898] cursor-pointer"
               />
-              {/* QUICK PRESETS */}
+              {/* QUICK ZOOM PRESETS */}
               <div className="flex items-center justify-between gap-1 mt-2">
                 {zoomPresets.map((pz) => (
                   <button
                     key={pz}
-                    onClick={() => updateFraming(posX, posY, pz)}
+                    onClick={() => updateFraming(posX, posY, pz, brightness)}
                     className={`px-1.5 py-0.5 rounded text-[8.5px] font-mono border transition-all cursor-pointer ${
                       zoom === pz
                         ? "bg-[#b5a898] text-black border-[#b5a898] font-bold"
@@ -278,6 +282,44 @@ export default function HeroCover() {
                 ))}
               </div>
             </div>
+
+            {/* BRIGHTNESS CONTROL */}
+            <div className="pt-2 border-t border-white/10">
+              <div className="flex justify-between text-[10px] tracking-wider uppercase text-[#b5a898] mb-1.5">
+                <span className="flex items-center gap-1">
+                  <Sun size={11} className="text-[#c9a84c]" />
+                  <span>Brillo / Luminosidad</span>
+                </span>
+                <span className="text-white font-mono font-bold">{brightness}%</span>
+              </div>
+              <input
+                type="range"
+                min="90"
+                max="160"
+                step="1"
+                value={brightness}
+                onChange={(e) =>
+                  updateFraming(posX, posY, zoom, Number(e.target.value))
+                }
+                className="w-full accent-[#b5a898] cursor-pointer"
+              />
+              {/* QUICK BRIGHTNESS PRESETS */}
+              <div className="flex items-center justify-between gap-1 mt-2">
+                {brightnessPresets.map((pb) => (
+                  <button
+                    key={pb}
+                    onClick={() => updateFraming(posX, posY, zoom, pb)}
+                    className={`px-2 py-0.5 rounded text-[8.5px] font-mono border transition-all cursor-pointer ${
+                      brightness === pb
+                        ? "bg-[#c9a84c] text-black border-[#c9a84c] font-bold"
+                        : "bg-white/5 text-white/70 border-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    {pb}%
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* ACTION BUTTONS */}
@@ -285,7 +327,7 @@ export default function HeroCover() {
             <button
               onClick={handleReset}
               className="inline-flex items-center gap-1 text-[9.5px] text-white/60 hover:text-white py-1 px-2.5 rounded border border-white/10 hover:border-white/30 cursor-pointer"
-              title="Restablecer posición inicial"
+              title="Restablecer posición y brillo inicial"
             >
               <RotateCcw size={11} />
               <span>Reset</span>
