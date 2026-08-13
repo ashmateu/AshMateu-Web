@@ -1,10 +1,10 @@
 import {
-  nvidiaAI,
-  PRIMARY_NVIDIA_MODEL,
-  BACKUP_NVIDIA_MODEL,
+  qwenAI,
+  PRIMARY_QWEN_MODEL,
+  BACKUP_QWEN_MODEL,
   CONCIERGE_SYSTEM_PROMPT,
   ChatMessage,
-} from "@/lib/nvidia-ai";
+} from "@/lib/qwen-ai";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 45;
@@ -38,12 +38,12 @@ export async function POST(request: Request) {
 
     const encoder = new TextEncoder();
 
-    // Intentar stream con GLM-5.2
+    // 1. Intento primario: Qwen Max en Streaming
     try {
-      const stream = await nvidiaAI.chat.completions.create({
-        model: PRIMARY_NVIDIA_MODEL,
+      const stream = await qwenAI.chat.completions.create({
+        model: PRIMARY_QWEN_MODEL,
         messages: fullMessages,
-        temperature: 0.75,
+        temperature: 0.7,
         max_tokens: 1024,
         top_p: 0.95,
         stream: true,
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
             }
             controller.close();
           } catch (streamErr) {
-            console.error("Error durante el streaming de GLM-5.2:", streamErr);
+            console.error("Error durante el streaming de Qwen Max:", streamErr);
             controller.error(streamErr);
           }
         },
@@ -75,13 +75,13 @@ export async function POST(request: Request) {
       });
     } catch (primaryError) {
       console.warn(
-        "Fallo primario con GLM-5.2, intentando backup stream con Llama:",
+        "Fallo primario con Qwen Max, intentando backup stream con Qwen Turbo:",
         primaryError
       );
 
-      // Fallback a Llama 3.1 8B en streaming
-      const backupStream = await nvidiaAI.chat.completions.create({
-        model: BACKUP_NVIDIA_MODEL,
+      // 2. Fallback: Qwen Turbo en Streaming (~600ms)
+      const backupStream = await qwenAI.chat.completions.create({
+        model: BACKUP_QWEN_MODEL,
         messages: fullMessages,
         temperature: 0.7,
         max_tokens: 800,

@@ -308,7 +308,7 @@ export default function ConciergeDrawer() {
           {/* BADGE DE CALIBRACIÓN */}
           <div className="text-center py-2">
             <span className="inline-block px-3 py-1 bg-[#B5A898]/15 border border-[#B5A898]/30 rounded-full text-[8.5px] tracking-[0.24em] uppercase text-[#7A6A5A] font-medium">
-              Creative Intelligence · Powered by NVIDIA NIM
+              Creative Intelligence · Powered by Qwen AI
             </span>
           </div>
 
