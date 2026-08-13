@@ -17,7 +17,7 @@ export default function GsapReveal({
   className = "",
   delay = 0,
   direction = "up",
-  duration = 0.9,
+  duration = 0.62,
 }: GsapRevealProps) {
   const elRef = useRef<HTMLDivElement>(null);
 
@@ -30,18 +30,18 @@ export default function GsapReveal({
     let x = 0;
     let y = 0;
 
-    if (direction === "up") y = 16;
-    if (direction === "down") y = -16;
-    if (direction === "left") x = 16;
-    if (direction === "right") x = -16;
+    if (direction === "up") y = 12;
+    if (direction === "down") y = -12;
+    if (direction === "left") x = 12;
+    if (direction === "right") x = -12;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
         {
           opacity: 0,
-          scale: 0.96,
-          filter: "blur(8px)",
+          scale: 0.97,
+          filter: "blur(6px)",
           x,
           y,
         },
