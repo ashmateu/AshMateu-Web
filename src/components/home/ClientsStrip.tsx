@@ -9,79 +9,79 @@ interface BrandItem {
   src: string;
   width: number;
   height: number;
-  className?: string;
+  className: string;
 }
 
 const brandLogos: BrandItem[] = [
   {
     name: "Chanel",
-    src: "/images/brands/chanel.svg",
-    width: 100,
-    height: 38,
-    className: "h-7 sm:h-8",
+    src: "/images/brands/chanel.webp",
+    width: 155,
+    height: 101,
+    className: "max-h-7 sm:max-h-8 max-w-[88px] sm:max-w-[98px]",
   },
   {
     name: "Louis Vuitton",
-    src: "/images/brands/louis_vuitton.svg",
-    width: 110,
-    height: 36,
-    className: "h-6 sm:h-7",
+    src: "/images/brands/louis_vuitton.webp",
+    width: 245,
+    height: 295,
+    className: "max-h-8 sm:max-h-9 max-w-[80px] sm:max-w-[90px]",
   },
   {
     name: "Gucci",
-    src: "/images/brands/gucci.svg",
-    width: 110,
-    height: 36,
-    className: "h-5 sm:h-6",
+    src: "/images/brands/gucci.webp",
+    width: 103,
+    height: 19,
+    className: "max-h-4 sm:max-h-5 max-w-[100px] sm:max-w-[115px]",
   },
   {
     name: "Miu Miu",
-    src: "/images/brands/miu_miu.svg",
-    width: 105,
-    height: 36,
-    className: "h-5 sm:h-6",
+    src: "/images/brands/miu_miu.webp",
+    width: 387,
+    height: 64,
+    className: "max-h-4.5 sm:max-h-5 max-w-[105px] sm:max-w-[120px]",
   },
   {
     name: "Dolce & Gabbana",
-    src: "/images/brands/dolce_gabbana.svg",
-    width: 135,
-    height: 34,
-    className: "h-4 sm:h-5",
+    src: "/images/brands/dolce_gabbana.webp",
+    width: 403,
+    height: 47,
+    className: "max-h-3.5 sm:max-h-4.5 max-w-[120px] sm:max-w-[135px]",
   },
   {
     name: "Marie Claire",
-    src: "/images/brands/marie_claire.svg",
-    width: 125,
-    height: 38,
-    className: "h-6 sm:h-7",
+    src: "/images/brands/marie_claire.webp",
+    width: 403,
+    height: 61,
+    className: "max-h-5 sm:max-h-6 max-w-[110px] sm:max-w-[125px]",
   },
   {
     name: "Nike",
-    src: "/images/brands/nike.svg",
-    width: 75,
-    height: 36,
-    className: "h-5 sm:h-6",
+    src: "/images/brands/nike.webp",
+    width: 403,
+    height: 143,
+    className: "max-h-5 sm:max-h-6 max-w-[65px] sm:max-w-[75px]",
   },
   {
     name: "L'Oréal Paris",
-    src: "/images/brands/loreal.svg",
-    width: 115,
-    height: 34,
-    className: "h-4 sm:h-5",
+    src: "/images/brands/loreal.webp",
+    width: 403,
+    height: 76,
+    className: "max-h-4 sm:max-h-5 max-w-[105px] sm:max-w-[118px]",
   },
   {
     name: "Mercedes-Benz",
-    src: "/images/brands/mercedes_benz.svg",
-    width: 125,
-    height: 40,
-    className: "h-7 sm:h-8",
+    src: "/images/brands/mercedes_benz.webp",
+    width: 403,
+    height: 404,
+    className: "max-h-7 sm:max-h-8 max-w-[65px] sm:max-w-[75px]",
   },
   {
     name: "Netflix",
-    src: "/images/brands/netflix.svg",
-    width: 90,
-    height: 36,
-    className: "h-5 sm:h-6",
+    src: "/images/brands/netflix.webp",
+    width: 403,
+    height: 112,
+    className: "max-h-4.5 sm:max-h-5.5 max-w-[90px] sm:max-w-[105px]",
   },
 ];
 
@@ -95,12 +95,12 @@ export default function ClientsStrip() {
             <span>Marcas &amp; Publicaciones Seleccionadas</span>
           </div>
 
-          {/* AUTHENTIC BRAND ISOLOGOS GRID */}
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-18">
+          {/* OPTICALLY NORMALIZED BRAND ISOLOGOS GRID */}
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12">
             {brandLogos.map((brand) => (
               <div
                 key={brand.name}
-                className="group flex items-center justify-center p-2 transition-all duration-300 hover:scale-105"
+                className="group w-28 sm:w-32 md:w-36 h-12 sm:h-14 flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105 select-none"
                 title={brand.name}
               >
                 <Image
@@ -108,7 +108,7 @@ export default function ClientsStrip() {
                   alt={`${brand.name} logo`}
                   width={brand.width}
                   height={brand.height}
-                  className={`${brand.className || "h-6"} w-auto object-contain brightness-0 opacity-60 group-hover:opacity-100 transition-opacity duration-300`}
+                  className={`${brand.className} w-auto h-auto object-contain opacity-65 group-hover:opacity-100 transition-opacity duration-300`}
                 />
               </div>
             ))}
