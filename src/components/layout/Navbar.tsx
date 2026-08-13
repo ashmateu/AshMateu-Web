@@ -3,81 +3,85 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Menu, X, ArrowUpRight, Check } from "lucide-react";
+import { Menu, X, ArrowUpRight, Check, Sparkles } from "lucide-react";
 
-export type RunwayVariant = "3A" | "3B" | "3C" | "3D";
+export type RunwayAvantGardeVariant = "3A-1" | "3A-2" | "3A-3" | "3A-4";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [variant, setVariant] = useState<RunwayVariant>("3A");
+  const [variant, setVariant] = useState<RunwayAvantGardeVariant>("3A-1");
   const [showSwitcher, setShowSwitcher] = useState(true);
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 25);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Sync with query param (?nav=3A, 3B, 3C, 3D) or localStorage
+  // Sync with URL query param (?nav=3A-1, 3A-2, 3A-3, 3A-4) or localStorage
   useEffect(() => {
-    const navParam = searchParams.get("nav") as RunwayVariant;
-    if (navParam && ["3A", "3B", "3C", "3D"].includes(navParam)) {
+    const navParam = searchParams.get("nav") as RunwayAvantGardeVariant;
+    if (navParam && ["3A-1", "3A-2", "3A-3", "3A-4"].includes(navParam)) {
       setVariant(navParam);
     } else {
-      const saved = localStorage.getItem("ash_runway_variant") as RunwayVariant;
-      if (saved && ["3A", "3B", "3C", "3D"].includes(saved)) {
+      const saved = localStorage.getItem("ash_runway_ag_variant") as RunwayAvantGardeVariant;
+      if (saved && ["3A-1", "3A-2", "3A-3", "3A-4"].includes(saved)) {
         setVariant(saved);
       }
     }
   }, [searchParams]);
 
-  const handleSelectVariant = (v: RunwayVariant) => {
+  const handleSelectVariant = (v: RunwayAvantGardeVariant) => {
     setVariant(v);
-    localStorage.setItem("ash_runway_variant", v);
+    localStorage.setItem("ash_runway_ag_variant", v);
   };
 
   const navLinks = [
-    { label: "WHAT I DO?", href: "/#highlights", num: "01" },
-    { label: "FASHION GALLERY", href: "/galeria", num: "02" },
-    { label: "TRENDS", href: "/blog", num: "03" },
-    { label: "STYLING SERVICES", href: "/como-trabajo", num: "04" },
-    { label: "VLOG", href: "/#vlog", num: "05" },
-    { label: "NEWSLETTER", href: "/newsletter", num: "06" },
+    { label: "WHAT I DO?", href: "/#highlights", code: "01" },
+    { label: "FASHION GALLERY", href: "/galeria", code: "02" },
+    { label: "TRENDS", href: "/blog", code: "03" },
+    { label: "STYLING SERVICES", href: "/como-trabajo", code: "04" },
+    { label: "VLOG", href: "/#vlog", code: "05" },
+    { label: "NEWSLETTER", href: "/newsletter", code: "06" },
   ];
 
   return (
     <>
       {/* =========================================================================
-          VARIANTE 3A: RUNWAY MINIMAL CLASSIC
-          Línea inferior continua, tipografía Bodoni pura con descriptor horizontal,
-          enlaces con divisor diagonal sutil '/' y botón de WhatsApp en píldora fina.
+          VARIANTE 3A-1: HAUTE COUTURE MONOGRAPH (Saint Laurent / The Row)
+          - Logo: 'ASH MATEU' en Bodoni estilizada con sub-label 'PARIS · BUENOS AIRES'
+          - Línea de Pasarela: Hairline luminosa en degradé dorado/cristal
+          - Enlaces: Espaciado ultra-fino con divisores técnicos '+'
+          - CTA: Cápsula translúcida con baliza viva '● WhatsApp ↗'
           ========================================================================= */}
-      {variant === "3A" && (
+      {variant === "3A-1" && (
         <header
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
             scrolled
-              ? "bg-[#0a0a0a]/95 border-white/15 py-4 backdrop-blur-xl shadow-lg"
-              : "bg-black/40 border-white/15 py-5 backdrop-blur-md"
+              ? "bg-[#0a0a0a]/92 backdrop-blur-2xl py-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
+              : "bg-gradient-to-b from-black/80 via-black/30 to-transparent py-5"
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* LOGO */}
-            <Link href="/" className="flex items-baseline gap-3 group text-white">
-              <span className="font-serif text-2xl md:text-[28px] font-normal uppercase tracking-[0.06em] group-hover:text-[#b5a898] transition-colors leading-none">
-                Ash Mateu
-              </span>
-              <span className="hidden sm:inline text-[9px] tracking-[0.28em] text-[#b5a898] uppercase font-light">
-                · Directora Creativa
-              </span>
+            {/* LOGO WITH MAISON COORDINATES */}
+            <Link href="/" className="flex items-center gap-3.5 group text-white">
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl md:text-[28px] font-normal uppercase tracking-[0.1em] group-hover:text-[#b5a898] transition-colors leading-none">
+                  Ash Mateu
+                </span>
+                <span className="text-[7.5px] tracking-[0.38em] text-[#b5a898] uppercase font-medium mt-1">
+                  Paris · Buenos Aires
+                </span>
+              </div>
             </Link>
 
-            {/* LINKS WITH '/' SEPARATORS */}
-            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 text-[10px] tracking-[0.24em] uppercase font-medium text-white/80">
+            {/* LINKS WITH '+' COUTURE DELIMITERS */}
+            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 text-[10px] tracking-[0.28em] uppercase font-medium text-white/80">
               {navLinks.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
@@ -85,34 +89,39 @@ export default function Navbar() {
                     <li>
                       <Link
                         href={link.href}
-                        className={`transition-colors py-1 relative hover:text-white ${
+                        className={`transition-colors py-1 relative hover:text-white group flex items-center gap-1 ${
                           isActive ? "text-white font-semibold" : ""
                         }`}
                       >
-                        {link.label}
-                        {isActive && (
-                          <span className="absolute -bottom-1 left-0 w-full h-[1.5px] bg-[#b5a898]" />
-                        )}
+                        <span>{link.label}</span>
+                        <span
+                          className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1.5px] bg-[#b5a898] transition-all duration-300 ${
+                            isActive ? "w-full" : "w-0 group-hover:w-full"
+                          }`}
+                        />
                       </Link>
                     </li>
                     {i < navLinks.length - 1 && (
-                      <span className="text-white/20 select-none font-light">/</span>
+                      <span className="text-[#b5a898]/40 select-none text-[8px] font-light">
+                        +
+                      </span>
                     )}
                   </React.Fragment>
                 );
               })}
             </ul>
 
-            {/* CTA: Subtle hairline pill */}
+            {/* CTA: ATELIER DIRECT WITH LIVE BEACON */}
             <div className="flex items-center gap-4">
               <a
                 href="https://wa.me/5491123823297"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-2 border border-white/35 hover:border-white bg-white/5 hover:bg-white text-white hover:text-black px-4 py-1.5 rounded-full text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-300 backdrop-blur-sm"
+                className="group hidden sm:inline-flex items-center gap-2 bg-white/5 hover:bg-white text-white hover:text-black border border-white/25 hover:border-white px-4 py-1.5 rounded-full text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-300 backdrop-blur-md shadow-sm active:scale-[0.98]"
               >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
                 <span>WhatsApp</span>
-                <ArrowUpRight size={13} />
+                <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
               <button
@@ -123,57 +132,66 @@ export default function Navbar() {
               </button>
             </div>
           </div>
+
+          {/* LUMINOUS RUNWAY HAIRLINE WIRE */}
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#b5a898]/50 to-transparent mt-3.5" />
         </header>
       )}
 
       {/* =========================================================================
-          VARIANTE 3B: RUNWAY HIGH EDITORIAL (Numbered + Gold Accent CTA)
-          Línea milimétrica, logotipo con subtítulo apilado 'DIRECCIÓN CREATIVA & STYLING',
-          enlaces con micro-índice numérico '01. WHAT I DO?' y botón en oro champagne.
+          VARIANTE 3A-2: ARCHITECTURAL NOIR & MAGNETIC CAPSULE (Bottega / Acne Studios)
+          - Logo: Monolítico con diamante 'ASH MATEU ◆ DIRECTORA CREATIVA'
+          - Enlaces: Píldoras magnéticas de cristal al hacer hover
+          - CTA: Botón en oro champagne cepillado con micro-círculo de tensión cinética
           ========================================================================= */}
-      {variant === "3B" && (
+      {variant === "3A-2" && (
         <header
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-white/15 ${
             scrolled
-              ? "bg-[#0a0a0a]/95 border-white/20 py-3.5 backdrop-blur-2xl shadow-xl"
-              : "bg-[#0a0a0a]/60 border-white/15 py-4 backdrop-blur-lg"
+              ? "bg-[#0a0a0a]/95 backdrop-blur-2xl py-3 shadow-2xl"
+              : "bg-black/60 backdrop-blur-md py-4"
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* LOGO: STACKED EDITORIAL */}
-            <Link href="/" className="flex flex-col group text-white">
-              <span className="font-serif text-2xl md:text-[26px] font-normal uppercase tracking-[0.08em] group-hover:text-[#b5a898] transition-colors leading-tight">
+            {/* LOGO WITH GEOMETRIC DIAMOND */}
+            <Link href="/" className="flex items-baseline gap-2.5 group text-white">
+              <span className="font-serif text-2xl md:text-[28px] font-normal uppercase tracking-[0.08em] group-hover:text-[#b5a898] transition-colors leading-none">
                 Ash Mateu
               </span>
-              <span className="text-[7.5px] tracking-[0.32em] text-[#b5a898] uppercase font-medium">
-                Dirección Creativa &amp; Styling
+              <span className="text-[#c9a84c] text-[10px]">◆</span>
+              <span className="hidden sm:inline text-[8.5px] tracking-[0.3em] text-white/70 uppercase font-light">
+                Directora Creativa
               </span>
             </Link>
 
-            {/* LINKS WITH NUMBERED MICRO-INDEX */}
-            <ul className="hidden lg:flex items-center gap-6 xl:gap-8 text-[9.5px] tracking-[0.22em] uppercase font-medium text-white/80">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-[#b5a898] transition-colors py-1 group flex items-center gap-1"
-                  >
-                    <span className="text-[8px] text-[#b5a898]/70 font-mono">
-                      {link.num}.
-                    </span>
-                    <span>{link.label}</span>
-                  </Link>
-                </li>
-              ))}
+            {/* MAGNETIC GLASS PILL LINKS */}
+            <ul className="hidden lg:flex items-center gap-2 xl:gap-3 text-[10px] tracking-[0.24em] uppercase font-medium text-white/80">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className={`px-3.5 py-1.5 rounded-full transition-all duration-300 ${
+                        isActive
+                          ? "bg-white text-black font-semibold shadow-sm"
+                          : "hover:bg-white/10 hover:text-white text-white/75"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
 
-            {/* CTA: CHAMPAGNE GOLD PILL WITH NESTED CIRCLE */}
-            <div className="flex items-center gap-3.5">
+            {/* CTA: BRUSHED CHAMPAGNE GOLD BUTTON */}
+            <div className="flex items-center gap-3">
               <a
                 href="https://wa.me/5491123823297"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group hidden sm:inline-flex items-center gap-2 bg-[#b5a898] hover:bg-white text-black pl-4 pr-1.5 py-1 rounded-full text-[10px] tracking-[0.18em] uppercase font-semibold transition-all duration-300 shadow-md"
+                className="group hidden sm:inline-flex items-center gap-2.5 bg-[#b5a898] hover:bg-white text-black pl-4 pr-1.5 py-1.5 rounded-full text-[10px] tracking-[0.18em] uppercase font-semibold transition-all duration-300 shadow-md active:scale-[0.98]"
               >
                 <span>WhatsApp</span>
                 <div className="w-5 h-5 rounded-full bg-black text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -193,63 +211,65 @@ export default function Navbar() {
       )}
 
       {/* =========================================================================
-          VARIANTE 3C: RUNWAY GLASS STRIP (Clean Dot Indicators & Sleek Pill)
-          Franja translúcida ultra limpia, monograma con punto de oro y año,
-          enlaces con indicador de punto inferior y botón alargado traslúcido.
+          VARIANTE 3A-3: EDITORIAL SPLIT FRAME (Vogue Paris / Balenciaga Runway)
+          - Logo: 'ASH MATEU' con monograma de alta costura 'AM°'
+          - Enlaces: Separados por barras verticales finas '|' con resplandor sutil
+          - CTA: Marco arquitectónico 'ATELIER DIRECT ↗' con esquinas de precisión
           ========================================================================= */}
-      {variant === "3C" && (
+      {variant === "3A-3" && (
         <header
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-white/20 ${
             scrolled
-              ? "bg-[#0a0a0a]/90 border-white/15 py-3.5 backdrop-blur-xl shadow-lg"
-              : "bg-gradient-to-r from-black/70 via-black/40 to-black/70 border-white/20 py-4.5 backdrop-blur-md"
+              ? "bg-[#0a0a0a]/95 backdrop-blur-xl py-3.5 shadow-xl"
+              : "bg-gradient-to-r from-black/80 via-black/50 to-black/80 backdrop-blur-md py-4.5"
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* LOGO: ASH MATEU + GOLD DOT */}
-            <Link href="/" className="flex items-center gap-2.5 group text-white">
-              <span className="font-serif text-2xl md:text-[26px] font-normal uppercase tracking-[0.08em] group-hover:text-[#b5a898] transition-colors leading-none">
-                Ash Mateu<span className="text-[#c9a84c]">.</span>
+            {/* LOGO WITH SUPERSCRIPT MONOGRAM */}
+            <Link href="/" className="flex items-center gap-2 group text-white">
+              <span className="font-serif text-2xl md:text-[28px] font-normal uppercase tracking-[0.1em] group-hover:text-[#b5a898] transition-colors leading-none">
+                Ash Mateu
               </span>
-              <span className="hidden sm:inline-block h-3.5 w-[1px] bg-white/25 mx-0.5" />
-              <span className="hidden sm:inline-block text-[8px] tracking-[0.25em] text-white/50 uppercase">
-                Est. 2011
+              <span className="font-serif text-[11px] text-[#b5a898] italic font-light">
+                AM°
               </span>
             </Link>
 
-            {/* LINKS: CLEAN & AIRY */}
-            <ul className="hidden lg:flex items-center gap-7 xl:gap-9 text-[10px] tracking-[0.26em] uppercase font-medium text-white/75">
-              {navLinks.map((link) => {
+            {/* LINKS WITH VERTICAL BARS '|' */}
+            <ul className="hidden lg:flex items-center gap-4 xl:gap-6 text-[10px] tracking-[0.26em] uppercase font-medium text-white/80">
+              {navLinks.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="hover:text-white transition-colors relative py-1 flex flex-col items-center group"
-                    >
-                      <span className={isActive ? "text-white font-semibold" : ""}>
-                        {link.label}
-                      </span>
-                      <span
-                        className={`w-1 h-1 rounded-full bg-[#c9a84c] mt-1 transition-all duration-300 ${
-                          isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  <React.Fragment key={link.label}>
+                    <li>
+                      <Link
+                        href={link.href}
+                        className={`transition-colors py-1 hover:text-white ${
+                          isActive
+                            ? "text-[#b5a898] font-semibold border-b border-[#b5a898] pb-0.5"
+                            : ""
                         }`}
-                      />
-                    </Link>
-                  </li>
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                    {i < navLinks.length - 1 && (
+                      <span className="text-white/20 select-none font-thin">|</span>
+                    )}
+                  </React.Fragment>
                 );
               })}
             </ul>
 
-            {/* CTA: SLEEK TRANSLUCENT CAPSULE */}
+            {/* CTA: SURGICAL RECTANGLE ATELIER */}
             <div className="flex items-center gap-3">
               <a
                 href="https://wa.me/5491123823297"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-2 bg-white/10 hover:bg-white text-white hover:text-black border border-white/25 hover:border-white px-4 py-1.5 rounded-full text-[9.5px] tracking-[0.2em] uppercase font-medium transition-all duration-300 backdrop-blur-sm"
+                className="hidden sm:inline-flex items-center gap-2 border border-white/40 hover:border-white hover:bg-white hover:text-black text-white px-4 py-1.5 text-[9.5px] tracking-[0.24em] uppercase font-semibold transition-all duration-300 backdrop-blur-sm"
               >
-                <span>WhatsApp</span>
+                <span>Atelier Direct</span>
                 <ArrowUpRight size={12} />
               </a>
 
@@ -265,63 +285,67 @@ export default function Navbar() {
       )}
 
       {/* =========================================================================
-          VARIANTE 3D: RUNWAY MAGAZINE MASTHEAD (Editorial Top Bar + Structured Nav)
-          Inspirado en Vogue / Harper's Bazaar: micro-barra superior de coordenadas
-          y barra principal con botón de contacto enmarcado en ángulo recto (0px radius).
+          VARIANTE 3A-4: PURE AVANT-GARDE MINIMAL (Céline Phoebe Philo / Jil Sander)
+          - Header: Pureza absoluta, tipografía etérea y máxima respiración
+          - Logo: 'ASH MATEU' en tracking expandido con punto dorado de autor
+          - CTA: 'WhatsApp +54 9 11 ↗' con subrayado reactivo en reposo
           ========================================================================= */}
-      {variant === "3D" && (
+      {variant === "3A-4" && (
         <header
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
             scrolled
-              ? "bg-[#0a0a0a] border-white/20 py-3 backdrop-blur-none shadow-xl"
-              : "bg-black/60 border-white/15 py-3.5 backdrop-blur-md"
+              ? "bg-[#0a0a0a]/90 backdrop-blur-2xl border-b border-white/10 py-3.5"
+              : "bg-transparent border-b border-white/15 py-6"
           }`}
         >
-          {/* TOP MICRO-STRIP */}
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 pb-2 mb-2 border-b border-white/10 hidden sm:flex items-center justify-between text-[8px] tracking-[0.3em] uppercase text-white/50">
-            <span>Buenos Aires · Paris · New York</span>
-            <span>Fashion Styling &amp; Creative Direction · +54 9 11 2382-3297</span>
-          </div>
-
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* LOGO: PROTAGONIST MASTHEAD */}
+            {/* LOGO: EXPANDED COUTURE SIGNATURE */}
             <Link href="/" className="group text-white">
-              <span className="font-serif text-2xl md:text-3xl font-normal uppercase tracking-[0.1em] group-hover:text-[#b5a898] transition-colors leading-none">
-                Ash Mateu
+              <span className="font-serif text-2xl md:text-[30px] font-normal uppercase tracking-[0.14em] group-hover:text-[#b5a898] transition-colors leading-none">
+                Ash Mateu<span className="text-[#c9a84c]">.</span>
               </span>
             </Link>
 
-            {/* LINKS: MAGAZINE STYLE */}
-            <ul className="hidden lg:flex items-center gap-6 xl:gap-8 text-[10px] tracking-[0.24em] uppercase font-medium text-white/80">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-[#b5a898] transition-colors py-1"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+            {/* LINKS: PURE ETHEREAL TRACKING */}
+            <ul className="hidden lg:flex items-center gap-8 xl:gap-10 text-[10.5px] tracking-[0.3em] uppercase font-light text-white/85">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className={`transition-colors py-1 relative hover:text-white ${
+                        isActive ? "text-white font-medium" : ""
+                      }`}
+                    >
+                      {link.label}
+                      <span
+                        className={`absolute -bottom-1 left-0 h-[1px] bg-white transition-all duration-300 ${
+                          isActive ? "w-full" : "w-0 hover:w-full"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
 
-            {/* CTA: SHARP 0PX ARCHITECTURAL RECTANGLE */}
+            {/* CTA: SLEEK DIRECT LINE */}
             <div className="flex items-center gap-4">
               <a
                 href="https://wa.me/5491123823297"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-2 border border-white/40 hover:bg-white hover:text-black text-white px-4 py-1.5 text-[9.5px] tracking-[0.24em] uppercase font-semibold transition-all duration-300"
+                className="hidden sm:inline-flex items-center gap-1.5 text-[10px] tracking-[0.24em] uppercase text-[#b5a898] hover:text-white border-b border-[#b5a898]/50 hover:border-white pb-0.5 transition-colors font-medium"
               >
-                <span>WhatsApp</span>
-                <ArrowUpRight size={12} />
+                <span>WhatsApp ↗</span>
               </a>
 
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden p-1.5 text-white hover:text-[#b5a898]"
+                className="lg:hidden p-2 text-white hover:text-[#b5a898]"
               >
-                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
           </div>
@@ -335,16 +359,17 @@ export default function Navbar() {
         <div className="fixed bottom-6 right-6 z-50 bg-[#0a0a0a]/95 border border-white/20 text-white rounded-2xl p-3.5 shadow-2xl backdrop-blur-2xl flex flex-col gap-2.5 max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300">
           <div className="flex items-center justify-between pb-2 border-b border-white/10 px-1">
             <div className="flex flex-col">
-              <span className="text-[9.5px] tracking-[0.2em] uppercase text-[#b5a898] font-semibold">
-                Variantes Runway Border
+              <span className="text-[9.5px] tracking-[0.2em] uppercase text-[#b5a898] font-semibold flex items-center gap-1.5">
+                <Sparkles size={12} className="text-[#c9a84c]" />
+                Evolución de Runway 3A
               </span>
               <span className="text-[8px] text-white/50 tracking-wider uppercase">
-                Basadas en la opción 3
+                Alta Moda Vanguardista
               </span>
             </div>
             <button
               onClick={() => setShowSwitcher(false)}
-              className="text-white/40 hover:text-white text-xs p-1"
+              className="text-white/40 hover:text-white text-xs p-1 cursor-pointer"
               title="Cerrar selector"
             >
               ✕
@@ -353,51 +378,51 @@ export default function Navbar() {
 
           <div className="grid grid-cols-2 gap-1.5 text-[10px]">
             <button
-              onClick={() => handleSelectVariant("3A")}
+              onClick={() => handleSelectVariant("3A-1")}
               className={`p-2.5 rounded-lg text-left transition-all border flex items-center justify-between cursor-pointer ${
-                variant === "3A"
+                variant === "3A-1"
                   ? "bg-white text-black border-white font-semibold shadow-sm"
                   : "bg-white/5 text-white/80 border-white/10 hover:border-white/30"
               }`}
             >
-              <span>3A. Minimal Classic</span>
-              {variant === "3A" && <Check size={12} />}
+              <span>3A-1. Haute Couture</span>
+              {variant === "3A-1" && <Check size={12} />}
             </button>
 
             <button
-              onClick={() => handleSelectVariant("3B")}
+              onClick={() => handleSelectVariant("3A-2")}
               className={`p-2.5 rounded-lg text-left transition-all border flex items-center justify-between cursor-pointer ${
-                variant === "3B"
+                variant === "3A-2"
                   ? "bg-white text-black border-white font-semibold shadow-sm"
                   : "bg-white/5 text-white/80 border-white/10 hover:border-white/30"
               }`}
             >
-              <span>3B. High Editorial</span>
-              {variant === "3B" && <Check size={12} />}
+              <span>3A-2. Architectural Noir</span>
+              {variant === "3A-2" && <Check size={12} />}
             </button>
 
             <button
-              onClick={() => handleSelectVariant("3C")}
+              onClick={() => handleSelectVariant("3A-3")}
               className={`p-2.5 rounded-lg text-left transition-all border flex items-center justify-between cursor-pointer ${
-                variant === "3C"
+                variant === "3A-3"
                   ? "bg-white text-black border-white font-semibold shadow-sm"
                   : "bg-white/5 text-white/80 border-white/10 hover:border-white/30"
               }`}
             >
-              <span>3C. Glass Strip</span>
-              {variant === "3C" && <Check size={12} />}
+              <span>3A-3. Split Frame</span>
+              {variant === "3A-3" && <Check size={12} />}
             </button>
 
             <button
-              onClick={() => handleSelectVariant("3D")}
+              onClick={() => handleSelectVariant("3A-4")}
               className={`p-2.5 rounded-lg text-left transition-all border flex items-center justify-between cursor-pointer ${
-                variant === "3D"
+                variant === "3A-4"
                   ? "bg-white text-black border-white font-semibold shadow-sm"
                   : "bg-white/5 text-white/80 border-white/10 hover:border-white/30"
               }`}
             >
-              <span>3D. Magazine Masthead</span>
-              {variant === "3D" && <Check size={12} />}
+              <span>3A-4. Pure Avant-Garde</span>
+              {variant === "3A-4" && <Check size={12} />}
             </button>
           </div>
         </div>
