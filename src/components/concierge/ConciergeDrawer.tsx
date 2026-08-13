@@ -220,35 +220,7 @@ export default function ConciergeDrawer() {
 
   return (
     <>
-      {/* 1. DISPARADOR FLOTANTE EDITORIAL DISCRETO */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="group relative flex items-center gap-3 bg-[#0A0A0A]/95 hover:bg-black text-[#F7F3EE] border border-[#B5A898]/40 hover:border-white px-4.5 py-3 rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.5)] backdrop-blur-md transition-all duration-300 active:scale-[0.98] cursor-pointer"
-          aria-label="Abrir Concierge Editorial VIP"
-        >
-          {/* Indicador sutil pulsante */}
-          <div className="relative flex items-center justify-center w-2.5 h-2.5">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-[#B5A898] opacity-75 animate-ping" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#B5A898]" />
-          </div>
-
-          <div className="flex flex-col text-left">
-            <span className="text-[9px] tracking-[0.26em] uppercase text-[#B5A898] font-semibold group-hover:text-white transition-colors">
-              Creative Concierge
-            </span>
-            <span className="font-serif text-[12px] italic tracking-wide text-white/90">
-              Briefing &amp; Creative Consultation
-            </span>
-          </div>
-
-          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-[#B5A898] group-hover:bg-white group-hover:text-black transition-all duration-300 ml-1">
-            <Sparkles size={12} />
-          </div>
-        </button>
-      </div>
-
-      {/* 2. OVERLAY BACKDROP */}
+      {/* OVERLAY BACKDROP */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
