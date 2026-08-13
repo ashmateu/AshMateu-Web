@@ -1,4 +1,4 @@
-"useclient";
+"use client";
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -30,10 +30,10 @@ export default function GsapReveal({
     let x = 0;
     let y = 0;
 
-    if (direction === "up") y = 40;
-    if (direction === "down") y = -40;
-    if (direction === "left") x = 40;
-    if (direction === "right") x = -40;
+    if (direction === "up") y = 35;
+    if (direction === "down") y = -35;
+    if (direction === "left") x = 35;
+    if (direction === "right") x = -35;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -52,7 +52,8 @@ export default function GsapReveal({
           ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 88%",
+            // Trigger threshold: 3er tercio de la pantalla (2/3 visibles, 1/3 inferior)
+            start: "top 66.6%",
             toggleActions: "play none none reverse",
           },
         }
