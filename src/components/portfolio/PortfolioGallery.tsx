@@ -7,7 +7,15 @@ import { useQueryState } from "nuqs";
 import { projects } from "@/lib/data/projects";
 import GsapReveal from "@/components/animations/GsapReveal";
 
-export default function PortfolioGallery() {
+interface PortfolioGalleryProps {
+  isStandalone?: boolean;
+  className?: string;
+}
+
+export default function PortfolioGallery({
+  isStandalone = false,
+  className = "",
+}: PortfolioGalleryProps) {
   const [category, setCategory] = useQueryState("category", {
     defaultValue: "all",
   });
@@ -26,15 +34,22 @@ export default function PortfolioGallery() {
       : projects.filter((p) => p.category === category);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-[#f7f3ee]">
+    <section
+      id="portfolio"
+      className={`${
+        isStandalone ? "pt-2 pb-16 md:pb-24" : "py-16 md:py-24"
+      } bg-[#f7f3ee] ${className}`}
+    >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-6">
           <GsapReveal>
-            <p className="text-[11px] tracking-[0.28em] uppercase text-[#7a7065] font-medium mb-3">
-              08 Proyectos Editoriales
+            <p className="text-[11px] tracking-[0.28em] uppercase text-[#7a7065] font-medium mb-2">
+              {isStandalone
+                ? "Archivo Visual & Proyectos · 08 Producciones"
+                : "08 Proyectos Editoriales"}
             </p>
-            <h2 className="font-serif text-3xl md:text-5xl font-normal text-black tracking-tight">
-              Selected Works
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-black tracking-tight">
+              {isStandalone ? "Galería & Portfolio" : "Selected Works"}
             </h2>
           </GsapReveal>
 
@@ -44,7 +59,7 @@ export default function PortfolioGallery() {
               <button
                 key={cat.value}
                 onClick={() => setCategory(cat.value)}
-                className={`px-4 py-2 border transition-all duration-200 ${
+                className={`px-4 py-2 border transition-all duration-200 cursor-pointer ${
                   category === cat.value
                     ? "bg-black text-white border-black"
                     : "bg-white text-black/70 border-[#b5a898]/40 hover:border-black"
@@ -62,7 +77,7 @@ export default function PortfolioGallery() {
             <GsapReveal key={project.id} delay={idx * 0.06}>
               <Link
                 href={`/projects/${project.slug}`}
-                className="group block bg-white border border-[#b5a898]/30 overflow-hidden hover:border-black transition-all duration-300"
+                className="group block bg-white border border-[#b5a898]/30 overflow-hidden hover:border-black transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100">
                   <Image
@@ -76,13 +91,20 @@ export default function PortfolioGallery() {
                     {project.category}
                   </div>
                 </div>
-                <div className="p-6">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-[#7a7065] block mb-1">
+
+                <div className="p-5">
+                  <span className="text-[9.5px] tracking-[0.2em] uppercase text-[#7a7065] block mb-1">
                     {project.location} · {project.year}
                   </span>
-                  <h3 className="font-serif text-lg font-normal text-black group-hover:text-[#b5a898] transition-colors leading-snug line-clamp-2">
+                  <h3 className="font-serif text-lg text-black font-normal leading-snug group-hover:text-[#b5a898] transition-colors mb-2 line-clamp-1">
                     {project.title}
                   </h3>
+                  <p className="text-xs text-black/65 line-clamp-2 leading-relaxed font-light mb-4">
+                    {project.summary}
+                  </p>
+                  <span className="text-[10px] tracking-[0.18em] uppercase font-semibold text-black border-b border-black/30 pb-0.5 group-hover:border-black">
+                    Ver Proyecto →
+                  </span>
                 </div>
               </Link>
             </GsapReveal>

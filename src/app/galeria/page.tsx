@@ -11,18 +11,15 @@ export const metadata = {
 
 export default function GaleriaPage() {
   return (
-    <div className="pt-28 md:pt-36 bg-[#f7f3ee]">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 pb-8">
-        <p className="text-[11px] tracking-[0.28em] uppercase text-[#7a7065] font-medium mb-3">
-          Archivo Visual &amp; Proyectos
-        </p>
-        <h1 className="font-serif text-4xl md:text-6xl text-black font-normal mb-6">
-          Galería &amp; Portfolio
-        </h1>
-      </div>
-
-      <Suspense fallback={<div className="py-20 text-center text-xs tracking-widest uppercase text-black/50">Cargando Galería...</div>}>
-        <PortfolioGallery />
+    <div className="pt-24 md:pt-32 bg-[#f7f3ee]">
+      <Suspense
+        fallback={
+          <div className="py-20 text-center text-xs tracking-widest uppercase text-black/50">
+            Cargando Galería...
+          </div>
+        }
+      >
+        <PortfolioGallery isStandalone={true} />
       </Suspense>
       <EditorialGaleria />
       <ContactForm />
