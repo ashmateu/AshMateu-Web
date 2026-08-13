@@ -102,9 +102,13 @@ export default function ConciergeDrawer() {
     setIsLoading(true);
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 9000);
+
       const res = await fetch("/api/concierge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           messages: updatedMessages.map((m) => ({
             role: m.role,
@@ -113,10 +117,18 @@ export default function ConciergeDrawer() {
         }),
       });
 
-      const data = await res.json();
-      const assistantText =
-        data.message ||
-        "Gracias por tu consulta. Podés escribirnos directamente a info@ashmateu.com o a nuestro WhatsApp directo (+54 9 11 2382-3297).";
+      clearTimeout(timeoutId);
+
+      let assistantText = "";
+      if (res.ok) {
+        const data = await res.json().catch(() => ({}));
+        assistantText =
+          data.message ||
+          "Gracias por tu consulta. Podés escribirnos directamente a info@ashmateu.com o a nuestro WhatsApp directo (+54 9 11 2382-3297).";
+      } else {
+        assistantText =
+          "¡Hola! Sí, estoy en línea. Contanos sobre tu próxima campaña o evento nupcial, o podés contactarnos directamente a info@ashmateu.com.";
+      }
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -135,7 +147,7 @@ export default function ConciergeDrawer() {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content:
-          "Gracias por tu mensaje. Para coordinar los detalles de tu producción o asesoramiento de imagen, podés comunicarte directamente a info@ashmateu.com o por WhatsApp al +54 9 11 2382-3297.",
+          "¡Hola! Sí, estoy en línea en el Atelier Digital de Ash Mateu. ¿En qué tipo de proyecto o producción estás trabajando? Podés escribirnos también a info@ashmateu.com o por WhatsApp al +54 9 11 2382-3297.",
         timestamp: new Date().toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",

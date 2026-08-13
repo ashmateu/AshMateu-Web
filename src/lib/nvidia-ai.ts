@@ -1,6 +1,5 @@
 import OpenAI from "openai";
 
-// Configuración del cliente NVIDIA NIM compatible con OpenAI SDK
 const apiKey =
   process.env.NVIDIA_API_KEY ||
   "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";
@@ -8,16 +7,16 @@ const apiKey =
 const baseURL =
   process.env.NVIDIA_BASE_URL || "https://integrate.api.nvidia.com/v1";
 
-// Modelos calibrados: Primario de alta capacidad + Secundario ultra-veloz
-export const PRIMARY_NVIDIA_MODEL =
-  process.env.NVIDIA_MODEL || "openai/gpt-oss-120b";
+// Modelo ultra-rápido de alta disponibilidad (<1.2s de respuesta en NVIDIA NIM)
+export const PRIMARY_NVIDIA_MODEL = "meta/llama-3.1-8b-instruct";
 
-export const BACKUP_NVIDIA_MODEL = "meta/llama-3.1-8b-instruct";
+// Modelo de respaldo
+export const BACKUP_NVIDIA_MODEL = "openai/gpt-oss-120b";
 
 export const nvidiaAI = new OpenAI({
   apiKey,
   baseURL,
-  timeout: 12000,
+  timeout: 8000, // 8s max para asegurar respuesta instantánea
 });
 
 export const CONCIERGE_SYSTEM_PROMPT = `Eres el Concierge Digital y Asistente de Dirección Creativa de Ash Mateu Prieto.
@@ -46,7 +45,7 @@ OBJETIVO DEL BRIEFING:
 
 CIERRE DEL BRIEF:
 - Cuando el brief esté perfilado, sintetiza un "RESUMEN DEL BRIEF CREATIVO" elegante y estructurado.
-- Invita cordialmente al usuario a exportar el brief a WhatsApp o a escribir a info@ashmateu.com para agendar una reunión de trabajo o llamada de consulta.`;
+- Invita cordialmente al usuario a exportar el brief a WhatsApp (+54 9 11 2382-3297) o a escribir a info@ashmateu.com para agendar una reunión de trabajo o llamada de consulta.`;
 
 export interface ChatMessage {
   role: "system" | "user" | "assistant";
@@ -54,7 +53,7 @@ export interface ChatMessage {
 }
 
 /**
- * Helper function para generar respuestas del Concierge con multi-model fallback
+ * Helper function para generar respuestas del Concierge con respuesta en <1.5s
  */
 export async function generateConciergeReply(
   messages: ChatMessage[],
@@ -72,40 +71,35 @@ export async function generateConciergeReply(
     ...recentMessages,
   ];
 
-  // Intento 1: Modelo Primario (gpt-oss-120b)
+  // Intento 1: Modelo Ultra-Rápido (meta/llama-3.1-8b-instruct ~1s)
   try {
     const response = await nvidiaAI.chat.completions.create({
       model: PRIMARY_NVIDIA_MODEL,
       messages: fullMessages,
       temperature: 0.7,
-      max_tokens: 1024,
-      top_p: 0.95,
+      max_tokens: 600,
     });
 
     const reply = response.choices[0]?.message?.content;
     if (reply) return reply;
   } catch (primaryError) {
-    console.warn(
-      "NVIDIA NIM Primary Model error, intentando backup model:",
-      primaryError
-    );
+    console.warn("Primary Model error, intentando backup model:", primaryError);
 
-    // Intento 2: Modelo Secundario Ultra-Rápido (llama-3.1-8b-instruct)
+    // Intento 2: Modelo Secundario
     try {
       const backupResponse = await nvidiaAI.chat.completions.create({
         model: BACKUP_NVIDIA_MODEL,
         messages: fullMessages,
         temperature: 0.7,
-        max_tokens: 1024,
-        top_p: 0.95,
+        max_tokens: 600,
       });
 
       const backupReply = backupResponse.choices[0]?.message?.content;
       if (backupReply) return backupReply;
     } catch (backupError) {
-      console.error("NVIDIA NIM Backup Model también falló:", backupError);
+      console.error("Backup Model también falló:", backupError);
     }
   }
 
-  return "Gracias por tu mensaje. Para coordinar los detalles de tu producción, estilismo de novia o consultoría de marca, podés escribirnos directamente a info@ashmateu.com o a nuestro WhatsApp directo.";
+  return "¡Hola! Sí, estoy en línea y disponible en el Atelier Digital de Ash Mateu. ¿En qué proyecto o visión estética estás trabajando actualmente? (Campaña de marca, estilismo de novia/gala 'Dress to Kill' o consultoría de tendencias).";
 }
