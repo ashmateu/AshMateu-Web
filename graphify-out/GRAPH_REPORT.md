@@ -1,16 +1,16 @@
 # Graph Report - ashmateu-web  (2026-08-13)
 
 ## Corpus Check
-- 57 files · ~3,004,160 words
+- 59 files · ~3,063,672 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 501 nodes · 575 edges · 61 communities (49 shown, 12 thin omitted)
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.87)
+- 519 nodes · 605 edges · 62 communities (51 shown, 11 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `29040340`
+- Built from commit: `98c6fff8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -30,7 +30,6 @@
 - [[_COMMUNITY_gstack Config|gstack Config]]
 - [[_COMMUNITY_Sanity Client|Sanity Client]]
 - [[_COMMUNITY_Migración de Datos|Migración de Datos]]
-- [[_COMMUNITY_MercadoPago Preferencia|MercadoPago Preferencia]]
 - [[_COMMUNITY_MercadoPago Webhook|MercadoPago Webhook]]
 - [[_COMMUNITY_Claude Settings|Claude Settings]]
 - [[_COMMUNITY_Vercel Config|Vercel Config]]
@@ -70,6 +69,8 @@
 - [[_COMMUNITY_Community 54|Community 54]]
 - [[_COMMUNITY_Community 55|Community 55]]
 - [[_COMMUNITY_Community 56|Community 56]]
+- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 61|Community 61]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Ash Mateu (Person / Creative Director)` - 33 edges
@@ -98,15 +99,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (61 total, 12 thin omitted)
+## Communities (62 total, 11 thin omitted)
 
 ### Community 0 - "Portfolio y Celebridades"
 Cohesion: 0.11
-Nodes (37): Celebrity: Calu Rivero, Celebrity: Leonie Hanne, Celebrity: Valentina Ferrer, Ash Mateu (Person / Creative Director), Brand: Chanel, Brand: Dolce & Gabbana, Brand: Gucci, Brand: L'Oréal (+29 more)
+Nodes (38): Celebrity: Calu Rivero, Celebrity: Leonie Hanne, Celebrity: Valentina Ferrer, Ash Mateu (Person / Creative Director), Brand: Chanel, Brand: Dolce & Gabbana, Brand: Gucci, Brand: L'Oréal (+30 more)
 
 ### Community 1 - "Blog y Notas"
-Cohesion: 0.07
-Nodes (32): Blog Collage Card Layout, articles, metadata, Blog Post Detail Page, Supabase 'posts' Slug Query (post detail), Supabase 'posts' Table Integration (blog), Auth Modal (Login / Register), Supabase 'orders' + 'products' Join Query (+24 more)
+Cohesion: 0.08
+Nodes (28): Blog Collage Card Layout, articles, metadata, Blog Post Detail Page, Supabase 'posts' Slug Query (post detail), Supabase 'posts' Table Integration (blog), Auth Modal (Login / Register), Supabase 'orders' + 'products' Join Query (+20 more)
 
 ### Community 2 - "Sitio Web y Config"
 Cohesion: 0.08
@@ -157,8 +158,8 @@ Cohesion: 0.27
 Nodes (3): metadata, ContactFormData, contactSchema
 
 ### Community 17 - "Claude Settings"
-Cohesion: 0.24
-Nodes (3): Project, projects, ProjectPageProps
+Cohesion: 0.22
+Nodes (4): Project, projects, PortfolioGalleryProps, ProjectPageProps
 
 ### Community 18 - "Vercel Config"
 Cohesion: 0.50
@@ -177,12 +178,12 @@ Cohesion: 0.22
 Nodes (8): Agentes disponibles (agency-agents), ashmateu-web — Claude Code Project Config, Mercadito (Tiendanube headless), Pendientes críticos, Referencias de diseño, Skills disponibles (gstack), Stack, Tokens de diseño
 
 ### Community 27 - "Community 27"
-Cohesion: 0.29
-Nodes (3): HighlightItem, highlightsData, metadata
+Cohesion: 0.33
+Nodes (4): HighlightItem, highlightsData, HighlightNote, highlightsNotes
 
 ### Community 28 - "Community 28"
-Cohesion: 0.33
-Nodes (5): 1. Arquitectura y Stack Actual, 2. Mapa de Rutas & Navegación, 3. Reglas de Diseño e Imágenes, 4. Estado de Despliegue, Handoff: ashmateu.com — Reconstrucción Next.js 16 + Tailwind CSS v4
+Cohesion: 0.25
+Nodes (8): 1. Arquitectura y Stack Actual, 2. Mapa de Rutas & Componentes de Alta Gama, 2. Mapa de Rutas & Navegación, 3. Reglas de Diseño e Imágenes, 3. Reglas de Git y Despliegue, 4. Estado de Despliegue, Handoff: ashmateu.com — Reconstrucción Next.js 16 + High-End Luxury Design System, Handoff: ashmateu.com — Reconstrucción Next.js 16 + Tailwind CSS v4
 
 ### Community 31 - "Community 31"
 Cohesion: 0.40
@@ -272,25 +273,33 @@ Nodes (5): supabase-postgres-best-practices, computedHash, skillPath, source, so
 Cohesion: 0.40
 Nodes (5): terminal-bench-loop, computedHash, skillPath, source, sourceType
 
+### Community 54 - "Community 54"
+Cohesion: 0.14
+Nodes (12): fallbackPressArticles, getPressArticles(), PressArticle, NewsletterClientProps, metadata, NewsletterPage(), publications, Press Featured + Grid Layout (+4 more)
+
+### Community 61 - "Community 61"
+Cohesion: 0.40
+Nodes (3): DEFAULT_DESKTOP, DEFAULT_MOBILE, FramingConfig
+
 ## Knowledge Gaps
-- **239 isolated node(s):** `config`, `nextConfig`, `name`, `version`, `private` (+234 more)
+- **247 isolated node(s):** `config`, `nextConfig`, `name`, `version`, `private` (+242 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `skills` connect `Community 55` to `Skills y Dependencias`, `Community 31`, `Community 32`, `Community 33`, `Community 34`, `Community 35`, `Community 36`, `Community 37`, `Community 38`, `Community 39`, `Community 40`, `Community 41`, `Community 42`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 47`, `Community 48`, `Community 49`, `Community 50`, `Community 51`, `Community 52`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
-- **Why does `Portfolio Section (#trabajo)` connect `Blog y Notas` to `Portfolio y Celebridades`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+  _High betweenness centrality (0.049) - this node is a cross-community bridge._
+- **Why does `Site Navigation Structure` connect `Blog y Notas` to `Portfolio y Celebridades`, `Community 54`?**
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+- **Why does `Portfolio Section (#trabajo)` connect `Portfolio y Celebridades` to `Blog y Notas`?**
+  _High betweenness centrality (0.028) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `Ash Mateu (Person / Creative Director)` (e.g. with `Celebrity: Calu Rivero` and `Celebrity: Leonie Hanne`) actually correct?**
   _`Ash Mateu (Person / Creative Director)` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `config`, `nextConfig`, `name` to the rest of the system?**
-  _257 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _265 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Portfolio y Celebridades` be split into smaller, more focused modules?**
-  _Cohesion score 0.11411411411411411 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10953058321479374 - nodes in this community are weakly interconnected._
 - **Should `Blog y Notas` be split into smaller, more focused modules?**
-  _Cohesion score 0.06984126984126984 - nodes in this community are weakly interconnected._
-- **Should `Sitio Web y Config` be split into smaller, more focused modules?**
-  _Cohesion score 0.07671957671957672 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08275862068965517 - nodes in this community are weakly interconnected._
