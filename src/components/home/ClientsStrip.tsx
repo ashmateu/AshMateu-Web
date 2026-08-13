@@ -30,8 +30,8 @@ const brandLogos: BrandItem[] = [
   {
     name: "Gucci",
     src: "/images/brands/gucci.webp",
-    width: 103,
-    height: 19,
+    width: 403,
+    height: 67,
     className: "max-h-4 sm:max-h-5 max-w-[100px] sm:max-w-[115px]",
   },
   {
