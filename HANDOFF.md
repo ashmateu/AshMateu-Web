@@ -14,8 +14,7 @@
   - Configuración Singleton: `src/lib/qwen-ai.ts`.
   - Endpoint API: `src/app/api/concierge/route.ts` con respuesta chunked (`ReadableStream`) y fallback automático.
 - **Componente de Interfaz (`src/components/concierge/ConciergeDrawer.tsx`)**:
-  - Modal / Slide-over lateral con fondo marfil `#F7F3EE`, contrastes `#0A0A0A`, bordes capilares `#B5A898/40` y tipografía *Bodoni Moda*.
-  - Disparador flotante discreto en esquina inferior con badge de alta costura e indicador pulsante.
+  - Sin botón flotante intrusivo en pantalla: el acceso es contextual y exclusivo a través del banner interactivo en **Styling Services (`/como-trabajo`)**.
   - Chips de consulta rápida (Campañas, Novias, Dirección Creativa, Consultoría).
   - Exportación con un click directo a WhatsApp (`https://wa.me/5491123823297`) con el brief formateado.
 - **Banner Interactivo en Servicios**:
