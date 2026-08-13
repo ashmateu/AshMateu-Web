@@ -100,6 +100,11 @@ Se procesaron y clasificaron **70 archivos fotográficos y audiovisuales de alta
 8. `08_portadas_editoriales_prensa/` (20 fotos — Portadas de revistas, notas y artículos)
 9. `09_videos_reels_backstage/` (8 videos — Clips y reels para contenido visual)
 
+### 🖼️ Integración de Fotografías Reales de Ash en la Web
+- **`Mi Historia` (`/historia`)**: Retratos editoriales de Ash en Fashion Week París y Galas internacionales, más una galería de **"Momentos de Carrera & Backstage"** con badges de locación y layout asimétrico.
+- **`¿Cómo Trabajo?` (`/como-trabajo`)**: Fotografía editorial de Ash en acción en cada uno de los 3 pilares (*Dress to Kill*, *Styling & Producciones* y *Consultoría & Speaker*).
+- **`Galería Editorial` (Home / `/galeria`)**: Fondos fotográficos con gradientes oscuros en las 4 tarjetas editoriales principales (*Blog*, *Prensa*, *Proyectos* y *Dirección Creativa*).
+
 ---
 
 ## 2. Ramas de Git y Resguardo
