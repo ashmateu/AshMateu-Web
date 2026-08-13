@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Sliders, Check, RotateCcw, Copy } from "lucide-react";
+import { ArrowUpRight, Sliders, Check, RotateCcw, Copy, ZoomIn } from "lucide-react";
 import gsap from "gsap";
 
 export default function HeroCover() {
@@ -79,9 +79,11 @@ export default function HeroCover() {
     return () => ctx.revert();
   }, []);
 
+  const zoomPresets = [100, 125, 150, 180, 220, 260];
+
   return (
     <section className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]">
-      {/* FULL-SCREEN HERO BACKGROUND IMAGE (2.5K ULTRA-HD WITH SHARPNESS ENHANCEMENT) */}
+      {/* FULL-SCREEN HERO BACKGROUND IMAGE (4K UHD NATIVE) */}
       <div ref={heroRef} className="absolute inset-0 w-full h-full">
         <Image
           src="/images/hero/hero_cover_pptx.webp"
@@ -176,12 +178,12 @@ export default function HeroCover() {
 
       {/* LIVE ENCUADRE CALIBRATOR PANEL */}
       {showCalibrator && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#0a0a0a]/95 border border-white/25 text-white rounded-2xl p-5 shadow-2xl backdrop-blur-2xl w-80 animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0a0a0a]/95 border border-white/25 text-white rounded-2xl p-5 shadow-2xl backdrop-blur-2xl w-84 max-w-[calc(100vw-2rem)] animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <Sliders size={14} className="text-[#c9a84c]" />
               <span className="text-xs font-semibold tracking-wider uppercase text-white">
-                Ajuste de Encuadre
+                Ajuste de Encuadre &amp; Zoom
               </span>
             </div>
             <button
@@ -239,26 +241,41 @@ export default function HeroCover() {
               </div>
             </div>
 
-            {/* ZOOM / SCALE */}
+            {/* ZOOM / SCALE (EXPANDED TO 300%) */}
             <div>
               <div className="flex justify-between text-[10px] tracking-wider uppercase text-[#b5a898] mb-1.5">
-                <span>Escala / Zoom</span>
-                <span className="text-white font-mono">{zoom}%</span>
+                <span className="flex items-center gap-1">
+                  <ZoomIn size={11} className="text-[#c9a84c]" />
+                  <span>Escala / Zoom Máximo</span>
+                </span>
+                <span className="text-white font-mono font-bold">{zoom}%</span>
               </div>
               <input
                 type="range"
-                min="90"
-                max="150"
+                min="80"
+                max="300"
+                step="1"
                 value={zoom}
                 onChange={(e) =>
                   updateFraming(posX, posY, Number(e.target.value))
                 }
                 className="w-full accent-[#b5a898] cursor-pointer"
               />
-              <div className="flex justify-between text-[8.5px] text-white/40 mt-0.5">
-                <span>Alejar (90%)</span>
-                <span>Normal (100%)</span>
-                <span>Acercar (150%)</span>
+              {/* QUICK PRESETS */}
+              <div className="flex items-center justify-between gap-1 mt-2">
+                {zoomPresets.map((pz) => (
+                  <button
+                    key={pz}
+                    onClick={() => updateFraming(posX, posY, pz)}
+                    className={`px-1.5 py-0.5 rounded text-[8.5px] font-mono border transition-all cursor-pointer ${
+                      zoom === pz
+                        ? "bg-[#b5a898] text-black border-[#b5a898] font-bold"
+                        : "bg-white/5 text-white/70 border-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    {pz}%
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -267,7 +284,7 @@ export default function HeroCover() {
           <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
             <button
               onClick={handleReset}
-              className="inline-flex items-center gap-1 text-[9.5px] text-white/60 hover:text-white py-1 px-2 rounded border border-white/10 hover:border-white/30 cursor-pointer"
+              className="inline-flex items-center gap-1 text-[9.5px] text-white/60 hover:text-white py-1 px-2.5 rounded border border-white/10 hover:border-white/30 cursor-pointer"
               title="Restablecer posición inicial"
             >
               <RotateCcw size={11} />
