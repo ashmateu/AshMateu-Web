@@ -6,13 +6,13 @@
 
 ## 1. Estado Actual del Proyecto & Últimos Hitos
 
-### 🤖 Concierge Editorial VIP & Creative Briefing con IA (NVIDIA NIM)
+### 🤖 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)
 - **Motor de Inteligencia Artificial**:
-  - Proveedor: **NVIDIA NIM** vía OpenAI SDK (`https://integrate.api.nvidia.com/v1`).
-  - Modelo Primario: `z-ai/glm-5.2` en modo **Streaming** (Time to First Token: ~1.2s con escritura en vivo).
-  - Modelo Secundario / Fallback: `meta/llama-3.1-8b-instruct`.
-  - Configuración Singleton: `src/lib/nvidia-ai.ts`.
-  - Endpoint API: `src/app/api/concierge/route.ts` con respuesta chunked (`ReadableStream`) de latencia ultra-baja.
+  - Proveedor: **Alibaba Cloud DashScope Compatible** (`https://dashscope-intl.aliyuncs.com/compatible-mode/v1`).
+  - Modelo Primario: `qwen-max` en modo **Streaming** (Time to First Token: ~1.4s con máxima capacidad de razonamiento editorial y fluidez en español).
+  - Modelo Secundario / Fallback: `qwen-turbo` (~600ms de latencia).
+  - Configuración Singleton: `src/lib/qwen-ai.ts`.
+  - Endpoint API: `src/app/api/concierge/route.ts` con respuesta chunked (`ReadableStream`) y fallback automático.
 - **Componente de Interfaz (`src/components/concierge/ConciergeDrawer.tsx`)**:
   - Modal / Slide-over lateral con fondo marfil `#F7F3EE`, contrastes `#0A0A0A`, bordes capilares `#B5A898/40` y tipografía *Bodoni Moda*.
   - Disparador flotante discreto en esquina inferior con badge de alta costura e indicador pulsante.
