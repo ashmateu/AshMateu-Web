@@ -105,12 +105,12 @@ export default function ContactForm() {
                     WhatsApp directo
                   </span>
                   <a
-                    href="https://wa.me/5491138580228"
+                    href="https://wa.me/5491123823297"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white hover:text-[#b5a898] transition-colors"
                   >
-                    +54 9 11 3858-0228 ↗
+                    +54 9 11 2382-3297 ↗
                   </a>
                 </div>
                 <div>

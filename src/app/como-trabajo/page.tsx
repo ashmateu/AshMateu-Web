@@ -44,7 +44,7 @@ export default function ComoTrabajoPage() {
                   <em>‘Que nunca nadie olvide tu vestido.’</em> Acompañamiento integral de estilismo nupcial, elección de diseñador, pruebas de vestuario y asesoramiento estético completo.
                 </p>
                 <a
-                  href="https://wa.me/5491138580228?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Novias"
+                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Novias"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[11px] tracking-[0.16em] uppercase text-black font-medium border-b border-black/30 pb-0.5"
@@ -58,7 +58,7 @@ export default function ComoTrabajoPage() {
                   Styling exclusivo para premios internacionales, festivales de cine, red carpets y ocasiones donde el impacto fotográfico y mediático es prioritario.
                 </p>
                 <a
-                  href="https://wa.me/5491138580228?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Gala"
+                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Gala"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[11px] tracking-[0.16em] uppercase text-black font-medium border-b border-black/30 pb-0.5"
@@ -72,7 +72,7 @@ export default function ComoTrabajoPage() {
                   Construcción de fondo de armario, diagnóstico de estilo personal y alineación de la imagen con los objetivos profesionales y vitales.
                 </p>
                 <a
-                  href="https://wa.me/5491138580228?text=Hola%20Ash,%20quiero%20consultar%20por%20Consultoria%20de%20Imagen"
+                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Consultoria%20de%20Imagen"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[11px] tracking-[0.16em] uppercase text-black font-medium border-b border-black/30 pb-0.5"
@@ -86,7 +86,7 @@ export default function ComoTrabajoPage() {
                   Para quienes quieren vestir para matar. Curaduría de estilismo completo para celebraciones de alto perfil.
                 </p>
                 <a
-                  href="https://wa.me/5491138580228"
+                  href="https://wa.me/5491123823297"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[11px] tracking-[0.16em] uppercase text-black font-medium border-b border-black/30 pb-0.5"

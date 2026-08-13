@@ -27,10 +27,13 @@ export default function Footer() {
           <Link href="/blog" className="hover:text-white transition-colors">
             Trends
           </Link>
+          <Link href="/newsletter" className="hover:text-white transition-colors">
+            Newsletter
+          </Link>
           <Link href="/prensa" className="hover:text-white transition-colors">
             Prensa
           </Link>
-          <Link href="#contacto" className="hover:text-white transition-colors">
+          <Link href="/#contacto" className="hover:text-white transition-colors">
             Contacto
           </Link>
         </div>
