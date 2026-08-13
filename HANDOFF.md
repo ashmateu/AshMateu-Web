@@ -1,6 +1,6 @@
 # Handoff: ashmateu.com — Reconstrucción Next.js 16 + High-End Luxury Design System
 
-**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **Zod**, **Supabase** y frameworks de diseño editorial de alta gama (**Stitch Design Taste** + **High-End Visual Design**).
+**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **Zod**, **Formspree**, **Supabase** y frameworks de diseño editorial de alta gama (**Stitch Design Taste** + **High-End Visual Design**).
 
 ---
 
@@ -27,10 +27,23 @@
   - **Netflix** (`netflix.webp`) — Wordmark arqueado oficial.
 - **Normalización Óptica**: Cada logo recortado a sus límites de píxel reales y alojado en contenedores homogéneos de `140px × 56px` con `opacity: 0.65` y hover a `1.0`.
 
+### 📬 Integraciones de Automatización & Formspree
+- **Formulario de Contacto (`/api/contact`)**:
+  - Conectado con el Form ID oficial de Formspree **`xeebjqpq`** (`https://formspree.io/f/xeebjqpq`).
+  - Cada envío valida los datos con Zod y los reenvía de forma inmediata al correo de Ash Mateu.
+- **Suscripción a Newsletter (`/newsletter`)**:
+  - Conectado al Form ID oficial de Formspree **`mqaeavog`** (`https://formspree.io/f/mqaeavog`).
+
+### 🎯 Optimización de Conversión & Click-Paths
+- **`¿Cómo Trabajo?` (`/como-trabajo`)**:
+  - Se agregaron botones de acción rápida directos a WhatsApp con mensajes pre-cargados en **todos los pilares** (Novias, Galas, Imagen Personal, Fiestas, Campañas de Marca, Styling Editorial, Branding y Speaker Keynotes).
+- **`Trends & Blog` (`/blog`)**:
+  - Artículos y portadas con enlaces interactivos que conectan a `/prensa`, `/newsletter` y servicios afines.
+
 ### 📏 Compactación Integral de Distancias y Rellenos
 - Se redujeron sistemáticamente los rellenos verticales en todas las secciones para un ritmo de navegación ágil y cómodo:
-  - **Highlights**: `py-16 md:py-20 lg:py-24` (antes `py-44`).
-  - **¿Cómo Trabajo? (3 Pilares)**: `py-16 md:py-20 lg:py-24` (antes `py-36`).
+  - **Highlights**: `py-16 md:py-20 lg:py-24`.
+  - **¿Cómo Trabajo? (3 Pilares)**: `py-16 md:py-20 lg:py-24`.
   - **Galería Editorial**: `py-16 md:py-20 lg:py-24`.
   - **Selected Works (Portfolio)**: `py-16 md:py-20 lg:py-24`.
   - **Vlog & Redes**: `py-16 md:py-20 lg:py-24`.
@@ -38,7 +51,7 @@
   - **Formulario de Contacto**: `py-16 md:py-20 lg:py-24`.
 
 ### 📸 Hero Cover & Background 4K Nativo
-- **Master Image**: Integrada la fotografía editorial 4K UHD nativa (`3840 × 2160 px`) en `public/images/hero/hero_cover_pptx.webp`.
+- **Master Image**: Fotografía editorial 4K UHD nativa (`3840 × 2160 px`) en `public/images/hero/hero_cover_pptx.webp`.
 - **Encuadres Calibrados**:
   - **Móvil (9:16 vertical)**: Centrado en el rostro de la modelo (`X: 70%`, `Y: 22%`, `Zoom: 100%`).
   - **Desktop (16:9 horizontal)**: Encuadre panorámico con aire superior (`X: 50%`, `Y: 20%`, `Zoom: 100%`).
@@ -69,7 +82,7 @@
 - **Framework**: Next.js 16.3.0 (Turbopack, App Router, RSC, SSR/SSG).
 - **Estilos**: Tailwind CSS v4 con tokens de diseño editorial (`globals.css`).
 - **Tipografía**: Bodoni Moda (Google Fonts) para display numbers y títulos de pasarela; Montserrat para etiquetas de catálogo; Inter para textos de lectura.
-- **Validación de Formularios**: Zod con esquema isomórfico (`src/lib/validations/contact.ts`) y endpoint API (`/api/contact`).
+- **Validación de Formularios & Email**: Zod con esquema isomórfico (`src/lib/validations/contact.ts`), API Route (`/api/contact`) y despacho a Formspree (`xeebjqpq`).
 - **Gestión de Estado de URL**: `nuqs` con `<NuqsAdapter>` en el layout raíz para filtros de galería compartibles.
 - **Interactividad & Motion**: GSAP ScrollTrigger (`src/components/animations/GsapReveal.tsx`).
 - **Prensa & Columnas**: Conexión a Supabase (`src/lib/data/press.ts`) con 21 artículos reales de Marie Claire Argentina (`marieclaire.perfil.com`).
