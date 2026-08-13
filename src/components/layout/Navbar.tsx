@@ -51,15 +51,15 @@ export default function Navbar() {
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* OFFICIAL BRAND LOGO */}
+            {/* OFFICIAL BRAND LOGO (30% BIGGER & HIGH DEFINITION) */}
             <Link href="/" className="flex items-center group py-0.5" aria-label="Ash Mateu Prieto — Inicio">
               <Image
                 src="/images/logo/ash_mateu_logo_white.webp"
                 alt="Ash Mateu Prieto — Creative Director & Fashion Consultant"
-                width={200}
-                height={69}
+                width={260}
+                height={90}
                 priority
-                className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                className="h-11 sm:h-12 md:h-14 lg:h-[54px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
             </Link>
 
@@ -153,9 +153,9 @@ export default function Navbar() {
             <Image
               src="/images/logo/ash_mateu_logo_white.webp"
               alt="Ash Mateu Prieto"
-              width={160}
-              height={55}
-              className="h-7 w-auto object-contain mb-3"
+              width={200}
+              height={69}
+              className="h-10 w-auto object-contain mb-3"
             />
             <p className="text-[9px] tracking-[0.25em] uppercase text-[#b5a898] mb-4">
               Buenos Aires · Nueva York · París · +54 9 11 2382-3297

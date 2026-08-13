@@ -7,16 +7,16 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0a0a] text-white/70 py-16 md:py-20 border-t border-white/15 text-xs relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-10">
-        {/* BRAND IDENTITY & OFFICIAL LOGO */}
-        <div className="flex flex-col items-center md:items-start gap-2 text-center md:text-left">
+        {/* BRAND IDENTITY & OFFICIAL LOGO (30% BIGGER) */}
+        <div className="flex flex-col items-center md:items-start gap-2.5 text-center md:text-left">
           <Image
             src="/images/logo/ash_mateu_logo_white.webp"
             alt="Ash Mateu Prieto — Styling & Creative Direction"
-            width={220}
-            height={76}
-            className="h-10 md:h-12 w-auto object-contain"
+            width={280}
+            height={97}
+            className="h-13 md:h-16 lg:h-[70px] w-auto object-contain"
           />
-          <span className="text-[9px] tracking-[0.26em] text-white/50 uppercase">
+          <span className="text-[9.5px] tracking-[0.26em] text-white/50 uppercase font-light">
             Buenos Aires · Nueva York · París · Est. 2011
           </span>
         </div>
