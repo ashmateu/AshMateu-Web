@@ -88,6 +88,18 @@
 - Isotipo oficial y texto en `#25D366` en `Navbar.tsx` y `Footer.tsx`.
 - Teléfono directo unificado: **`+54 9 11 2382-3297`** (`https://wa.me/5491123823297`).
 
+### 📁 Catálogo Multimedia Organizado por Personaje & Producción (`public/images/catalog/`)
+Se procesaron y clasificaron **70 archivos fotográficos y audiovisuales de alta resolución** compartidos por Ash:
+1. `01_chanel_alta_costura_studio/` (7 fotos — Sesión de estudio Canon 5D Mark IV)
+2. `02_campanas_internacionales_sony_hires/` (3 fotos — Campañas Sony Alpha A7R IV en 61 MP)
+3. `03_fashion_week_paris_canon/` (8 fotos — Street style, fittings y desfiles en París)
+4. `04_celebridades_galas_red_carpet/` (8 fotos — Galas, alfombras rojas y premiaciones)
+5. `05_styling_editorial_celebrity_looks/` (7 fotos — Looks editoriales y estilismo de figuras)
+6. `06_novias_dress_to_kill_fittings/` (3 fotos — Pruebas de vestidos de novia de alta costura)
+7. `07_backstage_streetstyle_social/` (6 fotos — Backstages de desfiles y backstage de moda)
+8. `08_portadas_editoriales_prensa/` (20 fotos — Portadas de revistas, notas y artículos)
+9. `09_videos_reels_backstage/` (8 videos — Clips y reels para contenido visual)
+
 ---
 
 ## 2. Ramas de Git y Resguardo
