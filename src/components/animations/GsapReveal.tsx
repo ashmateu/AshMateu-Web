@@ -17,7 +17,7 @@ export default function GsapReveal({
   className = "",
   delay = 0,
   direction = "up",
-  duration = 0.85,
+  duration = 0.9,
 }: GsapRevealProps) {
   const elRef = useRef<HTMLDivElement>(null);
 
@@ -30,30 +30,33 @@ export default function GsapReveal({
     let x = 0;
     let y = 0;
 
-    if (direction === "up") y = 30;
-    if (direction === "down") y = -30;
-    if (direction === "left") x = 30;
-    if (direction === "right") x = -30;
+    if (direction === "up") y = 16;
+    if (direction === "down") y = -16;
+    if (direction === "left") x = 16;
+    if (direction === "right") x = -16;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
         {
           opacity: 0,
+          scale: 0.96,
+          filter: "blur(8px)",
           x,
           y,
         },
         {
           opacity: 1,
+          scale: 1,
+          filter: "blur(0px)",
           x: 0,
           y: 0,
           duration,
           delay,
-          ease: "power3.out",
+          ease: "power2.out",
           scrollTrigger: {
             trigger: el,
-            // Activación en la parte baja de la pantalla (apenas entra por el borde inferior)
-            start: "top 90%",
+            start: "top 88%",
             toggleActions: "play none none reverse",
           },
         }
@@ -64,7 +67,11 @@ export default function GsapReveal({
   }, [delay, direction, duration]);
 
   return (
-    <div ref={elRef} className={className}>
+    <div
+      ref={elRef}
+      className={className}
+      style={{ willChange: "transform, opacity, filter" }}
+    >
       {children}
     </div>
   );
