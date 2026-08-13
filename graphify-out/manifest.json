@@ -1,53 +1,53 @@
 {
   "/Users/mariano_rosso/Downloads/ashmateu-web/HANDOFF.md": {
-    "mtime": 1781908846.682423,
-    "ast_hash": "767d3a03e85d63f384ca7c218af1b9cb",
-    "semantic_hash": "767d3a03e85d63f384ca7c218af1b9cb"
+    "mtime": 1782170845.7485003,
+    "ast_hash": "14f4ac5ec5514826b9b7b1e42433cff3",
+    "semantic_hash": "14f4ac5ec5514826b9b7b1e42433cff3"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/index.html": {
-    "mtime": 1781908754.4877012,
-    "ast_hash": "d927c890eecab62db257df3e1952f399",
-    "semantic_hash": "d927c890eecab62db257df3e1952f399"
+    "mtime": 1782156686.9202993,
+    "ast_hash": "d0a6184f4e3dfa13eef5b32a308d227e",
+    "semantic_hash": "d0a6184f4e3dfa13eef5b32a308d227e"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/calu-chinatown.html": {
-    "mtime": 1781904080.3128803,
-    "ast_hash": "a5a9f6e06252145afc18940e9544ce72",
-    "semantic_hash": "a5a9f6e06252145afc18940e9544ce72"
+    "mtime": 1782156686.9219027,
+    "ast_hash": "28fe7c21c4944508892a4a7af273f439",
+    "semantic_hash": "28fe7c21c4944508892a4a7af273f439"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/chanel-hc.html": {
-    "mtime": 1781902532.433936,
-    "ast_hash": "d78f56f65c9569172991161ef6832f65",
-    "semantic_hash": "d78f56f65c9569172991161ef6832f65"
+    "mtime": 1782156686.922154,
+    "ast_hash": "45dbca21971b79b78cdefb0704642a0e",
+    "semantic_hash": "45dbca21971b79b78cdefb0704642a0e"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/chanel-williamsburg.html": {
-    "mtime": 1781902584.2831311,
-    "ast_hash": "5e4d939015f631b786b1482502ec7598",
-    "semantic_hash": "5e4d939015f631b786b1482502ec7598"
+    "mtime": 1782156686.9223983,
+    "ast_hash": "58e38b5115436e855b15c3f8cec07a9a",
+    "semantic_hash": "58e38b5115436e855b15c3f8cec07a9a"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/dolores-fonzi.html": {
-    "mtime": 1781904063.1476576,
-    "ast_hash": "9726fcab20b8b54e51ce2195fab2e8bb",
-    "semantic_hash": "9726fcab20b8b54e51ce2195fab2e8bb"
+    "mtime": 1782156686.9226227,
+    "ast_hash": "5eead15be3a0d886294ed75e9e3c629d",
+    "semantic_hash": "5eead15be3a0d886294ed75e9e3c629d"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/gucci-rural.html": {
-    "mtime": 1781904075.4634445,
-    "ast_hash": "ccf1bf4e01d9cc2bb7aa0d918c1679d9",
-    "semantic_hash": "ccf1bf4e01d9cc2bb7aa0d918c1679d9"
+    "mtime": 1782156686.9228408,
+    "ast_hash": "e018cb659e193030af29af2577a47c59",
+    "semantic_hash": "e018cb659e193030af29af2577a47c59"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/leonie-hanne.html": {
-    "mtime": 1781902568.4767723,
-    "ast_hash": "54a96ba52ca5f8197d618953cfe935d0",
-    "semantic_hash": "54a96ba52ca5f8197d618953cfe935d0"
+    "mtime": 1782156686.9230669,
+    "ast_hash": "3703910639f08e215a22da9e54e7075e",
+    "semantic_hash": "3703910639f08e215a22da9e54e7075e"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/netflix-mf.html": {
-    "mtime": 1781902636.1360328,
-    "ast_hash": "f09ba826b0101a5e86cfd9c32dcd5eb6",
-    "semantic_hash": "f09ba826b0101a5e86cfd9c32dcd5eb6"
+    "mtime": 1782156686.9232955,
+    "ast_hash": "86d10340a725a2c9456ebc7016b784a0",
+    "semantic_hash": "86d10340a725a2c9456ebc7016b784a0"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/projects/valentina-ferrer.html": {
-    "mtime": 1781904066.7997663,
-    "ast_hash": "453f7f16663eba50490950e61fb71517",
-    "semantic_hash": "453f7f16663eba50490950e61fb71517"
+    "mtime": 1782156686.9235022,
+    "ast_hash": "951332518d6b1758ea870e86633df3be",
+    "semantic_hash": "951332518d6b1758ea870e86633df3be"
   },
   "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-050.jpg": {
     "mtime": 1781895081.7238007,
@@ -633,5 +633,995 @@
     "mtime": 1781901312.9219692,
     "ast_hash": "1fa778a7c5dc2ef29fb3d83bd1c6f217",
     "semantic_hash": "1fa778a7c5dc2ef29fb3d83bd1c6f217"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.claude/settings.local.json": {
+    "mtime": 1782170589.174575,
+    "ast_hash": "a71ec6960ce76ef59f281bd59628f52d",
+    "semantic_hash": "a71ec6960ce76ef59f281bd59628f52d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.gstack/claude-available.json": {
+    "mtime": 1782136540.850759,
+    "ast_hash": "5bb8e086e81257a7e39c20bf0dba6126",
+    "semantic_hash": "5bb8e086e81257a7e39c20bf0dba6126"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.mcp.json": {
+    "mtime": 1782165683.5011535,
+    "ast_hash": "b7a9156d873e0d10742aaebf83cbb710",
+    "semantic_hash": "b7a9156d873e0d10742aaebf83cbb710"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/api/mp-preference.js": {
+    "mtime": 1782004701.8160174,
+    "ast_hash": "fb667dcd8261a05dd54a6d06f1da8a1d",
+    "semantic_hash": "fb667dcd8261a05dd54a6d06f1da8a1d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/api/mp-webhook.js": {
+    "mtime": 1781982044.0625253,
+    "ast_hash": "aa8d4c8657c3c34ca90f9af3e89a9f4b",
+    "semantic_hash": "aa8d4c8657c3c34ca90f9af3e89a9f4b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/api/sync-press.js": {
+    "mtime": 1781998128.1060104,
+    "ast_hash": "7dfc35850662202e276e95cea1e0015c",
+    "semantic_hash": "7dfc35850662202e276e95cea1e0015c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/js/effects.js": {
+    "mtime": 1782081376.718613,
+    "ast_hash": "483ef11867d33a322bdd607539f3f984",
+    "semantic_hash": "483ef11867d33a322bdd607539f3f984"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/js/i18n.js": {
+    "mtime": 1782165307.4355624,
+    "ast_hash": "7908704861b8b8a95eb938d9e334c4d9",
+    "semantic_hash": "7908704861b8b8a95eb938d9e334c4d9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/js/project-page.js": {
+    "mtime": 1782068412.9139884,
+    "ast_hash": "b8f537bee4fac1cc5ed49ed6a970e329",
+    "semantic_hash": "b8f537bee4fac1cc5ed49ed6a970e329"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/js/sanity.js": {
+    "mtime": 1782143953.5506232,
+    "ast_hash": "4b492e7337d5b02c036c454111653ea6",
+    "semantic_hash": "4b492e7337d5b02c036c454111653ea6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/skills-lock.json": {
+    "mtime": 1782165752.1027114,
+    "ast_hash": "e7ad5d25a50685fda47ce8564af09a8d",
+    "semantic_hash": "e7ad5d25a50685fda47ce8564af09a8d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/migrate.js": {
+    "mtime": 1782069233.2132564,
+    "ast_hash": "e68d7d82e3bf93adee3c5e492ca29179",
+    "semantic_hash": "e68d7d82e3bf93adee3c5e492ca29179"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/package.json": {
+    "mtime": 1782067974.3262749,
+    "ast_hash": "613f307a074b780aa12e51787ac6fd04",
+    "semantic_hash": "613f307a074b780aa12e51787ac6fd04"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/sanity.cli.js": {
+    "mtime": 1782070644.5187416,
+    "ast_hash": "75169cc4908eb2f075c279555a00280d",
+    "semantic_hash": "75169cc4908eb2f075c279555a00280d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/sanity.config.js": {
+    "mtime": 1782067707.969702,
+    "ast_hash": "92aaf6a9dba101eeae33f83b400b7223",
+    "semantic_hash": "92aaf6a9dba101eeae33f83b400b7223"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/schemas/homePage.js": {
+    "mtime": 1782067360.2702918,
+    "ast_hash": "079f20140209b4ae1913b637ea009ab1",
+    "semantic_hash": "079f20140209b4ae1913b637ea009ab1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/schemas/index.js": {
+    "mtime": 1782067368.8877046,
+    "ast_hash": "f0be7b746ea6d63623fb3a7ce8e2d9c3",
+    "semantic_hash": "f0be7b746ea6d63623fb3a7ce8e2d9c3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/schemas/objects/contentBlock.js": {
+    "mtime": 1782068431.8594596,
+    "ast_hash": "c9710a2f11005d64390bfe93e92f7943",
+    "semantic_hash": "c9710a2f11005d64390bfe93e92f7943"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/schemas/objects/credit.js": {
+    "mtime": 1782067336.796548,
+    "ast_hash": "838d0e1709ca20fca51c205f34bb8132",
+    "semantic_hash": "838d0e1709ca20fca51c205f34bb8132"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/schemas/objects/service.js": {
+    "mtime": 1782067340.3755016,
+    "ast_hash": "d32cb32cbf7ef39d4227e38e38597e07",
+    "semantic_hash": "d32cb32cbf7ef39d4227e38e38597e07"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/schemas/project.js": {
+    "mtime": 1782068371.646604,
+    "ast_hash": "dd74065d8c6ad9f3ef852eed879c28f5",
+    "semantic_hash": "dd74065d8c6ad9f3ef852eed879c28f5"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/studio/schemas/siteSettings.js": {
+    "mtime": 1782067365.165917,
+    "ast_hash": "36ab811722e12551a6d85145b8401bab",
+    "semantic_hash": "36ab811722e12551a6d85145b8401bab"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/supabase/schema.sql": {
+    "mtime": 1781982034.320988,
+    "ast_hash": "d3e9c6c0194b9e72b591e8ce7e5ab694",
+    "semantic_hash": "d3e9c6c0194b9e72b591e8ce7e5ab694"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/vercel.json": {
+    "mtime": 1782164872.8370001,
+    "ast_hash": "b4b13c3472eb2272d64c3bd29eb05980",
+    "semantic_hash": "b4b13c3472eb2272d64c3bd29eb05980"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/CHANGELOG.md": {
+    "mtime": 1782165752.0274642,
+    "ast_hash": "c2431bd02e1717ed5f6a728643953695",
+    "semantic_hash": "c2431bd02e1717ed5f6a728643953695"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/SKILL.md": {
+    "mtime": 1782165752.0283656,
+    "ast_hash": "0e31e4a19cccde79afd7fee73982a158",
+    "semantic_hash": "0e31e4a19cccde79afd7fee73982a158"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/_contributing.md": {
+    "mtime": 1782165752.0331318,
+    "ast_hash": "19edd365b47667a9b81108cacfd75775",
+    "semantic_hash": "19edd365b47667a9b81108cacfd75775"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/_sections.md": {
+    "mtime": 1782165752.033184,
+    "ast_hash": "7cc4829a3718c745dfdbec554c30485f",
+    "semantic_hash": "7cc4829a3718c745dfdbec554c30485f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/_template.md": {
+    "mtime": 1782165752.0328832,
+    "ast_hash": "384ee769a417d3001e81d81b139acbf6",
+    "semantic_hash": "384ee769a417d3001e81d81b139acbf6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md": {
+    "mtime": 1782165752.0331414,
+    "ast_hash": "f32a27eab306ad2a29db0a2a8a55b03c",
+    "semantic_hash": "f32a27eab306ad2a29db0a2a8a55b03c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md": {
+    "mtime": 1782165752.033857,
+    "ast_hash": "5b4fbcc451879892d366fa02194bb536",
+    "semantic_hash": "5b4fbcc451879892d366fa02194bb536"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md": {
+    "mtime": 1782165752.0342605,
+    "ast_hash": "c73ea45eecdb007786cd3b3e08e31640",
+    "semantic_hash": "c73ea45eecdb007786cd3b3e08e31640"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/conn-limits.md": {
+    "mtime": 1782165752.033887,
+    "ast_hash": "59025fe12439048e81296f28feca4ce1",
+    "semantic_hash": "59025fe12439048e81296f28feca4ce1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/conn-pooling.md": {
+    "mtime": 1782165752.0337799,
+    "ast_hash": "8561b805a5e0bdfa348840266861de66",
+    "semantic_hash": "8561b805a5e0bdfa348840266861de66"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md": {
+    "mtime": 1782165752.034359,
+    "ast_hash": "fe941145678825d273baac1fe66d4dce",
+    "semantic_hash": "fe941145678825d273baac1fe66d4dce"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/data-batch-inserts.md": {
+    "mtime": 1782165752.0345495,
+    "ast_hash": "75a4e92f80b90818221fae51f8b994f1",
+    "semantic_hash": "75a4e92f80b90818221fae51f8b994f1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/data-n-plus-one.md": {
+    "mtime": 1782165752.0347884,
+    "ast_hash": "4fc111bb51121f5181910b3759061ada",
+    "semantic_hash": "4fc111bb51121f5181910b3759061ada"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/data-pagination.md": {
+    "mtime": 1782165752.035175,
+    "ast_hash": "0e9b3211df99b3d35f7083c984b03ccb",
+    "semantic_hash": "0e9b3211df99b3d35f7083c984b03ccb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/data-upsert.md": {
+    "mtime": 1782165752.035586,
+    "ast_hash": "51a26138848f5fec547cd56b9bcb33d4",
+    "semantic_hash": "51a26138848f5fec547cd56b9bcb33d4"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/lock-advisory.md": {
+    "mtime": 1782165752.0361412,
+    "ast_hash": "3f3523b7b0a812a6906f92a6610a5a9b",
+    "semantic_hash": "3f3523b7b0a812a6906f92a6610a5a9b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md": {
+    "mtime": 1782165752.035559,
+    "ast_hash": "07eae98867b47074d82528df59d2135e",
+    "semantic_hash": "07eae98867b47074d82528df59d2135e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/lock-short-transactions.md": {
+    "mtime": 1782165752.0353615,
+    "ast_hash": "aea973297ac14bba2586a2ff57fd8ff7",
+    "semantic_hash": "aea973297ac14bba2586a2ff57fd8ff7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/lock-skip-locked.md": {
+    "mtime": 1782165752.0367062,
+    "ast_hash": "26e9bd402801299afce06ee506a9f864",
+    "semantic_hash": "26e9bd402801299afce06ee506a9f864"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md": {
+    "mtime": 1782165752.0362368,
+    "ast_hash": "93d5998318098652ac380cd354718924",
+    "semantic_hash": "93d5998318098652ac380cd354718924"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md": {
+    "mtime": 1782165752.0361779,
+    "ast_hash": "ee51d9586cf18c848563799c14dcc638",
+    "semantic_hash": "ee51d9586cf18c848563799c14dcc638"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md": {
+    "mtime": 1782165752.0370612,
+    "ast_hash": "e3d1e4f8831a37bdb1c7f364b911f7a6",
+    "semantic_hash": "e3d1e4f8831a37bdb1c7f364b911f7a6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/query-composite-indexes.md": {
+    "mtime": 1782165752.0373907,
+    "ast_hash": "bd959891036289cfaf3d54e49599b2d0",
+    "semantic_hash": "bd959891036289cfaf3d54e49599b2d0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/query-covering-indexes.md": {
+    "mtime": 1782165752.0377338,
+    "ast_hash": "5e62afcfe9289405caec1f32f351dd29",
+    "semantic_hash": "5e62afcfe9289405caec1f32f351dd29"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/query-index-types.md": {
+    "mtime": 1782165752.0363867,
+    "ast_hash": "ef0d4ad9d1eb0466a0bde542ade59de2",
+    "semantic_hash": "ef0d4ad9d1eb0466a0bde542ade59de2"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/query-missing-indexes.md": {
+    "mtime": 1782165752.0374458,
+    "ast_hash": "1bd5f85a9c930219dd479825986bd6ad",
+    "semantic_hash": "1bd5f85a9c930219dd479825986bd6ad"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/query-partial-indexes.md": {
+    "mtime": 1782165752.0378795,
+    "ast_hash": "a6c64f9136f8a7880e53df3e259d90c9",
+    "semantic_hash": "a6c64f9136f8a7880e53df3e259d90c9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/schema-constraints.md": {
+    "mtime": 1782165752.0378728,
+    "ast_hash": "e7362385f5b79c28f5e495d7c45a7a52",
+    "semantic_hash": "e7362385f5b79c28f5e495d7c45a7a52"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/schema-data-types.md": {
+    "mtime": 1782165752.038393,
+    "ast_hash": "a10f1ec17bd499622d9201af3d00e0d4",
+    "semantic_hash": "a10f1ec17bd499622d9201af3d00e0d4"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md": {
+    "mtime": 1782165752.03853,
+    "ast_hash": "6bc02b38edd88e56c89bab863f5c789b",
+    "semantic_hash": "6bc02b38edd88e56c89bab863f5c789b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md": {
+    "mtime": 1782165752.0387235,
+    "ast_hash": "1df2eae336d542d365f99abdfa968367",
+    "semantic_hash": "1df2eae336d542d365f99abdfa968367"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/schema-partitioning.md": {
+    "mtime": 1782165752.0387917,
+    "ast_hash": "e95568857288b614ba0d4b8cd1b4fb72",
+    "semantic_hash": "e95568857288b614ba0d4b8cd1b4fb72"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/schema-primary-keys.md": {
+    "mtime": 1782165752.0390663,
+    "ast_hash": "63412819d632d8cbe39f14630e5de085",
+    "semantic_hash": "63412819d632d8cbe39f14630e5de085"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/security-privileges.md": {
+    "mtime": 1782165752.0394757,
+    "ast_hash": "212beb5d93e7c02cb61c95e117af3aaa",
+    "semantic_hash": "212beb5d93e7c02cb61c95e117af3aaa"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/security-rls-basics.md": {
+    "mtime": 1782165752.0398283,
+    "ast_hash": "2349e490ff266b1c2b81a2368c054baa",
+    "semantic_hash": "2349e490ff266b1c2b81a2368c054baa"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase-postgres-best-practices/references/security-rls-performance.md": {
+    "mtime": 1782165752.0399437,
+    "ast_hash": "6c87b7d050ba714a95a2b88eb0b6caf0",
+    "semantic_hash": "6c87b7d050ba714a95a2b88eb0b6caf0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase/CHANGELOG.md": {
+    "mtime": 1782165751.3732002,
+    "ast_hash": "bd88eabad50a89d284a0f737bda015af",
+    "semantic_hash": "bd88eabad50a89d284a0f737bda015af"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase/SKILL.md": {
+    "mtime": 1782165751.3743,
+    "ast_hash": "24a2e7ad2c7e071f98c021cd4c32bccf",
+    "semantic_hash": "24a2e7ad2c7e071f98c021cd4c32bccf"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase/assets/feedback-issue-template.md": {
+    "mtime": 1782165751.3785784,
+    "ast_hash": "a38bcf7c09794faf287d91a992830b47",
+    "semantic_hash": "a38bcf7c09794faf287d91a992830b47"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/.agents/skills/supabase/references/skill-feedback.md": {
+    "mtime": 1782165751.3789144,
+    "ast_hash": "38a53e95ded880782190ddf2f2810317",
+    "semantic_hash": "38a53e95ded880782190ddf2f2810317"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/CLAUDE.md": {
+    "mtime": 1782136540.851579,
+    "ast_hash": "a8d08b593a77d27b4ae46b8014cfad10",
+    "semantic_hash": "a8d08b593a77d27b4ae46b8014cfad10"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/admin/index.html": {
+    "mtime": 1781992881.7569923,
+    "ast_hash": "75f0966403c17eba18fba4670740943a",
+    "semantic_hash": "75f0966403c17eba18fba4670740943a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/auth-ui.html": {
+    "mtime": 1782003049.5336075,
+    "ast_hash": "b227fed35b1cdfb1432f4c08bc44b920",
+    "semantic_hash": "b227fed35b1cdfb1432f4c08bc44b920"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/blog.html": {
+    "mtime": 1782162908.2282774,
+    "ast_hash": "ee94189caeb90a15a2a50f847c797fd3",
+    "semantic_hash": "ee94189caeb90a15a2a50f847c797fd3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/blog/post.html": {
+    "mtime": 1782169053.6216223,
+    "ast_hash": "c6d18c632cde02a8d8be8b7c8b59f17f",
+    "semantic_hash": "c6d18c632cde02a8d8be8b7c8b59f17f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/cuenta.html": {
+    "mtime": 1782003403.123948,
+    "ast_hash": "a802bca8f675dfb012971f29daa2e381",
+    "semantic_hash": "a802bca8f675dfb012971f29daa2e381"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/llms.txt": {
+    "mtime": 1781980040.154654,
+    "ast_hash": "4cd36237d25b74ee13c4d529df62f616",
+    "semantic_hash": "4cd36237d25b74ee13c4d529df62f616"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/mercadito.html": {
+    "mtime": 1782156686.9209597,
+    "ast_hash": "4a30cc89c2d81de35b2e0b1d00d62cd2",
+    "semantic_hash": "4a30cc89c2d81de35b2e0b1d00d62cd2"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/prensa.html": {
+    "mtime": 1782156686.921475,
+    "ast_hash": "6838144be9192bd8eea9d60ebc46414d",
+    "semantic_hash": "6838144be9192bd8eea9d60ebc46414d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/robots.txt": {
+    "mtime": 1781980044.338042,
+    "ast_hash": "52fef695879848d142353983707b05fe",
+    "semantic_hash": "52fef695879848d142353983707b05fe"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-050.webp": {
+    "mtime": 1781962444.186376,
+    "ast_hash": "cba4bdfeecd1cc9a261ca6884b3b312e",
+    "semantic_hash": "cba4bdfeecd1cc9a261ca6884b3b312e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-051.webp": {
+    "mtime": 1781962444.2101855,
+    "ast_hash": "b8a2f6491ef1945605ce687177fe7066",
+    "semantic_hash": "b8a2f6491ef1945605ce687177fe7066"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-052.webp": {
+    "mtime": 1781962444.1128385,
+    "ast_hash": "e059f97b279ae6001e755a92d1044e11",
+    "semantic_hash": "e059f97b279ae6001e755a92d1044e11"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-053.webp": {
+    "mtime": 1781962444.0903656,
+    "ast_hash": "a522f36929351878189015beaabae2dd",
+    "semantic_hash": "a522f36929351878189015beaabae2dd"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-054.webp": {
+    "mtime": 1781962444.374308,
+    "ast_hash": "10cd005bb4d3af4b67b8973ca0e8abeb",
+    "semantic_hash": "10cd005bb4d3af4b67b8973ca0e8abeb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-055.webp": {
+    "mtime": 1781962444.2963192,
+    "ast_hash": "be3da3d2dd7bf00c9ea773fadf758994",
+    "semantic_hash": "be3da3d2dd7bf00c9ea773fadf758994"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-056.webp": {
+    "mtime": 1781962444.4611661,
+    "ast_hash": "bc5beccfa244f1b59e49e6f91b21196c",
+    "semantic_hash": "bc5beccfa244f1b59e49e6f91b21196c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-057.webp": {
+    "mtime": 1781962444.4911227,
+    "ast_hash": "783a4458f56cbd7046461662976120cf",
+    "semantic_hash": "783a4458f56cbd7046461662976120cf"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-058.webp": {
+    "mtime": 1781962443.7516909,
+    "ast_hash": "b4a40db6e7ef8b531fbceac4609f77c5",
+    "semantic_hash": "b4a40db6e7ef8b531fbceac4609f77c5"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-059.webp": {
+    "mtime": 1781962443.6260772,
+    "ast_hash": "da6e005f5000a5bffbdae1c0980266ad",
+    "semantic_hash": "da6e005f5000a5bffbdae1c0980266ad"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-060.webp": {
+    "mtime": 1781962443.7797854,
+    "ast_hash": "105e23a200789c95fa1e27d4c0297316",
+    "semantic_hash": "105e23a200789c95fa1e27d4c0297316"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-061.webp": {
+    "mtime": 1781962443.854622,
+    "ast_hash": "ff99bcc28b0f8d066de986976b0a56c6",
+    "semantic_hash": "ff99bcc28b0f8d066de986976b0a56c6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-062.webp": {
+    "mtime": 1781962443.9660687,
+    "ast_hash": "f6ee59e985033f4358d8ded14469b7db",
+    "semantic_hash": "f6ee59e985033f4358d8ded14469b7db"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-063.webp": {
+    "mtime": 1781962443.9365454,
+    "ast_hash": "a931c027a4bf4d13c755a27b52e1d7e1",
+    "semantic_hash": "a931c027a4bf4d13c755a27b52e1d7e1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-064.webp": {
+    "mtime": 1781962443.7174442,
+    "ast_hash": "6ba1c5264b84381017c3d58263c28c9c",
+    "semantic_hash": "6ba1c5264b84381017c3d58263c28c9c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-065.webp": {
+    "mtime": 1781962443.6551096,
+    "ast_hash": "0353fd29c41596fb6e525e4dfa3237e9",
+    "semantic_hash": "0353fd29c41596fb6e525e4dfa3237e9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-066.webp": {
+    "mtime": 1781962443.5466049,
+    "ast_hash": "7ecb5d901b0e1c06ec47e71b51d1f533",
+    "semantic_hash": "7ecb5d901b0e1c06ec47e71b51d1f533"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-067.webp": {
+    "mtime": 1781962443.5785682,
+    "ast_hash": "3484c300885fe70cc6122e990223130d",
+    "semantic_hash": "3484c300885fe70cc6122e990223130d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-068.webp": {
+    "mtime": 1781962444.3463368,
+    "ast_hash": "bde5675158316021e75646a78f8b89ab",
+    "semantic_hash": "bde5675158316021e75646a78f8b89ab"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-069.webp": {
+    "mtime": 1781962444.320431,
+    "ast_hash": "0d0b016132533d1571729fe625ac8cbf",
+    "semantic_hash": "0d0b016132533d1571729fe625ac8cbf"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-070.webp": {
+    "mtime": 1781962443.6937885,
+    "ast_hash": "09bb8a548331139e9f88370e4c53b384",
+    "semantic_hash": "09bb8a548331139e9f88370e4c53b384"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-071.webp": {
+    "mtime": 1781962443.6709242,
+    "ast_hash": "8192b8e840a22b559829d155bf4d937a",
+    "semantic_hash": "8192b8e840a22b559829d155bf4d937a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-072.webp": {
+    "mtime": 1781962443.5161679,
+    "ast_hash": "796ca98855550999411f76e7e3626091",
+    "semantic_hash": "796ca98855550999411f76e7e3626091"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-073.webp": {
+    "mtime": 1781962443.6058204,
+    "ast_hash": "026b5349e983bf883ce4528606997653",
+    "semantic_hash": "026b5349e983bf883ce4528606997653"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-074.webp": {
+    "mtime": 1781962443.8084736,
+    "ast_hash": "f491e9273f96ab28bb28476b78347fd6",
+    "semantic_hash": "f491e9273f96ab28bb28476b78347fd6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-075.webp": {
+    "mtime": 1781962443.8242,
+    "ast_hash": "b2053ecd7c1e235df51b7aeadfe1fd17",
+    "semantic_hash": "b2053ecd7c1e235df51b7aeadfe1fd17"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-076.webp": {
+    "mtime": 1781962443.9875035,
+    "ast_hash": "e55401759be266a7865e095ce78b1ede",
+    "semantic_hash": "e55401759be266a7865e095ce78b1ede"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-077.webp": {
+    "mtime": 1781962443.9103515,
+    "ast_hash": "326651842c8e19f8d9a848c1c4d5c0d2",
+    "semantic_hash": "326651842c8e19f8d9a848c1c4d5c0d2"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-078.webp": {
+    "mtime": 1781962444.169124,
+    "ast_hash": "04e104bb24122a7bb3a777d3ead0f913",
+    "semantic_hash": "04e104bb24122a7bb3a777d3ead0f913"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-079.webp": {
+    "mtime": 1781962444.2327783,
+    "ast_hash": "c3c2046c1847688326443ee27c522dc3",
+    "semantic_hash": "c3c2046c1847688326443ee27c522dc3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-080.webp": {
+    "mtime": 1781962444.5116432,
+    "ast_hash": "bf808d449577c17979c9d66af09ef405",
+    "semantic_hash": "bf808d449577c17979c9d66af09ef405"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-081.webp": {
+    "mtime": 1781962444.4313295,
+    "ast_hash": "e17241c4f679bdf6768c9c9f34fa1bc1",
+    "semantic_hash": "e17241c4f679bdf6768c9c9f34fa1bc1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-082.webp": {
+    "mtime": 1781962444.280509,
+    "ast_hash": "554e5be2dd51b64d2bc9df11aa7b4e85",
+    "semantic_hash": "554e5be2dd51b64d2bc9df11aa7b4e85"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-083.webp": {
+    "mtime": 1781962444.4032059,
+    "ast_hash": "b757c6f6156488a27646512fd9df2617",
+    "semantic_hash": "b757c6f6156488a27646512fd9df2617"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-084.webp": {
+    "mtime": 1781962444.0624948,
+    "ast_hash": "9584ca23586e4ea9edb29289c733815d",
+    "semantic_hash": "9584ca23586e4ea9edb29289c733815d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-085.webp": {
+    "mtime": 1781962444.1294749,
+    "ast_hash": "f62fe597bb8aea42adb2cd0f4bc6848f",
+    "semantic_hash": "f62fe597bb8aea42adb2cd0f4bc6848f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-086.webp": {
+    "mtime": 1781962444.2626872,
+    "ast_hash": "c4828ebb0da64a5fda1f212d33925877",
+    "semantic_hash": "c4828ebb0da64a5fda1f212d33925877"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-087.webp": {
+    "mtime": 1781962444.1451237,
+    "ast_hash": "b8b2dc6a37101a20fa4fd991c7e96dd5",
+    "semantic_hash": "b8b2dc6a37101a20fa4fd991c7e96dd5"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-088.webp": {
+    "mtime": 1781962443.8825214,
+    "ast_hash": "c5dbe32d2d074d14f268eb250a6d3ad3",
+    "semantic_hash": "c5dbe32d2d074d14f268eb250a6d3ad3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-089.webp": {
+    "mtime": 1781962444.0099714,
+    "ast_hash": "c16f977033866e12c99b90a0750d9f3c",
+    "semantic_hash": "c16f977033866e12c99b90a0750d9f3c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/_xl_scan/xl-090.webp": {
+    "mtime": 1781962444.034854,
+    "ast_hash": "2b2f5f292b564fa68fb79893687cfe24",
+    "semantic_hash": "2b2f5f292b564fa68fb79893687cfe24"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/ash/bts-set.jpg": {
+    "mtime": 1782000171.64524,
+    "ast_hash": "97783dfbb58db7ddc0215ab234bd2ec0",
+    "semantic_hash": "97783dfbb58db7ddc0215ab234bd2ec0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/ash/frontrow.jpg": {
+    "mtime": 1782000171.651751,
+    "ast_hash": "9f8f465a8342ec9e258bede6ee5a170d",
+    "semantic_hash": "9f8f465a8342ec9e258bede6ee5a170d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/blog/pexels-01.jpg": {
+    "mtime": 1782158704.756291,
+    "ast_hash": "d0f7c691050ba5b1020091c984391871",
+    "semantic_hash": "d0f7c691050ba5b1020091c984391871"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/blog/pexels-02.jpg": {
+    "mtime": 1782158705.5066202,
+    "ast_hash": "fb6f9dc5eecb6ff9ffd7a3eb3bcf1f41",
+    "semantic_hash": "fb6f9dc5eecb6ff9ffd7a3eb3bcf1f41"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/blog/pexels-03.jpg": {
+    "mtime": 1782158706.0196075,
+    "ast_hash": "94ee2bd4884e2539e55c8739f1af1eae",
+    "semantic_hash": "94ee2bd4884e2539e55c8739f1af1eae"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-01.webp": {
+    "mtime": 1781962442.3329754,
+    "ast_hash": "51d0ee6ca61be25ec73da5c48e010399",
+    "semantic_hash": "51d0ee6ca61be25ec73da5c48e010399"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-02.webp": {
+    "mtime": 1781962441.9636972,
+    "ast_hash": "868eb671c90775dcbd018086af70db9f",
+    "semantic_hash": "868eb671c90775dcbd018086af70db9f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-03.webp": {
+    "mtime": 1781962441.881823,
+    "ast_hash": "7fe3d349c8f64f16796fa83be31c8c34",
+    "semantic_hash": "7fe3d349c8f64f16796fa83be31c8c34"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-04.webp": {
+    "mtime": 1781962442.873671,
+    "ast_hash": "f5b36a551721aacaaaacc19102688494",
+    "semantic_hash": "f5b36a551721aacaaaacc19102688494"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-05.webp": {
+    "mtime": 1781962442.424095,
+    "ast_hash": "19a274df708f16f7dca4b574e61c59c0",
+    "semantic_hash": "19a274df708f16f7dca4b574e61c59c0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-06.webp": {
+    "mtime": 1781962443.0489125,
+    "ast_hash": "aaefc2b335856bb2d48a0fb3a2d00308",
+    "semantic_hash": "aaefc2b335856bb2d48a0fb3a2d00308"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-07.webp": {
+    "mtime": 1781962443.2224486,
+    "ast_hash": "b2fcc0745d9d66d333a8cb3ce47fecfb",
+    "semantic_hash": "b2fcc0745d9d66d333a8cb3ce47fecfb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-08.webp": {
+    "mtime": 1781962443.4903574,
+    "ast_hash": "6e9f61556e5a2b2ce1f947841d287539",
+    "semantic_hash": "6e9f61556e5a2b2ce1f947841d287539"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-09.webp": {
+    "mtime": 1781962443.402843,
+    "ast_hash": "8a5f1d55e2ef067cd2b4ecca9cec13cc",
+    "semantic_hash": "8a5f1d55e2ef067cd2b4ecca9cec13cc"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-10.webp": {
+    "mtime": 1781962442.7819762,
+    "ast_hash": "a7375e4243ae022e1db841ff18aca9f7",
+    "semantic_hash": "a7375e4243ae022e1db841ff18aca9f7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-11.webp": {
+    "mtime": 1781962442.516405,
+    "ast_hash": "e97eb8b3b0e95d8e22ac01032742137a",
+    "semantic_hash": "e97eb8b3b0e95d8e22ac01032742137a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-12.webp": {
+    "mtime": 1781962442.958585,
+    "ast_hash": "5a0a0d513cf8abff0683dd195e4edff4",
+    "semantic_hash": "5a0a0d513cf8abff0683dd195e4edff4"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-13.webp": {
+    "mtime": 1781962443.3137724,
+    "ast_hash": "50285234604bae449b14b84eb4af06d4",
+    "semantic_hash": "50285234604bae449b14b84eb4af06d4"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-14.webp": {
+    "mtime": 1781962442.1427827,
+    "ast_hash": "4436919ac096c246431e7c482759aae8",
+    "semantic_hash": "4436919ac096c246431e7c482759aae8"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-15.webp": {
+    "mtime": 1781962442.236627,
+    "ast_hash": "98306aec84bedce5b45d7febd5720348",
+    "semantic_hash": "98306aec84bedce5b45d7febd5720348"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/editorial-16.webp": {
+    "mtime": 1781962442.0482345,
+    "ast_hash": "b6535ce8939efb9ed8b69f4757dfa1ba",
+    "semantic_hash": "b6535ce8939efb9ed8b69f4757dfa1ba"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-000.webp": {
+    "mtime": 1781962437.4887307,
+    "ast_hash": "478bde5ab19af1838d5c8088825fb6b6",
+    "semantic_hash": "478bde5ab19af1838d5c8088825fb6b6"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-001.webp": {
+    "mtime": 1781962437.6968055,
+    "ast_hash": "65bb24e004d07b3414f5402870f0a117",
+    "semantic_hash": "65bb24e004d07b3414f5402870f0a117"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-002.webp": {
+    "mtime": 1781962438.154976,
+    "ast_hash": "d53391d7c77299697f5d4470b496c738",
+    "semantic_hash": "d53391d7c77299697f5d4470b496c738"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-003.webp": {
+    "mtime": 1781962437.9182985,
+    "ast_hash": "1ea14a422426a9918984e7ad7bc59bdb",
+    "semantic_hash": "1ea14a422426a9918984e7ad7bc59bdb"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-004.webp": {
+    "mtime": 1781962437.3042629,
+    "ast_hash": "a03c48141e50c774bbeaf17787c993e0",
+    "semantic_hash": "a03c48141e50c774bbeaf17787c993e0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-chinatown/img-005.webp": {
+    "mtime": 1781962437.0564377,
+    "ast_hash": "4231f812af7d9c7ff833e143bcf1858b",
+    "semantic_hash": "4231f812af7d9c7ff833e143bcf1858b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/calu-nj/img-000.webp": {
+    "mtime": 1781962434.747309,
+    "ast_hash": "c5e6dbd88220b98f032867655619721f",
+    "semantic_hash": "c5e6dbd88220b98f032867655619721f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-000.webp": {
+    "mtime": 1781962436.201427,
+    "ast_hash": "787f519629a76cad4a98783d39df6ec1",
+    "semantic_hash": "787f519629a76cad4a98783d39df6ec1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-001.webp": {
+    "mtime": 1781962436.2224,
+    "ast_hash": "f8c62ea95eae45adaa7b518dd082b596",
+    "semantic_hash": "f8c62ea95eae45adaa7b518dd082b596"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-002.webp": {
+    "mtime": 1781962436.4190395,
+    "ast_hash": "27ec1f2bf34dbc0dd5c00327bcf7b989",
+    "semantic_hash": "27ec1f2bf34dbc0dd5c00327bcf7b989"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-003.webp": {
+    "mtime": 1781962436.3967376,
+    "ast_hash": "2a19f0dd6ec83d5a923a2308b82a8b9a",
+    "semantic_hash": "2a19f0dd6ec83d5a923a2308b82a8b9a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-004.webp": {
+    "mtime": 1781962435.9862032,
+    "ast_hash": "a7257b83f7c69912112557b985e4b5b9",
+    "semantic_hash": "a7257b83f7c69912112557b985e4b5b9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-005.webp": {
+    "mtime": 1781962435.4770253,
+    "ast_hash": "9d4549772fc3cb1346c6270cb8950f41",
+    "semantic_hash": "9d4549772fc3cb1346c6270cb8950f41"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-006.webp": {
+    "mtime": 1781962434.9436615,
+    "ast_hash": "ee5dd390bbf967a55b59d8f17db476e1",
+    "semantic_hash": "ee5dd390bbf967a55b59d8f17db476e1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-007.webp": {
+    "mtime": 1781962435.1602447,
+    "ast_hash": "8dc89c99ca090e0223a034875eecd5c0",
+    "semantic_hash": "8dc89c99ca090e0223a034875eecd5c0"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-008.webp": {
+    "mtime": 1781962436.848768,
+    "ast_hash": "61b708a23852569cad293f413360d67b",
+    "semantic_hash": "61b708a23852569cad293f413360d67b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-009.webp": {
+    "mtime": 1781962436.6065965,
+    "ast_hash": "b9b615f7d2f83f077b1c71c3dd0e604f",
+    "semantic_hash": "b9b615f7d2f83f077b1c71c3dd0e604f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-010.webp": {
+    "mtime": 1781962435.7859643,
+    "ast_hash": "328f679efcd31e9db303ef78d473646f",
+    "semantic_hash": "328f679efcd31e9db303ef78d473646f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-hc/img-011.webp": {
+    "mtime": 1781962435.6162117,
+    "ast_hash": "ee91b653c69e9af413c6d1ae6741453d",
+    "semantic_hash": "ee91b653c69e9af413c6d1ae6741453d"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-000.webp": {
+    "mtime": 1781962441.1344292,
+    "ast_hash": "a48892691e6814c0687988f6fab77992",
+    "semantic_hash": "a48892691e6814c0687988f6fab77992"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-001.webp": {
+    "mtime": 1781962441.3553483,
+    "ast_hash": "e4a48816da55432b611cb159e58300da",
+    "semantic_hash": "e4a48816da55432b611cb159e58300da"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-002.webp": {
+    "mtime": 1781962441.6862426,
+    "ast_hash": "b5dcade4c45975d275194b8084735ec8",
+    "semantic_hash": "b5dcade4c45975d275194b8084735ec8"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/chanel-pap/img-003.webp": {
+    "mtime": 1781962441.5485868,
+    "ast_hash": "74a007d0129d8c04e4f3ab0993ae26cd",
+    "semantic_hash": "74a007d0129d8c04e4f3ab0993ae26cd"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-000.webp": {
+    "mtime": 1781962433.5269053,
+    "ast_hash": "8e831cf6280ef886d10df3f38d2565a3",
+    "semantic_hash": "8e831cf6280ef886d10df3f38d2565a3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-001.webp": {
+    "mtime": 1781962433.5915534,
+    "ast_hash": "58a2676a5e5f2f3c0ef75dd5219328fd",
+    "semantic_hash": "58a2676a5e5f2f3c0ef75dd5219328fd"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-002.webp": {
+    "mtime": 1781962433.9034643,
+    "ast_hash": "9710233403ac391ad9faf8ed846f3d8f",
+    "semantic_hash": "9710233403ac391ad9faf8ed846f3d8f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-003.webp": {
+    "mtime": 1781962433.8309212,
+    "ast_hash": "8caf8cfa8eb1e25bdc6a90fd3ddf6956",
+    "semantic_hash": "8caf8cfa8eb1e25bdc6a90fd3ddf6956"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-004.webp": {
+    "mtime": 1781962433.4686477,
+    "ast_hash": "dfa239efa04dcecab2697a87d3ca60f9",
+    "semantic_hash": "dfa239efa04dcecab2697a87d3ca60f9"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-005.webp": {
+    "mtime": 1781962433.4090223,
+    "ast_hash": "9bcb6b94a224021b3a8e8622dedd852a",
+    "semantic_hash": "9bcb6b94a224021b3a8e8622dedd852a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/dolores-fonzi/img-006.webp": {
+    "mtime": 1781962433.202781,
+    "ast_hash": "be80a6966094d50a131ff14743463cf7",
+    "semantic_hash": "be80a6966094d50a131ff14743463cf7"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/gucci-rural/img-000.webp": {
+    "mtime": 1781962438.8989544,
+    "ast_hash": "e82eb18d25ac32feedf2bc58420b6849",
+    "semantic_hash": "e82eb18d25ac32feedf2bc58420b6849"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/gucci-rural/img-001.webp": {
+    "mtime": 1781962439.1849768,
+    "ast_hash": "63cbbd7b4da6074c0acf8c853de41531",
+    "semantic_hash": "63cbbd7b4da6074c0acf8c853de41531"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/gucci-rural/img-002.webp": {
+    "mtime": 1781962439.4389753,
+    "ast_hash": "a8ccb44bfe96d0ef65f135f0e2b8a925",
+    "semantic_hash": "a8ccb44bfe96d0ef65f135f0e2b8a925"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/gucci-rural/img-strip.jpg": {
+    "mtime": 1782086040.6827307,
+    "ast_hash": "76544332089b02bcddf8541fa3b3b45c",
+    "semantic_hash": "76544332089b02bcddf8541fa3b3b45c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-000.webp": {
+    "mtime": 1781962440.0827074,
+    "ast_hash": "a7f54733e7113a76a4d215edf83a0228",
+    "semantic_hash": "a7f54733e7113a76a4d215edf83a0228"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-001.webp": {
+    "mtime": 1781962440.2183473,
+    "ast_hash": "bd20d392fa716f4002d00863fdc7b8fe",
+    "semantic_hash": "bd20d392fa716f4002d00863fdc7b8fe"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-002.webp": {
+    "mtime": 1781962440.6278596,
+    "ast_hash": "89d274bcf3903e67450f471e7220ecca",
+    "semantic_hash": "89d274bcf3903e67450f471e7220ecca"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-003.webp": {
+    "mtime": 1781962440.4787564,
+    "ast_hash": "dd1d21dc3335535884100065342ec49a",
+    "semantic_hash": "dd1d21dc3335535884100065342ec49a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-004.webp": {
+    "mtime": 1781962439.9527247,
+    "ast_hash": "799e5fc4c14f9407f413545698ff6e08",
+    "semantic_hash": "799e5fc4c14f9407f413545698ff6e08"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-005.webp": {
+    "mtime": 1781962439.722456,
+    "ast_hash": "9007b334700e53527c08e4092f4b2cc1",
+    "semantic_hash": "9007b334700e53527c08e4092f4b2cc1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-006.webp": {
+    "mtime": 1781962439.60867,
+    "ast_hash": "2f6eeda9b8b51995f39642fb8df5177e",
+    "semantic_hash": "2f6eeda9b8b51995f39642fb8df5177e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-007.webp": {
+    "mtime": 1781962439.6814532,
+    "ast_hash": "726bb839002d586acfdc87168fb0d12a",
+    "semantic_hash": "726bb839002d586acfdc87168fb0d12a"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-008.webp": {
+    "mtime": 1781962440.9003043,
+    "ast_hash": "d39a647774eea661421cb9e6f3f26849",
+    "semantic_hash": "d39a647774eea661421cb9e6f3f26849"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/leonie-dg/img-009.webp": {
+    "mtime": 1781962440.6904747,
+    "ast_hash": "14205b37c13cbc16ec17d23598b94d55",
+    "semantic_hash": "14205b37c13cbc16ec17d23598b94d55"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-000.webp": {
+    "mtime": 1781962438.4615571,
+    "ast_hash": "54717b833b3229b038162ac3551dcf27",
+    "semantic_hash": "54717b833b3229b038162ac3551dcf27"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-001.webp": {
+    "mtime": 1781962438.5259259,
+    "ast_hash": "6d79dc4fd42b4df47fb2df044c3ae23b",
+    "semantic_hash": "6d79dc4fd42b4df47fb2df044c3ae23b"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-002.webp": {
+    "mtime": 1781962438.6455867,
+    "ast_hash": "ef9fb0bc297305bbdacbcdbf75bb94d3",
+    "semantic_hash": "ef9fb0bc297305bbdacbcdbf75bb94d3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-003.webp": {
+    "mtime": 1781962438.5843852,
+    "ast_hash": "797d6e066618d20df9d650573c97f2d8",
+    "semantic_hash": "797d6e066618d20df9d650573c97f2d8"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-004.webp": {
+    "mtime": 1781962438.3967724,
+    "ast_hash": "55f2185cf5327debdda6dc9a7368efea",
+    "semantic_hash": "55f2185cf5327debdda6dc9a7368efea"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-005.webp": {
+    "mtime": 1781962438.330149,
+    "ast_hash": "6f4aff0352217f893b907899b860e28c",
+    "semantic_hash": "6f4aff0352217f893b907899b860e28c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-006.webp": {
+    "mtime": 1781962438.2115393,
+    "ast_hash": "c0c9f7e0a1872744386664d1a2fe1eab",
+    "semantic_hash": "c0c9f7e0a1872744386664d1a2fe1eab"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/netflix-mf/img-007.webp": {
+    "mtime": 1781962438.268326,
+    "ast_hash": "b46ec211a042f9af5cbd0ad87249446f",
+    "semantic_hash": "b46ec211a042f9af5cbd0ad87249446f"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-000.webp": {
+    "mtime": 1781962434.2386446,
+    "ast_hash": "3e391f79425b4e858f863a37b9d5ec35",
+    "semantic_hash": "3e391f79425b4e858f863a37b9d5ec35"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-001.webp": {
+    "mtime": 1781962434.2906592,
+    "ast_hash": "6517d23091e17c14551031e2d853c20c",
+    "semantic_hash": "6517d23091e17c14551031e2d853c20c"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-002.webp": {
+    "mtime": 1781962434.5542088,
+    "ast_hash": "ebf398652c9b3ec887526bf6751b3256",
+    "semantic_hash": "ebf398652c9b3ec887526bf6751b3256"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-003.webp": {
+    "mtime": 1781962434.3501403,
+    "ast_hash": "e59dd58d7b49d00a42809d3c262250d1",
+    "semantic_hash": "e59dd58d7b49d00a42809d3c262250d1"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/extracted/valentina-miumiu/img-004.webp": {
+    "mtime": 1781962434.040693,
+    "ast_hash": "75a54b88fcd7a5ac584126da21cac9d8",
+    "semantic_hash": "75a54b88fcd7a5ac584126da21cac9d8"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/fonzi-076.webp": {
+    "mtime": 1781962443.112647,
+    "ast_hash": "9e79d2d5f6e3e4d83df289c2fb145611",
+    "semantic_hash": "9e79d2d5f6e3e4d83df289c2fb145611"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/fonzi_bw-078.webp": {
+    "mtime": 1781962442.596609,
+    "ast_hash": "f89978c4e8577f116f05c9707ac7084e",
+    "semantic_hash": "f89978c4e8577f116f05c9707ac7084e"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/netflix-081.webp": {
+    "mtime": 1781962444.6092489,
+    "ast_hash": "7cf8a73b6bca1d305d42949b9702d627",
+    "semantic_hash": "7cf8a73b6bca1d305d42949b9702d627"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/netflix2-084.webp": {
+    "mtime": 1781962441.7805872,
+    "ast_hash": "a9ccfa4cebfce8e9f563f525ce0a8ac3",
+    "semantic_hash": "a9ccfa4cebfce8e9f563f525ce0a8ac3"
+  },
+  "/Users/mariano_rosso/Downloads/ashmateu-web/images/ash/vlog.mp4": {
+    "mtime": 1782000171.655974,
+    "ast_hash": "d857a8f6b13499dbd6a1959a89b01682",
+    "semantic_hash": "d857a8f6b13499dbd6a1959a89b01682"
   }
 }

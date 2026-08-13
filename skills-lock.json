@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "skills": {
+    "company-creator": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/company-creator/SKILL.md",
+      "computedHash": "b76a4dcb0b5690f35e94be7d7fa9cf00f91d5e36d393397b3fae3fb2d486de58"
+    },
+    "create-agent-adapter": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/create-agent-adapter/SKILL.md",
+      "computedHash": "18135efaabf21f17ad4d8ae7fc1ed8144e5c670f6540eb3e5ea719140e7f521a"
+    },
+    "create-issue-interaction-ui": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/create-issue-interaction-ui/SKILL.md",
+      "computedHash": "78d59920d92bd4aaf01e386c4978ee3d8bb3a718734e751a59d9c819ed1ce732"
+    },
+    "deal-with-security-advisory": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deal-with-security-advisory/SKILL.md",
+      "computedHash": "fc607216d11dd83eec4b9371ba23d0edc3f121afcf6d59ad3e5732cd15f283da"
+    },
+    "design-guide": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/design-guide/SKILL.md",
+      "computedHash": "98ac5d4eba74071a9a1199a27a5c6453a755a1f1faaefe31d787985e4863ea6e"
+    },
+    "diagnose-why-work-stopped": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/diagnose-why-work-stopped/SKILL.md",
+      "computedHash": "d053b11ff5d84555dff87ca49746a3a0a279d6ad68f129284be845967a7bf9bf"
+    },
+    "doc-maintenance": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/doc-maintenance/SKILL.md",
+      "computedHash": "ea9816e6f958fbf9f11ebd42067450d282bf1d5f486c7110f665185f78213687"
+    },
+    "paperclip": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": "skills/paperclip/SKILL.md",
+      "computedHash": "042e8adc0aa5729a8d27c39f588750b1fed7b2e35e2a5526c23c95536e31d220"
+    },
+    "paperclip-board": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": "skills/paperclip-board/SKILL.md",
+      "computedHash": "d34ceade8537e4e47a4bc10b3d4b0889382c6d3357218556c9edab9b237e6fd8"
+    },
+    "paperclip-converting-plans-to-tasks": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": "skills/paperclip-converting-plans-to-tasks/SKILL.md",
+      "computedHash": "d66776198732fca3ebd61cb2efc044188ef34bc07254597f51183fe4deb2b981"
+    },
+    "paperclip-create-agent": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": "skills/paperclip-create-agent/SKILL.md",
+      "computedHash": "9e42c3c4d8e56e8661aaec7821d643e4014157b60611ff0a2e5e539d32ac41be"
+    },
+    "paperclip-create-plugin": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/paperclip-create-plugin/SKILL.md",
+      "computedHash": "45743e4a4363f504258c5cacbd35e81030f8f1f379fbb337a5b3b3038735d5f4"
+    },
+    "paperclip-dev-workspace-run-verify-fix": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/paperclip-dev-workspace-run-verify-fix/SKILL.md",
+      "computedHash": "19523f493db041b6d10bea3d0515cd78a4f878d7a49a9fa43b8c0a671b598888"
+    },
+    "paperclip-page": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/paperclip-page/SKILL.md",
+      "computedHash": "0604a80a5b873be0d36b23ad10056b8547faf531c122930b1b63cfd5423087e0"
+    },
+    "para-memory-files": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": "skills/para-memory-files/SKILL.md",
+      "computedHash": "54a6ac702edf6ca6a31808b21b67de9d8cedc828da2941273d38002a96128b91"
+    },
+    "pr-report": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/pr-report/SKILL.md",
+      "computedHash": "a73626344eeb84fff9cc01acabd2832ee5df9a9be71b7d5feca40a0a72f3d563"
+    },
+    "prcheckloop": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/prcheckloop/SKILL.md",
+      "computedHash": "c683f983c4ff281f4ebb57da4b617bcf81c497c172d72e08661619cd3c067783"
+    },
+    "release": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/release/SKILL.md",
+      "computedHash": "38a6dca895593dd183721adf89b4462e56f3e9a9237834807b1004ae8eab8cdb"
+    },
+    "release-changelog": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/release-changelog/SKILL.md",
+      "computedHash": "601b4574c7dcd935f1d356267df463fd6d236ff4acee441dc6f76f48750518dc"
+    },
+    "release-changelog-discord-message": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/release-changelog-discord-message/SKILL.md",
+      "computedHash": "849f7a5560425a50e0ee8f4918619131750db3fdc13e72f85973adbe36849046"
+    },
+    "supabase": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase/SKILL.md",
+      "computedHash": "d414d598b9428b3e851c4ce61898649906b19e55aa7415bb42a286bd9ca2ab32"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "0d2c4857a7d6fdcd3fbc46e458fa4c497f029cab89a01548b3defce203003932"
+    },
+    "terminal-bench-loop": {
+      "source": "paperclipai/paperclip",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/terminal-bench-loop/SKILL.md",
+      "computedHash": "737829f78415e42f9e25b724c258ed9d64e59bfea98d909a1972fff4e00c1e33"
+    }
+  }
+}
