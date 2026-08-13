@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -45,21 +46,21 @@ export default function Navbar() {
         <div
           className={`relative z-10 w-full transition-all duration-500 ${
             scrolled
-              ? "bg-[#0a0a0a]/92 backdrop-blur-2xl py-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.6)] border-b border-white/10"
-              : "py-5"
+              ? "bg-[#0a0a0a]/92 backdrop-blur-2xl py-3 shadow-[0_8px_30px_rgba(0,0,0,0.6)] border-b border-white/10"
+              : "py-4 md:py-5"
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* LOGO: ASH MATEU + PARIS · BUENOS AIRES */}
-            <Link href="/" className="flex items-center gap-3.5 group text-white">
-              <div className="flex flex-col">
-                <span className="font-serif text-2xl md:text-[28px] font-normal uppercase tracking-[0.1em] group-hover:text-[#b5a898] transition-colors leading-none">
-                  Ash Mateu
-                </span>
-                <span className="text-[7.5px] tracking-[0.38em] text-[#b5a898] uppercase font-medium mt-1">
-                  Paris · Buenos Aires
-                </span>
-              </div>
+            {/* OFFICIAL BRAND LOGO */}
+            <Link href="/" className="flex items-center group py-0.5" aria-label="Ash Mateu Prieto — Inicio">
+              <Image
+                src="/images/logo/ash_mateu_logo_white.webp"
+                alt="Ash Mateu Prieto — Creative Director & Fashion Consultant"
+                width={200}
+                height={69}
+                priority
+                className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              />
             </Link>
 
             {/* NAV LINKS WITH '+' COUTURE DELIMITERS & CENTER-EXPANDING GOLD HOVER */}
@@ -149,8 +150,15 @@ export default function Navbar() {
           </ul>
 
           <div className="pt-8 border-t border-white/15">
+            <Image
+              src="/images/logo/ash_mateu_logo_white.webp"
+              alt="Ash Mateu Prieto"
+              width={160}
+              height={55}
+              className="h-7 w-auto object-contain mb-3"
+            />
             <p className="text-[9px] tracking-[0.25em] uppercase text-[#b5a898] mb-4">
-              Ash Mateu — Creative Direction &amp; Styling · +54 9 11 2382-3297
+              Buenos Aires · Nueva York · París · +54 9 11 2382-3297
             </p>
             <a
               href="https://wa.me/5491123823297"
