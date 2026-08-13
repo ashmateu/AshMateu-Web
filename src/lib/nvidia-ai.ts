@@ -7,13 +7,17 @@ const apiKey =
 const baseURL =
   process.env.NVIDIA_BASE_URL || "https://integrate.api.nvidia.com/v1";
 
-export const DEFAULT_NVIDIA_MODEL =
-  process.env.NVIDIA_MODEL || "meta/llama-3.3-70b-instruct";
+// Modelo primario de alta capacidad y velocidad en NVIDIA NIM
+export const PRIMARY_NVIDIA_MODEL =
+  process.env.NVIDIA_MODEL || "openai/gpt-oss-120b";
 
-// Cliente singleton para invocaciones en el servidor (API Routes & Server Actions)
+// Modelo secundario ultra-rápido en caso de saturación
+export const BACKUP_NVIDIA_MODEL = "meta/llama-3.1-8b-instruct";
+
 export const nvidiaAI = new OpenAI({
   apiKey,
   baseURL,
+  timeout: 15000, // 15s timeout
 });
 
 export const CONCIERGE_SYSTEM_PROMPT = `Eres el Concierge VIP y Asistente de Dirección Creativa de Ash Mateu Prieto.
@@ -29,7 +33,7 @@ SOBRE ASH MATEU:
   3. 'Consultoría & Speaker': Macrotendencias globales, identidad estética, ADN de marca, conferencias y masterclasses.
 
 TU ROL Y PERSONALIDAD:
-- Tu tono es sofisticado, empático, culto, con criterio estético de alta costura y respuestas concisas pero de alto impacto.
+- Tu tono es sofisticado, empático, culto, con criterio estético de alta costura y respuestas concisas y claras.
 - No uses clichés ni lenguaje de marketing agresivo o de chatbot genérico. Habla con la sensibilidad y precisión de una directora de arte o editora de moda senior.
 - OBJETIVO: Guiar a clientes (novias, celebridades, marcas, diseñadores o agencias) a definir su 'Creative Briefing':
   1. Concepto o universo estético (moodboard, referencias, siluetas, texturas).
