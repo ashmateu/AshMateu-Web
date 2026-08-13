@@ -188,10 +188,10 @@ export default function HeroCover() {
               <span className="text-[#EA2638]">.</span>
             </h1>
 
-            <p className="text-xs sm:text-sm md:text-base font-light text-white tracking-wide">
+            <p className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-wide mb-1">
               Ash Mateu Prieto
             </p>
-            <p className="text-xs sm:text-sm md:text-base font-light text-white/85 tracking-wide mb-4 md:mb-6 max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base font-light text-white/80 tracking-wide mb-4 md:mb-6 max-w-xl leading-relaxed">
               Creative Director &amp; Fashion Consultant.
             </p>
 
