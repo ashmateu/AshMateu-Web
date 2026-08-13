@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --ivory: #f7f3ee;
+    --sand: #b5a898;
+    --sand-light: #ece7df;
+    --sand-text: #7a7065;
+    --gold: #c9a84c;
+    --gutter: clamp(20px, 4.5vw, 64px);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--ivory);
+    color: var(--black);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-family: var(--font-montserrat), sans-serif;
+  }
+
+  ::selection {
+    background-color: var(--sand);
+    color: var(--black);
+  }
+}
+
+.font-serif {
+  font-family: var(--font-bodoni), Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+/* Custom Utilities for High Fashion Editorial Aesthetics */
+.editorial-kicker {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.editorial-title {
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.06;
+}
+
+.glass-nav {
+  background: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}

@@ -19,6 +19,7 @@ token.json
 patagonia-outreach/
 Para la IA.zip
 Para la IA/
-
-
-
+node_modules/
+.next/
+dist/
+build/
