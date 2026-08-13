@@ -164,9 +164,12 @@ export default function Navbar() {
               height={69}
               className="h-10 w-auto object-contain mb-3"
             />
-            <p className="text-[9px] tracking-[0.25em] uppercase text-[#b5a898] mb-4">
-              Buenos Aires · Nueva York · París · +54 9 11 2382-3297
-            </p>
+            <div className="flex flex-col gap-1 mb-4 text-[9px] tracking-[0.25em] uppercase text-[#b5a898]">
+              <p>Buenos Aires · Nueva York · París · +54 9 11 2382-3297</p>
+              <a href="mailto:info@ashmateu.com" className="hover:text-white transition-colors underline underline-offset-2">
+                info@ashmateu.com
+              </a>
+            </div>
             <a
               href="https://wa.me/5491123823297"
               target="_blank"
