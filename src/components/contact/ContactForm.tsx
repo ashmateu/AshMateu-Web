@@ -72,7 +72,7 @@ export default function ContactForm() {
   return (
     <section id="contacto" className="py-24 md:py-36 bg-[#0a0a0a] text-white border-t border-white/10 relative overflow-hidden">
       {/* BACKGROUND GLOW */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#c9a84c]/10 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#EA2638]/10 blur-[140px] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -83,7 +83,7 @@ export default function ContactForm() {
                 <span>07 · Contacto &amp; Bookings 2026</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-white mb-6 leading-[1.1] tracking-tight">
-                Empecemos a trabajar juntos<span className="text-[#c9a84c]">.</span>
+                Empecemos a trabajar juntos<span className="text-[#EA2638]">.</span>
               </h2>
               <p className="text-xs md:text-sm text-white/70 leading-relaxed mb-8 font-light">
                 Disponible para proyectos de dirección creativa, styling editorial,

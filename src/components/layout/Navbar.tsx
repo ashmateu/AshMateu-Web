@@ -93,7 +93,7 @@ export default function Navbar() {
               })}
             </ul>
 
-            {/* CTA: ATELIER DIRECT WHATSAPP WITH LIVE PULSING BEACON */}
+            {/* CTA: ATELIER DIRECT WHATSAPP WITH LIVE PULSING CRIMSON BEACON */}
             <div className="flex items-center gap-4">
               <a
                 href="https://wa.me/5491123823297"
@@ -101,7 +101,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="group hidden sm:inline-flex items-center gap-2 bg-white/5 hover:bg-white text-white hover:text-black border border-white/25 hover:border-white px-4 py-1.5 rounded-full text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-300 backdrop-blur-md shadow-sm active:scale-[0.98]"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638] animate-pulse" />
                 <span>WhatsApp</span>
                 <ArrowUpRight
                   size={13}

@@ -57,9 +57,9 @@ export default function HeroCover() {
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 pb-14 md:pb-20">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
           <div ref={textRef} className="max-w-2xl text-white">
-            {/* MICROSCOPIC EYEBROW BADGE */}
+            {/* MICROSCOPIC EYEBROW BADGE WITH RED ACCENT DOT */}
             <div className="inline-flex items-center gap-2 border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[9.5px] tracking-[0.26em] uppercase text-[#b5a898] mb-4 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638] animate-pulse" />
               <span>Ash Mateu Prieto</span>
             </div>
 
@@ -68,7 +68,7 @@ export default function HeroCover() {
               <br />
               <span className="italic font-light">brands</span> and{" "}
               <span className="italic font-light">ideas</span>
-              <span className="text-[#c9a84c]">.</span>
+              <span className="text-[#EA2638]">.</span>
             </h1>
 
             <p className="text-sm md:text-base font-light text-white/85 tracking-wide mb-6 max-w-xl leading-relaxed">
