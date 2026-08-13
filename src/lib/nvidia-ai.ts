@@ -7,16 +7,17 @@ const apiKey =
 const baseURL =
   process.env.NVIDIA_BASE_URL || "https://integrate.api.nvidia.com/v1";
 
-// Modelo ultra-rápido de alta disponibilidad (<1.2s de respuesta en NVIDIA NIM)
-export const PRIMARY_NVIDIA_MODEL = "meta/llama-3.1-8b-instruct";
+// Modelo primario: GLM-5.2 (Z-AI / NVIDIA NIM)
+export const PRIMARY_NVIDIA_MODEL =
+  process.env.NVIDIA_MODEL || "z-ai/glm-5.2";
 
-// Modelo de respaldo
-export const BACKUP_NVIDIA_MODEL = "openai/gpt-oss-120b";
+// Modelo de respaldo: Llama 3.1 8B Instruct
+export const BACKUP_NVIDIA_MODEL = "meta/llama-3.1-8b-instruct";
 
 export const nvidiaAI = new OpenAI({
   apiKey,
   baseURL,
-  timeout: 8000, // 8s max para asegurar respuesta instantánea
+  timeout: 15000,
 });
 
 export const CONCIERGE_SYSTEM_PROMPT = `Eres el Concierge Digital y Asistente de Dirección Creativa de Ash Mateu Prieto.
@@ -50,56 +51,4 @@ CIERRE DEL BRIEF:
 export interface ChatMessage {
   role: "system" | "user" | "assistant";
   content: string;
-}
-
-/**
- * Helper function para generar respuestas del Concierge con respuesta en <1.5s
- */
-export async function generateConciergeReply(
-  messages: ChatMessage[],
-  userContext?: string
-): Promise<string> {
-  const recentMessages = messages.slice(-8);
-
-  const fullMessages: ChatMessage[] = [
-    {
-      role: "system",
-      content: userContext
-        ? `${CONCIERGE_SYSTEM_PROMPT}\n\n[CONTEXTO DEL USUARIO]: ${userContext}`
-        : CONCIERGE_SYSTEM_PROMPT,
-    },
-    ...recentMessages,
-  ];
-
-  // Intento 1: Modelo Ultra-Rápido (meta/llama-3.1-8b-instruct ~1s)
-  try {
-    const response = await nvidiaAI.chat.completions.create({
-      model: PRIMARY_NVIDIA_MODEL,
-      messages: fullMessages,
-      temperature: 0.7,
-      max_tokens: 600,
-    });
-
-    const reply = response.choices[0]?.message?.content;
-    if (reply) return reply;
-  } catch (primaryError) {
-    console.warn("Primary Model error, intentando backup model:", primaryError);
-
-    // Intento 2: Modelo Secundario
-    try {
-      const backupResponse = await nvidiaAI.chat.completions.create({
-        model: BACKUP_NVIDIA_MODEL,
-        messages: fullMessages,
-        temperature: 0.7,
-        max_tokens: 600,
-      });
-
-      const backupReply = backupResponse.choices[0]?.message?.content;
-      if (backupReply) return backupReply;
-    } catch (backupError) {
-      console.error("Backup Model también falló:", backupError);
-    }
-  }
-
-  return "¡Hola! Sí, estoy en línea y disponible en el Atelier Digital de Ash Mateu. ¿En qué proyecto o visión estética estás trabajando actualmente? (Campaña de marca, estilismo de novia/gala 'Dress to Kill' o consultoría de tendencias).";
 }

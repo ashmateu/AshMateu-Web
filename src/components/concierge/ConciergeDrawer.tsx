@@ -102,13 +102,9 @@ export default function ConciergeDrawer() {
     setIsLoading(true);
 
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 9000);
-
       const res = await fetch("/api/concierge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        signal: controller.signal,
         body: JSON.stringify({
           messages: updatedMessages.map((m) => ({
             role: m.role,
@@ -117,30 +113,44 @@ export default function ConciergeDrawer() {
         }),
       });
 
-      clearTimeout(timeoutId);
-
-      let assistantText = "";
-      if (res.ok) {
-        const data = await res.json().catch(() => ({}));
-        assistantText =
-          data.message ||
-          "Gracias por tu consulta. Podés escribirnos directamente a info@ashmateu.com o a nuestro WhatsApp directo (+54 9 11 2382-3297).";
-      } else {
-        assistantText =
-          "¡Hola! Sí, estoy en línea. Contanos sobre tu próxima campaña o evento nupcial, o podés contactarnos directamente a info@ashmateu.com.";
+      if (!res.ok || !res.body) {
+        throw new Error("No stream body available");
       }
 
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: assistantText,
-        timestamp: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      };
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let assistantText = "";
+      const assistantId = (Date.now() + 1).toString();
+      const timestamp = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      // Crear mensaje asistente inicial
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: assistantId,
+          role: "assistant",
+          content: "",
+          timestamp,
+        },
+      ]);
+      setIsLoading(false);
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        assistantText += chunk;
+
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId ? { ...m, content: assistantText } : m
+          )
+        );
+      }
     } catch (err) {
       console.error("Error al comunicarse con el concierge:", err);
       const fallbackMessage: Message = {
