@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
+import ConciergeTriggerBanner from "@/components/concierge/ConciergeTriggerBanner";
 
 export const metadata = {
   title: "¿Cómo Trabajo? — Ash Mateu",
@@ -19,9 +20,12 @@ export default function ComoTrabajoPage() {
         <h1 className="font-serif text-4xl md:text-6xl text-black font-normal mb-8">
           ¿Cómo Trabajo?
         </h1>
-        <p className="text-base md:text-xl text-black/75 max-w-2xl font-light leading-relaxed mb-16">
+        <p className="text-base md:text-xl text-black/75 max-w-2xl font-light leading-relaxed mb-12">
           Tres pilares de trabajo diseñados para personas que buscan una imagen inolvidable, marcas que necesitan posicionamiento global y empresas en busca de innovación en tendencias.
         </p>
+
+        {/* AI CONCIERGE INTERACTIVE BRIEFING BANNER */}
+        <ConciergeTriggerBanner />
 
         {/* PILAR 1 */}
         <section id="personas" className="py-12 border-t border-[#b5a898]/40">
