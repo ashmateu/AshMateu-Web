@@ -188,15 +188,12 @@ export default function HeroCover() {
               <span className="text-[#EA2638]">.</span>
             </h1>
 
-            <p className="text-xs sm:text-sm md:text-base font-light text-white/85 tracking-wide mb-3 md:mb-4 max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base font-light text-white tracking-wide">
+              Ash Mateu Prieto
+            </p>
+            <p className="text-xs sm:text-sm md:text-base font-light text-white/85 tracking-wide mb-4 md:mb-6 max-w-xl leading-relaxed">
               Creative Director &amp; Fashion Consultant.
             </p>
-
-            {/* MICROSCOPIC BADGE WITH RED ACCENT DOT */}
-            <div className="inline-flex items-center gap-2 border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[9px] sm:text-[9.5px] tracking-[0.26em] uppercase text-[#b5a898] mb-5 md:mb-6 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638] animate-pulse" />
-              <span>Ash Mateu Prieto</span>
-            </div>
 
             <blockquote className="border-l-2 border-[#b5a898] pl-3 md:pl-4 py-0.5 md:py-1 mb-6 md:mb-8 text-xs md:text-sm italic text-white/75 max-w-lg leading-relaxed backdrop-blur-[2px]">
               ‘Construyo identidad a través de estrategias de branding y
