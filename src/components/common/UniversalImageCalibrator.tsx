@@ -17,6 +17,8 @@ import {
   Search,
   FolderOpen,
   CheckCircle2,
+  Save,
+  Download,
 } from "lucide-react";
 import catalogManifest from "@/lib/data/catalog_manifest.json";
 
@@ -26,6 +28,7 @@ interface SlotConfig {
   zoom: number;
   brightness: number;
   customSrc?: string;
+  originalSrc?: string;
 }
 
 const DEFAULT_CONFIG: SlotConfig = {
@@ -35,17 +38,35 @@ const DEFAULT_CONFIG: SlotConfig = {
   brightness: 100,
 };
 
-const STORAGE_KEY = "ash_site_image_slots_v4";
+const STORAGE_KEY = "ash_site_image_slots_v5_permanent";
+
+// Deterministic DOM path generator - 100% stable across reloads
+function getDomPath(el: HTMLElement): string {
+  const stack: string[] = [];
+  let curr: HTMLElement | null = el;
+  while (curr && curr.tagName !== "BODY" && curr.tagName !== "HTML") {
+    let sibIndex = 1;
+    let sib: Element | null = curr;
+    while ((sib = sib.previousElementSibling)) {
+      if (sib.tagName === curr.tagName) sibIndex++;
+    }
+    const id = curr.id ? `#${curr.id}` : "";
+    const tag = curr.tagName.toLowerCase();
+    stack.unshift(id ? `${tag}${id}` : `${tag}:nth-of-type(${sibIndex})`);
+    curr = curr.parentElement;
+  }
+  return stack.join(" > ");
+}
 
 export default function UniversalImageCalibrator() {
   const [isEnabled, setIsEnabled] = useState(false);
-  const [activeTab, setActiveTab] = useState<"framing" | "replace">("replace");
-  const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"replace" | "framing">("replace");
+  const [selectedSlotKey, setSelectedSlotKey] = useState<string | null>(null);
   const [selectedImgElement, setSelectedImgElement] = useState<HTMLImageElement | null>(null);
-  const [slotConfigs, setSlotConfigs] = useState<{ [slotId: string]: SlotConfig }>({});
+  const [slotConfigs, setSlotConfigs] = useState<{ [slotKey: string]: SlotConfig }>({});
   const [currentConfig, setCurrentConfig] = useState<SlotConfig>(DEFAULT_CONFIG);
   const [copied, setCopied] = useState(false);
-  const [swappedFeedback, setSwappedFeedback] = useState<string | null>(null);
+  const [savedFeedback, setSavedFeedback] = useState<string | null>(null);
 
   // Gallery Picker States
   const [selectedCategory, setSelectedCategory] = useState<string>("portadas");
@@ -54,24 +75,34 @@ export default function UniversalImageCalibrator() {
 
   const categories = Object.keys(catalogManifest);
 
-  // Helper to generate a unique, stable Slot ID for every image on the page
-  const getSlotId = (img: HTMLImageElement): string => {
-    let existingId = img.getAttribute("data-ash-slot-id");
-    if (existingId) return existingId;
-
-    const section = img.closest("section")?.id || img.closest("header")?.tagName || "body";
-    const parentClass = img.parentElement?.className?.split(" ")[0] || "div";
-    const srcKey = (img.getAttribute("src") || img.src || "img").split("?")[0].split("/").pop() || "photo";
-
-    const allImgs = Array.from(document.querySelectorAll("img"));
-    const idx = allImgs.indexOf(img);
-
-    const slotId = `slot_${section}_${parentClass}_${srcKey}_${idx}`.replace(/[^a-zA-Z0-9_]/g, "_");
-    img.setAttribute("data-ash-slot-id", slotId);
-    return slotId;
+  // Clean canonical image URL
+  const getCanonicalSrc = (img: HTMLImageElement | string): string => {
+    let src = typeof img === "string" ? img : img.getAttribute("data-original-src") || img.currentSrc || img.src || img.getAttribute("src") || "";
+    try {
+      const url = new URL(src, window.location.href);
+      if (url.pathname.includes("/_next/image")) {
+        const actualUrl = url.searchParams.get("url");
+        if (actualUrl) return decodeURIComponent(actualUrl);
+      }
+      return decodeURIComponent(url.pathname);
+    } catch {
+      return src;
+    }
   };
 
-  // Helper to forcibly apply image source and bypass Next.js srcset lock
+  // Compute permanent slot key based on page path + DOM selector
+  const getSlotKey = (img: HTMLImageElement): string => {
+    let existingKey = img.getAttribute("data-ash-slot-key");
+    if (existingKey) return existingKey;
+
+    const page = typeof window !== "undefined" ? window.location.pathname : "/";
+    const domPath = getDomPath(img);
+    const key = `${page}::${domPath}`;
+    img.setAttribute("data-ash-slot-key", key);
+    return key;
+  };
+
+  // Forcibly apply image source and bypass Next.js srcset lock
   const applyImageSource = (img: HTMLImageElement, newSrc: string) => {
     try {
       img.removeAttribute("srcset");
@@ -81,7 +112,6 @@ export default function UniversalImageCalibrator() {
       img.srcset = newSrc;
       img.setAttribute("data-applied-src", newSrc);
 
-      // Also update any parent <picture> sources if present
       const picture = img.closest("picture");
       if (picture) {
         picture.querySelectorAll("source").forEach((source) => {
@@ -100,22 +130,27 @@ export default function UniversalImageCalibrator() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        setSlotConfigs(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        setSlotConfigs(parsed);
       }
     } catch (e) {
       console.error("Error loading saved slot configurations:", e);
     }
   }, []);
 
-  // Apply saved configurations strictly to their assigned Slot IDs
+  // Apply saved configurations strictly to their assigned DOM slots
   const applySlotConfigs = useCallback(() => {
     const images = document.querySelectorAll<HTMLImageElement>("img");
     images.forEach((img) => {
-      // Skip images inside the calibrator UI
       if (img.closest("#universal-calibrator-panel")) return;
 
-      const slotId = getSlotId(img);
-      const config = slotConfigs[slotId];
+      // Remember original src before any modification
+      if (!img.getAttribute("data-original-src")) {
+        img.setAttribute("data-original-src", getCanonicalSrc(img));
+      }
+
+      const slotKey = getSlotKey(img);
+      const config = slotConfigs[slotKey];
 
       if (config) {
         // Apply custom image replacement if saved
@@ -138,7 +173,7 @@ export default function UniversalImageCalibrator() {
 
   useEffect(() => {
     applySlotConfigs();
-    const interval = setInterval(applySlotConfigs, 800);
+    const interval = setInterval(applySlotConfigs, 600);
     return () => clearInterval(interval);
   }, [applySlotConfigs]);
 
@@ -157,7 +192,6 @@ export default function UniversalImageCalibrator() {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      // Ignore clicks inside calibrator panel or trigger button
       if (target.closest("#universal-calibrator-panel") || target.closest("#calibrator-trigger-btn")) {
         return;
       }
@@ -168,23 +202,22 @@ export default function UniversalImageCalibrator() {
         e.preventDefault();
         e.stopPropagation();
 
-        // Clear previous active indicator
         document.querySelectorAll("img[data-calibrating='true']").forEach((el) => {
           el.removeAttribute("data-calibrating");
         });
 
-        // Set active indicator on clicked image
         img.setAttribute("data-calibrating", "true");
 
-        const slotId = getSlotId(img);
-        setSelectedSlotId(slotId);
+        const slotKey = getSlotKey(img);
+        setSelectedSlotKey(slotKey);
         setSelectedImgElement(img);
 
-        const existing = slotConfigs[slotId] || {
+        const existing = slotConfigs[slotKey] || {
           x: 50,
           y: 15,
           zoom: 100,
           brightness: 100,
+          originalSrc: img.getAttribute("data-original-src") || getCanonicalSrc(img),
         };
         setCurrentConfig(existing);
       }
@@ -194,11 +227,12 @@ export default function UniversalImageCalibrator() {
     return () => window.removeEventListener("click", handleClick, { capture: true });
   }, [isEnabled, slotConfigs]);
 
-  // Update configuration for the selected image ONLY
+  // Update configuration for the selected image ONLY & SAVE IMMEDIATELY
   const updateSlot = (partial: Partial<SlotConfig>) => {
-    if (!selectedSlotId || !selectedImgElement) return;
+    if (!selectedSlotKey || !selectedImgElement) return;
 
-    const updated = { ...currentConfig, ...partial };
+    const original = selectedImgElement.getAttribute("data-original-src") || getCanonicalSrc(selectedImgElement);
+    const updated: SlotConfig = { ...currentConfig, originalSrc: original, ...partial };
     setCurrentConfig(updated);
 
     // Apply replacement immediately to the active DOM element
@@ -216,11 +250,13 @@ export default function UniversalImageCalibrator() {
       selectedImgElement.style.filter = "";
     }
 
-    // Persist to state and localStorage
-    const newConfigs = { ...slotConfigs, [selectedSlotId]: updated };
+    // Persist immediately to state & localStorage
+    const newConfigs = { ...slotConfigs, [selectedSlotKey]: updated };
     setSlotConfigs(newConfigs);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfigs));
+      setSavedFeedback("💾 Guardado automáticamente");
+      setTimeout(() => setSavedFeedback(null), 2500);
     } catch (e) {
       console.error("Error saving slot configuration:", e);
     }
@@ -229,8 +265,8 @@ export default function UniversalImageCalibrator() {
   // Replace image with a catalog image
   const handleSelectCatalogImage = (imgPath: string, imgName: string) => {
     updateSlot({ customSrc: imgPath });
-    setSwappedFeedback(`¡Foto cambiada a: ${imgName}!`);
-    setTimeout(() => setSwappedFeedback(null), 3000);
+    setSavedFeedback(`✅ Foto cambiada y guardada: ${imgName}`);
+    setTimeout(() => setSavedFeedback(null), 3000);
   };
 
   // Upload local file from device
@@ -243,40 +279,44 @@ export default function UniversalImageCalibrator() {
       const dataUrl = event.target?.result as string;
       if (dataUrl) {
         updateSlot({ customSrc: dataUrl });
-        setSwappedFeedback("¡Foto subida desde tu dispositivo!");
-        setTimeout(() => setSwappedFeedback(null), 3000);
+        setSavedFeedback("✅ Foto de tu dispositivo guardada");
+        setTimeout(() => setSavedFeedback(null), 3000);
       }
     };
     reader.readAsDataURL(file);
   };
 
   const handleResetSlot = () => {
-    if (!selectedSlotId || !selectedImgElement) return;
-    const resetConfig: SlotConfig = { x: 50, y: 15, zoom: 100, brightness: 100 };
-    updateSlot(resetConfig);
-    selectedImgElement.removeAttribute("data-applied-src");
+    if (!selectedSlotKey || !selectedImgElement) return;
+    const newConfigs = { ...slotConfigs };
+    delete newConfigs[selectedSlotKey];
+    setSlotConfigs(newConfigs);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfigs));
+    } catch (e) {}
     window.location.reload();
   };
 
   const handleClearAll = () => {
     if (window.confirm("¿Restablecer todas las fotos y encuadres del sitio a su estado original?")) {
       localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem("ash_site_image_slots_v3");
-      localStorage.removeItem("ash_universal_image_framings_v2");
       setSlotConfigs({});
-      setSelectedSlotId(null);
+      setSelectedSlotKey(null);
       setSelectedImgElement(null);
       window.location.reload();
     }
   };
 
   const handleCopyCode = () => {
-    if (!selectedSlotId) return;
-    const currentImgSrc = selectedImgElement?.getAttribute("src") || "";
-    const snippet = `/* Slot: ${selectedSlotId} */\nsrc: "${currentConfig.customSrc || currentImgSrc}",\nobjectPosition: "${currentConfig.x}% ${currentConfig.y}%",\ntransform: "scale(${currentConfig.zoom / 100})",\nfilter: "brightness(${currentConfig.brightness / 100})"`;
-    navigator.clipboard.writeText(snippet);
+    const totalCustomSlots = Object.keys(slotConfigs).length;
+    const dataStr = JSON.stringify(slotConfigs, null, 2);
+    navigator.clipboard.writeText(dataStr);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setSavedFeedback(`📋 ${totalCustomSlots} cambios copiados al portapapeles`);
+    setTimeout(() => {
+      setCopied(false);
+      setSavedFeedback(null);
+    }, 3000);
   };
 
   // Filtered images in catalog picker
@@ -326,7 +366,7 @@ export default function UniversalImageCalibrator() {
             const next = !isEnabled;
             setIsEnabled(next);
             if (!next) {
-              setSelectedSlotId(null);
+              setSelectedSlotKey(null);
               setSelectedImgElement(null);
             }
           }}
@@ -343,13 +383,13 @@ export default function UniversalImageCalibrator() {
 
         {isEnabled && (
           <span className="hidden sm:inline-block bg-[#0a0a0a]/90 text-white text-[9.5px] px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md shadow-lg">
-            {selectedSlotId ? "Foto seleccionada (borde verde) lista para cambiar o encuadrar" : "👉 Hacé click sobre cualquier foto para cambiarla o ajustarla"}
+            {selectedSlotKey ? "Foto seleccionada (borde verde) lista para cambiar o encuadrar" : "👉 Hacé click sobre cualquier foto para cambiarla o ajustarla"}
           </span>
         )}
       </div>
 
       {/* FLOATING POWERFUL INSPECTOR & IMAGE REPLACER PANEL */}
-      {isEnabled && selectedSlotId && (
+      {isEnabled && selectedSlotKey && (
         <div
           id="universal-calibrator-panel"
           className="fixed bottom-20 left-5 z-50 w-[330px] sm:w-[380px] max-h-[85vh] flex flex-col bg-[#0a0a0a]/98 backdrop-blur-2xl border border-white/20 p-5 rounded-2xl shadow-2xl text-white animate-in fade-in slide-in-from-bottom-4 duration-300 overflow-hidden"
@@ -367,7 +407,7 @@ export default function UniversalImageCalibrator() {
                 if (selectedImgElement) {
                   selectedImgElement.removeAttribute("data-calibrating");
                 }
-                setSelectedSlotId(null);
+                setSelectedSlotKey(null);
                 setSelectedImgElement(null);
               }}
               className="text-white/60 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
@@ -405,11 +445,11 @@ export default function UniversalImageCalibrator() {
             </button>
           </div>
 
-          {/* SUCCESS TOAST FEEDBACK */}
-          {swappedFeedback && (
+          {/* REALTIME STATUS / FEEDBACK */}
+          {savedFeedback && (
             <div className="bg-[#22c55e]/20 border border-[#22c55e] text-[#22c55e] text-[10px] py-1.5 px-3 rounded-lg mb-2 flex items-center gap-1.5 font-medium animate-in fade-in">
               <CheckCircle2 size={13} />
-              <span className="truncate">{swappedFeedback}</span>
+              <span className="truncate">{savedFeedback}</span>
             </div>
           )}
 
@@ -634,7 +674,7 @@ export default function UniversalImageCalibrator() {
                 type="button"
                 onClick={handleResetSlot}
                 className="inline-flex items-center gap-1 text-[9.5px] text-white/70 hover:text-white py-1.5 px-2.5 rounded border border-white/10 hover:border-white/30 cursor-pointer transition-colors"
-                title="Restablecer foto y posición original"
+                title="Restablecer foto y posición original de este cuadro"
               >
                 <RotateCcw size={11} />
                 <span>Reset</span>
@@ -654,9 +694,10 @@ export default function UniversalImageCalibrator() {
               type="button"
               onClick={handleCopyCode}
               className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-wider uppercase bg-[#b5a898] hover:bg-white text-black py-1.5 px-3.5 rounded-full shadow cursor-pointer transition-all active:scale-95"
+              title="Copiar todos los cambios realizados"
             >
               {copied ? <Check size={12} /> : <Copy size={12} />}
-              <span>{copied ? "¡Copiado!" : "Copiar Config"}</span>
+              <span>{copied ? "¡Copiado!" : "Exportar Todo"}</span>
             </button>
           </div>
         </div>
