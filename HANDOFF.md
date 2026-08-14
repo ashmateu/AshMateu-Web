@@ -10,14 +10,13 @@
 - **Directiva**: Cada fotografía donde aparezca Ash Mateu, modelos o figuras destacadas **debe tener el rostro 100% visible, sin cortes de frente, cabello u ojos**.
 - **Implementación Técnica**: Uso estricto de `object-cover object-[center_top]`, `object-[center_10%]` o `object-[center_15%]` en contenedores verticales o panorámicos (`next/image`), evitando `object-center` que corta la parte superior de los retratos.
 
-### 📐 Calibrador Universal de Encuadre en Vivo (`UniversalImageCalibrator.tsx`)
-- **Herramienta Interactiva Global**:
-  - Botón flotante discreto en la esquina inferior izquierda: **"📐 Centrar / Encuadrar Fotos"**.
-  - Al activarse, permite hacer **click sobre cualquier imagen de todo el sitio web** (Home, Historia, Galería, Cómo Trabajo, Blog, Prensa, Newsletter) para abrir el panel flotante de calibración.
-  - **Controles en Tiempo Real**: Deslizadores para posición Y (Vertical / Rostro), posición X (Horizontal), Zoom / Escala (80% - 250%) y Brillo (80% - 150%).
-  - **Presets Rápidos**: Rostro Superior (12%), Rostro/Busto (22%), Centro (50%), Cuerpo Entero (15%).
-  - **Persistencia**: Guarda automáticamente los ajustes en `localStorage` vinculados a la ruta de cada imagen y los re-aplica de forma continua.
-  - **Copia de Código**: Botón para copiar el snippet CSS exacto con un solo click.
+### 🎬 Portada Hero: Efectos Cinemáticos & Cero Salto de Carga (`HeroCover.tsx`)
+- **Eliminación Total del Layout Shift / Salto**:
+  - Se eliminaron las transiciones CSS en el primer render y se incorporó una cortina de revelado cinemática en GSAP (`opacity: 0 -> 1` con suave `scale: 1.04 -> 1.0`). La foto aparece de forma sedosa ya encuadrada en sus coordenadas exactas sin saltos perceptibles.
+- **Efectos Cinemáticos de Lujo**:
+  - **Parallax Sutil en Desktop**: Respuesta milimétrica al movimiento del cursor del ratón con inercia orgánica (`power1.out`).
+  - **Luz Radial & Viñeta Noir**: Gradiente radial oscuro en los bordes para una atmósfera de editorial de alta gama.
+  - **Textura de Grano Fílmico**: Capa micro-texturada que aporta riqueza visual y contraste profundo.
 
 ### 🤖 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)
 - **Motor de Inteligencia Artificial**:
