@@ -81,7 +81,7 @@ export default function EditorialGaleria() {
                   alt={card.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 25vw"
-                  className="object-cover object-center opacity-35 group-hover:opacity-45 transition-all duration-700 group-hover:scale-105"
+                  className="object-cover object-[center_top] opacity-35 group-hover:opacity-45 transition-all duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/50" />
               </div>

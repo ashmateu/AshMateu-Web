@@ -48,7 +48,7 @@ export default async function PrensaPage() {
                   alt={cov.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover object-[center_16%] group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-6">

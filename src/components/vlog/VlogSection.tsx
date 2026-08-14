@@ -73,7 +73,7 @@ export default function VlogSection({
                       alt={activeItem.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 66vw"
-                      className="object-cover group-hover/thumb:scale-105 transition-transform duration-700 ease-out"
+                      className="object-cover object-[center_top] group-hover/thumb:scale-105 transition-transform duration-700 ease-out"
                     />
                     <div className="absolute inset-0 bg-black/40 group-hover/thumb:bg-black/25 transition-colors flex items-center justify-center">
                       {/* LUXURY CIRCULAR PLAY BUTTON */}
@@ -126,7 +126,7 @@ export default function VlogSection({
                       src={item.thumbnail}
                       alt={item.title}
                       fill
-                      className="object-cover group-hover/item:scale-105 transition-transform duration-500"
+                      className="object-cover object-[center_top] group-hover/item:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                       <Play size={14} className="fill-white text-white opacity-80" />

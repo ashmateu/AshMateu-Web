@@ -80,7 +80,7 @@ export default function BlogPage() {
                     src={art.image}
                     alt={art.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 </Link>
                 <div className="p-7 md:p-8">

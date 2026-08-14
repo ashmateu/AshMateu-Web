@@ -121,7 +121,7 @@ export default function PortfolioGallery({
                           ? "(max-width: 768px) 100vw, 70vw"
                           : "(max-width: 768px) 100vw, 35vw"
                       }
-                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="object-cover object-[center_top] transition-transform duration-700 ease-out group-hover:scale-105"
                     />
 
                     {/* OVERLAY SUTIL GRADIENTE */}

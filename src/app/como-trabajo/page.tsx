@@ -51,7 +51,7 @@ export default function ComoTrabajoPage() {
                   alt="Ash Mateu Gala Styling"
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
                   <span className="text-[9.5px] tracking-[0.2em] uppercase text-white font-medium">
@@ -154,7 +154,7 @@ export default function ComoTrabajoPage() {
                   alt="Ash Mateu Producción en París"
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
                   <span className="text-[9.5px] tracking-[0.2em] uppercase text-white font-medium">
@@ -240,7 +240,7 @@ export default function ComoTrabajoPage() {
                   alt="Ash Mateu Speaker & Masterclass"
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-[center_10%] transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
                   <span className="text-[9.5px] tracking-[0.2em] uppercase text-white font-medium">

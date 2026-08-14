@@ -143,7 +143,7 @@ export default function NewsletterClient({
                   alt={featured.title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a] text-white p-8">
@@ -201,7 +201,7 @@ export default function NewsletterClient({
                       alt={art.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-700 ease-out"
+                      className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a] text-white p-6">

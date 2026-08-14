@@ -19,6 +19,7 @@ export default function HistoriaPage() {
       src: "/images/catalog/03_fashion_week_paris_canon/4A2A4232.JPEG",
       aspect: "aspect-[3/4]",
       colSpan: "md:col-span-6 lg:col-span-4",
+      objectPosition: "object-[center_20%]",
     },
     {
       title: "Galas & Red Carpet",
@@ -27,6 +28,7 @@ export default function HistoriaPage() {
       src: "/images/catalog/04_celebridades_galas_red_carpet/55E0547F-4668-4B8D-9EC2-2B30A99B8E64.JPG",
       aspect: "aspect-[3/4]",
       colSpan: "md:col-span-6 lg:col-span-4",
+      objectPosition: "object-[center_top]",
     },
     {
       title: "Dirección en Set & Alta Costura",
@@ -35,6 +37,7 @@ export default function HistoriaPage() {
       src: "/images/catalog/01_chanel_alta_costura_studio/_E8A9273.jpg",
       aspect: "aspect-[3/4]",
       colSpan: "md:col-span-6 lg:col-span-4",
+      objectPosition: "object-[center_top]",
     },
     {
       title: "Atelier & Fittings",
@@ -43,6 +46,7 @@ export default function HistoriaPage() {
       src: "/images/catalog/04_celebridades_galas_red_carpet/1A45F2E3-D9B8-44D1-99B8-9C1E3D4D17DF.JPG",
       aspect: "aspect-[4/5]",
       colSpan: "md:col-span-6 lg:col-span-6",
+      objectPosition: "object-[center_top]",
     },
     {
       title: "Speaker & Formación",
@@ -51,6 +55,7 @@ export default function HistoriaPage() {
       src: "/images/catalog/07_backstage_streetstyle_social/20220402_104713.jpg",
       aspect: "aspect-[4/5]",
       colSpan: "md:col-span-6 lg:col-span-6",
+      objectPosition: "object-[center_10%]",
     },
   ];
 
@@ -112,7 +117,7 @@ export default function HistoriaPage() {
                 alt="Ash Mateu en París Fashion Week"
                 fill
                 sizes="(max-width: 768px) 100vw, 30vw"
-                className="object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-105"
+                className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-white font-medium">
@@ -126,7 +131,7 @@ export default function HistoriaPage() {
                 alt="Ash Mateu Red Carpet & Galas"
                 fill
                 sizes="(max-width: 768px) 100vw, 30vw"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-white font-medium">
@@ -164,7 +169,7 @@ export default function HistoriaPage() {
                     alt={item.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 40vw"
-                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    className={`object-cover ${item.objectPosition} transition-transform duration-700 group-hover:scale-105`}
                   />
                   <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full text-[9px] tracking-[0.2em] uppercase text-white font-medium">
                     {item.location}
