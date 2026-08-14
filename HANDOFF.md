@@ -10,13 +10,12 @@
 - **Directiva**: Cada fotografía donde aparezca Ash Mateu, modelos o figuras destacadas **debe tener el rostro 100% visible, sin cortes de frente, cabello u ojos**.
 - **Implementación Técnica**: Uso estricto de `object-cover object-[center_top]`, `object-[center_10%]` o `object-[center_15%]` en contenedores verticales o panorámicos (`next/image`), evitando `object-center` que corta la parte superior de los retratos.
 
-### 🎬 Portada Hero: Efectos Cinemáticos & Cero Salto de Carga (`HeroCover.tsx`)
+### 🎬 Portada Hero: Movimiento Parallax & Cero Salto de Carga (`HeroCover.tsx`)
 - **Eliminación Total del Layout Shift / Salto**:
-  - Se eliminaron las transiciones CSS en el primer render y se incorporó una cortina de revelado cinemática en GSAP (`opacity: 0 -> 1` con suave `scale: 1.04 -> 1.0`). La foto aparece de forma sedosa ya encuadrada en sus coordenadas exactas sin saltos perceptibles.
-- **Efectos Cinemáticos de Lujo**:
+  - Se eliminaron las transiciones CSS en el primer render y se incorporó una cortina de revelado cinemática en GSAP (`opacity: 0 -> 1` con suave `scale: 1.03 -> 1.0`). La foto aparece de forma sedosa ya encuadrada en sus coordenadas exactas sin saltos perceptibles.
+- **Efecto de Movimiento Parallax**:
   - **Parallax Sutil en Desktop**: Respuesta milimétrica al movimiento del cursor del ratón con inercia orgánica (`power1.out`).
-  - **Luz Radial & Viñeta Noir**: Gradiente radial oscuro en los bordes para una atmósfera de editorial de alta gama.
-  - **Textura de Grano Fílmico**: Capa micro-texturada que aporta riqueza visual y contraste profundo.
+  - **Luminosidad y Colores Originales**: Se eliminó cualquier velo oscuro o grano artificial, conservando la luz natural y nitidez pura de la fotografía original.
 
 ### 🤖 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)
 - **Motor de Inteligencia Artificial**:
