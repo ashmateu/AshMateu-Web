@@ -50,20 +50,9 @@ export default function Navbar() {
               : "py-4 md:py-5"
           }`}
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* BRAND TYPOGRAPHIC WORDMARK */}
-            <Link
-              href="/"
-              className="group py-1 flex items-center"
-              aria-label="Ash Mateu — Inicio"
-            >
-              <span className="font-serif text-lg sm:text-xl md:text-2xl tracking-[0.22em] uppercase text-white font-normal group-hover:text-[#b5a898] transition-colors">
-                Ash Mateu
-              </span>
-            </Link>
-
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-end lg:justify-center relative">
             {/* NAV LINKS WITH '+' COUTURE DELIMITERS & CENTER-EXPANDING GOLD HOVER */}
-            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 text-[10px] tracking-[0.28em] uppercase font-medium text-white/90">
+            <ul className="hidden lg:flex items-center gap-6 xl:gap-8 text-[10.5px] tracking-[0.28em] uppercase font-medium text-white/90">
               {navLinks.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
@@ -94,7 +83,7 @@ export default function Navbar() {
             </ul>
 
             {/* CTA: ATELIER DIRECT WHATSAPP (OFFICIAL WHATSAPP GREEN #25D366) */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 lg:absolute lg:right-6 xl:right-12">
               <a
                 href="https://wa.me/5491123823297"
                 target="_blank"
