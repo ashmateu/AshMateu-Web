@@ -119,10 +119,9 @@ Se procesaron y clasificaron **70 archivos fotográficos y audiovisuales de alta
 - **`¿Cómo Trabajo?` (`/como-trabajo`)**: Fotografía editorial de Ash en acción en cada uno de los 3 pilares (*Dress to Kill*, *Styling & Producciones* y *Consultoría & Speaker*).
 - **`Galería Editorial` (Home / `/galeria`)**: Fondos fotográficos con gradientes oscuros en las 4 tarjetas editoriales principales (*Blog*, *Prensa*, *Proyectos* y *Dirección Creativa*).
 - **Rediseño `Fashion Gallery` (`/galeria` & Home Portfolio)**:
-  - Aplicación de principios **Stitch Design Taste**: Grilla asimétrica tipo exhibición/pasarela.
+  - Aplicación de principios **Stitch Design Taste**: Grilla asimétrica tipo exhibición fotográfica pura.
   - Filtros tipográficos minimalistas con subrayado activo de 2px.
-  - **Ficha Técnica Ultra-Minimalista**: Debajo de cada foto figura únicamente el número en *Bodoni Moda Italic* y el nombre del cliente/marca (ej: `Nº 01 / Chanel / Marie Claire Argentina`), sin párrafos de descripción ni botones pesados.
-  - **Badge de Categoría en Hover**: Las etiquetas (*Haute Couture*, *Editorial*, *Campañas*, *Celebrity*) aparecen elegantemente cuando el puntero se posa sobre la imagen.
+  - **Exhibición Ultra-Minimalista (Pure Imagery)**: Sin ningún texto debajo de las fotos en estado estático. Toda la información (`Nº 01`, cliente/marca como `Chanel / Marie Claire Argentina`, categoría editorial `Haute Couture`, locación y año) aparece en un overlay oscuro refinado **exclusivamente al posar el puntero (hover)** sobre la imagen.
 
 ---
 
