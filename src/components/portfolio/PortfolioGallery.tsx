@@ -105,7 +105,7 @@ export default function PortfolioGallery({
               <GsapReveal
                 key={project.id}
                 delay={idx * 0.05}
-                className={`${colSpan} group flex flex-col justify-between`}
+                className={`${colSpan} group relative`}
               >
                 <Link
                   href={`/projects/${project.slug}`}
@@ -124,36 +124,32 @@ export default function PortfolioGallery({
                       className="object-cover object-[center_top] transition-transform duration-700 ease-out group-hover:scale-105"
                     />
 
-                    {/* OVERLAY SUTIL GRADIENTE CON LOCACIÓN */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                      <span className="text-[10px] tracking-[0.24em] uppercase text-white font-medium">
-                        {project.location} · {project.year}
-                      </span>
-                    </div>
+                    {/* OVERLAY EDITORIAL COMPLETO AL POSAR EL PUNTERO (HOVER) */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col justify-between p-5 md:p-6 pointer-events-none">
+                      {/* TOP ROW: CATEGORÍA + FLECHA */}
+                      <div className="flex items-center justify-between transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                        <span className="bg-[#F7F3EE]/95 backdrop-blur-md px-3 py-1 text-[9.5px] tracking-[0.24em] uppercase text-[#0A0A0A] font-semibold border border-[#B5A898]/40 shadow-sm">
+                          {project.category}
+                        </span>
+                        <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center">
+                          <ArrowUpRight size={14} />
+                        </div>
+                      </div>
 
-                    {/* BADGE DE CATEGORÍA EDITORIAL (APARECE AL POSAR EL PUNTERO) */}
-                    <div className="absolute top-4 left-4 bg-[#F7F3EE]/95 backdrop-blur-md px-3.5 py-1 text-[9.5px] tracking-[0.24em] uppercase text-[#0A0A0A] font-semibold border border-[#B5A898]/40 shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-1 group-hover:translate-y-0 pointer-events-none">
-                      {project.category}
-                    </div>
-
-                    {/* FLECHA DE EXPLORACIÓN DISCRETA */}
-                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#0A0A0A]/80 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <ArrowUpRight size={14} />
+                      {/* BOTTOM ROW: Nº + CLIENTE + LOCACIÓN */}
+                      <div className="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                        <span className="font-serif text-sm italic text-[#b5a898] block mb-1">
+                          Nº {formattedNumber}
+                        </span>
+                        <h3 className="font-serif text-xl sm:text-2xl text-white font-normal leading-snug">
+                          {project.client}
+                        </h3>
+                        <span className="text-[10px] tracking-[0.24em] uppercase text-white/75 font-light block mt-1.5">
+                          {project.location} · {project.year}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </Link>
-
-                {/* FICHA TÉCNICA MINIMALISTA: Nº Y CLIENTE */}
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="pt-3.5 flex flex-col space-y-0.5 group/info"
-                >
-                  <span className="font-serif text-xs italic text-[#7A6A5A]">
-                    Nº {formattedNumber}
-                  </span>
-                  <h3 className="font-serif text-base sm:text-lg text-[#0A0A0A] font-normal leading-snug group-hover/info:text-[#7A6A5A] transition-colors">
-                    {project.client}
-                  </h3>
                 </Link>
               </GsapReveal>
             );
