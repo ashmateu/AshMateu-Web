@@ -6,6 +6,10 @@
 
 ## 1. Estado Actual del Proyecto & Últimos Hitos
 
+### 👑 REGLA INQUEBRANTABLE: Visibilidad Total del Rostro del Protagonista
+- **Directiva**: Cada fotografía donde aparezca Ash Mateu, modelos o figuras destacadas **debe tener el rostro 100% visible, sin cortes de frente, cabello u ojos**.
+- **Implementación Técnica**: Uso estricto de `object-cover object-[center_top]`, `object-[center_10%]` o `object-[center_15%]` en contenedores verticales o panorámicos (`next/image`), evitando `object-center` que corta la parte superior de los retratos.
+
 ### 🤖 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)
 - **Motor de Inteligencia Artificial**:
   - Proveedor: **Alibaba Cloud DashScope Compatible** (`https://dashscope-intl.aliyuncs.com/compatible-mode/v1`).
