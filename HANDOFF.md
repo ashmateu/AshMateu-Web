@@ -10,6 +10,15 @@
 - **Directiva**: Cada fotografía donde aparezca Ash Mateu, modelos o figuras destacadas **debe tener el rostro 100% visible, sin cortes de frente, cabello u ojos**.
 - **Implementación Técnica**: Uso estricto de `object-cover object-[center_top]`, `object-[center_10%]` o `object-[center_15%]` en contenedores verticales o panorámicos (`next/image`), evitando `object-center` que corta la parte superior de los retratos.
 
+### 📐 Calibrador Universal de Encuadre en Vivo (`UniversalImageCalibrator.tsx`)
+- **Herramienta Interactiva Global**:
+  - Botón flotante discreto en la esquina inferior izquierda: **"📐 Centrar / Encuadrar Fotos"**.
+  - Al activarse, permite hacer **click sobre cualquier imagen de todo el sitio web** (Home, Historia, Galería, Cómo Trabajo, Blog, Prensa, Newsletter) para abrir el panel flotante de calibración.
+  - **Controles en Tiempo Real**: Deslizadores para posición Y (Vertical / Rostro), posición X (Horizontal), Zoom / Escala (80% - 250%) y Brillo (80% - 150%).
+  - **Presets Rápidos**: Rostro Superior (12%), Rostro/Busto (22%), Centro (50%), Cuerpo Entero (15%).
+  - **Persistencia**: Guarda automáticamente los ajustes en `localStorage` vinculados a la ruta de cada imagen y los re-aplica de forma continua.
+  - **Copia de Código**: Botón para copiar el snippet CSS exacto con un solo click.
+
 ### 🤖 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)
 - **Motor de Inteligencia Artificial**:
   - Proveedor: **Alibaba Cloud DashScope Compatible** (`https://dashscope-intl.aliyuncs.com/compatible-mode/v1`).
