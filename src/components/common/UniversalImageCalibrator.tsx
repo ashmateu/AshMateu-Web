@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
 import {
   Sliders,
   X,
@@ -17,7 +16,6 @@ import {
   Upload,
   Search,
   FolderOpen,
-  Eye,
   CheckCircle2,
 } from "lucide-react";
 import catalogManifest from "@/lib/data/catalog_manifest.json";
@@ -37,16 +35,17 @@ const DEFAULT_CONFIG: SlotConfig = {
   brightness: 100,
 };
 
-const STORAGE_KEY = "ash_site_image_slots_v3";
+const STORAGE_KEY = "ash_site_image_slots_v4";
 
 export default function UniversalImageCalibrator() {
   const [isEnabled, setIsEnabled] = useState(false);
-  const [activeTab, setActiveTab] = useState<"framing" | "replace">("framing");
+  const [activeTab, setActiveTab] = useState<"framing" | "replace">("replace");
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
   const [selectedImgElement, setSelectedImgElement] = useState<HTMLImageElement | null>(null);
   const [slotConfigs, setSlotConfigs] = useState<{ [slotId: string]: SlotConfig }>({});
   const [currentConfig, setCurrentConfig] = useState<SlotConfig>(DEFAULT_CONFIG);
   const [copied, setCopied] = useState(false);
+  const [swappedFeedback, setSwappedFeedback] = useState<string | null>(null);
 
   // Gallery Picker States
   const [selectedCategory, setSelectedCategory] = useState<string>("portadas");
@@ -60,18 +59,40 @@ export default function UniversalImageCalibrator() {
     let existingId = img.getAttribute("data-ash-slot-id");
     if (existingId) return existingId;
 
-    // Build hierarchical unique path
     const section = img.closest("section")?.id || img.closest("header")?.tagName || "body";
     const parentClass = img.parentElement?.className?.split(" ")[0] || "div";
-    const srcKey = img.getAttribute("src")?.split("?")[0]?.split("/").pop() || "img";
-    
-    // Find index among siblings
+    const srcKey = (img.getAttribute("src") || img.src || "img").split("?")[0].split("/").pop() || "photo";
+
     const allImgs = Array.from(document.querySelectorAll("img"));
     const idx = allImgs.indexOf(img);
 
     const slotId = `slot_${section}_${parentClass}_${srcKey}_${idx}`.replace(/[^a-zA-Z0-9_]/g, "_");
     img.setAttribute("data-ash-slot-id", slotId);
     return slotId;
+  };
+
+  // Helper to forcibly apply image source and bypass Next.js srcset lock
+  const applyImageSource = (img: HTMLImageElement, newSrc: string) => {
+    try {
+      img.removeAttribute("srcset");
+      img.setAttribute("src", newSrc);
+      img.setAttribute("srcset", newSrc);
+      img.src = newSrc;
+      img.srcset = newSrc;
+      img.setAttribute("data-applied-src", newSrc);
+
+      // Also update any parent <picture> sources if present
+      const picture = img.closest("picture");
+      if (picture) {
+        picture.querySelectorAll("source").forEach((source) => {
+          source.removeAttribute("srcset");
+          source.setAttribute("srcset", newSrc);
+          source.srcset = newSrc;
+        });
+      }
+    } catch (e) {
+      console.error("Error applying image source", e);
+    }
   };
 
   // Load saved slot configurations on mount
@@ -99,9 +120,7 @@ export default function UniversalImageCalibrator() {
       if (config) {
         // Apply custom image replacement if saved
         if (config.customSrc && img.getAttribute("data-applied-src") !== config.customSrc) {
-          img.src = config.customSrc;
-          img.srcset = "";
-          img.setAttribute("data-applied-src", config.customSrc);
+          applyImageSource(img, config.customSrc);
         }
 
         // Apply framing to this exact element only
@@ -119,7 +138,7 @@ export default function UniversalImageCalibrator() {
 
   useEffect(() => {
     applySlotConfigs();
-    const interval = setInterval(applySlotConfigs, 1000);
+    const interval = setInterval(applySlotConfigs, 800);
     return () => clearInterval(interval);
   }, [applySlotConfigs]);
 
@@ -182,13 +201,12 @@ export default function UniversalImageCalibrator() {
     const updated = { ...currentConfig, ...partial };
     setCurrentConfig(updated);
 
-    // Apply immediately to the active DOM element
-    if (updated.customSrc && selectedImgElement.getAttribute("data-applied-src") !== updated.customSrc) {
-      selectedImgElement.src = updated.customSrc;
-      selectedImgElement.srcset = "";
-      selectedImgElement.setAttribute("data-applied-src", updated.customSrc);
+    // Apply replacement immediately to the active DOM element
+    if (updated.customSrc) {
+      applyImageSource(selectedImgElement, updated.customSrc);
     }
 
+    // Apply framing styles directly
     selectedImgElement.style.objectPosition = `${updated.x}% ${updated.y}%`;
     selectedImgElement.style.transform = `scale(${updated.zoom / 100})`;
     selectedImgElement.style.transformOrigin = `${updated.x}% ${updated.y}%`;
@@ -208,9 +226,11 @@ export default function UniversalImageCalibrator() {
     }
   };
 
-  // Replace image with a catalog image or custom URL
-  const handleSelectCatalogImage = (imgPath: string) => {
+  // Replace image with a catalog image
+  const handleSelectCatalogImage = (imgPath: string, imgName: string) => {
     updateSlot({ customSrc: imgPath });
+    setSwappedFeedback(`¡Foto cambiada a: ${imgName}!`);
+    setTimeout(() => setSwappedFeedback(null), 3000);
   };
 
   // Upload local file from device
@@ -223,6 +243,8 @@ export default function UniversalImageCalibrator() {
       const dataUrl = event.target?.result as string;
       if (dataUrl) {
         updateSlot({ customSrc: dataUrl });
+        setSwappedFeedback("¡Foto subida desde tu dispositivo!");
+        setTimeout(() => setSwappedFeedback(null), 3000);
       }
     };
     reader.readAsDataURL(file);
@@ -232,11 +254,14 @@ export default function UniversalImageCalibrator() {
     if (!selectedSlotId || !selectedImgElement) return;
     const resetConfig: SlotConfig = { x: 50, y: 15, zoom: 100, brightness: 100 };
     updateSlot(resetConfig);
+    selectedImgElement.removeAttribute("data-applied-src");
+    window.location.reload();
   };
 
   const handleClearAll = () => {
     if (window.confirm("¿Restablecer todas las fotos y encuadres del sitio a su estado original?")) {
       localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem("ash_site_image_slots_v3");
       localStorage.removeItem("ash_universal_image_framings_v2");
       setSlotConfigs({});
       setSelectedSlotId(null);
@@ -248,7 +273,7 @@ export default function UniversalImageCalibrator() {
   const handleCopyCode = () => {
     if (!selectedSlotId) return;
     const currentImgSrc = selectedImgElement?.getAttribute("src") || "";
-    const snippet = `/* Foto Slot: ${selectedSlotId} */\nsrc: "${currentConfig.customSrc || currentImgSrc}",\nobjectPosition: "${currentConfig.x}% ${currentConfig.y}%",\ntransform: "scale(${currentConfig.zoom / 100})",\nfilter: "brightness(${currentConfig.brightness / 100})"`;
+    const snippet = `/* Slot: ${selectedSlotId} */\nsrc: "${currentConfig.customSrc || currentImgSrc}",\nobjectPosition: "${currentConfig.x}% ${currentConfig.y}%",\ntransform: "scale(${currentConfig.zoom / 100})",\nfilter: "brightness(${currentConfig.brightness / 100})"`;
     navigator.clipboard.writeText(snippet);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -283,8 +308,8 @@ export default function UniversalImageCalibrator() {
           box-shadow: 0 0 20px rgba(181, 168, 152, 0.9) !important;
         }
         body.calibrator-active img[data-calibrating="true"] {
-          outline: 3.5px solid #22c55e !important;
-          box-shadow: 0 0 25px rgba(34, 197, 94, 0.9) !important;
+          outline: 4px solid #22c55e !important;
+          box-shadow: 0 0 30px rgba(34, 197, 94, 0.95) !important;
           animation: pulse-ring 2s infinite ease-in-out;
         }
         @keyframes pulse-ring {
@@ -317,8 +342,8 @@ export default function UniversalImageCalibrator() {
         </button>
 
         {isEnabled && (
-          <span className="hidden sm:inline-block bg-[#0a0a0a]/90 text-white text-[9.5px] px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md">
-            {selectedSlotId ? "Editando foto seleccionada (borde verde)" : "👉 Hacé click sobre cualquier foto para cambiarla o ajustarla"}
+          <span className="hidden sm:inline-block bg-[#0a0a0a]/90 text-white text-[9.5px] px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md shadow-lg">
+            {selectedSlotId ? "Foto seleccionada (borde verde) lista para cambiar o encuadrar" : "👉 Hacé click sobre cualquier foto para cambiarla o ajustarla"}
           </span>
         )}
       </div>
@@ -352,20 +377,10 @@ export default function UniversalImageCalibrator() {
             </button>
           </div>
 
-          {/* MAIN TABS: AJUSTAR ENCUADRE vs CAMBIAR FOTO */}
+          {/* MAIN TABS: CAMBIAR FOTO vs AJUSTAR ENCUADRE */}
           <div className="grid grid-cols-2 gap-1.5 p-1 bg-white/10 rounded-lg my-3 shrink-0 text-[10.5px] font-semibold tracking-wider uppercase">
             <button
-              onClick={() => setActiveTab("framing")}
-              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all cursor-pointer ${
-                activeTab === "framing"
-                  ? "bg-[#22c55e] text-black font-bold shadow-xs"
-                  : "text-white/70 hover:text-white"
-              }`}
-            >
-              <Sliders size={12} />
-              <span>Encuadre (X/Y)</span>
-            </button>
-            <button
+              type="button"
               onClick={() => setActiveTab("replace")}
               className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all cursor-pointer ${
                 activeTab === "replace"
@@ -374,11 +389,151 @@ export default function UniversalImageCalibrator() {
               }`}
             >
               <ImageIcon size={12} />
-              <span>Cambiar Foto</span>
+              <span>1. Cambiar Foto</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("framing")}
+              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                activeTab === "framing"
+                  ? "bg-[#22c55e] text-black font-bold shadow-xs"
+                  : "text-white/70 hover:text-white"
+              }`}
+            >
+              <Sliders size={12} />
+              <span>2. Encuadre (X/Y)</span>
             </button>
           </div>
 
-          {/* TAB 1: AJUSTAR ENCUADRE */}
+          {/* SUCCESS TOAST FEEDBACK */}
+          {swappedFeedback && (
+            <div className="bg-[#22c55e]/20 border border-[#22c55e] text-[#22c55e] text-[10px] py-1.5 px-3 rounded-lg mb-2 flex items-center gap-1.5 font-medium animate-in fade-in">
+              <CheckCircle2 size={13} />
+              <span className="truncate">{swappedFeedback}</span>
+            </div>
+          )}
+
+          {/* TAB 1: CAMBIAR FOTO POR OTRA DEL CATÁLOGO O LOCAL */}
+          {activeTab === "replace" && (
+            <div className="overflow-y-auto space-y-3 pr-1 py-1 text-xs custom-scrollbar">
+              {/* UPLOAD LOCAL FILE */}
+              <div className="p-3 bg-white/5 border border-white/15 rounded-xl text-center hover:border-[#22c55e] transition-colors">
+                <label className="flex flex-col items-center justify-center gap-1.5 cursor-pointer hover:text-[#22c55e] transition-colors">
+                  <Upload size={18} className="text-[#22c55e]" />
+                  <span className="text-[10.5px] font-semibold tracking-wider uppercase text-white">
+                    Subir foto desde tu dispositivo
+                  </span>
+                  <span className="text-[8.5px] text-white/50">Toca aquí para elegir foto JPG, PNG, WebP</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+
+              {/* CATEGORY SELECTOR */}
+              <div>
+                <div className="flex justify-between items-center text-[9.5px] tracking-wider uppercase text-[#b5a898] mb-1 font-medium">
+                  <span className="flex items-center gap-1">
+                    <FolderOpen size={10} />
+                    <span>Carpetas del Catálogo:</span>
+                  </span>
+                  <span className="text-white/60">({currentCategoryImages.length} fotos)</span>
+                </div>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full bg-[#141414] border border-white/20 text-white rounded-lg px-2.5 py-1.5 text-[11px] focus:outline-none focus:border-[#22c55e] cursor-pointer"
+                >
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      📁 {cat} ({((catalogManifest as Record<string, Array<{ name: string; path: string; label: string }>>)[cat] || []).length})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* SEARCH IN CATEGORY */}
+              <div className="relative">
+                <Search size={11} className="absolute left-2.5 top-2.5 text-white/40" />
+                <input
+                  type="text"
+                  placeholder="Buscar foto por nombre..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-[#141414] border border-white/15 text-white rounded-lg pl-7 pr-2.5 py-1.5 text-[10px] focus:outline-none focus:border-[#22c55e]"
+                />
+              </div>
+
+              {/* THUMBNAILS GRID PICKER */}
+              <div className="grid grid-cols-3 gap-2 max-h-[190px] overflow-y-auto p-1.5 bg-black/50 rounded-xl border border-white/10">
+                {filteredCatalogImages.map((img) => {
+                  const isCurrent = currentConfig.customSrc === img.path || selectedImgElement?.getAttribute("src")?.includes(img.name);
+                  return (
+                    <button
+                      key={img.path}
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleSelectCatalogImage(img.path, img.name);
+                      }}
+                      className={`group relative aspect-[3/4] rounded-lg overflow-hidden border transition-all cursor-pointer ${
+                        isCurrent
+                          ? "border-[#22c55e] ring-2 ring-[#22c55e] scale-95"
+                          : "border-white/15 hover:border-white/60"
+                      }`}
+                      title={`Tocar para aplicar: ${img.name}`}
+                    >
+                      <img
+                        src={img.path}
+                        alt={img.name}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      {isCurrent && (
+                        <div className="absolute inset-0 bg-[#22c55e]/25 flex items-center justify-center">
+                          <CheckCircle2 size={18} className="text-[#22c55e] drop-shadow-md" />
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* CUSTOM URL INPUT */}
+              <div className="pt-1">
+                <span className="text-[9px] tracking-wider uppercase text-white/60 block mb-1">
+                  O pegar URL / ruta de imagen:
+                </span>
+                <div className="flex gap-1">
+                  <input
+                    type="text"
+                    placeholder="https://... o /images/..."
+                    value={customUrlInput}
+                    onChange={(e) => setCustomUrlInput(e.target.value)}
+                    className="flex-1 bg-[#141414] border border-white/15 text-white rounded-lg px-2 py-1 text-[10px]"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (customUrlInput.trim()) {
+                        handleSelectCatalogImage(customUrlInput.trim(), "URL Personalizada");
+                        setCustomUrlInput("");
+                      }
+                    }}
+                    className="bg-[#22c55e] text-black px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors"
+                  >
+                    Aplicar
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: AJUSTAR ENCUADRE */}
           {activeTab === "framing" && (
             <div className="overflow-y-auto space-y-3.5 pr-1 py-1 text-xs custom-scrollbar">
               {/* PRESETS BUTTONS */}
@@ -386,6 +541,7 @@ export default function UniversalImageCalibrator() {
                 {presets.map((p) => (
                   <button
                     key={p.label}
+                    type="button"
                     onClick={() => updateSlot({ x: p.x, y: p.y })}
                     className="text-[9px] py-1.5 px-2 bg-white/5 hover:bg-white/15 text-white/90 rounded border border-white/10 hover:border-[#22c55e] transition-all text-left font-medium cursor-pointer"
                   >
@@ -471,133 +627,21 @@ export default function UniversalImageCalibrator() {
             </div>
           )}
 
-          {/* TAB 2: CAMBIAR FOTO POR OTRA DEL CATÁLOGO O LOCAL */}
-          {activeTab === "replace" && (
-            <div className="overflow-y-auto space-y-3 pr-1 py-1 text-xs custom-scrollbar">
-              {/* UPLOAD LOCAL FILE */}
-              <div className="p-3 bg-white/5 border border-white/15 rounded-xl text-center">
-                <label className="flex flex-col items-center justify-center gap-1.5 cursor-pointer hover:text-[#22c55e] transition-colors">
-                  <Upload size={18} className="text-[#22c55e]" />
-                  <span className="text-[10px] font-semibold tracking-wider uppercase">
-                    Subir foto desde tu dispositivo
-                  </span>
-                  <span className="text-[8.5px] text-white/50">JPG, PNG, WebP</span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                </label>
-              </div>
-
-              {/* CATEGORY SELECTOR */}
-              <div>
-                <div className="flex justify-between items-center text-[9.5px] tracking-wider uppercase text-[#b5a898] mb-1 font-medium">
-                  <span className="flex items-center gap-1">
-                    <FolderOpen size={10} />
-                    <span>Carpetas del Catálogo:</span>
-                  </span>
-                  <span className="text-white/60">({currentCategoryImages.length} fotos)</span>
-                </div>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-[#141414] border border-white/20 text-white rounded-lg px-2.5 py-1.5 text-[11px] focus:outline-none focus:border-[#22c55e] cursor-pointer"
-                >
-                  {categories.map((cat) => (
-                    <option key={cat} value={cat}>
-                      📁 {cat} ({((catalogManifest as Record<string, Array<{ name: string; path: string; label: string }>>)[cat] || []).length})
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* SEARCH IN CATEGORY */}
-              <div className="relative">
-                <Search size={11} className="absolute left-2.5 top-2.5 text-white/40" />
-                <input
-                  type="text"
-                  placeholder="Buscar foto por nombre..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-[#141414] border border-white/15 text-white rounded-lg pl-7 pr-2.5 py-1.5 text-[10px] focus:outline-none focus:border-[#22c55e]"
-                />
-              </div>
-
-              {/* THUMBNAILS GRID PICKER */}
-              <div className="grid grid-cols-3 gap-2 max-h-[190px] overflow-y-auto p-1 bg-black/40 rounded-xl border border-white/10">
-                {filteredCatalogImages.map((img) => {
-                  const isCurrent = currentConfig.customSrc === img.path || selectedImgElement?.getAttribute("src")?.includes(img.name);
-                  return (
-                    <button
-                      key={img.path}
-                      onClick={() => handleSelectCatalogImage(img.path)}
-                      className={`group relative aspect-[3/4] rounded-lg overflow-hidden border transition-all cursor-pointer ${
-                        isCurrent
-                          ? "border-[#22c55e] ring-2 ring-[#22c55e] scale-95"
-                          : "border-white/10 hover:border-white/50"
-                      }`}
-                      title={img.name}
-                    >
-                      <img
-                        src={img.path}
-                        alt={img.name}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                      {isCurrent && (
-                        <div className="absolute inset-0 bg-[#22c55e]/20 flex items-center justify-center">
-                          <CheckCircle2 size={16} className="text-[#22c55e] drop-shadow-md" />
-                        </div>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* CUSTOM URL INPUT */}
-              <div className="pt-1">
-                <span className="text-[9px] tracking-wider uppercase text-white/60 block mb-1">
-                  O pegar URL de imagen:
-                </span>
-                <div className="flex gap-1">
-                  <input
-                    type="text"
-                    placeholder="https://... o /images/..."
-                    value={customUrlInput}
-                    onChange={(e) => setCustomUrlInput(e.target.value)}
-                    className="flex-1 bg-[#141414] border border-white/15 text-white rounded-lg px-2 py-1 text-[10px]"
-                  />
-                  <button
-                    onClick={() => {
-                      if (customUrlInput.trim()) {
-                        updateSlot({ customSrc: customUrlInput.trim() });
-                        setCustomUrlInput("");
-                      }
-                    }}
-                    className="bg-[#22c55e] text-black px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors"
-                  >
-                    Aplicar
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* FOOTER ACTIONS */}
           <div className="pt-3 border-t border-white/15 flex items-center justify-between gap-2 mt-3 shrink-0">
             <div className="flex items-center gap-1.5">
               <button
+                type="button"
                 onClick={handleResetSlot}
                 className="inline-flex items-center gap-1 text-[9.5px] text-white/70 hover:text-white py-1.5 px-2.5 rounded border border-white/10 hover:border-white/30 cursor-pointer transition-colors"
-                title="Restablecer posición original"
+                title="Restablecer foto y posición original"
               >
                 <RotateCcw size={11} />
                 <span>Reset</span>
               </button>
 
               <button
+                type="button"
                 onClick={handleClearAll}
                 className="inline-flex items-center gap-1 text-[9.5px] text-red-400/70 hover:text-red-300 py-1.5 px-2 rounded border border-red-500/20 hover:border-red-500/40 cursor-pointer transition-colors"
                 title="Restablecer todas las fotos del sitio"
@@ -607,6 +651,7 @@ export default function UniversalImageCalibrator() {
             </div>
 
             <button
+              type="button"
               onClick={handleCopyCode}
               className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-wider uppercase bg-[#b5a898] hover:bg-white text-black py-1.5 px-3.5 rounded-full shadow cursor-pointer transition-all active:scale-95"
             >
