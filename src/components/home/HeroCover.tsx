@@ -213,19 +213,8 @@ export default function HeroCover() {
           />
         </div>
 
-        {/* LUXURY RADIAL LIGHT & CINEMATIC NOIR VIGNETTE */}
-        <div className="absolute inset-0 bg-radial-[circle_at_center] from-transparent via-black/25 to-black/85 pointer-events-none" />
-
-        {/* EDITORIAL GRADIENT OVERLAY (DARK TOWARDS BOTTOM FOR PERFECT TEXT CONTRAST) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 md:from-black/90 md:via-black/25 md:to-transparent pointer-events-none" />
-
-        {/* SUBTLE GRAIN TEXTURE OVERLAY */}
-        <div
-          className="absolute inset-0 opacity-[0.035] mix-blend-overlay pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          }}
-        />
+        {/* EDITORIAL GRADIENT OVERLAY (ONLY AT BOTTOM FOR CLEAN TEXT CONTRAST) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent md:from-black/70 md:via-transparent md:to-transparent pointer-events-none" />
       </div>
 
       {/* HERO OVERLAID CONTENT */}
