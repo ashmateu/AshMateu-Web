@@ -46,13 +46,13 @@ export default function Navbar() {
         <div
           className={`relative z-10 w-full transition-all duration-500 ${
             scrolled
-              ? "bg-[#0a0a0a]/92 backdrop-blur-2xl py-3 shadow-[0_8px_30px_rgba(0,0,0,0.6)] border-b border-white/10"
-              : "py-4 md:py-5"
+              ? "bg-[#0a0a0a]/92 backdrop-blur-2xl py-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.6)] border-b border-white/10"
+              : "pt-7 sm:pt-8 md:pt-9 pb-5 md:pb-6"
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-end lg:justify-center relative">
             {/* NAV LINKS WITH '+' COUTURE DELIMITERS & CENTER-EXPANDING GOLD HOVER */}
-            <ul className="hidden lg:flex items-center gap-6 xl:gap-8 text-[10.5px] tracking-[0.28em] uppercase font-medium text-white/90">
+            <ul className="hidden lg:flex items-center gap-6 xl:gap-9 text-[13px] sm:text-[13.5px] tracking-[0.24em] uppercase font-medium text-white/95">
               {navLinks.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
@@ -60,20 +60,20 @@ export default function Navbar() {
                     <li>
                       <Link
                         href={link.href}
-                        className={`transition-colors py-1 relative hover:text-white group flex items-center gap-1 ${
+                        className={`transition-colors py-1.5 relative hover:text-white group flex items-center gap-1 ${
                           isActive ? "text-white font-semibold" : ""
                         }`}
                       >
                         <span>{link.label}</span>
                         <span
-                          className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1.5px] bg-[#b5a898] transition-all duration-300 ${
+                          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1.5px] bg-[#b5a898] transition-all duration-300 ${
                             isActive ? "w-full" : "w-0 group-hover:w-full"
                           }`}
                         />
                       </Link>
                     </li>
                     {i < navLinks.length - 1 && (
-                      <span className="text-[#b5a898]/40 select-none text-[8px] font-light">
+                      <span className="text-[#b5a898]/50 select-none text-[10px] font-light">
                         +
                       </span>
                     )}
@@ -88,11 +88,11 @@ export default function Navbar() {
                 href="https://wa.me/5491123823297"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group hidden sm:inline-flex items-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-black border border-[#25D366]/35 hover:border-[#25D366] px-4 py-1.5 rounded-full text-[10px] tracking-[0.2em] uppercase font-semibold transition-all duration-300 backdrop-blur-md shadow-sm active:scale-[0.98]"
+                className="group hidden sm:inline-flex items-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-black border border-[#25D366]/35 hover:border-[#25D366] px-4.5 py-2 rounded-full text-[11px] tracking-[0.2em] uppercase font-semibold transition-all duration-300 backdrop-blur-md shadow-sm active:scale-[0.98]"
               >
                 {/* WHATSAPP OFFICIAL ICON */}
                 <svg
-                  className="w-[11px] h-[11px] fill-[#25D366] group-hover:fill-black transition-colors"
+                  className="w-[12px] h-[12px] fill-[#25D366] group-hover:fill-black transition-colors"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
