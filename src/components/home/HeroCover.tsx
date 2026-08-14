@@ -14,9 +14,6 @@ import {
   Smartphone,
   Monitor,
   Sparkles,
-  Play,
-  Film,
-  Camera,
 } from "lucide-react";
 import gsap from "gsap";
 
@@ -46,13 +43,11 @@ export default function HeroCover() {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
   const [isMobileScreen, setIsMobileScreen] = useState(false);
   const [activeTab, setActiveTab] = useState<"desktop" | "mobile">("desktop");
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mediaMode, setMediaMode] = useState<"video" | "photo">("video");
 
   const [desktopFraming, setDesktopFraming] =
     useState<FramingConfig>(DEFAULT_DESKTOP);
@@ -76,10 +71,6 @@ export default function HeroCover() {
       const savedMob = localStorage.getItem("ash_hero_mobile_framing");
       if (savedMob) {
         setMobileFraming(JSON.parse(savedMob));
-      }
-      const savedMode = localStorage.getItem("ash_hero_media_mode");
-      if (savedMode === "photo" || savedMode === "video") {
-        setMediaMode(savedMode);
       }
     } catch (e) {
       console.error("Error loading saved framing configs", e);
@@ -135,13 +126,6 @@ export default function HeroCover() {
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const toggleMediaMode = (mode: "video" | "photo") => {
-    setMediaMode(mode);
-    try {
-      localStorage.setItem("ash_hero_media_mode", mode);
-    } catch {}
   };
 
   // Cinematic GSAP Reveal on Mount
@@ -201,7 +185,7 @@ export default function HeroCover() {
       ref={containerRef}
       className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]"
     >
-      {/* FULL-SCREEN HERO BACKGROUND: VIDEO REEL OR HIGH-RES PHOTO */}
+      {/* FULL-SCREEN HERO BACKGROUND IMAGE WITH CINEMATIC BREATHE & LIGHTING */}
       <div
         ref={heroRef}
         className={`absolute inset-0 w-full h-full opacity-0 transition-opacity duration-700 ${
@@ -209,66 +193,27 @@ export default function HeroCover() {
         }`}
       >
         <div ref={imageWrapperRef} className="relative w-full h-full scale-[1.03]">
-          {mediaMode === "video" ? (
-            <video
-              ref={videoRef}
-              src="/videos/hero_cover_cinematic.mp4"
-              poster="/images/hero/hero_cover_pptx.webp"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover object-center filter brightness-[105%] contrast-[104%]"
-            />
-          ) : (
-            <Image
-              src="/images/hero/hero_cover_pptx.webp"
-              alt="Ash Mateu — Creative Direction & High Fashion Styling"
-              fill
-              priority
-              unoptimized
-              style={{
-                objectFit: "cover",
-                objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
-                transform: `scale(${currentConfig.zoom / 100})`,
-                transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
-                filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
-                transition: isLoaded
-                  ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
-                  : "none",
-              }}
-            />
-          )}
+          <Image
+            src="/images/hero/hero_cover_pptx.webp"
+            alt="Ash Mateu — Creative Direction & High Fashion Styling"
+            fill
+            priority
+            unoptimized
+            style={{
+              objectFit: "cover",
+              objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
+              transform: `scale(${currentConfig.zoom / 100})`,
+              transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
+              filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
+              transition: isLoaded
+                ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
+                : "none",
+            }}
+          />
         </div>
 
-        {/* EDITORIAL GRADIENT OVERLAY */}
+        {/* EDITORIAL GRADIENT OVERLAY (ONLY AT BOTTOM FOR CLEAN TEXT CONTRAST) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent md:from-black/70 md:via-transparent md:to-transparent pointer-events-none" />
-      </div>
-
-      {/* DISCRETE HERO MEDIA TOGGLE (VIDEO CINEMÁTICO / FOTO MASTER) */}
-      <div className="absolute top-20 right-4 md:right-8 z-20 flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-white/20 text-[10px] tracking-[0.2em] uppercase font-semibold text-white/90 shadow-xl">
-        <button
-          onClick={() => toggleMediaMode("video")}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-300 ${
-            mediaMode === "video"
-              ? "bg-[#b5a898] text-black shadow-xs"
-              : "text-white/70 hover:text-white"
-          }`}
-        >
-          <Film size={11} strokeWidth={2.2} />
-          <span>Cinematic Reel</span>
-        </button>
-        <button
-          onClick={() => toggleMediaMode("photo")}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-300 ${
-            mediaMode === "photo"
-              ? "bg-[#b5a898] text-black shadow-xs"
-              : "text-white/70 hover:text-white"
-          }`}
-        >
-          <Camera size={11} strokeWidth={2.2} />
-          <span>Foto Portada</span>
-        </button>
       </div>
 
       {/* HERO OVERLAID CONTENT */}
