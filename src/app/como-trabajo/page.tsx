@@ -4,9 +4,10 @@ import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
 import ConciergeTriggerBanner from "@/components/concierge/ConciergeTriggerBanner";
 import GsapReveal from "@/components/animations/GsapReveal";
+import { ArrowUpRight } from "lucide-react";
 
 export const metadata = {
-  title: "¿Cómo Trabajo? — Ash Mateu",
+  title: "¿Cómo Trabajo? — Styling Services & Metodología — Ash Mateu",
   description:
     "01 Dress to Kill (Personas & Novias) · 02 Empresas & Marcas (Styling & Producciones) · 03 Consultoría & Speaker de Tendencias.",
 };
@@ -20,7 +21,7 @@ export default function ComoTrabajoPage() {
             <span>Metodología &amp; Servicios</span>
           </div>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-black font-normal mb-6">
-            ¿Cómo Trabajo?
+            Styling Services
           </h1>
           <p className="text-sm sm:text-base md:text-xl text-black/75 max-w-2xl font-light leading-relaxed mb-12">
             Tres pilares de trabajo diseñados para personas que buscan una imagen inolvidable, marcas que necesitan posicionamiento global y empresas en busca de innovación en tendencias.
@@ -34,7 +35,7 @@ export default function ComoTrabajoPage() {
         <section id="personas" className="py-16 border-t border-[#b5a898]/40">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-4">
-              <span className="text-[11px] tracking-[0.24em] uppercase text-[#b5a898] font-medium block mb-2">
+              <span className="text-[11px] tracking-[0.24em] uppercase text-[#b5a898] font-semibold block mb-2">
                 Pilar 01 · Personas
               </span>
               <h2 className="font-serif text-3xl md:text-4xl text-black mb-4">
@@ -44,90 +45,163 @@ export default function ComoTrabajoPage() {
                 El vestir no es un accesorio superficial; es una declaración de identidad, seguridad y presencia en ocasiones irrepetibles.
               </p>
 
-              {/* FOTOGRAFÍA EDITORIAL DE ASH EN GALA */}
-              <div className="relative aspect-[3/4] w-full bg-neutral-200 overflow-hidden shadow-lg border border-[#b5a898]/30 hidden lg:block group">
+              {/* FOTOGRAFÍA HERO DEL PILAR 1 */}
+              <div className="relative aspect-[3/4] w-full bg-neutral-200 overflow-hidden shadow-md border border-[#b5a898]/30 hidden lg:block group">
                 <Image
-                  src="/images/catalog/04_celebridades_galas_red_carpet/55E0547F-4668-4B8D-9EC2-2B30A99B8E64.JPG"
-                  alt="Ash Mateu Gala Styling"
+                  src="/images/catalog_v2/RED CARPETS/IMG_4680.jpg"
+                  alt="Dress to Kill — Galas & Haute Couture"
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
                   className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
-                  <span className="text-[9.5px] tracking-[0.2em] uppercase text-white font-medium">
-                    Galas &amp; Alfombras Rojas
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-5">
+                  <span className="text-[10px] tracking-[0.22em] uppercase text-white font-medium">
+                    Haute Couture &amp; Galas VIP
                   </span>
                 </div>
               </div>
             </div>
 
+            {/* CUADROS INDIVIDUALES PILAR 1 */}
             <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 1: NOVIAS */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Novias Únicas</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    <em>‘Que nunca nadie olvide tu vestido.’</em> Acompañamiento integral de estilismo nupcial, elección de diseñador, pruebas de vestuario y asesoramiento estético completo.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog_v2/RED CARPETS/IMG_7306.jpg"
+                      alt="Novias Únicas Fitting"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Atelier Nupcial
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Novias Únicas</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      <em>‘Que nunca nadie olvide tu vestido.’</em> Acompañamiento integral de estilismo nupcial, elección de diseñador, pruebas de vestuario y asesoramiento estético completo.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Novias"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Consultar fecha de Novias ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Novias"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Consultar fecha de Novias</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
 
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 2: ALFOMBRAS ROJAS & GALAS */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Alfombras Rojas &amp; Galas</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Styling exclusivo para premios internacionales, festivales de cine, red carpets y ocasiones donde el impacto fotográfico y mediático es prioritario.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog_v2/EMILIA ATTIAS/IMG_4205-1.jpg"
+                      alt="Alfombras Rojas & Galas"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Red Carpet VIP
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Alfombras Rojas &amp; Galas</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      Styling exclusivo para premios internacionales, festivales de cine, red carpets y ocasiones donde el impacto fotográfico y mediático es prioritario.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Gala"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Agendar Styling de Gala ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20de%20Gala"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Agendar Styling de Gala</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
 
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 3: CONSULTORÍA EN IMAGEN */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Consultoría en Imagen</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Construcción de fondo de armario, diagnóstico de estilo personal y alineación de la imagen con los objetivos profesionales y vitales.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog_v2/ASH/IMG_7656-1.jpg"
+                      alt="Consultoría en Imagen"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Fondo de Armario
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Consultoría en Imagen</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      Construcción de fondo de armario, diagnóstico de estilo personal y alineación de la imagen con los objetivos profesionales y vitales.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Consultoria%20de%20Imagen"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Consultar disponibilidad ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Consultoria%20de%20Imagen"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Consultar disponibilidad</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
 
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 4: FIESTAS & EVENTOS */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Fiestas &amp; Eventos</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Para quienes quieren vestir para matar. Curaduría de estilismo completo para celebraciones de alto perfil.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog_v2/VALENTINA ZENERE/Valentina Z 0016.jpg"
+                      alt="Fiestas & Eventos Styling"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Eventos &amp; Celebraciones
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Fiestas &amp; Eventos</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      Para quienes quieren vestir para matar. Curaduría de estilismo completo para celebraciones de alto perfil y noches inolvidables.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20para%20Fiestas%20y%20Eventos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Escribir por WhatsApp ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20para%20Fiestas%20y%20Eventos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Escribir por WhatsApp</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -137,7 +211,7 @@ export default function ComoTrabajoPage() {
         <section id="marcas" className="py-16 border-t border-[#b5a898]/40">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-4">
-              <span className="text-[11px] tracking-[0.24em] uppercase text-[#b5a898] font-medium block mb-2">
+              <span className="text-[11px] tracking-[0.24em] uppercase text-[#b5a898] font-semibold block mb-2">
                 Pilar 02 · Marcas &amp; Empresas
               </span>
               <h2 className="font-serif text-3xl md:text-4xl text-black mb-4">
@@ -147,73 +221,128 @@ export default function ComoTrabajoPage() {
                 Campañas visuales de moda, dirección de arte y estilismo editorial en Buenos Aires, Nueva York y París.
               </p>
 
-              {/* FOTOGRAFÍA EDITORIAL DE ASH EN PARÍS */}
-              <div className="relative aspect-[3/4] w-full bg-neutral-200 overflow-hidden shadow-lg border border-[#b5a898]/30 hidden lg:block group">
+              {/* FOTOGRAFÍA HERO DEL PILAR 2 */}
+              <div className="relative aspect-[3/4] w-full bg-neutral-200 overflow-hidden shadow-md border border-[#b5a898]/30 hidden lg:block group">
                 <Image
-                  src="/images/catalog/03_fashion_week_paris_canon/4A2A4184.JPEG"
-                  alt="Ash Mateu Producción en París"
+                  src="/images/catalog_v2/MODA CENTRAL PARK/Moda-Purpura-3.jpg"
+                  alt="Dirección de Arte & Campañas"
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
                   className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
-                  <span className="text-[9.5px] tracking-[0.2em] uppercase text-white font-medium">
-                    Dirección de Arte &amp; Producción
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-5">
+                  <span className="text-[10px] tracking-[0.22em] uppercase text-white font-medium">
+                    Campañas en NYC &amp; París
                   </span>
                 </div>
               </div>
             </div>
 
+            {/* CUADROS INDIVIDUALES PILAR 2 */}
             <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 1: CAMPAÑAS */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Campañas &amp; Contenidos</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Desarrollo integral desde el concepto hasta la realización en set. Coordinación de equipos creativos, modelos y locaciones internacionales.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog_v2/Campaigns/18405581-fd6b-4f13-bee8-d2a896bbfd5c.jpg"
+                      alt="Campañas & Contenidos"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Producción Comercial
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Campañas &amp; Contenidos</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      Desarrollo integral desde el concepto hasta la realización en set. Coordinación de equipos creativos, modelos y locaciones internacionales.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Produccion%20y%20Campana%20de%20Marca"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Consultar Producción ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Produccion%20y%20Campana%20de%20Marca"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Consultar Producción</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
 
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 2: STYLING EDITORIAL */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Styling Editorial &amp; Publicitario</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Construcción de looks de alto impacto para cine, TV, streaming, revistas y marcas de lujo.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog_v2/36. Valentina Ferrer Marie Claire/MC_VALENTINA_RETOUCHED_0001 copy.jpg"
+                      alt="Styling Editorial & Publicitario"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Editorial &amp; Revistas
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Styling Editorial &amp; Publicitario</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      Construcción de looks de alto impacto para cine, TV, streaming, revistas internacionales y marcas de lujo.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20Editorial%20o%20Publicitario"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Consultar Styling ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Styling%20Editorial%20o%20Publicitario"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Consultar Styling</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
 
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm md:col-span-2">
-                <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Curaduría de Diseño &amp; Lookbooks</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Asesoramiento en armado de colecciones, selección de texturas, paleta cromática y dirección estética de catálogos comerciales.
-                  </p>
+              {/* CUADRO 3: CURADURÍA DE DISEÑO */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300 md:col-span-2">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
+                  <div className="relative aspect-[16/10] md:aspect-auto md:col-span-5 bg-neutral-100 overflow-hidden min-h-[220px]">
+                    <Image
+                      src="/images/catalog_v2/MODA ESTUDIO NY/MarieClaire_Cover_2024_001.jpg"
+                      alt="Curaduría de Diseño & Lookbooks"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Lookbooks &amp; Colecciones
+                    </div>
+                  </div>
+                  <div className="p-6 md:p-8 md:col-span-7 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-serif text-xl sm:text-2xl mb-3 text-black">Curaduría de Diseño &amp; Lookbooks</h3>
+                      <p className="text-xs sm:text-sm text-black/70 leading-relaxed mb-6">
+                        Asesoramiento en armado de colecciones, selección de texturas, paleta cromática, diseño de producto y dirección estética de catálogos comerciales.
+                      </p>
+                    </div>
+                    <a
+                      href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Curaduria%20de%20Diseno"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                    >
+                      <span>Consultar Curaduría</span>
+                      <ArrowUpRight size={13} strokeWidth={2} />
+                    </a>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Curaduria%20de%20Diseno"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Consultar Curaduría ↗
-                </a>
               </div>
             </div>
           </div>
@@ -223,7 +352,7 @@ export default function ComoTrabajoPage() {
         <section id="consultoria" className="py-16 border-t border-[#b5a898]/40">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-4">
-              <span className="text-[11px] tracking-[0.24em] uppercase text-[#b5a898] font-medium block mb-2">
+              <span className="text-[11px] tracking-[0.24em] uppercase text-[#b5a898] font-semibold block mb-2">
                 Pilar 03 · Estrategia &amp; Educación
               </span>
               <h2 className="font-serif text-3xl md:text-4xl text-black mb-4">
@@ -233,56 +362,93 @@ export default function ComoTrabajoPage() {
                 Conferencias y consultoría estratégica sobre macrotendencias globales, nuevas oportunidades de mercado y comportamiento del consumidor.
               </p>
 
-              {/* FOTOGRAFÍA EDITORIAL DE ASH SPEAKER */}
-              <div className="relative aspect-[3/4] w-full bg-neutral-200 overflow-hidden shadow-lg border border-[#b5a898]/30 hidden lg:block group">
+              {/* FOTOGRAFÍA HERO DEL PILAR 3 */}
+              <div className="relative aspect-[3/4] w-full bg-neutral-200 overflow-hidden shadow-md border border-[#b5a898]/30 hidden lg:block group">
                 <Image
-                  src="/images/catalog/07_backstage_streetstyle_social/20220402_104713.jpg"
-                  alt="Ash Mateu Speaker & Masterclass"
+                  src="/images/catalog_v2/ASH/IMG_7664-1.jpg"
+                  alt="Ash Mateu Speaker & Keynote"
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
-                  className="object-cover object-[center_10%] transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
-                  <span className="text-[9.5px] tracking-[0.2em] uppercase text-white font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-5">
+                  <span className="text-[10px] tracking-[0.22em] uppercase text-white font-medium">
                     Keynotes &amp; Formación de Negocios
                   </span>
                 </div>
               </div>
             </div>
 
+            {/* CUADROS INDIVIDUALES PILAR 3 */}
             <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 1: BRANDING & POSICIONAMIENTO */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Branding &amp; Posicionamiento</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Estrategia de innovación comercial, comunicación de marca y diferenciación en el mercado del lujo y consumo premium.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda A.jpg"
+                      alt="Branding & Posicionamiento de Moda"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Estrategia &amp; Futuro
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Branding &amp; Posicionamiento</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      Estrategia de innovación comercial, comunicación de marca y diferenciación en el mercado del lujo y consumo premium.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Branding%20y%20Estrategia"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Consultar Estrategia ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Branding%20y%20Estrategia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Consultar Estrategia</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
 
-              <div className="bg-white p-6 md:p-7 border border-[#b5a898]/30 flex flex-col justify-between shadow-sm">
+              {/* CUADRO 2: SPEAKER */}
+              <div className="bg-white border border-[#b5a898]/30 overflow-hidden flex flex-col justify-between shadow-sm group hover:border-black transition-all duration-300">
                 <div>
-                  <h3 className="font-serif text-xl mb-2 text-black">Speaker Especializada</h3>
-                  <p className="text-xs text-black/70 leading-relaxed mb-4">
-                    Conferencias magistrales para empresas, universidades y congresos sobre macrotendencias globales y futuro de la moda.
-                  </p>
+                  <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
+                    <Image
+                      src="/images/catalog/07_backstage_streetstyle_social/20220402_104713.jpg"
+                      alt="Speaker Especializada & Masterclasses"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 35vw"
+                      className="object-cover object-[center_10%] transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
+                      Conferencias &amp; Keynotes
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl mb-2 text-black">Speaker Especializada</h3>
+                    <p className="text-xs text-black/70 leading-relaxed">
+                      Conferencias magistrales para empresas, universidades y congresos sobre macrotendencias globales y futuro de la moda.
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Keynote%20o%20Charla"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
-                >
-                  Agendar Keynote ↗
-                </a>
+                <div className="p-6 pt-0">
+                  <a
+                    href="https://wa.me/5491123823297?text=Hola%20Ash,%20quiero%20consultar%20por%20Keynote%20o%20Charla"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase text-black font-semibold border-b border-black/30 pb-0.5 hover:border-black hover:text-[#7a6a5a] transition-colors w-fit"
+                  >
+                    <span>Agendar Keynote</span>
+                    <ArrowUpRight size={13} strokeWidth={2} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
