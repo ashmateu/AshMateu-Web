@@ -104,6 +104,10 @@ Se procesaron y clasificaron **70 archivos fotográficos y audiovisuales de alta
 - **`Mi Historia` (`/historia`)**: Retratos editoriales de Ash en Fashion Week París y Galas internacionales, más una galería de **"Momentos de Carrera & Backstage"** con badges de locación y layout asimétrico.
 - **`¿Cómo Trabajo?` (`/como-trabajo`)**: Fotografía editorial de Ash en acción en cada uno de los 3 pilares (*Dress to Kill*, *Styling & Producciones* y *Consultoría & Speaker*).
 - **`Galería Editorial` (Home / `/galeria`)**: Fondos fotográficos con gradientes oscuros en las 4 tarjetas editoriales principales (*Blog*, *Prensa*, *Proyectos* y *Dirección Creativa*).
+- **Rediseño `Fashion Gallery` (`/galeria` & Home Portfolio)**:
+  - Aplicación de principios **Stitch Design Taste**: Grilla asimétrica tipo exhibición/pasarela (sin botones de compra ni píldoras de e-commerce genéricas).
+  - Filtros tipográficos minimalistas con subrayado activo de 2px.
+  - Fichas técnicas curatoriales con numeración *Bodoni Moda Italic* (`Nº 01`, `Nº 02`...), procedencia del cliente y microinteracción de zoom en imagen.
 
 ---
 
