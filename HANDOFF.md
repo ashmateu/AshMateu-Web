@@ -10,12 +10,16 @@
 - **Directiva**: Cada fotografía donde aparezca Ash Mateu, modelos o figuras destacadas **debe tener el rostro 100% visible, sin cortes de frente, cabello u ojos**.
 - **Implementación Técnica**: Uso estricto de `object-cover object-[center_top]`, `object-[center_10%]` o `object-[center_15%]` en contenedores verticales o panorámicos (`next/image`), evitando `object-center` que corta la parte superior de los retratos.
 
-### 🎬 Portada Hero: Movimiento Parallax & Cero Salto de Carga (`HeroCover.tsx`)
+### 🎬 Portada Hero: Encuadre Predeterminado Global & Parallax (`HeroCover.tsx`)
+- **Encuadre Predeterminado en Código Base**:
+  - **Desktop**: `x: 76%`, `y: 22%`, `zoom: 145%`, `brightness: 110%`. Este encuadre destaca el primer plano de alto impacto de la modelo a la derecha, dejando el espacio negativo azul a la izquierda para la tipografía editorial.
+  - **Móvil**: `x: 75%`, `y: 22%`, `zoom: 130%`, `brightness: 110%`.
+  - Con estos valores fijos en el código fuente, **todos los usuarios nuevos (incluida Ash y cualquier visitante sin memoria local previa)** ven la portada exactamente en el encuadre de la segunda imagen.
 - **Eliminación Total del Layout Shift / Salto**:
   - Se eliminaron las transiciones CSS en el primer render y se incorporó una cortina de revelado cinemática en GSAP (`opacity: 0 -> 1` con suave `scale: 1.03 -> 1.0`). La foto aparece de forma sedosa ya encuadrada en sus coordenadas exactas sin saltos perceptibles.
 - **Efecto de Movimiento Parallax**:
   - **Parallax Sutil en Desktop**: Respuesta milimétrica al movimiento del cursor del ratón con inercia orgánica (`power1.out`).
-  - **Luminosidad y Colores Originales**: Se eliminó cualquier velo oscuro o grano artificial, conservando la luz natural y nitidez pura de la fotografía original.
+  - **Luminosidad y Colores Originales**: Sin viñeta ni grano artificial, conservando la luz natural y nitidez pura de la fotografía original.
 
 ### 🤖 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)
 - **Motor de Inteligencia Artificial**:
