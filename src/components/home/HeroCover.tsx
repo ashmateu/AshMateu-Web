@@ -25,17 +25,17 @@ interface FramingConfig {
 }
 
 const DEFAULT_DESKTOP: FramingConfig = {
-  x: 50,
-  y: 18,
-  zoom: 100,
-  brightness: 112,
+  x: 76,
+  y: 22,
+  zoom: 145,
+  brightness: 110,
 };
 
 const DEFAULT_MOBILE: FramingConfig = {
-  x: 70,
-  y: 20,
-  zoom: 100,
-  brightness: 112,
+  x: 75,
+  y: 22,
+  zoom: 130,
+  brightness: 110,
 };
 
 export default function HeroCover() {
