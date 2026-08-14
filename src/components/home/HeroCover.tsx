@@ -14,6 +14,9 @@ import {
   Smartphone,
   Monitor,
   Sparkles,
+  Play,
+  Film,
+  Camera,
 } from "lucide-react";
 import gsap from "gsap";
 
@@ -43,11 +46,13 @@ export default function HeroCover() {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
   const [isMobileScreen, setIsMobileScreen] = useState(false);
   const [activeTab, setActiveTab] = useState<"desktop" | "mobile">("desktop");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [mediaMode, setMediaMode] = useState<"video" | "photo">("video");
 
   const [desktopFraming, setDesktopFraming] =
     useState<FramingConfig>(DEFAULT_DESKTOP);
@@ -71,6 +76,10 @@ export default function HeroCover() {
       const savedMob = localStorage.getItem("ash_hero_mobile_framing");
       if (savedMob) {
         setMobileFraming(JSON.parse(savedMob));
+      }
+      const savedMode = localStorage.getItem("ash_hero_media_mode");
+      if (savedMode === "photo" || savedMode === "video") {
+        setMediaMode(savedMode);
       }
     } catch (e) {
       console.error("Error loading saved framing configs", e);
@@ -126,6 +135,13 @@ export default function HeroCover() {
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const toggleMediaMode = (mode: "video" | "photo") => {
+    setMediaMode(mode);
+    try {
+      localStorage.setItem("ash_hero_media_mode", mode);
+    } catch {}
   };
 
   // Cinematic GSAP Reveal on Mount
@@ -185,7 +201,7 @@ export default function HeroCover() {
       ref={containerRef}
       className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]"
     >
-      {/* FULL-SCREEN HERO BACKGROUND IMAGE WITH CINEMATIC BREATHE & LIGHTING */}
+      {/* FULL-SCREEN HERO BACKGROUND: VIDEO REEL OR HIGH-RES PHOTO */}
       <div
         ref={heroRef}
         className={`absolute inset-0 w-full h-full opacity-0 transition-opacity duration-700 ${
@@ -193,28 +209,66 @@ export default function HeroCover() {
         }`}
       >
         <div ref={imageWrapperRef} className="relative w-full h-full scale-[1.03]">
-          <Image
-            src="/images/hero/hero_cover_pptx.webp"
-            alt="Ash Mateu — Creative Direction & High Fashion Styling"
-            fill
-            priority
-            unoptimized
-            style={{
-              objectFit: "cover",
-              objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
-              transform: `scale(${currentConfig.zoom / 100})`,
-              transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
-              filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
-              // Transition is enabled only after initial mount to avoid layout snapping
-              transition: isLoaded
-                ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
-                : "none",
-            }}
-          />
+          {mediaMode === "video" ? (
+            <video
+              ref={videoRef}
+              src="/videos/hero_cover_cinematic.mp4"
+              poster="/images/hero/hero_cover_pptx.webp"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover object-center filter brightness-[105%] contrast-[104%]"
+            />
+          ) : (
+            <Image
+              src="/images/hero/hero_cover_pptx.webp"
+              alt="Ash Mateu — Creative Direction & High Fashion Styling"
+              fill
+              priority
+              unoptimized
+              style={{
+                objectFit: "cover",
+                objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
+                transform: `scale(${currentConfig.zoom / 100})`,
+                transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
+                filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
+                transition: isLoaded
+                  ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
+                  : "none",
+              }}
+            />
+          )}
         </div>
 
-        {/* EDITORIAL GRADIENT OVERLAY (ONLY AT BOTTOM FOR CLEAN TEXT CONTRAST) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent md:from-black/70 md:via-transparent md:to-transparent pointer-events-none" />
+        {/* EDITORIAL GRADIENT OVERLAY */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent md:from-black/70 md:via-transparent md:to-transparent pointer-events-none" />
+      </div>
+
+      {/* DISCRETE HERO MEDIA TOGGLE (VIDEO CINEMÁTICO / FOTO MASTER) */}
+      <div className="absolute top-20 right-4 md:right-8 z-20 flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-white/20 text-[10px] tracking-[0.2em] uppercase font-semibold text-white/90 shadow-xl">
+        <button
+          onClick={() => toggleMediaMode("video")}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-300 ${
+            mediaMode === "video"
+              ? "bg-[#b5a898] text-black shadow-xs"
+              : "text-white/70 hover:text-white"
+          }`}
+        >
+          <Film size={11} strokeWidth={2.2} />
+          <span>Cinematic Reel</span>
+        </button>
+        <button
+          onClick={() => toggleMediaMode("photo")}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-300 ${
+            mediaMode === "photo"
+              ? "bg-[#b5a898] text-black shadow-xs"
+              : "text-white/70 hover:text-white"
+          }`}
+        >
+          <Camera size={11} strokeWidth={2.2} />
+          <span>Foto Portada</span>
+        </button>
       </div>
 
       {/* HERO OVERLAID CONTENT */}
@@ -278,73 +332,94 @@ export default function HeroCover() {
             className="flex flex-col items-start lg:items-end gap-3 text-white/80 pointer-events-auto"
           >
             <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[9.5px] tracking-[0.25em] uppercase font-medium shadow-lg">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638] animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b5a898] animate-pulse" />
               <span>Buenos Aires · Nueva York · París</span>
             </div>
 
-            {/* QUICK CALIBRATOR TOGGLE BUTTON */}
-            <button
-              onClick={() => setShowCalibrator(!showCalibrator)}
-              className="group inline-flex items-center gap-2 bg-black/40 hover:bg-black/80 backdrop-blur-md border border-white/10 hover:border-[#b5a898] text-white/70 hover:text-white px-3 py-1 rounded-full text-[9px] tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer"
-              title="Ajustar encuadre de la foto de portada"
-            >
-              <Sliders size={11} className="text-[#b5a898]" />
-              <span>{showCalibrator ? "Cerrar Ajustes" : "Ajustar Portada"}</span>
-            </button>
+            <div className="hidden sm:flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[9px] tracking-[0.2em] uppercase text-white/60">
+              <span>Haute Couture &amp; Celebrity Styling</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* INTERACTIVE CALIBRATOR DRAWER / MODAL */}
+      {/* DISCRETE CALIBRATION SLIDER TOGGLE FOR EDITING (CORNER BUTTON) */}
+      <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
+        <button
+          onClick={() => setShowCalibrator(!showCalibrator)}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] tracking-[0.16em] uppercase font-semibold transition-all duration-300 shadow-md ${
+            showCalibrator
+              ? "bg-[#b5a898] text-black"
+              : "bg-black/60 hover:bg-black/80 text-white/80 hover:text-white backdrop-blur-md border border-white/20"
+          }`}
+          title="Ajustar encuadre milimétrico de la portada"
+        >
+          <Sliders size={12} strokeWidth={2} />
+          <span>{showCalibrator ? "Cerrar Ajustes" : "Ajustar Foto"}</span>
+        </button>
+      </div>
+
+      {/* FLOATING LUXURY CALIBRATOR PANEL */}
       {showCalibrator && (
-        <div className="absolute top-20 right-6 md:right-12 z-50 w-[310px] sm:w-[340px] bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/20 p-5 rounded-2xl shadow-2xl text-white animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+        <div className="absolute bottom-16 right-4 z-30 w-[310px] sm:w-[350px] bg-black/90 backdrop-blur-xl border border-white/25 p-5 rounded-2xl shadow-2xl text-white text-xs animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="flex items-center justify-between border-b border-white/15 pb-3 mb-4">
             <div className="flex items-center gap-2">
-              <Sliders size={13} className="text-[#b5a898]" />
-              <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-white">
+              <Sparkles size={14} className="text-[#b5a898]" />
+              <span className="font-serif text-sm tracking-wide text-white">
                 Encuadre de Portada
               </span>
             </div>
-            <button
-              onClick={() => setShowCalibrator(false)}
-              className="text-white/60 hover:text-white text-xs p-1 cursor-pointer"
-            >
-              ✕
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handleReset}
+                className="p-1 text-white/50 hover:text-white transition-colors"
+                title="Restablecer"
+              >
+                <RotateCcw size={13} />
+              </button>
+              <button
+                onClick={handleCopy}
+                className="p-1 text-white/50 hover:text-[#b5a898] transition-colors"
+                title="Copiar código CSS"
+              >
+                {copied ? <Check size={13} className="text-green-400" /> : <Copy size={13} />}
+              </button>
+            </div>
           </div>
 
-          {/* DESKTOP / MOBILE SWITCHER */}
-          <div className="grid grid-cols-2 gap-1.5 bg-white/5 p-1 rounded-xl my-3 text-[10px] font-medium">
-            <button
-              onClick={() => setActiveTab("mobile")}
-              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
-                activeTab === "mobile"
-                  ? "bg-[#b5a898] text-black font-bold shadow"
-                  : "text-white/70 hover:text-white"
-              }`}
-            >
-              <Smartphone size={12} />
-              <span>Móvil ({isMobileScreen ? "Activo" : ""})</span>
-            </button>
+          {/* DESKTOP / MOBILE TABS */}
+          <div className="grid grid-cols-2 gap-1.5 p-1 bg-white/10 rounded-lg mb-4 text-[11px] font-medium tracking-wider uppercase">
             <button
               onClick={() => setActiveTab("desktop")}
-              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all ${
                 activeTab === "desktop"
-                  ? "bg-[#b5a898] text-black font-bold shadow"
+                  ? "bg-[#b5a898] text-black font-semibold shadow-xs"
                   : "text-white/70 hover:text-white"
               }`}
             >
               <Monitor size={12} />
-              <span>Desktop ({!isMobileScreen ? "Activo" : ""})</span>
+              <span>Desktop</span>
+            </button>
+            <button
+              onClick={() => setActiveTab("mobile")}
+              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all ${
+                activeTab === "mobile"
+                  ? "bg-[#b5a898] text-black font-semibold shadow-xs"
+                  : "text-white/70 hover:text-white"
+              }`}
+            >
+              <Smartphone size={12} />
+              <span>Mobile</span>
             </button>
           </div>
 
-          <div className="space-y-3.5 py-3 text-xs">
-            {/* POS X (HORIZONTAL) */}
+          {/* CONTROLS */}
+          <div className="space-y-4">
+            {/* HORIZONTAL POSITION (X) */}
             <div>
-              <div className="flex justify-between text-[9.5px] tracking-wider uppercase text-[#b5a898] mb-1">
+              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
                 <span>Posición Horizontal (X)</span>
-                <span className="text-white font-mono">{editingConfig.x}%</span>
+                <span className="font-mono text-white">{editingConfig.x}%</span>
               </div>
               <input
                 type="range"
@@ -352,20 +427,15 @@ export default function HeroCover() {
                 max="100"
                 value={editingConfig.x}
                 onChange={(e) => updateFraming({ x: Number(e.target.value) })}
-                className="w-full accent-[#b5a898] cursor-pointer"
+                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
               />
-              <div className="flex justify-between text-[8px] text-white/40 mt-0.5">
-                <span>Izquierda (0%)</span>
-                <span>Centro (50%)</span>
-                <span>Derecha (100%)</span>
-              </div>
             </div>
 
-            {/* POS Y (VERTICAL) */}
+            {/* VERTICAL POSITION (Y) */}
             <div>
-              <div className="flex justify-between text-[9.5px] tracking-wider uppercase text-[#b5a898] mb-1">
-                <span>Posición Vertical (Y)</span>
-                <span className="text-white font-mono">{editingConfig.y}%</span>
+              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
+                <span>Posición Vertical (Y / Rostro)</span>
+                <span className="font-mono text-white">{editingConfig.y}%</span>
               </div>
               <input
                 type="range"
@@ -373,114 +443,81 @@ export default function HeroCover() {
                 max="100"
                 value={editingConfig.y}
                 onChange={(e) => updateFraming({ y: Number(e.target.value) })}
-                className="w-full accent-[#b5a898] cursor-pointer"
+                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
               />
-              <div className="flex justify-between text-[8px] text-white/40 mt-0.5">
-                <span>Arriba (0%)</span>
-                <span>Centro (50%)</span>
-                <span>Abajo (100%)</span>
-              </div>
             </div>
 
-            {/* ZOOM / SCALE */}
+            {/* ZOOM (ESCALA) */}
             <div>
-              <div className="flex justify-between text-[9.5px] tracking-wider uppercase text-[#b5a898] mb-1">
+              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
                 <span className="flex items-center gap-1">
-                  <ZoomIn size={10} className="text-[#c9a84c]" />
-                  <span>Escala / Zoom</span>
+                  <ZoomIn size={11} />
+                  <span>Zoom / Escala</span>
                 </span>
-                <span className="text-white font-mono font-bold">
-                  {editingConfig.zoom}%
-                </span>
+                <span className="font-mono text-white">{editingConfig.zoom}%</span>
               </div>
               <input
                 type="range"
                 min="80"
-                max="300"
-                step="1"
+                max="220"
                 value={editingConfig.zoom}
-                onChange={(e) =>
-                  updateFraming({ zoom: Number(e.target.value) })
-                }
-                className="w-full accent-[#b5a898] cursor-pointer"
+                onChange={(e) => updateFraming({ zoom: Number(e.target.value) })}
+                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
               />
-              {/* QUICK ZOOM PRESETS */}
-              <div className="flex items-center justify-between gap-1 mt-1.5">
-                {zoomPresets.map((pz) => (
+              <div className="flex justify-between gap-1 mt-1.5">
+                {zoomPresets.map((z) => (
                   <button
-                    key={pz}
-                    onClick={() => updateFraming({ zoom: pz })}
-                    className={`px-1.5 py-0.5 rounded text-[8px] font-mono border transition-all cursor-pointer ${
-                      editingConfig.zoom === pz
-                        ? "bg-[#b5a898] text-black border-[#b5a898] font-bold"
-                        : "bg-white/5 text-white/70 border-white/10 hover:border-white/30"
+                    key={z}
+                    onClick={() => updateFraming({ zoom: z })}
+                    className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors ${
+                      editingConfig.zoom === z
+                        ? "bg-[#b5a898] text-black font-bold"
+                        : "bg-white/10 text-white/60 hover:text-white"
                     }`}
                   >
-                    {pz}%
+                    {z}%
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* BRIGHTNESS CONTROL */}
-            <div className="pt-2 border-t border-white/10">
-              <div className="flex justify-between text-[9.5px] tracking-wider uppercase text-[#b5a898] mb-1">
+            {/* BRIGHTNESS (BRILLO) */}
+            <div>
+              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
                 <span className="flex items-center gap-1">
-                  <Sun size={10} className="text-[#c9a84c]" />
+                  <Sun size={11} />
                   <span>Brillo</span>
                 </span>
-                <span className="text-white font-mono font-bold">
+                <span className="font-mono text-white">
                   {editingConfig.brightness}%
                 </span>
               </div>
               <input
                 type="range"
-                min="90"
+                min="70"
                 max="160"
-                step="1"
                 value={editingConfig.brightness}
                 onChange={(e) =>
                   updateFraming({ brightness: Number(e.target.value) })
                 }
-                className="w-full accent-[#b5a898] cursor-pointer"
+                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
               />
-              {/* QUICK BRIGHTNESS PRESETS */}
-              <div className="flex items-center justify-between gap-1 mt-1.5">
-                {brightnessPresets.map((pb) => (
+              <div className="flex justify-between gap-1 mt-1.5">
+                {brightnessPresets.map((b) => (
                   <button
-                    key={pb}
-                    onClick={() => updateFraming({ brightness: pb })}
-                    className={`px-2 py-0.5 rounded text-[8px] font-mono border transition-all cursor-pointer ${
-                      editingConfig.brightness === pb
-                        ? "bg-[#c9a84c] text-black border-[#c9a84c] font-bold"
-                        : "bg-white/5 text-white/70 border-white/10 hover:border-white/30"
+                    key={b}
+                    onClick={() => updateFraming({ brightness: b })}
+                    className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors ${
+                      editingConfig.brightness === b
+                        ? "bg-[#b5a898] text-black font-bold"
+                        : "bg-white/10 text-white/60 hover:text-white"
                     }`}
                   >
-                    {pb}%
+                    {b}%
                   </button>
                 ))}
               </div>
             </div>
-          </div>
-
-          {/* ACTION BUTTONS */}
-          <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
-            <button
-              onClick={handleReset}
-              className="inline-flex items-center gap-1 text-[9px] text-white/60 hover:text-white py-1 px-2 rounded border border-white/10 hover:border-white/30 cursor-pointer"
-              title="Restablecer posición inicial"
-            >
-              <RotateCcw size={10} />
-              <span>Reset</span>
-            </button>
-
-            <button
-              onClick={handleCopy}
-              className="inline-flex items-center gap-1.5 text-[9.5px] font-semibold tracking-wider uppercase bg-[#b5a898] hover:bg-white text-black py-1.5 px-3 rounded-full shadow cursor-pointer transition-all active:scale-95"
-            >
-              {copied ? <Check size={11} /> : <Copy size={11} />}
-              <span>{copied ? "¡Guardado!" : "Guardar"}</span>
-            </button>
           </div>
         </div>
       )}
