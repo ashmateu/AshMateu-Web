@@ -10,12 +10,15 @@ export const metadata = {
 };
 
 const covers = [
-  { src: "/images/hero/marie_claire_cover.webp", title: "Marie Claire Argentina — Portada" },
-  { src: "/images/extracted/valentina-miumiu/img-000.webp", title: "Valentina Ferrer × Miu Miu" },
-  { src: "/images/extracted/chanel-hc/img-005.webp", title: "Chanel Haute Couture NYC" },
-  { src: "/images/extracted/dolores-fonzi/img-003.webp", title: "Dolores Fonzi — Marie Claire" },
-  { src: "/images/extracted/leonie-dg/img-003.webp", title: "Leonie Hanne × Dolce & Gabbana" },
-  { src: "/images/hero_studio/MARIECLAIRE_2608064304_web.webp", title: "Ash Mateu Marie Claire Edición Especial" },
+  { src: "/images/catalog_v2/portadas/1_TAPA SANTI TALLEDO.jpg", title: "Marie Claire — Santi Talledo" },
+  { src: "/images/catalog_v2/portadas/Cover-Juani-final-scaled.jpg", title: "Marie Claire — Juana Burga" },
+  { src: "/images/catalog_v2/portadas/MC-064-Tapa MAIA RGB.jpg", title: "Marie Claire — Maia Reffico" },
+  { src: "/images/catalog_v2/36. Valentina Ferrer Marie Claire/MC-047-Tapa Valentina IG.jpg", title: "Marie Claire — Valentina Ferrer" },
+  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda A.jpg", title: "Marie Claire — Tecnomoda Digital" },
+  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda B.jpg", title: "Marie Claire — Tecnomoda Vanguardia" },
+  { src: "/images/catalog_v2/BELU NEGRI/A.jpg", title: "DMAG Magazine — Belu Negri" },
+  { src: "/images/catalog_v2/portadas/TAPA1.jpg", title: "Marie Claire — Portada Especial" },
+  { src: "/images/catalog_v2/portadas/TAPA2.jpg", title: "Marie Claire — Alta Costura" },
 ];
 
 export default async function PrensaPage() {
