@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import GsapReveal from "@/components/animations/GsapReveal";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import { Sparkles, Star, Globe2 } from "lucide-react";
 
 interface Milestone {
   number: string;
@@ -11,8 +11,8 @@ interface Milestone {
   badge?: string;
   title: string;
   description: string;
-  image?: string;
-  imageAlt?: string;
+  image: string;
+  imageAlt: string;
 }
 
 const milestones: Milestone[] = [
@@ -22,7 +22,7 @@ const milestones: Milestone[] = [
     badge: "2006",
     title: "Editorial Perfil",
     description: "La edad en la que empecé a dirigir producciones editoriales en Editorial Perfil.",
-    image: "/images/catalog_v2/IMG_0148.jpg",
+    image: "/images/catalog_v2/ASH/IMG_0682-1.jpg",
     imageAlt: "Debut Editorial 19 Años",
   },
   {
@@ -40,7 +40,7 @@ const milestones: Milestone[] = [
     badge: "2 Décadas",
     title: "Dirección Creativa",
     description: "Cuatro portadas simultáneas en quioscos y más de 150 portadas en dos décadas de carrera.",
-    image: "/images/catalog_v2/portadas/tapa_marie_claire_argentina.webp",
+    image: "/images/catalog_v2/portadas/TAPA1.jpg",
     imageAlt: "Tapas y Revistas",
   },
   {
@@ -49,7 +49,7 @@ const milestones: Milestone[] = [
     badge: "Exit 2025",
     title: "Ash Mateu Studio",
     description: "Comunidad de 150k Insiders en la escuela de moda online que fundé en 2015 y vendí en su totalidad en 2025.",
-    image: "/images/catalog_v2/DSC07379-3.jpg",
+    image: "/images/catalog_v2/ASH/IMG_7663-1.jpg",
     imageAlt: "Studio Exit",
   },
 ];
@@ -78,7 +78,7 @@ export default function HighlightsGrid() {
 
           <GsapReveal delay={0.1} className="max-w-md">
             <p className="font-sans text-xs sm:text-[13px] text-[#121212]/75 font-light leading-relaxed">
-              Dos décadas de dirección creativa, semanas de la moda globales y alianzas icónicas organizadas en una composición editorial limpia y de alta costura.
+              Dos décadas de dirección creativa, semanas de la moda globales y producciones icónicas organizadas en una composición editorial limpia de alta costura.
             </p>
           </GsapReveal>
         </div>
@@ -144,13 +144,13 @@ export default function HighlightsGrid() {
 
             {/* RIGHT COLUMN: HIGH-RES EDITORIAL PORTRAIT */}
             <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-[#B5A898]/40 shadow-md">
+              <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-[#B5A898]/40 shadow-md bg-[#FAF6F0]">
                 <Image
-                  src="/images/catalog_v2/IMG_4064.jpg"
+                  src="/images/hero/hero_cover_pptx.webp"
                   alt="Ash Mateu 20 Años"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-[center_12%] hover:scale-102 transition-transform duration-700 ease-out"
+                  className="object-cover object-[center_10%] hover:scale-102 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="flex justify-between items-center text-[9px] font-mono text-[#7A6A5A] mt-2 px-1">
@@ -162,7 +162,7 @@ export default function HighlightsGrid() {
           </div>
         </GsapReveal>
 
-        {/* FOUR REFINED EDITORIAL COLUMNS (MATCHING SITE TONE) */}
+        {/* FOUR REFINED EDITORIAL COLUMNS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-16">
           {milestones.map((m, idx) => (
             <GsapReveal
@@ -172,22 +172,20 @@ export default function HighlightsGrid() {
             >
               <div>
                 {/* PHOTO CONTAINER WITH CLEAN WARM BORDER */}
-                {m.image && (
-                  <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-[#B5A898]/40 mb-5 shadow-xs bg-[#FAF6F0]">
-                    <Image
-                      src={m.image}
-                      alt={m.imageAlt || m.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                      className="object-cover object-[center_15%] group-hover:scale-103 transition-transform duration-500"
-                    />
-                    {m.badge && (
-                      <div className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-wider uppercase text-[#0A0A0A] border border-[#B5A898]/40">
-                        {m.badge}
-                      </div>
-                    )}
-                  </div>
-                )}
+                <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-[#B5A898]/40 mb-5 shadow-xs bg-[#FAF6F0]">
+                  <Image
+                    src={m.image}
+                    alt={m.imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover object-[center_top] group-hover:scale-103 transition-transform duration-500"
+                  />
+                  {m.badge && (
+                    <div className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-wider uppercase text-[#0A0A0A] border border-[#B5A898]/40">
+                      {m.badge}
+                    </div>
+                  )}
+                </div>
 
                 {/* NUMBER & CATEGORY */}
                 <div className="flex items-center gap-2 mb-1.5">
