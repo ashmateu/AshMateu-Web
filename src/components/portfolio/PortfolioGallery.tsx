@@ -124,15 +124,15 @@ export default function PortfolioGallery({
                       className="object-cover object-[center_top] transition-transform duration-700 ease-out group-hover:scale-105"
                     />
 
-                    {/* OVERLAY SUTIL GRADIENTE */}
+                    {/* OVERLAY SUTIL GRADIENTE CON LOCACIÓN */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                       <span className="text-[10px] tracking-[0.24em] uppercase text-white font-medium">
                         {project.location} · {project.year}
                       </span>
                     </div>
 
-                    {/* BADGE DE CATEGORÍA EDITORIAL */}
-                    <div className="absolute top-4 left-4 bg-[#F7F3EE]/95 backdrop-blur-md px-3 py-1 text-[9px] tracking-[0.24em] uppercase text-[#0A0A0A] font-semibold border border-[#B5A898]/40 shadow-sm">
+                    {/* BADGE DE CATEGORÍA EDITORIAL (APARECE AL POSAR EL PUNTERO) */}
+                    <div className="absolute top-4 left-4 bg-[#F7F3EE]/95 backdrop-blur-md px-3.5 py-1 text-[9.5px] tracking-[0.24em] uppercase text-[#0A0A0A] font-semibold border border-[#B5A898]/40 shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-1 group-hover:translate-y-0 pointer-events-none">
                       {project.category}
                     </div>
 
@@ -143,41 +143,18 @@ export default function PortfolioGallery({
                   </div>
                 </Link>
 
-                {/* FICHA TÉCNICA CURATORIAL DE ALTA GAMA */}
-                <div className="pt-5 flex items-start justify-between gap-4">
-                  <div className="space-y-1.5 max-w-lg">
-                    <div className="flex items-center gap-3">
-                      <span className="font-serif text-sm italic text-[#7A6A5A]">
-                        Nº {formattedNumber}
-                      </span>
-                      <span className="w-1 h-1 rounded-full bg-[#B5A898]" />
-                      <span className="text-[10px] tracking-[0.22em] uppercase text-[#7A6A5A] font-medium">
-                        {project.client}
-                      </span>
-                    </div>
-
-                    <h3 className="font-serif text-xl sm:text-2xl text-[#0A0A0A] font-normal leading-snug group-hover:text-[#7A6A5A] transition-colors">
-                      <Link href={`/projects/${project.slug}`}>
-                        {project.title}
-                      </Link>
-                    </h3>
-
-                    <p className="text-xs text-[#0A0A0A]/70 font-light leading-relaxed line-clamp-2 pt-1">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="group/link inline-flex items-center gap-1 text-[11px] tracking-[0.2em] uppercase text-[#0A0A0A] hover:text-[#7A6A5A] font-medium border-b border-[#0A0A0A]/40 hover:border-[#7A6A5A] pb-0.5 transition-colors flex-shrink-0 pt-2"
-                  >
-                    <span>Ver</span>
-                    <ArrowUpRight
-                      size={13}
-                      className="transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
-                    />
-                  </Link>
-                </div>
+                {/* FICHA TÉCNICA MINIMALISTA: Nº Y CLIENTE */}
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="pt-3.5 flex flex-col space-y-0.5 group/info"
+                >
+                  <span className="font-serif text-xs italic text-[#7A6A5A]">
+                    Nº {formattedNumber}
+                  </span>
+                  <h3 className="font-serif text-base sm:text-lg text-[#0A0A0A] font-normal leading-snug group-hover/info:text-[#7A6A5A] transition-colors">
+                    {project.client}
+                  </h3>
+                </Link>
               </GsapReveal>
             );
           })}
