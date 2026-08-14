@@ -44,7 +44,7 @@
   - **Mercedes-Benz** (`mercedes_benz.webp`) — Estrella de 3 puntas.
   - **Netflix** (`netflix.webp`) — Wordmark arqueado oficial.
 - **Normalización Óptica**: Cada logo recortado a sus límites de píxel reales y alojado en contenedores homogéneos de `140px × 56px` con `opacity: 0.65` y hover a `1.0`.
-- **Identidad de Marca en Header & Footer**: Se eliminó el isotipo gráfico en imagen raster y se sustituyó por una firma tipográfica editorial limpia (*ASH MATEU*) en *Bodoni Moda Serif* de alto espaciado.
+- **Identidad de Marca en Header & Footer**: Se eliminó el texto y logo del banner superior (Navbar) para dejar exclusivamente los enlaces del menú centrados de forma limpia y minimalista, con el acceso directo a WhatsApp a la derecha. En el Footer se mantiene la firma tipográfica editorial (*ASH MATEU*).
 
 ### 📬 Integraciones de Automatización & Formspree
 - **Formulario de Contacto (`/api/contact`)**:
