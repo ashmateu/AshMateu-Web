@@ -124,6 +124,8 @@ Se procesaron y clasificaron **70 archivos fotográficos y audiovisuales de alta
   - Aplicación de principios **Stitch Design Taste**: Grilla asimétrica tipo exhibición fotográfica pura.
   - Filtros tipográficos minimalistas con subrayado activo de 2px.
   - **Exhibición Ultra-Minimalista (Pure Imagery)**: Sin ningún texto debajo de las fotos en estado estático. Toda la información (`Nº 01`, cliente/marca como `Chanel / Marie Claire Argentina`, categoría editorial `Haute Couture`, locación y año) aparece en un overlay oscuro refinado **exclusivamente al posar el puntero (hover)** sobre la imagen.
+- **Tira de Instagram `@ashmateu` (`InstagramStrip.tsx`)**:
+  - Curada con **6 fotografías de máximo impacto visual** de Ash en Paris Fashion Week (street style y desfiles en gabardina de alta costura), producción de estudio para Chanel Haute Couture, y sesiones de portada internacional, con encuadres calibrados a `object-[center_top]` para visibilidad total de rostros.
 
 ---
 
