@@ -20,6 +20,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
+    { label: "HOME", href: "/" },
     { label: "WHAT I DO?", href: "/#highlights" },
     { label: "FASHION GALLERY", href: "/galeria" },
     { label: "TRENDS", href: "/blog" },
@@ -51,8 +52,8 @@ export default function Navbar() {
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* NAV LINKS (LEFT-ALIGNED, NO DELIMITERS, TIGHTER SPACING) */}
-            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] sm:text-[13.5px] tracking-[0.22em] uppercase font-medium text-white/95">
+            {/* NAV LINKS (HOME + EXTENDED TRACKING & BREATHING SPACE) */}
+            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] sm:text-[13.5px] tracking-[0.28em] xl:tracking-[0.32em] uppercase font-medium text-white/95">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
