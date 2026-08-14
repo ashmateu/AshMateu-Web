@@ -117,7 +117,15 @@ Se procesaron y clasificaron **70 archivos fotográficos y audiovisuales de alta
 9. `09_videos_reels_backstage/` (8 videos — Clips y reels para contenido visual)
 
 ### 🖼️ Integración de Fotografías Reales de Ash en la Web
-- **`Mi Historia` (`/historia`)**: Retratos editoriales de Ash en Fashion Week París y Galas internacionales, más una galería de **"Momentos de Carrera & Backstage"** con badges de locación y layout asimétrico.
+- **`Mi Historia` (`/historia`)**: Retratos editoriales de Ash en Fashion Week París y Galas internacionales, más una galería ampliada de **"Momentos de Carrera & Backstage"** con **8 registros auténticos detrás de bambalinas, cámaras y set fotográfico**:
+  1. *Dirección de Set & Estudio Chanel* (Tomas con cámara Canon 5D Mark IV en estudio).
+  2. *Backstage & Fittings en París* (Preparación previa a desfiles en Paris Fashion Week).
+  3. *Detrás de Escena & Camarines* (Montaje y ajustes de peinado, maquillaje y prendas).
+  4. *Atelier & Fittings de Alta Costura* (Pruebas privadas de vestidos bordados de novia y gala).
+  5. *Cobertura en Vivo & Fotografía* (Captura de momentos de pasarela en Fashion Week).
+  6. *Set de Luces & Pruebas de Cámara* (Iluminación y calibración fotográfica en estudio).
+  7. *Producción de Moda & Backstage Social* (Dinámica de equipo y estilistas en set).
+  8. *Inside Studios & Masterclasses* (Enseñando el backstage de la industria de la moda).
 - **`¿Cómo Trabajo?` (`/como-trabajo`)**: Fotografía editorial de Ash en acción en cada uno de los 3 pilares (*Dress to Kill*, *Styling & Producciones* y *Consultoría & Speaker*).
 - **`Galería Editorial` (Home / `/galeria`)**: Fondos fotográficos con gradientes oscuros en las 4 tarjetas editoriales principales (*Blog*, *Prensa*, *Proyectos* y *Dirección Creativa*).
 - **Rediseño `Fashion Gallery` (`/galeria` & Home Portfolio)**:
