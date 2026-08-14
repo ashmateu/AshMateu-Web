@@ -13,6 +13,7 @@ import {
   Sun,
   Smartphone,
   Monitor,
+  Sparkles,
 } from "lucide-react";
 import gsap from "gsap";
 
@@ -25,26 +26,28 @@ interface FramingConfig {
 
 const DEFAULT_DESKTOP: FramingConfig = {
   x: 50,
-  y: 20,
+  y: 18,
   zoom: 100,
-  brightness: 115,
+  brightness: 112,
 };
 
-// Optimally focused on the model's face for vertical mobile viewports
 const DEFAULT_MOBILE: FramingConfig = {
   x: 70,
-  y: 22,
+  y: 20,
   zoom: 100,
-  brightness: 115,
+  brightness: 112,
 };
 
 export default function HeroCover() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
 
   const [isMobileScreen, setIsMobileScreen] = useState(false);
   const [activeTab, setActiveTab] = useState<"desktop" | "mobile">("desktop");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const [desktopFraming, setDesktopFraming] =
     useState<FramingConfig>(DEFAULT_DESKTOP);
@@ -54,32 +57,37 @@ export default function HeroCover() {
   const [showCalibrator, setShowCalibrator] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Detect screen size and load saved configurations
+  // Initialize screen size and load saved configurations synchronously on mount
   useEffect(() => {
-    const checkScreen = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobileScreen(mobile);
-      setActiveTab(mobile ? "mobile" : "desktop");
-    };
+    const isMob = window.innerWidth < 768;
+    setIsMobileScreen(isMob);
+    setActiveTab(isMob ? "mobile" : "desktop");
 
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-
-    // Load saved settings
     try {
       const savedDesk = localStorage.getItem("ash_hero_desktop_framing");
       if (savedDesk) {
-        setDesktopFraming((prev) => ({ ...prev, ...JSON.parse(savedDesk) }));
+        setDesktopFraming(JSON.parse(savedDesk));
       }
       const savedMob = localStorage.getItem("ash_hero_mobile_framing");
       if (savedMob) {
-        setMobileFraming((prev) => ({ ...prev, ...JSON.parse(savedMob) }));
+        setMobileFraming(JSON.parse(savedMob));
       }
     } catch (e) {
       console.error("Error loading saved framing configs", e);
     }
 
-    return () => window.removeEventListener("resize", checkScreen);
+    // Mark as loaded so transitions are enabled without jump
+    requestAnimationFrame(() => {
+      setIsLoaded(true);
+    });
+
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobileScreen(mobile);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const currentConfig = isMobileScreen ? mobileFraming : desktopFraming;
@@ -120,57 +128,104 @@ export default function HeroCover() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Cinematic GSAP Reveal on Mount
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.fromTo(
         heroRef.current,
-        { opacity: 0.85 },
-        { opacity: 1, duration: 1.2 }
+        { opacity: 0, scale: 1.04 },
+        { opacity: 1, scale: 1, duration: 1.4 }
       )
         .fromTo(
           textRef.current?.children || [],
-          { y: 35, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.16, duration: 1.2 },
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.14, duration: 1.1 },
           "-=0.9"
         )
         .fromTo(
           badgeRef.current,
-          { y: 20, opacity: 0 },
+          { y: 15, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.8 },
           "-=0.6"
         );
-    });
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
+
+  // Subtle Interactive Mouse Parallax on Desktop
+  useEffect(() => {
+    if (isMobileScreen) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!imageWrapperRef.current) return;
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5) * 12;
+      const yPos = (clientY / window.innerHeight - 0.5) * 10;
+
+      gsap.to(imageWrapperRef.current, {
+        x: xPos,
+        y: yPos,
+        duration: 1.2,
+        ease: "power1.out",
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [isMobileScreen]);
 
   const zoomPresets = [90, 100, 115, 130, 150, 180];
   const brightnessPresets = [100, 110, 120, 130, 140];
 
   return (
-    <section className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]">
-      {/* FULL-SCREEN HERO BACKGROUND IMAGE (4K UHD WITH SEPARATE MOBILE/DESKTOP FRAMING) */}
-      <div ref={heroRef} className="absolute inset-0 w-full h-full">
-        <Image
-          src="/images/hero/hero_cover_pptx.webp"
-          alt="Ash Mateu — Creative Direction & High Fashion Styling"
-          fill
-          priority
-          unoptimized
+    <section
+      ref={containerRef}
+      className="relative w-full h-[100svh] min-h-[660px] flex items-end overflow-hidden bg-[#0a0a0a]"
+    >
+      {/* FULL-SCREEN HERO BACKGROUND IMAGE WITH CINEMATIC BREATHE & LIGHTING */}
+      <div
+        ref={heroRef}
+        className={`absolute inset-0 w-full h-full opacity-0 transition-opacity duration-700 ${
+          isLoaded ? "opacity-100" : ""
+        }`}
+      >
+        <div ref={imageWrapperRef} className="relative w-full h-full scale-[1.03]">
+          <Image
+            src="/images/hero/hero_cover_pptx.webp"
+            alt="Ash Mateu — Creative Direction & High Fashion Styling"
+            fill
+            priority
+            unoptimized
+            style={{
+              objectFit: "cover",
+              objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
+              transform: `scale(${currentConfig.zoom / 100})`,
+              transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
+              filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
+              // Transition is enabled only after initial mount to avoid layout snapping
+              transition: isLoaded
+                ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
+                : "none",
+            }}
+          />
+        </div>
+
+        {/* LUXURY RADIAL LIGHT & CINEMATIC NOIR VIGNETTE */}
+        <div className="absolute inset-0 bg-radial-[circle_at_center] from-transparent via-black/25 to-black/85 pointer-events-none" />
+
+        {/* EDITORIAL GRADIENT OVERLAY (DARK TOWARDS BOTTOM FOR PERFECT TEXT CONTRAST) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 md:from-black/90 md:via-black/25 md:to-transparent pointer-events-none" />
+
+        {/* SUBTLE GRAIN TEXTURE OVERLAY */}
+        <div
+          className="absolute inset-0 opacity-[0.035] mix-blend-overlay pointer-events-none"
           style={{
-            objectFit: "cover",
-            objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
-            transform: `scale(${currentConfig.zoom / 100})`,
-            transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
-            filter: `brightness(${currentConfig.brightness / 100}) contrast(1.03) saturate(1.04)`,
-            transition:
-              "object-position 0.1s ease-out, transform 0.1s ease-out, filter 0.15s ease-out",
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           }}
         />
-        {/* EDITORIAL VIGNETTE GRADIENT (DARKER TOWARDS BOTTOM TO ENSURE TEXT LEGIBILITY ON MOBILE) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10 md:from-black/85 md:via-black/15 md:to-transparent pointer-events-none" />
       </div>
 
       {/* HERO OVERLAID CONTENT */}
@@ -228,50 +283,49 @@ export default function HeroCover() {
             </div>
           </div>
 
-          {/* LOCATIONS & CALIBRATOR TRIGGER BUTTON */}
+          {/* RIGHT BADGE: PARIS / NYC / BA & CLIENT HIGHLIGHT */}
           <div
             ref={badgeRef}
-            className="flex flex-col items-start lg:items-end text-white/70 text-[9.5px] sm:text-[10px] tracking-[0.24em] uppercase gap-2 pointer-events-auto"
+            className="flex flex-col items-start lg:items-end gap-3 text-white/80 pointer-events-auto"
           >
-            <div className="flex items-center gap-2 border-b border-white/20 pb-1">
+            <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[9.5px] tracking-[0.25em] uppercase font-medium shadow-lg">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638] animate-pulse" />
               <span>Buenos Aires · Nueva York · París</span>
             </div>
 
-            {/* ENCUADRE CALIBRATOR TOGGLE BUTTON */}
+            {/* QUICK CALIBRATOR TOGGLE BUTTON */}
             <button
               onClick={() => setShowCalibrator(!showCalibrator)}
-              className="mt-1 inline-flex items-center gap-1.5 bg-black/75 hover:bg-white text-white hover:text-black border border-white/40 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-[9.5px] tracking-[0.2em] uppercase font-medium transition-all backdrop-blur-md cursor-pointer shadow-xl active:scale-95"
+              className="group inline-flex items-center gap-2 bg-black/40 hover:bg-black/80 backdrop-blur-md border border-white/10 hover:border-[#b5a898] text-white/70 hover:text-white px-3 py-1 rounded-full text-[9px] tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer"
+              title="Ajustar encuadre de la foto de portada"
             >
-              <Sliders size={11} className="text-[#c9a84c]" />
-              <span>
-                {showCalibrator ? "Ocultar Calibrador" : "Ajustar Encuadre"}
-              </span>
+              <Sliders size={11} className="text-[#b5a898]" />
+              <span>{showCalibrator ? "Cerrar Ajustes" : "Ajustar Portada"}</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* LIVE ENCUADRE & LIGHTING CALIBRATOR PANEL (WITH MOBILE / DESKTOP SWITCHER) */}
+      {/* INTERACTIVE CALIBRATOR DRAWER / MODAL */}
       {showCalibrator && (
-        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-[#0a0a0a]/95 border border-white/25 text-white rounded-2xl p-4 sm:p-5 shadow-2xl backdrop-blur-2xl w-84 max-w-[calc(100vw-2rem)] animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto max-h-[85vh] overflow-y-auto">
-          {/* HEADER & DEVICE TABS */}
+        <div className="absolute top-20 right-6 md:right-12 z-50 w-[310px] sm:w-[340px] bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/20 p-5 rounded-2xl shadow-2xl text-white animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex items-center gap-1.5">
-              <Sliders size={13} className="text-[#c9a84c]" />
-              <span className="text-[11px] font-semibold tracking-wider uppercase text-white">
-                Ajuste de Encuadre
+            <div className="flex items-center gap-2">
+              <Sliders size={13} className="text-[#b5a898]" />
+              <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-white">
+                Encuadre de Portada
               </span>
             </div>
             <button
               onClick={() => setShowCalibrator(false)}
-              className="text-white/50 hover:text-white text-xs p-1 cursor-pointer"
+              className="text-white/60 hover:text-white text-xs p-1 cursor-pointer"
             >
               ✕
             </button>
           </div>
 
-          {/* DEVICE SWITCHER (CELULAR VS ESCRITORIO) */}
-          <div className="grid grid-cols-2 gap-1.5 p-1 bg-white/5 rounded-xl mt-3 border border-white/10 text-[10px] tracking-wider uppercase font-medium">
+          {/* DESKTOP / MOBILE SWITCHER */}
+          <div className="grid grid-cols-2 gap-1.5 bg-white/5 p-1 rounded-xl my-3 text-[10px] font-medium">
             <button
               onClick={() => setActiveTab("mobile")}
               className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
