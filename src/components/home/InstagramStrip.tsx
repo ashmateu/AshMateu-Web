@@ -83,10 +83,6 @@ export default function InstagramStrip() {
                   sizes="(max-width: 768px) 50vw, 16vw"
                   className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                {/* CITY WATERMARK */}
-                <div className="absolute top-2.5 right-2.5 bg-black/80 backdrop-blur-sm text-[#b5a898] text-[8px] tracking-[0.2em] uppercase px-2 py-0.5 font-medium border border-white/10">
-                  {p.loc}
-                </div>
               </a>
             </GsapReveal>
           ))}
