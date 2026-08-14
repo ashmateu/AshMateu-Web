@@ -50,45 +50,38 @@ export default function Navbar() {
               : "pt-7 sm:pt-8 md:pt-9 pb-5 md:pb-6"
           }`}
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-end lg:justify-center relative">
-            {/* NAV LINKS WITH '+' COUTURE DELIMITERS & CENTER-EXPANDING GOLD HOVER */}
-            <ul className="hidden lg:flex items-center gap-6 xl:gap-9 text-[13px] sm:text-[13.5px] tracking-[0.24em] uppercase font-medium text-white/95">
-              {navLinks.map((link, i) => {
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
+            {/* NAV LINKS (LEFT-ALIGNED, NO DELIMITERS, TIGHTER SPACING) */}
+            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] sm:text-[13.5px] tracking-[0.22em] uppercase font-medium text-white/95">
+              {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
-                  <React.Fragment key={link.label}>
-                    <li>
-                      <Link
-                        href={link.href}
-                        className={`transition-colors py-1.5 relative hover:text-white group flex items-center gap-1 ${
-                          isActive ? "text-white font-semibold" : ""
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className={`transition-colors py-1.5 relative hover:text-white group flex items-center ${
+                        isActive ? "text-white font-semibold" : "text-white/85"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      <span
+                        className={`absolute -bottom-0.5 left-0 h-[1.5px] bg-[#b5a898] transition-all duration-300 ${
+                          isActive ? "w-full" : "w-0 group-hover:w-full"
                         }`}
-                      >
-                        <span>{link.label}</span>
-                        <span
-                          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1.5px] bg-[#b5a898] transition-all duration-300 ${
-                            isActive ? "w-full" : "w-0 group-hover:w-full"
-                          }`}
-                        />
-                      </Link>
-                    </li>
-                    {i < navLinks.length - 1 && (
-                      <span className="text-[#b5a898]/50 select-none text-[10px] font-light">
-                        +
-                      </span>
-                    )}
-                  </React.Fragment>
+                      />
+                    </Link>
+                  </li>
                 );
               })}
             </ul>
 
-            {/* CTA: ATELIER DIRECT WHATSAPP (OFFICIAL WHATSAPP GREEN #25D366) */}
-            <div className="flex items-center gap-4 lg:absolute lg:right-6 xl:right-12">
+            {/* CTA: ATELIER DIRECT WHATSAPP & MOBILE MENU (RIGHT-ALIGNED) */}
+            <div className="flex items-center gap-4 ml-auto lg:ml-0">
               <a
                 href="https://wa.me/5491123823297"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group hidden sm:inline-flex items-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-black border border-[#25D366]/35 hover:border-[#25D366] px-4.5 py-2 rounded-full text-[11px] tracking-[0.2em] uppercase font-semibold transition-all duration-300 backdrop-blur-md shadow-sm active:scale-[0.98]"
+                className="group hidden sm:inline-flex items-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-black border border-[#25D366]/35 hover:border-[#25D366] px-4 py-2 rounded-full text-[11px] tracking-[0.18em] uppercase font-semibold transition-all duration-300 backdrop-blur-md shadow-sm active:scale-[0.98] flex-shrink-0"
               >
                 {/* WHATSAPP OFFICIAL ICON */}
                 <svg
