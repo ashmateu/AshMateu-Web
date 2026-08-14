@@ -7,12 +7,36 @@ import GsapReveal from "@/components/animations/GsapReveal";
 
 export default function InstagramStrip() {
   const photos = [
-    { src: "/images/hero_studio/MARIECLAIRE_2608064304_web.webp", alt: "Ash Mateu Editorial", loc: "PARIS" },
-    { src: "/images/extracted/chanel-hc/img-005.webp", alt: "Chanel Haute Couture NYC", loc: "NYC" },
-    { src: "/images/extracted/valentina-miumiu/img-000.webp", alt: "Valentina Ferrer Miu Miu", loc: "MILAN" },
-    { src: "/images/extracted/leonie-dg/img-003.webp", alt: "Leonie Hanne Dolce & Gabbana", loc: "VENEZIA" },
-    { src: "/images/extracted/calu-chinatown/img-004.webp", alt: "Calu Rivero Chinatown", loc: "NYC" },
-    { src: "/images/hero_studio/MARIECLAIRE_2608064351_web.webp", alt: "Ash Mateu Marie Claire", loc: "BA" },
+    {
+      src: "/images/catalog/03_fashion_week_paris_canon/4A2A4418.JPEG",
+      alt: "Ash Mateu en Paris Fashion Week Street Style",
+      loc: "PARÍS",
+    },
+    {
+      src: "/images/catalog/01_chanel_alta_costura_studio/_E8A9215.jpg",
+      alt: "Producción Chanel Haute Couture",
+      loc: "ESTUDIO",
+    },
+    {
+      src: "/images/catalog/03_fashion_week_paris_canon/4A2A4232.JPEG",
+      alt: "Ash Mateu en Fashion Week Fitting & Shows",
+      loc: "PARÍS",
+    },
+    {
+      src: "/images/hero_studio/MARIECLAIRE_2608064419_web.webp",
+      alt: "Ash Mateu Retrato Editorial de Moda",
+      loc: "BUENOS AIRES",
+    },
+    {
+      src: "/images/catalog/03_fashion_week_paris_canon/4A2A4184.JPEG",
+      alt: "Ash Mateu Cobertura de Moda Internacional",
+      loc: "PARÍS",
+    },
+    {
+      src: "/images/hero_studio/MARIECLAIRE_2608064351_web.webp",
+      alt: "Ash Mateu Dirección Creativa & Styling",
+      loc: "NUEVA YORK",
+    },
   ];
 
   return (
@@ -35,11 +59,14 @@ export default function InstagramStrip() {
             className="group inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-[#b5a898] hover:text-white border-b border-[#b5a898]/40 hover:border-white pb-1 transition-colors w-fit font-medium"
           >
             <span>Seguir en Instagram</span>
-            <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight
+              size={13}
+              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            />
           </a>
         </div>
 
-        {/* 6 EDITORIAL POLAROID TILES */}
+        {/* 6 HIGH-IMPACT POLAROID EDITORIAL TILES */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           {photos.map((p, idx) => (
             <GsapReveal key={idx} delay={idx * 0.03}>
@@ -54,10 +81,10 @@ export default function InstagramStrip() {
                   alt={p.alt}
                   fill
                   sizes="(max-width: 768px) 50vw, 16vw"
-                  className="object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 {/* CITY WATERMARK */}
-                <div className="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-sm text-[#b5a898] text-[8px] tracking-[0.2em] uppercase px-2 py-0.5 font-medium">
+                <div className="absolute top-2.5 right-2.5 bg-black/80 backdrop-blur-sm text-[#b5a898] text-[8px] tracking-[0.2em] uppercase px-2 py-0.5 font-medium border border-white/10">
                   {p.loc}
                 </div>
               </a>
