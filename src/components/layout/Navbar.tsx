@@ -51,16 +51,15 @@ export default function Navbar() {
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-            {/* OFFICIAL BRAND LOGO (30% BIGGER & HIGH DEFINITION) */}
-            <Link href="/" className="flex items-center group py-0.5" aria-label="Ash Mateu Prieto — Inicio">
-              <Image
-                src="/images/logo/ash_mateu_logo_white.webp"
-                alt="Ash Mateu Prieto — Creative Director & Fashion Consultant"
-                width={260}
-                height={90}
-                priority
-                className="h-11 sm:h-12 md:h-14 lg:h-[54px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-              />
+            {/* BRAND TYPOGRAPHIC WORDMARK */}
+            <Link
+              href="/"
+              className="group py-1 flex items-center"
+              aria-label="Ash Mateu — Inicio"
+            >
+              <span className="font-serif text-lg sm:text-xl md:text-2xl tracking-[0.22em] uppercase text-white font-normal group-hover:text-[#b5a898] transition-colors">
+                Ash Mateu
+              </span>
             </Link>
 
             {/* NAV LINKS WITH '+' COUTURE DELIMITERS & CENTER-EXPANDING GOLD HOVER */}
@@ -157,13 +156,11 @@ export default function Navbar() {
           </ul>
 
           <div className="pt-8 border-t border-white/15">
-            <Image
-              src="/images/logo/ash_mateu_logo_white.webp"
-              alt="Ash Mateu Prieto"
-              width={200}
-              height={69}
-              className="h-10 w-auto object-contain mb-3"
-            />
+            <div className="mb-3">
+              <span className="font-serif text-2xl tracking-[0.22em] uppercase text-white font-normal">
+                Ash Mateu
+              </span>
+            </div>
             <div className="flex flex-col gap-1 mb-4 text-[9px] tracking-[0.25em] uppercase text-[#b5a898]">
               <p>Buenos Aires · Nueva York · París · +54 9 11 2382-3297</p>
               <a href="mailto:info@ashmateu.com" className="hover:text-white transition-colors underline underline-offset-2">
