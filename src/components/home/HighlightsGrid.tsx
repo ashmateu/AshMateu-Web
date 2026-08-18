@@ -22,7 +22,7 @@ const milestones: Milestone[] = [
     badge: "2006",
     title: "Editorial Perfil",
     description: "La edad en la que empecé a dirigir producciones editoriales en Editorial Perfil.",
-    image: "/images/catalog_v2/ASH/IMG_0682-1.jpg",
+    image: "/images/catalog_v2/ASH/img_0286.jpg",
     imageAlt: "Debut Editorial 19 Años",
   },
   {
