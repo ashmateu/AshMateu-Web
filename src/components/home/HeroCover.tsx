@@ -34,8 +34,8 @@ const HERO_SLIDES = [
   {
     src: "/images/hero/carousel/slide-1.jpg",
     alt: "Producción Haute Couture dirigida por Ash Mateu — Paris Fashion Week",
-    desktop: { x: 50, y: 26, zoom: 115, brightness: 108 } as FramingConfig,
-    mobile: { x: 50, y: 24, zoom: 110, brightness: 108 } as FramingConfig,
+    desktop: { x: 85, y: 24, zoom: 170, brightness: 108 } as FramingConfig,
+    mobile: { x: 70, y: 22, zoom: 108, brightness: 108 } as FramingConfig,
   },
   {
     src: "/images/hero/carousel/slide-2.jpg",
