@@ -53,9 +53,56 @@
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
-.double-bezel-dark-inner {
-  background: #0f0f11;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* LUMINA INTERACTIVE LIST STYLES */
+.slider-wrapper {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+.slider-wrapper.loaded {
+  opacity: 1;
+}
+.slide-nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  max-width: 220px;
+}
+.slide-nav-item:hover {
+  opacity: 0.9;
+}
+.slide-nav-item.active {
+  opacity: 1;
+}
+.slide-progress-line {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+.slide-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #b5a898;
+  border-radius: 9999px;
+  transition: width 0.05s linear;
+}
+.slide-nav-title {
+  color: #ffffff;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.slide-nav-item.active .slide-nav-title {
+  color: #b5a898;
+  font-weight: 600;
 }
 
 /* SMOOTH TRANSITIONS */
