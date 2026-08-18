@@ -1,6 +1,6 @@
 # Handoff: ashmateu.com — Reconstrucción Next.js 16 + High-End Luxury Design System
 
-**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **NVIDIA NIM AI (OpenAI SDK)**, **Zod**, **Formspree**, **Supabase** y frameworks de diseño editorial de alta gama (**Stitch Design Taste** + **High-End Visual Design**).
+**Meta**: Reconstrucción técnica y visual integral de ashmateu.com en **Next.js 16.3.0 (App Router)** con **Tailwind CSS v4**, **TypeScript**, **React Server Components (RSC)**, **GSAP ScrollTrigger**, **NVIDIA NIM AI / Qwen AI**, **Zod**, **Formspree**, **Supabase** y frameworks de diseño editorial de alta gama (**Stitch Design Taste**, **High-End Visual Design**, **UI/UX Pro Max**).
 
 ---
 
@@ -10,166 +10,102 @@
 - **Directiva**: Cada fotografía donde aparezca Ash Mateu, modelos o figuras destacadas **debe tener el rostro 100% visible, sin cortes de frente, cabello u ojos**.
 - **Implementación Técnica**: Uso estricto de `object-cover object-[center_top]`, `object-[center_10%]` o `object-[center_15%]` en contenedores verticales o panorámicos (`next/image`), evitando `object-center` que corta la parte superior de los retratos.
 
-### 🎬 Portada Hero: Encuadre Predeterminado Global & Parallax (`HeroCover.tsx`)
-- **Encuadre Predeterminado en Código Base**:
-  - **Desktop**: `x: 76%`, `y: 22%`, `zoom: 145%`, `brightness: 110%`. Este encuadre destaca el primer plano de alto impacto de la modelo a la derecha, dejando el espacio negativo azul a la izquierda para la tipografía editorial.
-  - **Móvil**: `x: 75%`, `y: 22%`, `zoom: 130%`, `brightness: 110%`.
-  - Con estos valores fijos en el código fuente, **todos los usuarios nuevos (incluida Ash y cualquier visitante sin memoria local previa)** ven la portada exactamente en el encuadre de la segunda imagen.
-- **Eliminación Total del Layout Shift / Salto**:
-  - Se eliminaron las transiciones CSS en el primer render y se incorporó una cortina de revelado cinemática en GSAP (`opacity: 0 -> 1` con suave `scale: 1.03 -> 1.0`). La foto aparece de forma sedosa ya encuadrada en sus coordenadas exactas sin saltos perceptibles.
-- **Efecto de Movimiento Parallax**:
-  - **Parallax Sutil en Desktop**: Respuesta milimétrica al movimiento del cursor del ratón con inercia orgánica (`power1.out`).
-  - **Luminosidad y Colores Originales**: Sin viñeta ni grano artificial, conservando la luz natural y nitidez pura de la fotografía original.
+---
+
+### 🎨 Editor y Calibrador Universal de Fotos en Vivo (`UniversalImageCalibrator.tsx`)
+- **Aislamiento 100% Foto por Foto**:
+  - Cada imagen del sitio se identifica de forma única mediante un selector determinístico (`window.location.pathname::DOM_Path`).
+  - Al calibrar o cambiar una foto, **solo se modifica el elemento seleccionado (resaltado con borde verde brillante)** sin afectar a ninguna otra imagen de la página.
+- **Persistencia Permanente Invariable**:
+  - Los ajustes de encuadre y reemplazos de fotos se guardan automáticamente en `localStorage` (`ash_site_image_slots_v5_permanent`).
+  - Resistente a recargas, navegación entre páginas y montado asíncrono de componentes Next.js.
+- **Explorador y Cambiador de Fotos Integrado (`Catalog Picker`)**:
+  - Acceso directo a más de **910 fotografías y recursos de alta resolución** del catálogo (`src/lib/data/catalog_manifest.json`) divididos en 24 carpetas temáticas (*portadas*, *VALENTINA ZENERE*, *EMILIA ATTIAS*, *MODA CENTRAL PARK*, *ASH*, *RED CARPETS*, etc.).
+  - Soporte para subir imágenes locales desde el dispositivo (`FileReader` a DataURL) o ingresar URLs personalizadas.
+  - Sobrescritura forzada del atributo `srcset` interno de Next.js para actualización instantánea en el DOM.
+- **Exportación Rápida**: Botón *Exportar Todo* que copia al portapapeles el resumen JSON de todos los cambios de encuadre y reemplazos.
+
+---
+
+### 🏛️ Rediseño Editorial de "Highlights de Carrera" (`HighlightsGrid.tsx`)
+- **Coherencia y Armonía Estética con la Portada**:
+  - Fondo en lino cálido (`#F7F3EE`), líneas divisorias de 1px dorado suave (`#B5A898/40`) y tipografía clásica de revista de moda (*Bodoni Moda / Playfair Display* itálica para números display y sans ligera para cuerpos de texto).
+  - Eliminados los bloques oscuros y badges flotantes pesados para dar lugar a una presentación limpia, despojada y de alta costura.
+- **Composición Editorial en 3 Bloques**:
+  1. **Spread Principal (20 Años de Dirección de Moda)**:
+     - Número monumental `20` en itálica fina, declaración de autor de Ash y retrato vertical en alta resolución (`/images/hero/hero_cover_pptx.webp`).
+     - 3 pilares clave en el pie del spread: *01 · +150 Tapas Dirigidas*, *02 · NYFW & Haute Couture*, *03 · 150k Insiders Exit*.
+  2. **4 Columnas Editoriales con Fotografía Limpia**:
+     - *№ 01 · Debut Editorial 19 Años* (Editorial Perfil).
+     - *№ 02 · Front Row Cover NYFW 2010* (Lincoln Center).
+     - *№ 03 · +150 Tapas & Revistas* (Marie Claire, ¡HOLA!, etc.).
+     - *№ 04 · 150k Community & Exit* (Ash Mateu Studio).
+     - Todas las imágenes sin sellos ni cuadritos superpuestos, 100% limpias.
+  3. **Metadata de Cierre**:
+     - *01 · Residencia Global* (Buenos Aires · Nueva York · París · Londres · Dubái).
+     - *02 · Celebrity Styling & Red Carpets* (Dolores Fonzi, Valentina Zenere, Griselda Siciliani, Delfi Chaves, Gimena Accardi).
+     - *03 · Formación & Premios* (Central Saint Martins & Marangoni · 2x Martín Fierro & Premio Talento UP).
+
+---
+
+### 🎬 Portada Hero: Fotografía Editorial Pura & Calibración Fija (`HeroCover.tsx`)
+- **Foto Master 4K Nativa**: `public/images/hero/hero_cover_pptx.webp`.
+- **Encuadres Fijos en Código Fuente**:
+  - Desktop: `x: 76%`, `y: 22%`, `zoom: 145%`, `brightness: 110%`.
+  - Móvil: `x: 75%`, `y: 22%`, `zoom: 130%`, `brightness: 110%`.
+- **Comportamiento Limpio**: Sin reproductor de video ni botones de toggle, conservando la pureza y elegancia de la fotografía estática con parallax suave al cursor.
+
+---
 
 ### 🤖 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)
 - **Motor de Inteligencia Artificial**:
   - Proveedor: **Alibaba Cloud DashScope Compatible** (`https://dashscope-intl.aliyuncs.com/compatible-mode/v1`).
-  - Modelo Primario: `qwen-max` en modo **Streaming** (Time to First Token: ~1.4s con máxima capacidad de razonamiento editorial y fluidez en español).
-  - Modelo Secundario / Fallback: `qwen-turbo` (~600ms de latencia).
+  - Modelo Primario: `qwen-max` en modo **Streaming**.
+  - Modelo Secundario / Fallback: `qwen-turbo`.
   - Configuración Singleton: `src/lib/qwen-ai.ts`.
-  - Endpoint API: `src/app/api/concierge/route.ts` con respuesta chunked (`ReadableStream`) y fallback automático.
+  - Endpoint API: `src/app/api/concierge/route.ts` con respuesta chunked (`ReadableStream`).
 - **Componente de Interfaz (`src/components/concierge/ConciergeDrawer.tsx`)**:
-  - Sin botón flotante intrusivo en pantalla: el acceso es contextual y exclusivo a través del banner interactivo en **Styling Services (`/como-trabajo`)**.
-  - Chips de consulta rápida (Campañas, Novias, Dirección Creativa, Consultoría).
-  - Exportación con un click directo a WhatsApp (`https://wa.me/5491123823297`) con el brief formateado.
-- **Banner Interactivo en Servicios**:
-  - `src/components/concierge/ConciergeTriggerBanner.tsx` integrado en `/como-trabajo`.
+  - Activación contextual desde el banner en **Styling Services (`/como-trabajo`)**.
+  - Exportación de briefing formateado directo a WhatsApp (`+54 9 11 2382-3297`).
 
-### 🏛️ Highlights de Carrera: Diseño "Avant-Garde Editorial" (Stitch)
-- **Collage Asimétrico en Grilla de 12 Columnas**:
-  - Se eliminaron las cajas cuadradas y contenedores tradicionales, disponiendo los 11 hitos en una composición manual de pasarela sobre lienzo marfil (`#F7F3EE`).
-  - **Separadores Capilares de 1px**: Cada hito se separa con una línea vertical tenue (`border-l border-[#B5A898]/40 pl-5 md:pl-6`).
-  - **Escala al 70%**: Números display en *Bodoni Moda Italic* calibrados a `48px - 68px` (escala al 70%) para una integración equilibrada.
-  - **Offsets Asimétricos Tighter**: Desplazamientos verticales y horizontales compactos (`md:mt-4`, `md:mt-8`, `md:mt-12`), logrando dinamismo sin vacíos innecesarios.
+---
 
 ### 🏷️ Isologos Oficiales de Marcas & Publicaciones
-- **Vectores Oficiales Integrados**: Se reemplazaron los nombres en texto por los isologos vectoriales auténticos de las 10 marcas colaboradoras:
-  - **Chanel** (`chanel.webp`) — Doble C entrelazada y tipografía.
-  - **Louis Vuitton** (`louis_vuitton.webp`) — Monograma LV y wordmark.
-  - **Gucci** (`gucci.webp`) — Wordmark serif oficial corregido y centrado.
-  - **Miu Miu** (`miu_miu.webp`) — Logotipo geométrico de bloque.
-  - **Dolce & Gabbana** (`dolce_gabbana.webp`) — Logotipo con ampersand.
-  - **Marie Claire** (`marie_claire.webp`) — Cabecera de revista oficial.
-  - **Nike** (`nike.webp`) — Swoosh oficial.
-  - **L'Oréal Paris** (`loreal.webp`) — Wordmark de belleza oficial.
-  - **Mercedes-Benz** (`mercedes_benz.webp`) — Estrella de 3 puntas.
-  - **Netflix** (`netflix.webp`) — Wordmark arqueado oficial.
-- **Normalización Óptica**: Cada logo recortado a sus límites de píxel reales y alojado en contenedores homogéneos de `140px × 56px` con `opacity: 0.65` y hover a `1.0`.
-- **Identidad de Marca en Header & Footer**: La barra superior incluye el acceso directo **`HOME`** seguido de `WHAT I DO?`, `FASHION GALLERY`, `TRENDS`, `STYLING SERVICES`, `VLOG` y `NEWSLETTER`, con tracking tipográfico alargado y editorial (**`tracking-[0.28em] xl:tracking-[0.32em]`**) sobre `text-[13.5px]`. Los enlaces se alinean a la izquierda sin caracteres `+`, y el botón de WhatsApp se sitúa a la derecha sin riesgo de colisión. En el Footer se mantiene la firma tipográfica editorial (*ASH MATEU*).
-
-### 📬 Integraciones de Automatización & Formspree
-- **Formulario de Contacto (`/api/contact`)**:
-  - Conectado con el Form ID oficial de Formspree **`xeebjqpq`** (`https://formspree.io/f/xeebjqpq`).
-  - Cada envío valida los datos con Zod y los reenvía de forma inmediata al correo de Ash Mateu.
-- **Suscripción a Newsletter (`/newsletter`)**:
-  - Conectado al Form ID oficial de Formspree **`mqaeavog`** (`https://formspree.io/f/mqaeavog`).
-
-### ✉️ Unificación de Correo Electrónico
-- Correo oficial unificado en **`info@ashmateu.com`**:
-  - **ContactForm**: Enlace directo y visualización de `info@ashmateu.com`.
-  - **Footer**: Enlace directo `mailto:info@ashmateu.com` con icono vectorial.
-  - **Navbar Mobile Drawer**: Enlace directo `mailto:info@ashmateu.com`.
-
-### 🎯 Optimización de Conversión & Click-Paths
-- **`¿Cómo Trabajo?` (`/como-trabajo`)**:
-  - Se agregaron botones de acción rápida directos a WhatsApp con mensajes pre-cargados en **todos los pilares** (Novias, Galas, Imagen Personal, Fiestas, Campañas de Marca, Styling Editorial, Branding y Speaker Keynotes).
-- **`Trends & Blog` (`/blog`)**:
-  - Artículos y portadas con enlaces interactivos que conectan a `/prensa`, `/newsletter` y servicios afines.
-
-### 📏 Compactación Integral de Distancias y Rellenos
-- Se redujeron sistemáticamente los rellenos verticales en todas las secciones para un ritmo de navegación ágil y cómodo:
-  - **Highlights**: `py-16 md:py-20 lg:py-24`.
-  - **¿Cómo Trabajo? (3 Pilares)**: `py-16 md:py-20 lg:py-24`.
-  - **Galería Editorial**: `py-16 md:py-20 lg:py-24`.
-  - **Selected Works (Portfolio)**: `py-16 md:py-20 lg:py-24`.
-  - **Vlog & Redes**: `py-16 md:py-20 lg:py-24`.
-  - **Marcas & Instagram**: `py-12 md:py-16 lg:py-20`.
-  - **Formulario de Contacto**: `py-16 md:py-20 lg:py-24`.
-
-### 📸 Hero Cover & Background 4K Nativo
-- **Master Image**: Fotografía editorial 4K UHD nativa (`3840 × 2160 px`) en `public/images/hero/hero_cover_pptx.webp`.
-- **Estructura Tipográfica**: El nombre *Ash Mateu Prieto* está ubicado directamente arriba de *Creative Director & Fashion Consultant.* con una escala 50% mayor (`text-lg sm:text-xl md:text-2xl`), peso `font-light` y estilo visual refinado.
-- **Acciones del Hero**: Enlaces a *Mi Historia ↗* y *¿Cómo Trabajo? ↗* en formato editorial puro (solo texto con flecha y línea capilar inferior, sin cajas ni contenedores tipo píldora).
-- **Encuadres Calibrados**:
-  - **Móvil (9:16 vertical)**: Centrado en el rostro de la modelo (`X: 70%`, `Y: 22%`, `Zoom: 100%`).
-  - **Desktop (16:9 horizontal)**: Encuadre panorámico con aire superior (`X: 50%`, `Y: 20%`, `Zoom: 100%`).
-- **Luminosidad**: `brightness(115%) contrast(1.03) saturate(1.04)`.
-- **Panel Interactivo de Calibración**: Disponible en `HeroCover.tsx` para ajustes en vivo con guardado en `localStorage`.
-
-### ⚡ Animaciones de Scroll (GSAP ScrollTrigger)
-- **Efecto Híbrido**: Foco Óptico Blur (`blur(5px)` ➔ `blur(0px)`) + Micro-Zoom (`scale: 0.97` ➔ `1.0`) + micro-desplazamiento de `10px`.
-- **Velocidad**: `duration: 0.55s` con curva `power2.out` y `start: "top 88%"`.
-
-### 🟢 Botón y Enlaces de WhatsApp
-- Isotipo oficial y texto en `#25D366` en `Navbar.tsx` y `Footer.tsx`.
-- Teléfono directo unificado: **`+54 9 11 2382-3297`** (`https://wa.me/5491123823297`).
-
-### 📁 Catálogo Multimedia Organizado por Personaje & Producción (`public/images/catalog/`)
-Se procesaron y clasificaron **70 archivos fotográficos y audiovisuales de alta resolución** compartidos por Ash:
-1. `01_chanel_alta_costura_studio/` (7 fotos — Sesión de estudio Canon 5D Mark IV)
-2. `02_campanas_internacionales_sony_hires/` (3 fotos — Campañas Sony Alpha A7R IV en 61 MP)
-3. `03_fashion_week_paris_canon/` (8 fotos — Street style, fittings y desfiles en París)
-4. `04_celebridades_galas_red_carpet/` (8 fotos — Galas, alfombras rojas y premiaciones)
-5. `05_styling_editorial_celebrity_looks/` (7 fotos — Looks editoriales y estilismo de figuras)
-6. `06_novias_dress_to_kill_fittings/` (3 fotos — Pruebas de vestidos de novia de alta costura)
-7. `07_backstage_streetstyle_social/` (6 fotos — Backstages de desfiles y backstage de moda)
-8. `08_portadas_editoriales_prensa/` (20 fotos — Portadas de revistas, notas y artículos)
-9. `09_videos_reels_backstage/` (8 videos — Clips y reels para contenido visual)
-
-### 🖼️ Integración de Fotografías Reales de Ash en la Web
-- **`Mi Historia` (`/historia`)**: Retratos editoriales de Ash en Fashion Week París y Galas internacionales, más una galería ampliada de **"Momentos de Carrera & Backstage"** con **8 registros auténticos detrás de bambalinas, cámaras y set fotográfico**:
-  1. *Dirección de Set & Estudio Chanel* (Tomas con cámara Canon 5D Mark IV en estudio).
-  2. *Backstage & Fittings en París* (Preparación previa a desfiles en Paris Fashion Week).
-  3. *Detrás de Escena & Camarines* (Montaje y ajustes de peinado, maquillaje y prendas).
-  4. *Atelier & Fittings de Alta Costura* (Pruebas privadas de vestidos bordados de novia y gala).
-  5. *Cobertura en Vivo & Fotografía* (Captura de momentos de pasarela en Fashion Week).
-  6. *Set de Luces & Pruebas de Cámara* (Iluminación y calibración fotográfica en estudio).
-  7. *Producción de Moda & Backstage Social* (Dinámica de equipo y estilistas en set).
-  8. *Inside Studios & Masterclasses* (Enseñando el backstage de la industria de la moda).
-- **`¿Cómo Trabajo?` (`/como-trabajo`)**: Fotografía editorial de Ash en acción en cada uno de los 3 pilares (*Dress to Kill*, *Styling & Producciones* y *Consultoría & Speaker*).
-- **`Galería Editorial` (Home / `/galeria`)**: Fondos fotográficos con gradientes oscuros en las 4 tarjetas editoriales principales (*Blog*, *Prensa*, *Proyectos* y *Dirección Creativa*).
-- **Rediseño `Fashion Gallery` (`/galeria` & Home Portfolio)**:
-  - Aplicación de principios **Stitch Design Taste**: Grilla asimétrica tipo exhibición fotográfica pura.
-  - Filtros tipográficos minimalistas con subrayado activo de 2px.
-  - **Exhibición Ultra-Minimalista (Pure Imagery)**: Sin ningún texto debajo de las fotos en estado estático. Toda la información (`Nº 01`, cliente/marca como `Chanel / Marie Claire Argentina`, categoría editorial `Haute Couture`, locación y año) aparece en un overlay oscuro refinado **exclusivamente al posar el puntero (hover)** sobre la imagen.
-- **Tira de Instagram `@ashmateu` (`InstagramStrip.tsx`)**:
-  - Curada con **6 fotografías de máximo impacto visual** de Ash en Paris Fashion Week (street style y desfiles en gabardina de alta costura), producción de estudio para Chanel Haute Couture, y sesiones de portada internacional, con encuadres calibrados a `object-[center_top]` para visibilidad total de rostros.
-  - **Estética Ultra-Limpia**: Se eliminaron los textos/etiquetas de locación sobre las fotos para dejar las imágenes 100% puras.
+- Isologos vectoriales auténticos integrados: Chanel, Louis Vuitton, Gucci, Miu Miu, Dolce & Gabbana, Marie Claire, Nike, L'Oréal Paris, Mercedes-Benz, Netflix.
+- Normalización óptica a `140px × 56px` con opacidad base `0.65` y hover a `1.0`.
 
 ---
 
-## 2. Ramas de Git y Resguardo
-
-- **Rama de Trabajo Activa**: `preview/sitio-completo`.
-- **Rama de Backup**: `backup/antes-de-papel-notas` (apunta al commit `f0d794fe` con tarjetas blancas previas).
-- **Comando de Push**: `env -u GITHUB_TOKEN git push origin preview/sitio-completo`.
-- **Vercel Preview**: [ashmateu-web-git-preview-siti-c3f8cd-mrosso25486-7169s-projects.vercel.app](https://ashmateu-web-git-preview-siti-c3f8cd-mrosso25486-7169s-projects.vercel.app/)
+### 📬 Integraciones & Contacto
+- **Formulario de Contacto (`/api/contact`)**: Formspree ID `xeebjqpq`.
+- **Newsletter (`/newsletter`)**: Formspree ID `mqaeavog`.
+- **Correo Oficial Unificado**: `info@ashmateu.com`.
 
 ---
 
-## 3. Arquitectura y Stack
-
-- **Framework**: Next.js 16.3.0 (Turbopack, App Router, RSC, SSR/SSG).
-- **IA & Concierge**: NVIDIA NIM vía OpenAI SDK (`meta/llama-3.3-70b-instruct`) con streaming y fallback editorial.
-- **Estilos**: Tailwind CSS v4 con tokens de diseño editorial (`globals.css`).
-- **Tipografía**: Bodoni Moda (Google Fonts) para display numbers y títulos de pasarela; Montserrat para etiquetas de catálogo; Inter para textos de lectura.
-- **Validación de Formularios & Email**: Zod con esquema isomórfico (`src/lib/validations/contact.ts`), API Route (`/api/contact`) y despacho a Formspree (`xeebjqpq`).
-- **Gestión de Estado de URL**: `nuqs` con `<NuqsAdapter>` en el layout raíz para filtros de galería compartibles.
-- **Interactividad & Motion**: GSAP ScrollTrigger (`src/components/animations/GsapReveal.tsx`).
-- **Prensa & Columnas**: Conexión a Supabase (`src/lib/data/press.ts`) con 21 artículos reales de Marie Claire Argentina (`marieclaire.perfil.com`).
+### 🛠️ Skills & Herramientas de Diseño Instaladas
+- **`ui-ux-pro-max`**: Instalado en `.agents/skills/ui-ux-pro-max/` y `~/.gemini/config/skills/ui-ux-pro-max/` con motor de búsqueda local (79 estilos, 192 paletas, 74 font pairings, 119 reglas UX).
+- **`open-design`**, **`stitch-design-taste`**, **`design-taste-frontend`**, **`graphify`**, **`handoff`**.
 
 ---
 
-## 4. Mapa de Rutas
+## 2. Mapa de Rutas y Arquitectura
 
-- `/` (`src/app/page.tsx`): HeroCover, HighlightsGrid, ServicesPillars, EditorialGaleria, PortfolioGallery, VlogSection, ClientsStrip, InstagramStrip, ContactForm.
-- `/como-trabajo` (`src/app/como-trabajo/page.tsx`): 3 pilares de servicio con cotización directa + Banner Concierge IA.
-- `/historia` (`src/app/historia/page.tsx`): Biografía, retratos Marie Claire y trayectoria.
-- `/galeria` (`src/app/galeria/page.tsx`): Archivo visual interactivo con filtros URL (`nuqs`).
-- `/blog` (`src/app/blog/page.tsx`): Tendencias y macrotendencias editoriales.
-- `/newsletter` (`src/app/newsletter/page.tsx`): Suscripción y artículos de investigación.
-- `/prensa` (`src/app/prensa/page.tsx`): Tapas y notas en Marie Claire.
-- `/projects/[slug]` (`src/app/projects/[slug]/page.tsx`): Páginas individuales para 8 proyectos editoriales.
-- `API Routes`:
-  - `POST /api/contact`: Validación Zod y despacho a Formspree.
-  - `POST /api/concierge`: Inferencia con NVIDIA NIM OpenAI SDK.
+| Ruta | Componente / Propósito | Estado |
+| :--- | :--- | :--- |
+| `/` | `src/app/page.tsx` — Hero, Highlights, Servicios, Galería, Vlog, Marcas, Contacto | ✅ 100% Producción |
+| `/como-trabajo` | `src/app/como-trabajo/page.tsx` — 9 Cuadros de Styling Services + Concierge IA Banner | ✅ 100% Producción |
+| `/galeria` | `src/app/galeria/page.tsx` — Editorial Fashion Gallery con filtros por categoría | ✅ 100% Producción |
+| `/historia` | `src/app/historia/page.tsx` — Biografía, Manifiesto y trayectoria de Ash Mateu | ✅ 100% Producción |
+| `/prensa` | `src/app/prensa/page.tsx` — Colección de Portadas y Notas de Prensa | ✅ 100% Producción |
+| `/blog` | `src/app/blog/page.tsx` — Artículos de tendencias y macrotendencias de moda | ✅ 100% Producción |
+| `/newsletter` | `src/app/newsletter/page.tsx` — Suscripción VIP semanal | ✅ 100% Producción |
+| `/projects/[slug]` | `src/app/projects/[slug]/page.tsx` — Casos de estudio dinámicos SSG | ✅ 100% Producción |
+
+---
+
+## 3. URLs de Despliegue en Vivo
+
+- **URL de Producción Canónica (Siempre actualizada)**:
+  👉 **[https://ashmateu-web.vercel.app](https://ashmateu-web.vercel.app/)**
+- **Ramas Git**: Sincronizadas y mergeadas en `preview/sitio-completo` y `main`.

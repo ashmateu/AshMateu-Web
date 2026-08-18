@@ -454,19 +454,10 @@
       "norm_label": "nuqs"
     },
     {
-      "label": "openai",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L19",
-      "id": "package_dependencies_openai",
-      "community": 10,
-      "norm_label": "openai"
-    },
-    {
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L19",
       "id": "package_dependencies_react",
       "community": 10,
       "norm_label": "react"
@@ -475,7 +466,7 @@
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L20",
       "id": "package_dependencies_react_dom",
       "community": 10,
       "norm_label": "react-dom"
@@ -484,7 +475,7 @@
       "label": "tailwind-merge",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L21",
       "id": "package_dependencies_tailwind_merge",
       "community": 10,
       "norm_label": "tailwind-merge"
@@ -493,7 +484,7 @@
       "label": "zod",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L22",
       "id": "package_dependencies_zod",
       "community": 10,
       "norm_label": "zod"
@@ -502,7 +493,7 @@
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L24",
       "id": "package_devdependencies",
       "community": 10,
       "norm_label": "devdependencies"
@@ -511,7 +502,7 @@
       "label": "@tailwindcss/postcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L26",
+      "source_location": "L25",
       "id": "package_devdependencies_tailwindcss_postcss",
       "community": 10,
       "norm_label": "@tailwindcss/postcss"
@@ -520,7 +511,7 @@
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L27",
+      "source_location": "L26",
       "id": "package_devdependencies_types_node",
       "community": 10,
       "norm_label": "@types/node"
@@ -529,7 +520,7 @@
       "label": "@types/react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L27",
       "id": "package_devdependencies_types_react",
       "community": 10,
       "norm_label": "@types/react"
@@ -538,7 +529,7 @@
       "label": "@types/react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L28",
       "id": "package_devdependencies_types_react_dom",
       "community": 10,
       "norm_label": "@types/react-dom"
@@ -547,7 +538,7 @@
       "label": "postcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L30",
+      "source_location": "L29",
       "id": "package_devdependencies_postcss",
       "community": 10,
       "norm_label": "postcss"
@@ -556,7 +547,7 @@
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L31",
+      "source_location": "L30",
       "id": "package_devdependencies_tailwindcss",
       "community": 10,
       "norm_label": "tailwindcss"
@@ -565,7 +556,7 @@
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L32",
+      "source_location": "L31",
       "id": "package_devdependencies_typescript",
       "community": 10,
       "norm_label": "typescript"
@@ -1644,37 +1635,19 @@
     {
       "label": "route.ts",
       "file_type": "code",
-      "source_file": "src/app/api/concierge/route.ts",
-      "source_location": "L1",
-      "id": "concierge_route",
-      "community": 62,
-      "norm_label": "route.ts"
-    },
-    {
-      "label": "POST()",
-      "file_type": "code",
-      "source_file": "src/app/api/concierge/route.ts",
-      "source_location": "L12",
-      "id": "concierge_route_post",
-      "community": 62,
-      "norm_label": "post()"
-    },
-    {
-      "label": "route.ts",
-      "file_type": "code",
       "source_file": "src/app/api/contact/route.ts",
       "source_location": "L1",
       "id": "contact_route",
-      "community": 54,
+      "community": 16,
       "norm_label": "route.ts"
     },
     {
       "label": "POST()",
       "file_type": "code",
       "source_file": "src/app/api/contact/route.ts",
-      "source_location": "L7",
+      "source_location": "L4",
       "id": "contact_route_post",
-      "community": 54,
+      "community": 16,
       "norm_label": "post()"
     },
     {
@@ -1690,7 +1663,7 @@
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/blog/page.tsx",
-      "source_location": "L7",
+      "source_location": "L6",
       "id": "blog_page_metadata",
       "community": 1,
       "norm_label": "metadata"
@@ -1699,7 +1672,7 @@
       "label": "articles",
       "file_type": "code",
       "source_file": "src/app/blog/page.tsx",
-      "source_location": "L13",
+      "source_location": "L12",
       "id": "blog_page_articles",
       "community": 1,
       "norm_label": "articles"
@@ -1708,7 +1681,7 @@
       "label": "BlogPage()",
       "file_type": "code",
       "source_file": "src/app/blog/page.tsx",
-      "source_location": "L49",
+      "source_location": "L42",
       "id": "blog_page_blogpage",
       "community": 1,
       "norm_label": "blogpage()"
@@ -1719,25 +1692,25 @@
       "source_file": "src/app/como-trabajo/page.tsx",
       "source_location": "L1",
       "id": "como_trabajo_page",
-      "community": 54,
+      "community": 16,
       "norm_label": "page.tsx"
     },
     {
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/como-trabajo/page.tsx",
-      "source_location": "L9",
+      "source_location": "L6",
       "id": "como_trabajo_page_metadata",
-      "community": 54,
+      "community": 16,
       "norm_label": "metadata"
     },
     {
       "label": "ComoTrabajoPage()",
       "file_type": "code",
       "source_file": "src/app/como-trabajo/page.tsx",
-      "source_location": "L15",
+      "source_location": "L12",
       "id": "como_trabajo_page_comotrabajopage",
-      "community": 54,
+      "community": 16,
       "norm_label": "comotrabajopage()"
     },
     {
@@ -1807,7 +1780,7 @@
       "label": "bodoni",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L11",
+      "source_location": "L9",
       "id": "app_layout_bodoni",
       "community": 22,
       "norm_label": "bodoni"
@@ -1816,7 +1789,7 @@
       "label": "montserrat",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L18",
+      "source_location": "L16",
       "id": "app_layout_montserrat",
       "community": 22,
       "norm_label": "montserrat"
@@ -1825,7 +1798,7 @@
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L25",
+      "source_location": "L23",
       "id": "app_layout_metadata",
       "community": 22,
       "norm_label": "metadata"
@@ -1834,7 +1807,7 @@
       "label": "RootLayout()",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L51",
+      "source_location": "L49",
       "id": "app_layout_rootlayout",
       "community": 22,
       "norm_label": "rootlayout()"
@@ -1915,7 +1888,7 @@
       "label": "PrensaPage()",
       "file_type": "code",
       "source_file": "src/app/prensa/page.tsx",
-      "source_location": "L24",
+      "source_location": "L21",
       "id": "prensa_page_prensapage",
       "community": 54,
       "norm_label": "prensapage()"
@@ -1993,111 +1966,12 @@
       "norm_label": "gsapreveal()"
     },
     {
-      "label": "UniversalImageCalibrator.tsx",
-      "file_type": "code",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L1",
-      "id": "common_universalimagecalibrator",
-      "community": 22,
-      "norm_label": "universalimagecalibrator.tsx"
-    },
-    {
-      "label": "SlotConfig",
-      "file_type": "code",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L25",
-      "id": "common_universalimagecalibrator_slotconfig",
-      "community": 22,
-      "norm_label": "slotconfig"
-    },
-    {
-      "label": "DEFAULT_CONFIG",
-      "file_type": "code",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L34",
-      "id": "common_universalimagecalibrator_default_config",
-      "community": 22,
-      "norm_label": "default_config"
-    },
-    {
-      "label": "getDomPath()",
-      "file_type": "code",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L44",
-      "id": "common_universalimagecalibrator_getdompath",
-      "community": 22,
-      "norm_label": "getdompath()"
-    },
-    {
-      "label": "UniversalImageCalibrator()",
-      "file_type": "code",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L61",
-      "id": "common_universalimagecalibrator_universalimagecalibrator",
-      "community": 22,
-      "norm_label": "universalimagecalibrator()"
-    },
-    {
-      "label": "ConciergeDrawer.tsx",
-      "file_type": "code",
-      "source_file": "src/components/concierge/ConciergeDrawer.tsx",
-      "source_location": "L1",
-      "id": "concierge_conciergedrawer",
-      "community": 22,
-      "norm_label": "conciergedrawer.tsx"
-    },
-    {
-      "label": "Message",
-      "file_type": "code",
-      "source_file": "src/components/concierge/ConciergeDrawer.tsx",
-      "source_location": "L17",
-      "id": "concierge_conciergedrawer_message",
-      "community": 22,
-      "norm_label": "message"
-    },
-    {
-      "label": "STARTER_PROMPTS",
-      "file_type": "code",
-      "source_file": "src/components/concierge/ConciergeDrawer.tsx",
-      "source_location": "L24",
-      "id": "concierge_conciergedrawer_starter_prompts",
-      "community": 22,
-      "norm_label": "starter_prompts"
-    },
-    {
-      "label": "ConciergeDrawer()",
-      "file_type": "code",
-      "source_file": "src/components/concierge/ConciergeDrawer.tsx",
-      "source_location": "L43",
-      "id": "concierge_conciergedrawer_conciergedrawer",
-      "community": 22,
-      "norm_label": "conciergedrawer()"
-    },
-    {
-      "label": "ConciergeTriggerBanner.tsx",
-      "file_type": "code",
-      "source_file": "src/components/concierge/ConciergeTriggerBanner.tsx",
-      "source_location": "L1",
-      "id": "concierge_conciergetriggerbanner",
-      "community": 54,
-      "norm_label": "conciergetriggerbanner.tsx"
-    },
-    {
-      "label": "ConciergeTriggerBanner()",
-      "file_type": "code",
-      "source_file": "src/components/concierge/ConciergeTriggerBanner.tsx",
-      "source_location": "L6",
-      "id": "concierge_conciergetriggerbanner_conciergetriggerbanner",
-      "community": 54,
-      "norm_label": "conciergetriggerbanner()"
-    },
-    {
       "label": "ContactForm.tsx",
       "file_type": "code",
       "source_file": "src/components/contact/ContactForm.tsx",
       "source_location": "L1",
       "id": "contact_contactform",
-      "community": 54,
+      "community": 16,
       "norm_label": "contactform.tsx"
     },
     {
@@ -2106,7 +1980,7 @@
       "source_file": "src/components/contact/ContactForm.tsx",
       "source_location": "L8",
       "id": "contact_contactform_contactform",
-      "community": 54,
+      "community": 16,
       "norm_label": "contactform()"
     },
     {
@@ -2115,34 +1989,16 @@
       "source_file": "src/components/home/ClientsStrip.tsx",
       "source_location": "L1",
       "id": "home_clientsstrip",
-      "community": 63,
+      "community": 15,
       "norm_label": "clientsstrip.tsx"
-    },
-    {
-      "label": "BrandItem",
-      "file_type": "code",
-      "source_file": "src/components/home/ClientsStrip.tsx",
-      "source_location": "L7",
-      "id": "home_clientsstrip_branditem",
-      "community": 63,
-      "norm_label": "branditem"
-    },
-    {
-      "label": "brandLogos",
-      "file_type": "code",
-      "source_file": "src/components/home/ClientsStrip.tsx",
-      "source_location": "L15",
-      "id": "home_clientsstrip_brandlogos",
-      "community": 63,
-      "norm_label": "brandlogos"
     },
     {
       "label": "ClientsStrip()",
       "file_type": "code",
       "source_file": "src/components/home/ClientsStrip.tsx",
-      "source_location": "L88",
+      "source_location": "L6",
       "id": "home_clientsstrip_clientsstrip",
-      "community": 63,
+      "community": 15,
       "norm_label": "clientsstrip()"
     },
     {
@@ -2158,7 +2014,7 @@
       "label": "EditorialGaleria()",
       "file_type": "code",
       "source_file": "src/components/home/EditorialGaleria.tsx",
-      "source_location": "L9",
+      "source_location": "L8",
       "id": "home_editorialgaleria_editorialgaleria",
       "community": 30,
       "norm_label": "editorialgaleria()"
@@ -2176,7 +2032,7 @@
       "label": "FramingConfig",
       "file_type": "code",
       "source_file": "src/components/home/HeroCover.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "id": "home_herocover_framingconfig",
       "community": 61,
       "norm_label": "framingconfig"
@@ -2185,7 +2041,7 @@
       "label": "DEFAULT_DESKTOP",
       "file_type": "code",
       "source_file": "src/components/home/HeroCover.tsx",
-      "source_location": "L27",
+      "source_location": "L26",
       "id": "home_herocover_default_desktop",
       "community": 61,
       "norm_label": "default_desktop"
@@ -2218,28 +2074,28 @@
       "norm_label": "highlightsgrid.tsx"
     },
     {
-      "label": "Milestone",
+      "label": "HighlightNote",
       "file_type": "code",
       "source_file": "src/components/home/HighlightsGrid.tsx",
-      "source_location": "L8",
-      "id": "home_highlightsgrid_milestone",
+      "source_location": "L7",
+      "id": "home_highlightsgrid_highlightnote",
       "community": 27,
-      "norm_label": "milestone"
+      "norm_label": "highlightnote"
     },
     {
-      "label": "milestones",
+      "label": "highlightsNotes",
       "file_type": "code",
       "source_file": "src/components/home/HighlightsGrid.tsx",
-      "source_location": "L18",
-      "id": "home_highlightsgrid_milestones",
+      "source_location": "L22",
+      "id": "home_highlightsgrid_highlightsnotes",
       "community": 27,
-      "norm_label": "milestones"
+      "norm_label": "highlightsnotes"
     },
     {
       "label": "HighlightsGrid()",
       "file_type": "code",
       "source_file": "src/components/home/HighlightsGrid.tsx",
-      "source_location": "L57",
+      "source_location": "L166",
       "id": "home_highlightsgrid_highlightsgrid",
       "community": 27,
       "norm_label": "highlightsgrid()"
@@ -2250,7 +2106,7 @@
       "source_file": "src/components/home/InstagramStrip.tsx",
       "source_location": "L1",
       "id": "home_instagramstrip",
-      "community": 15,
+      "community": 57,
       "norm_label": "instagramstrip.tsx"
     },
     {
@@ -2259,7 +2115,7 @@
       "source_file": "src/components/home/InstagramStrip.tsx",
       "source_location": "L8",
       "id": "home_instagramstrip_instagramstrip",
-      "community": 15,
+      "community": 57,
       "norm_label": "instagramstrip()"
     },
     {
@@ -2275,7 +2131,7 @@
       "label": "ServicesPillars()",
       "file_type": "code",
       "source_file": "src/components/home/ServicesPillars.tsx",
-      "source_location": "L9",
+      "source_location": "L8",
       "id": "home_servicespillars_servicespillars",
       "community": 15,
       "norm_label": "servicespillars()"
@@ -2387,231 +2243,6 @@
       "id": "vlog_vlogsection_vlogsection",
       "community": 29,
       "norm_label": "vlogsection()"
-    },
-    {
-      "label": "catalog_manifest.json",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L1",
-      "id": "data_catalog_manifest",
-      "community": 16,
-      "norm_label": "catalog_manifest.json"
-    },
-    {
-      "label": "General / Miscel\u00e1nea",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2",
-      "id": "data_catalog_manifest_general_miscel\u00e1nea",
-      "community": 16,
-      "norm_label": "general / miscelanea"
-    },
-    {
-      "label": "Moda estudio tapa lunares New York jpegs",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2914",
-      "id": "data_catalog_manifest_moda_estudio_tapa_lunares_new_york_jpegs",
-      "community": 16,
-      "norm_label": "moda estudio tapa lunares new york jpegs"
-    },
-    {
-      "label": "PDFS MC",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2956",
-      "id": "data_catalog_manifest_pdfs_mc",
-      "community": 16,
-      "norm_label": "pdfs mc"
-    },
-    {
-      "label": "RED CARPETS",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2973",
-      "id": "data_catalog_manifest_red_carpets",
-      "community": 16,
-      "norm_label": "red carpets"
-    },
-    {
-      "label": "portadas",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3105",
-      "id": "data_catalog_manifest_portadas",
-      "community": 16,
-      "norm_label": "portadas"
-    },
-    {
-      "label": "CALU RIVERO",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3227",
-      "id": "data_catalog_manifest_calu_rivero",
-      "community": 16,
-      "norm_label": "calu rivero"
-    },
-    {
-      "label": "Speaker",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3274",
-      "id": "data_catalog_manifest_speaker",
-      "community": 16,
-      "norm_label": "speaker"
-    },
-    {
-      "label": "VALENTINA ZENERE",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3281",
-      "id": "data_catalog_manifest_valentina_zenere",
-      "community": 16,
-      "norm_label": "valentina zenere"
-    },
-    {
-      "label": "MODA ESTUDIO NY",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3403",
-      "id": "data_catalog_manifest_moda_estudio_ny",
-      "community": 16,
-      "norm_label": "moda estudio ny"
-    },
-    {
-      "label": "36. Valentina Ferrer Marie Claire",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3445",
-      "id": "data_catalog_manifest_36_valentina_ferrer_marie_claire",
-      "community": 16,
-      "norm_label": "36. valentina ferrer marie claire"
-    },
-    {
-      "label": "VARIOS",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3517",
-      "id": "data_catalog_manifest_varios",
-      "community": 16,
-      "norm_label": "varios"
-    },
-    {
-      "label": "VARIOS/Til\u00edn",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3659",
-      "id": "data_catalog_manifest_varios_til\u00edn",
-      "community": 16,
-      "norm_label": "varios/tilin"
-    },
-    {
-      "label": "VARIOS/BELU NEGRI DMAG - TAPA Y EDITORIAL",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3711",
-      "id": "data_catalog_manifest_varios_belu_negri_dmag_tapa_y_editorial",
-      "community": 16,
-      "norm_label": "varios/belu negri dmag - tapa y editorial"
-    },
-    {
-      "label": "VARIOS/TULI ACOSTA",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3783",
-      "id": "data_catalog_manifest_varios_tuli_acosta",
-      "community": 16,
-      "norm_label": "varios/tuli acosta"
-    },
-    {
-      "label": "Red carpets & Brides",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3825",
-      "id": "data_catalog_manifest_red_carpets_brides",
-      "community": 16,
-      "norm_label": "red carpets & brides"
-    },
-    {
-      "label": "MODA CENTRAL PARK Fotos extra",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3957",
-      "id": "data_catalog_manifest_moda_central_park_fotos_extra",
-      "community": 16,
-      "norm_label": "moda central park fotos extra"
-    },
-    {
-      "label": "ASH",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3979",
-      "id": "data_catalog_manifest_ash",
-      "community": 16,
-      "norm_label": "ash"
-    },
-    {
-      "label": "Campaigns",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4316",
-      "id": "data_catalog_manifest_campaigns",
-      "community": 16,
-      "norm_label": "campaigns"
-    },
-    {
-      "label": "EMILIA ATTIAS",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4478",
-      "id": "data_catalog_manifest_emilia_attias",
-      "community": 16,
-      "norm_label": "emilia attias"
-    },
-    {
-      "label": "BELU NEGRI",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4515",
-      "id": "data_catalog_manifest_belu_negri",
-      "community": 16,
-      "norm_label": "belu negri"
-    },
-    {
-      "label": "BACKSTAGE",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4542",
-      "id": "data_catalog_manifest_backstage",
-      "community": 16,
-      "norm_label": "backstage"
-    },
-    {
-      "label": "TULI ACOSTA",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4549",
-      "id": "data_catalog_manifest_tuli_acosta",
-      "community": 16,
-      "norm_label": "tuli acosta"
-    },
-    {
-      "label": "MODA CENTRAL PARK",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4576",
-      "id": "data_catalog_manifest_moda_central_park",
-      "community": 16,
-      "norm_label": "moda central park"
-    },
-    {
-      "label": "TAPA MODA FLOR CENTRAL PARK PANDORA",
-      "file_type": "code",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4603",
-      "id": "data_catalog_manifest_tapa_moda_flor_central_park_pandora",
-      "community": 16,
-      "norm_label": "tapa moda flor central park pandora"
     },
     {
       "label": "highlights.ts",
@@ -2740,60 +2371,6 @@
       "norm_label": "defaultvlogitems"
     },
     {
-      "label": "nvidia-ai.ts",
-      "file_type": "code",
-      "source_file": "src/lib/nvidia-ai.ts",
-      "source_location": "L1",
-      "id": "lib_nvidia_ai",
-      "community": 64,
-      "norm_label": "nvidia-ai.ts"
-    },
-    {
-      "label": "nvidiaAI",
-      "file_type": "code",
-      "source_file": "src/lib/nvidia-ai.ts",
-      "source_location": "L17",
-      "id": "lib_nvidia_ai_nvidiaai",
-      "community": 64,
-      "norm_label": "nvidiaai"
-    },
-    {
-      "label": "ChatMessage",
-      "file_type": "code",
-      "source_file": "src/lib/nvidia-ai.ts",
-      "source_location": "L51",
-      "id": "lib_nvidia_ai_chatmessage",
-      "community": 64,
-      "norm_label": "chatmessage"
-    },
-    {
-      "label": "qwen-ai.ts",
-      "file_type": "code",
-      "source_file": "src/lib/qwen-ai.ts",
-      "source_location": "L1",
-      "id": "lib_qwen_ai",
-      "community": 62,
-      "norm_label": "qwen-ai.ts"
-    },
-    {
-      "label": "qwenAI",
-      "file_type": "code",
-      "source_file": "src/lib/qwen-ai.ts",
-      "source_location": "L17",
-      "id": "lib_qwen_ai_qwenai",
-      "community": 62,
-      "norm_label": "qwenai"
-    },
-    {
-      "label": "ChatMessage",
-      "file_type": "code",
-      "source_file": "src/lib/qwen-ai.ts",
-      "source_location": "L51",
-      "id": "lib_qwen_ai_chatmessage",
-      "community": 62,
-      "norm_label": "chatmessage"
-    },
-    {
       "label": "client.ts",
       "file_type": "code",
       "source_file": "src/lib/supabase/client.ts",
@@ -2826,7 +2403,7 @@
       "source_file": "src/lib/validations/contact.ts",
       "source_location": "L1",
       "id": "validations_contact",
-      "community": 54,
+      "community": 16,
       "norm_label": "contact.ts"
     },
     {
@@ -2835,7 +2412,7 @@
       "source_file": "src/lib/validations/contact.ts",
       "source_location": "L3",
       "id": "validations_contact_contactschema",
-      "community": 54,
+      "community": 16,
       "norm_label": "contactschema"
     },
     {
@@ -2844,7 +2421,7 @@
       "source_file": "src/lib/validations/contact.ts",
       "source_location": "L20",
       "id": "validations_contact_contactformdata",
-      "community": 54,
+      "community": 16,
       "norm_label": "contactformdata"
     },
     {
@@ -3721,166 +3298,31 @@
       "norm_label": "handoff: ashmateu.com \u2014 reconstruccion next.js 16 + high-end luxury design system"
     },
     {
-      "label": "1. Estado Actual del Proyecto & \u00daltimos Hitos",
+      "label": "1. Arquitectura y Stack Actual",
       "file_type": "document",
       "source_file": "HANDOFF.md",
       "source_location": "L7",
-      "id": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
+      "id": "handoff_1_arquitectura_y_stack_actual",
       "community": 28,
-      "norm_label": "1. estado actual del proyecto & ultimos hitos"
+      "norm_label": "1. arquitectura y stack actual"
     },
     {
-      "label": "\ud83d\udc51 REGLA INQUEBRANTABLE: Visibilidad Total del Rostro del Protagonista",
+      "label": "2. Mapa de Rutas & Componentes de Alta Gama",
       "file_type": "document",
       "source_file": "HANDOFF.md",
-      "source_location": "L9",
-      "id": "handoff_regla_inquebrantable_visibilidad_total_del_rostro_del_protagonista",
+      "source_location": "L21",
+      "id": "handoff_2_mapa_de_rutas_componentes_de_alta_gama",
       "community": 28,
-      "norm_label": "\ud83d\udc51 regla inquebrantable: visibilidad total del rostro del protagonista"
+      "norm_label": "2. mapa de rutas & componentes de alta gama"
     },
     {
-      "label": "\ud83c\udfac Portada Hero: Encuadre Predeterminado Global & Parallax (`HeroCover.tsx`)",
+      "label": "3. Reglas de Git y Despliegue",
       "file_type": "document",
       "source_file": "HANDOFF.md",
-      "source_location": "L13",
-      "id": "handoff_portada_hero_encuadre_predeterminado_global_parallax_herocover_tsx",
+      "source_location": "L43",
+      "id": "handoff_3_reglas_de_git_y_despliegue",
       "community": 28,
-      "norm_label": "\ud83c\udfac portada hero: encuadre predeterminado global & parallax (`herocover.tsx`)"
-    },
-    {
-      "label": "\ud83e\udd16 Concierge Editorial VIP & Creative Briefing con IA (Qwen AI)",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L24",
-      "id": "handoff_concierge_editorial_vip_creative_briefing_con_ia_qwen_ai",
-      "community": 28,
-      "norm_label": "\ud83e\udd16 concierge editorial vip & creative briefing con ia (qwen ai)"
-    },
-    {
-      "label": "\ud83c\udfdb\ufe0f Highlights de Carrera: Dise\u00f1o \"Avant-Garde Editorial\" (Stitch)",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L38",
-      "id": "handoff_highlights_de_carrera_dise\u00f1o_avant_garde_editorial_stitch",
-      "community": 28,
-      "norm_label": "\ud83c\udfdb\ufe0f highlights de carrera: diseno \"avant-garde editorial\" (stitch)"
-    },
-    {
-      "label": "\ud83c\udff7\ufe0f Isologos Oficiales de Marcas & Publicaciones",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L45",
-      "id": "handoff_isologos_oficiales_de_marcas_publicaciones",
-      "community": 28,
-      "norm_label": "\ud83c\udff7\ufe0f isologos oficiales de marcas & publicaciones"
-    },
-    {
-      "label": "\ud83d\udcec Integraciones de Automatizaci\u00f3n & Formspree",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L60",
-      "id": "handoff_integraciones_de_automatizaci\u00f3n_formspree",
-      "community": 28,
-      "norm_label": "\ud83d\udcec integraciones de automatizacion & formspree"
-    },
-    {
-      "label": "\u2709\ufe0f Unificaci\u00f3n de Correo Electr\u00f3nico",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L67",
-      "id": "handoff_unificaci\u00f3n_de_correo_electr\u00f3nico",
-      "community": 28,
-      "norm_label": "\u2709\ufe0f unificacion de correo electronico"
-    },
-    {
-      "label": "\ud83c\udfaf Optimizaci\u00f3n de Conversi\u00f3n & Click-Paths",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L73",
-      "id": "handoff_optimizaci\u00f3n_de_conversi\u00f3n_click_paths",
-      "community": 28,
-      "norm_label": "\ud83c\udfaf optimizacion de conversion & click-paths"
-    },
-    {
-      "label": "\ud83d\udccf Compactaci\u00f3n Integral de Distancias y Rellenos",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L79",
-      "id": "handoff_compactaci\u00f3n_integral_de_distancias_y_rellenos",
-      "community": 28,
-      "norm_label": "\ud83d\udccf compactacion integral de distancias y rellenos"
-    },
-    {
-      "label": "\ud83d\udcf8 Hero Cover & Background 4K Nativo",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L89",
-      "id": "handoff_hero_cover_background_4k_nativo",
-      "community": 28,
-      "norm_label": "\ud83d\udcf8 hero cover & background 4k nativo"
-    },
-    {
-      "label": "\u26a1 Animaciones de Scroll (GSAP ScrollTrigger)",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L99",
-      "id": "handoff_animaciones_de_scroll_gsap_scrolltrigger",
-      "community": 28,
-      "norm_label": "\u26a1 animaciones de scroll (gsap scrolltrigger)"
-    },
-    {
-      "label": "\ud83d\udfe2 Bot\u00f3n y Enlaces de WhatsApp",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L103",
-      "id": "handoff_bot\u00f3n_y_enlaces_de_whatsapp",
-      "community": 28,
-      "norm_label": "\ud83d\udfe2 boton y enlaces de whatsapp"
-    },
-    {
-      "label": "\ud83d\udcc1 Cat\u00e1logo Multimedia Organizado por Personaje & Producci\u00f3n (`public/images/catalog/`)",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L107",
-      "id": "handoff_cat\u00e1logo_multimedia_organizado_por_personaje_producci\u00f3n_public_images_catalog",
-      "community": 28,
-      "norm_label": "\ud83d\udcc1 catalogo multimedia organizado por personaje & produccion (`public/images/catalog/`)"
-    },
-    {
-      "label": "\ud83d\uddbc\ufe0f Integraci\u00f3n de Fotograf\u00edas Reales de Ash en la Web",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L119",
-      "id": "handoff_integraci\u00f3n_de_fotograf\u00edas_reales_de_ash_en_la_web",
-      "community": 28,
-      "norm_label": "\ud83d\uddbc\ufe0f integracion de fotografias reales de ash en la web"
-    },
-    {
-      "label": "2. Ramas de Git y Resguardo",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L141",
-      "id": "handoff_2_ramas_de_git_y_resguardo",
-      "community": 28,
-      "norm_label": "2. ramas de git y resguardo"
-    },
-    {
-      "label": "3. Arquitectura y Stack",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L150",
-      "id": "handoff_3_arquitectura_y_stack",
-      "community": 28,
-      "norm_label": "3. arquitectura y stack"
-    },
-    {
-      "label": "4. Mapa de Rutas",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L163",
-      "id": "handoff_4_mapa_de_rutas",
-      "community": 28,
-      "norm_label": "4. mapa de rutas"
+      "norm_label": "3. reglas de git y despliegue"
     },
     {
       "label": "PRODUCT.md",
@@ -3971,51 +3413,6 @@
       "id": "product_accessibility_inclusion",
       "community": 19,
       "norm_label": "accessibility & inclusion"
-    },
-    {
-      "label": "HighlightNote",
-      "file_type": "code",
-      "source_file": "src/components/home/HighlightsGrid.tsx",
-      "source_location": "L7",
-      "community": 27,
-      "norm_label": "highlightnote",
-      "id": "home_highlightsgrid_highlightnote"
-    },
-    {
-      "label": "highlightsNotes",
-      "file_type": "code",
-      "source_file": "src/components/home/HighlightsGrid.tsx",
-      "source_location": "L22",
-      "community": 27,
-      "norm_label": "highlightsnotes",
-      "id": "home_highlightsgrid_highlightsnotes"
-    },
-    {
-      "label": "1. Arquitectura y Stack Actual",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L7",
-      "community": 28,
-      "norm_label": "1. arquitectura y stack actual",
-      "id": "handoff_1_arquitectura_y_stack_actual"
-    },
-    {
-      "label": "2. Mapa de Rutas & Componentes de Alta Gama",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L21",
-      "community": 28,
-      "norm_label": "2. mapa de rutas & componentes de alta gama",
-      "id": "handoff_2_mapa_de_rutas_componentes_de_alta_gama"
-    },
-    {
-      "label": "3. Reglas de Git y Despliegue",
-      "file_type": "document",
-      "source_file": "HANDOFF.md",
-      "source_location": "L43",
-      "community": 28,
-      "norm_label": "3. reglas de git y despliegue",
-      "id": "handoff_3_reglas_de_git_y_despliegue"
     },
     {
       "label": "publications",
@@ -4999,7 +4396,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 0,
       "norm_label": "portfolio section (#trabajo)",
       "id": "index_portfolio_section"
     },
@@ -6416,16 +5813,6 @@
       "source_file": "package.json",
       "source_location": "L19",
       "weight": 1.0,
-      "source": "package_dependencies",
-      "target": "package_dependencies_openai",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L19",
-      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "package_dependencies",
       "target": "package_dependencies_react"
@@ -7723,49 +7110,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/api/concierge/route.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "concierge_route",
-      "target": "concierge_route_post",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/concierge/route.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "concierge_route",
-      "target": "lib_qwen_ai",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/concierge/route.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "concierge_route",
-      "target": "lib_qwen_ai_chatmessage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/concierge/route.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "concierge_route",
-      "target": "lib_qwen_ai_qwenai",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/api/contact/route.ts",
       "source_location": "L4",
       "weight": 1.0,
@@ -7877,17 +7221,6 @@
       "target": "blog_page"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/como-trabajo/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "como_trabajo_page",
-      "target": "animations_gsapreveal",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/como-trabajo/page.tsx",
@@ -7906,17 +7239,6 @@
       "confidence_score": 1.0,
       "source": "como_trabajo_page",
       "target": "como_trabajo_page_metadata"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/como-trabajo/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "como_trabajo_page",
-      "target": "concierge_conciergetriggerbanner",
-      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -8080,28 +7402,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "app_layout",
-      "target": "common_universalimagecalibrator",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "app_layout",
-      "target": "concierge_conciergedrawer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.tsx",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -8137,9 +7437,9 @@
       "source_file": "src/app/newsletter/page.tsx",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_page",
-      "target": "data_press"
+      "target": "data_press",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -8148,9 +7448,9 @@
       "source_file": "src/app/newsletter/page.tsx",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_page",
-      "target": "data_press_getpressarticles"
+      "target": "data_press_getpressarticles",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -8159,9 +7459,9 @@
       "source_file": "src/app/newsletter/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_page",
-      "target": "newsletter_newsletterclient"
+      "target": "newsletter_newsletterclient",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8341,9 +7641,9 @@
       "source_file": "src/app/prensa/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prensa_page",
-      "target": "data_press"
+      "target": "data_press",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -8352,9 +7652,9 @@
       "source_file": "src/app/prensa/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prensa_page",
-      "target": "data_press_getpressarticles"
+      "target": "data_press_getpressarticles",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8583,9 +7883,9 @@
       "source_file": "src/components/newsletter/NewsletterClient.tsx",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_newsletterclient",
-      "target": "animations_gsapreveal"
+      "target": "animations_gsapreveal",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -8608,97 +7908,6 @@
       "confidence_score": 1.0,
       "source": "vlog_vlogsection",
       "target": "animations_gsapreveal"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L34",
-      "weight": 1.0,
-      "source": "common_universalimagecalibrator",
-      "target": "common_universalimagecalibrator_default_config",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L44",
-      "weight": 1.0,
-      "source": "common_universalimagecalibrator",
-      "target": "common_universalimagecalibrator_getdompath",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "common_universalimagecalibrator",
-      "target": "common_universalimagecalibrator_slotconfig",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L61",
-      "weight": 1.0,
-      "source": "common_universalimagecalibrator",
-      "target": "common_universalimagecalibrator_universalimagecalibrator",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/common/UniversalImageCalibrator.tsx",
-      "source_location": "L23",
-      "weight": 1.0,
-      "source": "common_universalimagecalibrator",
-      "target": "data_catalog_manifest",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/concierge/ConciergeDrawer.tsx",
-      "source_location": "L43",
-      "weight": 1.0,
-      "source": "concierge_conciergedrawer",
-      "target": "concierge_conciergedrawer_conciergedrawer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/concierge/ConciergeDrawer.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "source": "concierge_conciergedrawer",
-      "target": "concierge_conciergedrawer_message",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/concierge/ConciergeDrawer.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "source": "concierge_conciergedrawer",
-      "target": "concierge_conciergedrawer_starter_prompts",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/concierge/ConciergeTriggerBanner.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "concierge_conciergetriggerbanner",
-      "target": "concierge_conciergetriggerbanner_conciergetriggerbanner",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8747,26 +7956,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/home/ClientsStrip.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "home_clientsstrip",
-      "target": "home_clientsstrip_branditem",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/home/ClientsStrip.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "home_clientsstrip",
-      "target": "home_clientsstrip_brandlogos",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/home/ClientsStrip.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -8789,9 +7978,9 @@
       "source_file": "src/components/home/HeroCover.tsx",
       "source_location": "L26",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "home_herocover",
-      "target": "home_herocover_default_desktop"
+      "target": "home_herocover_default_desktop",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8799,9 +7988,9 @@
       "source_file": "src/components/home/HeroCover.tsx",
       "source_location": "L34",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "home_herocover",
-      "target": "home_herocover_default_mobile"
+      "target": "home_herocover_default_mobile",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8809,9 +7998,9 @@
       "source_file": "src/components/home/HeroCover.tsx",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "home_herocover",
-      "target": "home_herocover_framingconfig"
+      "target": "home_herocover_framingconfig",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8851,9 +8040,9 @@
       "source_file": "src/components/home/HighlightsGrid.tsx",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "home_highlightsgrid",
-      "target": "home_highlightsgrid_highlightnote"
+      "target": "home_highlightsgrid_highlightnote",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8871,28 +8060,8 @@
       "source_file": "src/components/home/HighlightsGrid.tsx",
       "source_location": "L22",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "home_highlightsgrid",
-      "target": "home_highlightsgrid_highlightsnotes"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/home/HighlightsGrid.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "home_highlightsgrid",
-      "target": "home_highlightsgrid_milestone",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/home/HighlightsGrid.tsx",
-      "source_location": "L18",
-      "weight": 1.0,
-      "source": "home_highlightsgrid",
-      "target": "home_highlightsgrid_milestones",
+      "target": "home_highlightsgrid_highlightsnotes",
       "confidence_score": 1.0
     },
     {
@@ -8942,9 +8111,9 @@
       "source_file": "src/components/newsletter/NewsletterClient.tsx",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_newsletterclient",
-      "target": "data_press"
+      "target": "data_press",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -8953,9 +8122,9 @@
       "source_file": "src/components/newsletter/NewsletterClient.tsx",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_newsletterclient",
-      "target": "data_press_pressarticle"
+      "target": "data_press_pressarticle",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8963,9 +8132,9 @@
       "source_file": "src/components/newsletter/NewsletterClient.tsx",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_newsletterclient",
-      "target": "newsletter_newsletterclient_newsletterclient"
+      "target": "newsletter_newsletterclient_newsletterclient",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8973,9 +8142,9 @@
       "source_file": "src/components/newsletter/NewsletterClient.tsx",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_newsletterclient",
-      "target": "newsletter_newsletterclient_newsletterclientprops"
+      "target": "newsletter_newsletterclient_newsletterclientprops",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -8984,9 +8153,9 @@
       "source_file": "src/components/newsletter/NewsletterClient.tsx",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "newsletter_newsletterclient_newsletterclientprops",
-      "target": "data_press_pressarticle"
+      "target": "data_press_pressarticle",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -9026,9 +8195,9 @@
       "source_file": "src/components/portfolio/PortfolioGallery.tsx",
       "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "portfolio_portfoliogallery",
-      "target": "portfolio_portfoliogallery_portfoliogalleryprops"
+      "target": "portfolio_portfoliogallery_portfoliogalleryprops",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -9076,246 +8245,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3445",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_36_valentina_ferrer_marie_claire",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3979",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_ash",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4542",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_backstage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4515",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_belu_negri",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3227",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_calu_rivero",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4316",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_campaigns",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4478",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_emilia_attias",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_general_miscel\u00e1nea",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4576",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_moda_central_park",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3957",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_moda_central_park_fotos_extra",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3403",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_moda_estudio_ny",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2914",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_moda_estudio_tapa_lunares_new_york_jpegs",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2956",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_pdfs_mc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3105",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_portadas",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L2973",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_red_carpets",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3825",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_red_carpets_brides",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3274",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_speaker",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4603",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_tapa_moda_flor_central_park_pandora",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L4549",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_tuli_acosta",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3281",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_valentina_zenere",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3517",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_varios",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3711",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_varios_belu_negri_dmag_tapa_y_editorial",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3659",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_varios_til\u00edn",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/data/catalog_manifest.json",
-      "source_location": "L3783",
-      "weight": 1.0,
-      "source": "data_catalog_manifest",
-      "target": "data_catalog_manifest_varios_tuli_acosta",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/lib/data/highlights.ts",
       "source_location": "L1",
       "weight": 1.0,
@@ -9339,9 +8268,9 @@
       "source_file": "src/lib/data/press.ts",
       "source_location": "L162",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "data_press",
-      "target": "data_press_cleanhtmlentities"
+      "target": "data_press_cleanhtmlentities",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9349,9 +8278,9 @@
       "source_file": "src/lib/data/press.ts",
       "source_location": "L16",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "data_press",
-      "target": "data_press_fallbackpressarticles"
+      "target": "data_press_fallbackpressarticles",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9359,9 +8288,9 @@
       "source_file": "src/lib/data/press.ts",
       "source_location": "L140",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "data_press",
-      "target": "data_press_getpressarticles"
+      "target": "data_press_getpressarticles",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9369,9 +8298,9 @@
       "source_file": "src/lib/data/press.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "data_press",
-      "target": "data_press_pressarticle"
+      "target": "data_press_pressarticle",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -9380,9 +8309,9 @@
       "source_file": "src/lib/data/press.ts",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "data_press",
-      "target": "supabase_client"
+      "target": "supabase_client",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -9391,9 +8320,9 @@
       "source_file": "src/lib/data/press.ts",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "data_press",
-      "target": "supabase_client_supabase"
+      "target": "supabase_client_supabase",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9438,46 +8367,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/lib/nvidia-ai.ts",
-      "source_location": "L51",
-      "weight": 1.0,
-      "source": "lib_nvidia_ai",
-      "target": "lib_nvidia_ai_chatmessage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/nvidia-ai.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "source": "lib_nvidia_ai",
-      "target": "lib_nvidia_ai_nvidiaai",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/qwen-ai.ts",
-      "source_location": "L51",
-      "weight": 1.0,
-      "source": "lib_qwen_ai",
-      "target": "lib_qwen_ai_chatmessage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/qwen-ai.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "source": "lib_qwen_ai",
-      "target": "lib_qwen_ai_qwenai",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/lib/supabase/client.ts",
       "source_location": "L3",
       "weight": 1.0,
@@ -9491,9 +8380,9 @@
       "source_file": "src/lib/supabase/client.ts",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "supabase_client",
-      "target": "supabase_client_supabase"
+      "target": "supabase_client_supabase",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10449,9 +9338,9 @@
       "source_file": "HANDOFF.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "handoff",
-      "target": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system"
+      "target": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10469,18 +9358,8 @@
       "source_file": "HANDOFF.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
-      "target": "handoff_1_arquitectura_y_stack_actual"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
-      "target": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
+      "target": "handoff_1_arquitectura_y_stack_actual",
       "confidence_score": 1.0
     },
     {
@@ -10489,28 +9368,8 @@
       "source_file": "HANDOFF.md",
       "source_location": "L21",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
-      "target": "handoff_2_mapa_de_rutas_componentes_de_alta_gama"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L141",
-      "weight": 1.0,
-      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
-      "target": "handoff_2_ramas_de_git_y_resguardo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L150",
-      "weight": 1.0,
-      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
-      "target": "handoff_3_arquitectura_y_stack",
+      "target": "handoff_2_mapa_de_rutas_componentes_de_alta_gama",
       "confidence_score": 1.0
     },
     {
@@ -10519,159 +9378,19 @@
       "source_file": "HANDOFF.md",
       "source_location": "L43",
       "weight": 1.0,
+      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
+      "target": "handoff_3_reglas_de_git_y_despliegue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOFF.md",
+      "source_location": "L7",
+      "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
-      "target": "handoff_3_reglas_de_git_y_despliegue"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L163",
-      "weight": 1.0,
-      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_high_end_luxury_design_system",
-      "target": "handoff_4_mapa_de_rutas",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L99",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_animaciones_de_scroll_gsap_scrolltrigger",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L103",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_bot\u00f3n_y_enlaces_de_whatsapp",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L107",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_cat\u00e1logo_multimedia_organizado_por_personaje_producci\u00f3n_public_images_catalog",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L79",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_compactaci\u00f3n_integral_de_distancias_y_rellenos",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L24",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_concierge_editorial_vip_creative_briefing_con_ia_qwen_ai",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L89",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_hero_cover_background_4k_nativo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L38",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_highlights_de_carrera_dise\u00f1o_avant_garde_editorial_stitch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L60",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_integraciones_de_automatizaci\u00f3n_formspree",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L119",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_integraci\u00f3n_de_fotograf\u00edas_reales_de_ash_en_la_web",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L45",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_isologos_oficiales_de_marcas_publicaciones",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L73",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_optimizaci\u00f3n_de_conversi\u00f3n_click_paths",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_portada_hero_encuadre_predeterminado_global_parallax_herocover_tsx",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_regla_inquebrantable_visibilidad_total_del_rostro_del_protagonista",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L67",
-      "weight": 1.0,
-      "source": "handoff_1_estado_actual_del_proyecto_\u00faltimos_hitos",
-      "target": "handoff_unificaci\u00f3n_de_correo_electr\u00f3nico",
-      "confidence_score": 1.0
+      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_tailwind_css_v4",
+      "target": "handoff_1_arquitectura_y_stack_actual"
     },
     {
       "relation": "contains",
@@ -10762,16 +9481,6 @@
       "confidence_score": 1.0,
       "source": "product_product",
       "target": "product_users"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "HANDOFF.md",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "handoff_handoff_ashmateu_com_reconstrucci\u00f3n_next_js_16_tailwind_css_v4",
-      "target": "handoff_1_arquitectura_y_stack_actual"
     },
     {
       "relation": "contains",
@@ -12635,5 +11344,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "47a4e5fdfbbf4ad72c9b1610194d0531e7b258ad"
+  "built_at_commit": "98c6fff8d1239f3e2c578b8aae4b9e4b79e1f5ff"
 }
