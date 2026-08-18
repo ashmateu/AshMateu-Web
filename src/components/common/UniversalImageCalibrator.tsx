@@ -60,6 +60,7 @@ function getDomPath(el: HTMLElement): string {
 
 export default function UniversalImageCalibrator() {
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isEditorVisible, setIsEditorVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<"replace" | "framing">("replace");
   const [selectedSlotKey, setSelectedSlotKey] = useState<string | null>(null);
   const [selectedImgElement, setSelectedImgElement] = useState<HTMLImageElement | null>(null);
@@ -67,6 +68,18 @@ export default function UniversalImageCalibrator() {
   const [currentConfig, setCurrentConfig] = useState<SlotConfig>(DEFAULT_CONFIG);
   const [copied, setCopied] = useState(false);
   const [savedFeedback, setSavedFeedback] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const host = window.location.hostname;
+      const isAllowed =
+        host.includes("ashmateu-web.vercel.app") ||
+        host.includes("localhost") ||
+        host.includes("127.0.0.1") ||
+        window.location.search.includes("editor=true");
+      setIsEditorVisible(isAllowed);
+    }
+  }, []);
 
   // Gallery Picker States
   const [selectedCategory, setSelectedCategory] = useState<string>("portadas");
@@ -358,35 +371,37 @@ export default function UniversalImageCalibrator() {
         }
       `}</style>
 
-      {/* DISCREET FLOATING ACTIVATOR BUTTON (BOTTOM LEFT) */}
-      <div className="fixed bottom-5 left-5 z-50 flex items-center gap-2">
-        <button
-          id="calibrator-trigger-btn"
-          onClick={() => {
-            const next = !isEnabled;
-            setIsEnabled(next);
-            if (!next) {
-              setSelectedSlotKey(null);
-              setSelectedImgElement(null);
-            }
-          }}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-[10.5px] tracking-[0.18em] uppercase font-semibold transition-all duration-300 shadow-2xl border cursor-pointer ${
-            isEnabled
-              ? "bg-[#0a0a0a] text-white border-white/40 ring-2 ring-[#22c55e] scale-105"
-              : "bg-white/95 hover:bg-white text-black border-[#b5a898]/50 hover:border-black backdrop-blur-md"
-          }`}
-          title="Modo edición: Cambiar fotos y encuadrar individualmente"
-        >
-          <Crosshair size={14} className={isEnabled ? "text-[#22c55e] animate-spin" : "text-black"} />
-          <span>{isEnabled ? "Modo Editor Activo" : "🎨 Cambiar / Encuadrar Fotos"}</span>
-        </button>
+      {/* DISCREET FLOATING ACTIVATOR BUTTON (ONLY ON ashmateu-web.vercel.app / PREVIEW) */}
+      {isEditorVisible && (
+        <div className="fixed bottom-5 left-5 z-50 flex items-center gap-2">
+          <button
+            id="calibrator-trigger-btn"
+            onClick={() => {
+              const next = !isEnabled;
+              setIsEnabled(next);
+              if (!next) {
+                setSelectedSlotKey(null);
+                setSelectedImgElement(null);
+              }
+            }}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-[10.5px] tracking-[0.18em] uppercase font-semibold transition-all duration-300 shadow-2xl border cursor-pointer ${
+              isEnabled
+                ? "bg-[#0a0a0a] text-white border-white/40 ring-2 ring-[#22c55e] scale-105"
+                : "bg-white/95 hover:bg-white text-black border-[#b5a898]/50 hover:border-black backdrop-blur-md"
+            }`}
+            title="Modo edición: Cambiar fotos y encuadrar individualmente"
+          >
+            <Crosshair size={14} className={isEnabled ? "text-[#22c55e] animate-spin" : "text-black"} />
+            <span>{isEnabled ? "Modo Editor Activo" : "🎨 Cambiar / Encuadrar Fotos"}</span>
+          </button>
 
-        {isEnabled && (
-          <span className="hidden sm:inline-block bg-[#0a0a0a]/90 text-white text-[9.5px] px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md shadow-lg">
-            {selectedSlotKey ? "Foto seleccionada (borde verde) lista para cambiar o encuadrar" : "👉 Hacé click sobre cualquier foto para cambiarla o ajustarla"}
-          </span>
-        )}
-      </div>
+          {isEnabled && (
+            <span className="hidden sm:inline-block bg-[#0a0a0a]/90 text-white text-[9.5px] px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md shadow-lg">
+              {selectedSlotKey ? "Foto seleccionada (borde verde) lista para cambiar o encuadrar" : "👉 Hacé click sobre cualquier foto para cambiarla o ajustarla"}
+            </span>
+          )}
+        </div>
+      )}
 
       {/* FLOATING POWERFUL INSPECTOR & IMAGE REPLACER PANEL */}
       {isEnabled && selectedSlotKey && (
