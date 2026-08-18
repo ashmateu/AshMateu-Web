@@ -24,32 +24,24 @@ interface FramingConfig {
   brightness: number;
 }
 
-const DEFAULT_DESKTOP: FramingConfig = {
-  x: 50,
-  y: 26,
-  zoom: 115,
-  brightness: 108,
-};
-
-const DEFAULT_MOBILE: FramingConfig = {
-  x: 50,
-  y: 24,
-  zoom: 110,
-  brightness: 108,
-};
-
 const HERO_SLIDES = [
   {
     src: "/images/hero/hero_cover_pptx.webp",
     alt: "Ash Mateu — Creative Direction & High Fashion Styling",
+    desktop: { x: 76, y: 22, zoom: 145, brightness: 110 } as FramingConfig,
+    mobile: { x: 75, y: 22, zoom: 130, brightness: 110 } as FramingConfig,
   },
   {
     src: "/images/hero/carousel/slide-1.jpg",
     alt: "Producción Haute Couture dirigida por Ash Mateu — Paris Fashion Week",
+    desktop: { x: 50, y: 26, zoom: 115, brightness: 108 } as FramingConfig,
+    mobile: { x: 50, y: 24, zoom: 110, brightness: 108 } as FramingConfig,
   },
   {
     src: "/images/hero/carousel/slide-2.jpg",
     alt: "Producción editorial en rooftop de Nueva York — Ash Mateu Creative Direction",
+    desktop: { x: 50, y: 26, zoom: 115, brightness: 108 } as FramingConfig,
+    mobile: { x: 50, y: 24, zoom: 110, brightness: 108 } as FramingConfig,
   },
 ];
 
@@ -75,10 +67,12 @@ export default function HeroCover() {
   const [activeTab, setActiveTab] = useState<"desktop" | "mobile">("desktop");
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const [desktopFraming, setDesktopFraming] =
-    useState<FramingConfig>(DEFAULT_DESKTOP);
-  const [mobileFraming, setMobileFraming] =
-    useState<FramingConfig>(DEFAULT_MOBILE);
+  const [slideFramings, setSlideFramings] = useState(() =>
+    HERO_SLIDES.map((slide) => ({
+      desktop: { ...slide.desktop },
+      mobile: { ...slide.mobile },
+    }))
+  );
 
   const [showCalibrator, setShowCalibrator] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -102,14 +96,20 @@ export default function HeroCover() {
     setActiveTab(isMob ? "mobile" : "desktop");
 
     try {
-      const savedDesk = localStorage.getItem("ash_hero_desktop_framing");
-      if (savedDesk) {
-        setDesktopFraming(JSON.parse(savedDesk));
-      }
-      const savedMob = localStorage.getItem("ash_hero_mobile_framing");
-      if (savedMob) {
-        setMobileFraming(JSON.parse(savedMob));
-      }
+      setSlideFramings((prev) =>
+        prev.map((framing, index) => {
+          const savedDesk = localStorage.getItem(
+            `ash_hero_slide_${index}_desktop_framing`
+          );
+          const savedMob = localStorage.getItem(
+            `ash_hero_slide_${index}_mobile_framing`
+          );
+          return {
+            desktop: savedDesk ? JSON.parse(savedDesk) : framing.desktop,
+            mobile: savedMob ? JSON.parse(savedMob) : framing.mobile,
+          };
+        })
+      );
     } catch (e) {
       console.error("Error loading saved framing configs", e);
     }
@@ -128,39 +128,48 @@ export default function HeroCover() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const currentConfig = isMobileScreen ? mobileFraming : desktopFraming;
-  const editingConfig = activeTab === "mobile" ? mobileFraming : desktopFraming;
+  const activeSlideFraming = slideFramings[currentSlide];
+  const currentConfig = isMobileScreen
+    ? activeSlideFraming.mobile
+    : activeSlideFraming.desktop;
+  const editingConfig =
+    activeTab === "mobile" ? activeSlideFraming.mobile : activeSlideFraming.desktop;
 
   const updateFraming = (updates: Partial<FramingConfig>) => {
-    if (activeTab === "mobile") {
-      const next = { ...mobileFraming, ...updates };
-      setMobileFraming(next);
-      localStorage.setItem("ash_hero_mobile_framing", JSON.stringify(next));
-    } else {
-      const next = { ...desktopFraming, ...updates };
-      setDesktopFraming(next);
-      localStorage.setItem("ash_hero_desktop_framing", JSON.stringify(next));
-    }
+    setSlideFramings((prev) => {
+      const next = prev.map((framing, index) => {
+        if (index !== currentSlide) return framing;
+        return {
+          ...framing,
+          [activeTab]: { ...framing[activeTab], ...updates },
+        };
+      });
+      localStorage.setItem(
+        `ash_hero_slide_${currentSlide}_${activeTab}_framing`,
+        JSON.stringify(next[currentSlide][activeTab])
+      );
+      return next;
+    });
   };
 
   const handleReset = () => {
-    if (activeTab === "mobile") {
-      setMobileFraming(DEFAULT_MOBILE);
-      localStorage.setItem(
-        "ash_hero_mobile_framing",
-        JSON.stringify(DEFAULT_MOBILE)
-      );
-    } else {
-      setDesktopFraming(DEFAULT_DESKTOP);
-      localStorage.setItem(
-        "ash_hero_desktop_framing",
-        JSON.stringify(DEFAULT_DESKTOP)
-      );
-    }
+    const defaultConfig = HERO_SLIDES[currentSlide][activeTab];
+    setSlideFramings((prev) =>
+      prev.map((framing, index) =>
+        index === currentSlide
+          ? { ...framing, [activeTab]: defaultConfig }
+          : framing
+      )
+    );
+    localStorage.setItem(
+      `ash_hero_slide_${currentSlide}_${activeTab}_framing`,
+      JSON.stringify(defaultConfig)
+    );
   };
 
   const handleCopy = () => {
-    const code = `// Mobile:\nobjectPosition: "${mobileFraming.x}% ${mobileFraming.y}%", transform: "scale(${mobileFraming.zoom / 100})"\n\n// Desktop:\nobjectPosition: "${desktopFraming.x}% ${desktopFraming.y}%", transform: "scale(${desktopFraming.zoom / 100})"`;
+    const { desktop, mobile } = activeSlideFraming;
+    const code = `// Slide ${currentSlide + 1} — Mobile:\nobjectPosition: "${mobile.x}% ${mobile.y}%", transform: "scale(${mobile.zoom / 100})"\n\n// Slide ${currentSlide + 1} — Desktop:\nobjectPosition: "${desktop.x}% ${desktop.y}%", transform: "scale(${desktop.zoom / 100})"`;
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -245,32 +254,37 @@ export default function HeroCover() {
         }`}
       >
         <div ref={imageWrapperRef} className="relative w-full h-full scale-[1.03]">
-          {HERO_SLIDES.map((slide, index) => (
-            <div
-              key={slide.src}
-              className="absolute inset-0 transition-opacity duration-[1200ms] ease-out"
-              style={{ opacity: index === currentSlide ? 1 : 0 }}
-              aria-hidden={index === currentSlide ? undefined : true}
-            >
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                priority={index === 0}
-                unoptimized
-                style={{
-                  objectFit: "cover",
-                  objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
-                  transform: `scale(${currentConfig.zoom / 100})`,
-                  transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
-                  filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
-                  transition: isLoaded
-                    ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
-                    : "none",
-                }}
-              />
-            </div>
-          ))}
+          {HERO_SLIDES.map((slide, index) => {
+            const config = isMobileScreen
+              ? slideFramings[index].mobile
+              : slideFramings[index].desktop;
+            return (
+              <div
+                key={slide.src}
+                className="absolute inset-0 transition-opacity duration-[1200ms] ease-out"
+                style={{ opacity: index === currentSlide ? 1 : 0 }}
+                aria-hidden={index === currentSlide ? undefined : true}
+              >
+                <Image
+                  src={slide.src}
+                  alt={slide.alt}
+                  fill
+                  priority={index === 0}
+                  unoptimized
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: `${config.x}% ${config.y}%`,
+                    transform: `scale(${config.zoom / 100})`,
+                    transformOrigin: `${config.x}% ${config.y}%`,
+                    filter: `brightness(${config.brightness / 100}) contrast(1.04) saturate(1.05)`,
+                    transition: isLoaded
+                      ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
+                      : "none",
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
 
         {/* EDITORIAL GRADIENT OVERLAY (ONLY AT BOTTOM FOR CLEAN TEXT CONTRAST) */}
@@ -396,7 +410,7 @@ export default function HeroCover() {
                 <div className="flex items-center gap-2">
                   <Sparkles size={14} className="text-[#b5a898]" />
                   <span className="font-serif text-sm tracking-wide text-white">
-                    Encuadre de Portada
+                    Encuadre — Slide {currentSlide + 1}/{HERO_SLIDES.length}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
