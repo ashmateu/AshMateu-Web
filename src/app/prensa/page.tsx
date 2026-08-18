@@ -2,101 +2,13 @@ import React from "react";
 import Image from "next/image";
 import { getPressArticles } from "@/lib/data/press";
 import ContactForm from "@/components/contact/ContactForm";
-import CircularTestimonials from "@/components/ui/circular-testimonials";
-import { Sparkles, BookOpen, ExternalLink, Award } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 export const metadata = {
   title: "Prensa & Portadas de Revista — Ash Mateu",
   description:
-    "Archivo completo de más de 150 portadas y artículos de moda dirigidos por Ash Mateu en Marie Claire Argentina y publicaciones de lujo.",
+    "Archivo oficial de más de 150 portadas y artículos de moda dirigidos por Ash Mateu en Marie Claire Argentina y publicaciones de lujo.",
 };
-
-const featuredCovers = [
-  {
-    name: "Maia Reffico",
-    designation: "Portada Marie Claire — Edición Central",
-    quote:
-      "La dirección de estilismo de Ash Mateu redefine el glamour juvenil y vanguardista, fusionando alta costura con la frescura escénica internacional.",
-    src: "/images/catalog_v2/portadas/MC-064-Tapa MAIA RGB.jpg",
-  },
-  {
-    name: "Valentina Ferrer",
-    designation: "Portada Marie Claire — New York Fashion",
-    quote:
-      "Producción editorial de portada en Nueva York. Una celebración de la elegancia contemporánea, la sastrería impecable y el diseño de autor.",
-    src: "/images/catalog_v2/36. Valentina Ferrer Marie Claire/MC-047-Tapa Valentina IG.jpg",
-  },
-  {
-    name: "Santi Talledo",
-    designation: "Portada Marie Claire — Edición Especial",
-    quote:
-      "Una portada disruptiva, audaz y conceptual que rompió esquemas en quioscos y marcó la conversación de la temporada de moda.",
-    src: "/images/catalog_v2/portadas/1_TAPA SANTI TALLEDO.jpg",
-  },
-  {
-    name: "Juana Burga",
-    designation: "Portada Marie Claire — Top Model Internacional",
-    quote:
-      "Dirección creativa milimétrica donde la alta costura se encuentra con una narrativa visual limpia, orgánica y cinematográfica.",
-    src: "/images/catalog_v2/portadas/Cover-Juani-final-scaled.jpg",
-  },
-  {
-    name: "NYFW Front Row",
-    designation: "Portada Marie Claire — Pasarelas Globales",
-    quote:
-      "Cubriendo el front row de las semanas de la moda globales y traduciendo las macrotendencias en portadas de referencia para Latinoamérica.",
-    src: "/images/catalog_v2/Moda estudio tapa lunares New York jpegs/MarieClaire_Cover_2024_014.jpg",
-  },
-  {
-    name: "Belu Negri",
-    designation: "Portada DMAG — Avant-Garde Edition",
-    quote:
-      "Estilismo y dirección de arte vanguardista con texturas audaces y estética pop editorial de alto impacto visual.",
-    src: "/images/catalog_v2/BELU NEGRI/A.jpg",
-  },
-  {
-    name: "Tecnomoda & Futuro Digital",
-    designation: "Portada Marie Claire — Edición Digital A",
-    quote:
-      "Explorando el futuro de la moda, la inteligencia visual y la creación de universos estéticos en la era digital.",
-    src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda A.jpg",
-  },
-  {
-    name: "Vanguardia Tecnológica",
-    designation: "Portada Marie Claire — Edición Digital B",
-    quote:
-      "Sastrería contemporánea y siluetas volumétricas en una edición que desafía los límites entre lo físico y lo digital.",
-    src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda B.jpg",
-  },
-  {
-    name: "Digital Trends 2026",
-    designation: "Portada Marie Claire — Edición Digital C",
-    quote:
-      "La nueva era de los creadores de contenido y el diseño latinoamericano en pasarelas del mundo.",
-    src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda C.jpg",
-  },
-  {
-    name: "New York Fashion Issue",
-    designation: "Portada Marie Claire — NY Special Edition",
-    quote:
-      "Dirección de moda integral en las calles y estudios de Manhattan para una de las ediciones más aclamadas de la revista.",
-    src: "/images/catalog_v2/PDFS MC/MC-073-Tapa NY.jpg",
-  },
-  {
-    name: "Alta Costura & Naturaleza",
-    designation: "Portada Marie Claire — Colección Primavera",
-    quote:
-      "Sastrería refinada y texturas poéticas en una producción inolvidable de dirección de moda integral.",
-    src: "/images/catalog_v2/portadas/TAPA1.jpg",
-  },
-  {
-    name: "Dos Décadas de Editorial",
-    designation: "Archivo Histórico — +150 Tapas",
-    quote:
-      "Veinte años marcando la agenda visual de la moda con más de 150 portadas simultáneas y reconocimientos internacionales.",
-    src: "/images/catalog_v2/portadas/TAPA2.jpg",
-  },
-];
 
 const allCatalogCovers = [
   { src: "/images/catalog_v2/portadas/MC-064-Tapa MAIA RGB.jpg", title: "Marie Claire — Maia Reffico", date: "Edición Aniversario", issue: "Tapa Principal" },
@@ -149,43 +61,8 @@ export default async function PrensaPage() {
           </p>
         </div>
 
-        {/* CIRCULAR 3D TESTIMONIALS / VERTICAL MAGAZINE COVERS SHOWCASE */}
-        <div className="mb-24 bg-white/75 backdrop-blur-md rounded-3xl p-6 md:p-12 lg:p-14 border border-[#B5A898]/40 shadow-sm">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#7A6A5A] font-semibold block mb-1.5">
-              3D Interactive Cover Deck
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#0A0A0A] font-normal">
-              Portadas Icónicas &amp; Citas Editoriales
-            </h2>
-            <p className="text-xs text-[#121212]/70 font-light mt-2 max-w-md mx-auto">
-              Visualización 3D en proporción rectangular completa de revista. Navega con las flechas o arrastra para ver las portadas.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <CircularTestimonials
-              testimonials={featuredCovers}
-              autoplay={true}
-              colors={{
-                name: "#0a0a0a",
-                designation: "#7a6a5a",
-                testimony: "#1f1f1f",
-                arrowBackground: "#0a0a0a",
-                arrowForeground: "#f7f3ee",
-                arrowHoverBackground: "#b5a898",
-              }}
-              fontSizes={{
-                name: "2rem",
-                designation: "0.85rem",
-                quote: "1.15rem",
-              }}
-            />
-          </div>
-        </div>
-
         {/* FULL ARCHIVE COVERS GRID (ALL 25+ COVERS) */}
-        <div className="pt-12 border-t border-[#B5A898]/40 mb-24">
+        <div className="mb-24">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
             <div>
               <span className="text-[9px] tracking-[0.28em] uppercase text-[#7A6A5A] font-semibold font-mono block mb-1">
@@ -195,7 +72,7 @@ export default async function PrensaPage() {
                 Archivo Histórico de Portadas
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-[#7A6A5A] bg-white px-3 py-1 rounded-full border border-[#B5A898]/40 self-start sm:self-auto">
+            <span className="text-[11px] font-mono text-[#7A6A5A] bg-white px-3.5 py-1.5 rounded-full border border-[#B5A898]/40 self-start sm:self-auto shadow-2xs">
               {allCatalogCovers.length} Portadas Catalogadas
             </span>
           </div>
