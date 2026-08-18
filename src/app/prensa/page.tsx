@@ -193,8 +193,12 @@ export default async function PrensaPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-            {characterCoverGroups.map((group) => (
-              <CharacterCoverCard key={group.id} group={group} />
+            {characterCoverGroups.map((group, idx) => (
+              <CharacterCoverCard
+                key={group.id}
+                group={group}
+                autoplayIntervalMs={3600 + (idx % 4) * 450}
+              />
             ))}
           </div>
         </div>
