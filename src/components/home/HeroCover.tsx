@@ -38,6 +38,15 @@ const DEFAULT_MOBILE: FramingConfig = {
   brightness: 110,
 };
 
+const xPresets = [
+  { label: "Izq", x: 25 },
+  { label: "Centro", x: 50 },
+  { label: "Derecha", x: 76 },
+];
+
+const zoomPresets = [100, 120, 145, 170];
+const brightnessPresets = [90, 100, 110, 125];
+
 export default function HeroCover() {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -56,9 +65,20 @@ export default function HeroCover() {
 
   const [showCalibrator, setShowCalibrator] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isEditorHost, setIsEditorHost] = useState(false);
 
   // Initialize screen size and load saved configurations synchronously on mount
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const host = window.location.hostname;
+      setIsEditorHost(
+        host.includes("ashmateu-web.vercel.app") ||
+        host.includes("localhost") ||
+        host.includes("127.0.0.1") ||
+        window.location.search.includes("editor=true")
+      );
+    }
+
     const isMob = window.innerWidth < 768;
     setIsMobileScreen(isMob);
     setActiveTab(isMob ? "mobile" : "desktop");
@@ -286,186 +306,205 @@ export default function HeroCover() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* DISCRETE CALIBRATION SLIDER TOGGLE FOR EDITING (CORNER BUTTON) */}
-      <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
-        <button
-          onClick={() => setShowCalibrator(!showCalibrator)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] tracking-[0.16em] uppercase font-semibold transition-all duration-300 shadow-md ${
-            showCalibrator
-              ? "bg-[#b5a898] text-black"
-              : "bg-black/60 hover:bg-black/80 text-white/80 hover:text-white backdrop-blur-md border border-white/20"
-          }`}
-          title="Ajustar encuadre milimétrico de la portada"
-        >
-          <Sliders size={12} strokeWidth={2} />
-          <span>{showCalibrator ? "Cerrar Ajustes" : "Ajustar Foto"}</span>
-        </button>
-      </div>
-
-      {/* FLOATING LUXURY CALIBRATOR PANEL */}
-      {showCalibrator && (
-        <div className="absolute bottom-16 right-4 z-30 w-[310px] sm:w-[350px] bg-black/90 backdrop-blur-xl border border-white/25 p-5 rounded-2xl shadow-2xl text-white text-xs animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="flex items-center justify-between border-b border-white/15 pb-3 mb-4">
-            <div className="flex items-center gap-2">
-              <Sparkles size={14} className="text-[#b5a898]" />
-              <span className="font-serif text-sm tracking-wide text-white">
-                Encuadre de Portada
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={handleReset}
-                className="p-1 text-white/50 hover:text-white transition-colors"
-                title="Restablecer"
-              >
-                <RotateCcw size={13} />
-              </button>
-              <button
-                onClick={handleCopy}
-                className="p-1 text-white/50 hover:text-[#b5a898] transition-colors"
-                title="Copiar código CSS"
-              >
-                {copied ? <Check size={13} className="text-green-400" /> : <Copy size={13} />}
-              </button>
-            </div>
-          </div>
-
-          {/* DESKTOP / MOBILE TABS */}
-          <div className="grid grid-cols-2 gap-1.5 p-1 bg-white/10 rounded-lg mb-4 text-[11px] font-medium tracking-wider uppercase">
+       {/* DISCRETE CALIBRATION SLIDER TOGGLE (ONLY ON PREVIEW / ashmateu-web.vercel.app) */}
+      {isEditorHost && (
+        <>
+          <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
             <button
-              onClick={() => setActiveTab("desktop")}
-              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all ${
-                activeTab === "desktop"
-                  ? "bg-[#b5a898] text-black font-semibold shadow-xs"
-                  : "text-white/70 hover:text-white"
+              onClick={() => setShowCalibrator(!showCalibrator)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] tracking-[0.16em] uppercase font-semibold transition-all duration-300 shadow-md cursor-pointer ${
+                showCalibrator
+                  ? "bg-[#b5a898] text-black"
+                  : "bg-black/60 hover:bg-black/80 text-white/80 hover:text-white backdrop-blur-md border border-white/20"
               }`}
+              title="Ajustar encuadre milimétrico de la portada"
             >
-              <Monitor size={12} />
-              <span>Desktop</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("mobile")}
-              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all ${
-                activeTab === "mobile"
-                  ? "bg-[#b5a898] text-black font-semibold shadow-xs"
-                  : "text-white/70 hover:text-white"
-              }`}
-            >
-              <Smartphone size={12} />
-              <span>Mobile</span>
+              <Sliders size={12} strokeWidth={2} />
+              <span>{showCalibrator ? "Cerrar Ajustes" : "Ajustar Foto"}</span>
             </button>
           </div>
 
-          {/* CONTROLS */}
-          <div className="space-y-4">
-            {/* HORIZONTAL POSITION (X) */}
-            <div>
-              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
-                <span>Posición Horizontal (X)</span>
-                <span className="font-mono text-white">{editingConfig.x}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={editingConfig.x}
-                onChange={(e) => updateFraming({ x: Number(e.target.value) })}
-                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
-              />
-            </div>
-
-            {/* VERTICAL POSITION (Y) */}
-            <div>
-              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
-                <span>Posición Vertical (Y / Rostro)</span>
-                <span className="font-mono text-white">{editingConfig.y}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={editingConfig.y}
-                onChange={(e) => updateFraming({ y: Number(e.target.value) })}
-                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
-              />
-            </div>
-
-            {/* ZOOM (ESCALA) */}
-            <div>
-              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
-                <span className="flex items-center gap-1">
-                  <ZoomIn size={11} />
-                  <span>Zoom / Escala</span>
-                </span>
-                <span className="font-mono text-white">{editingConfig.zoom}%</span>
-              </div>
-              <input
-                type="range"
-                min="80"
-                max="220"
-                value={editingConfig.zoom}
-                onChange={(e) => updateFraming({ zoom: Number(e.target.value) })}
-                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
-              />
-              <div className="flex justify-between gap-1 mt-1.5">
-                {zoomPresets.map((z) => (
+          {/* FLOATING LUXURY CALIBRATOR PANEL */}
+          {showCalibrator && (
+            <div className="absolute bottom-16 right-4 z-30 w-[310px] sm:w-[350px] bg-black/90 backdrop-blur-xl border border-white/25 p-5 rounded-2xl shadow-2xl text-white text-xs animate-in fade-in slide-in-from-bottom-4 duration-300">
+              <div className="flex items-center justify-between border-b border-white/15 pb-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <Sparkles size={14} className="text-[#b5a898]" />
+                  <span className="font-serif text-sm tracking-wide text-white">
+                    Encuadre de Portada
+                  </span>
+                </div>
+                <div className="flex items-center gap-1">
                   <button
-                    key={z}
-                    onClick={() => updateFraming({ zoom: z })}
-                    className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors ${
-                      editingConfig.zoom === z
-                        ? "bg-[#b5a898] text-black font-bold"
-                        : "bg-white/10 text-white/60 hover:text-white"
-                    }`}
+                    onClick={handleReset}
+                    className="p-1 text-white/50 hover:text-white transition-colors cursor-pointer"
+                    title="Restablecer"
                   >
-                    {z}%
+                    <RotateCcw size={13} />
                   </button>
-                ))}
-              </div>
-            </div>
-
-            {/* BRIGHTNESS (BRILLO) */}
-            <div>
-              <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
-                <span className="flex items-center gap-1">
-                  <Sun size={11} />
-                  <span>Brillo</span>
-                </span>
-                <span className="font-mono text-white">
-                  {editingConfig.brightness}%
-                </span>
-              </div>
-              <input
-                type="range"
-                min="70"
-                max="160"
-                value={editingConfig.brightness}
-                onChange={(e) =>
-                  updateFraming({ brightness: Number(e.target.value) })
-                }
-                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
-              />
-              <div className="flex justify-between gap-1 mt-1.5">
-                {brightnessPresets.map((b) => (
                   <button
-                    key={b}
-                    onClick={() => updateFraming({ brightness: b })}
-                    className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors ${
-                      editingConfig.brightness === b
-                        ? "bg-[#b5a898] text-black font-bold"
-                        : "bg-white/10 text-white/60 hover:text-white"
-                    }`}
+                    onClick={handleCopy}
+                    className="p-1 text-white/50 hover:text-[#b5a898] transition-colors cursor-pointer"
+                    title="Copiar código CSS"
                   >
-                    {b}%
+                    {copied ? <Check size={13} className="text-green-400" /> : <Copy size={13} />}
                   </button>
-                ))}
+                </div>
+              </div>
+
+              {/* DESKTOP / MOBILE TABS */}
+              <div className="grid grid-cols-2 gap-1.5 p-1 bg-white/10 rounded-lg mb-4 text-[11px] font-medium tracking-wider uppercase">
+                <button
+                  onClick={() => setActiveTab("desktop")}
+                  className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                    activeTab === "desktop"
+                      ? "bg-[#b5a898] text-black font-semibold shadow-xs"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  <Monitor size={13} />
+                  <span>Desktop</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab("mobile")}
+                  className={`flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                    activeTab === "mobile"
+                      ? "bg-[#b5a898] text-black font-semibold shadow-xs"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  <Smartphone size={13} />
+                  <span>Móvil</span>
+                </button>
+              </div>
+
+              {/* CONTROLS */}
+              <div className="space-y-4">
+                {/* HORIZONTAL POSITION (X) */}
+                <div>
+                  <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
+                    <span>Posición Horizontal (X)</span>
+                    <span className="font-mono text-white">{editingConfig.x}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={editingConfig.x}
+                    onChange={(e) => updateFraming({ x: Number(e.target.value) })}
+                    className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
+                  />
+                  <div className="flex justify-between gap-1 mt-1.5">
+                    {xPresets.map((p) => (
+                      <button
+                        key={p.label}
+                        onClick={() => updateFraming({ x: p.x })}
+                        className={`px-2 py-0.5 rounded text-[9px] uppercase tracking-wider transition-colors cursor-pointer ${
+                          editingConfig.x === p.x
+                            ? "bg-[#b5a898] text-black font-bold"
+                            : "bg-white/10 text-white/60 hover:text-white"
+                        }`}
+                      >
+                        {p.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* VERTICAL POSITION (Y) */}
+                <div>
+                  <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
+                    <span>Posición Vertical (Y / Rostro)</span>
+                    <span className="font-mono text-white">{editingConfig.y}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={editingConfig.y}
+                    onChange={(e) => updateFraming({ y: Number(e.target.value) })}
+                    className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
+                  />
+                </div>
+
+                {/* ZOOM (ESCALA) */}
+                <div>
+                  <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
+                    <span className="flex items-center gap-1">
+                      <ZoomIn size={11} />
+                      <span>Zoom / Escala</span>
+                    </span>
+                    <span className="font-mono text-white">{editingConfig.zoom}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="80"
+                    max="220"
+                    value={editingConfig.zoom}
+                    onChange={(e) => updateFraming({ zoom: Number(e.target.value) })}
+                    className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
+                  />
+                  <div className="flex justify-between gap-1 mt-1.5">
+                    {zoomPresets.map((z) => (
+                      <button
+                        key={z}
+                        onClick={() => updateFraming({ zoom: z })}
+                        className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors cursor-pointer ${
+                          editingConfig.zoom === z
+                            ? "bg-[#b5a898] text-black font-bold"
+                            : "bg-white/10 text-white/60 hover:text-white"
+                        }`}
+                      >
+                        {z}%
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* BRIGHTNESS (BRILLO) */}
+                <div>
+                  <div className="flex justify-between text-[11px] text-white/70 mb-1.5">
+                    <span className="flex items-center gap-1">
+                      <Sun size={11} />
+                      <span>Brillo</span>
+                    </span>
+                    <span className="font-mono text-white">
+                      {editingConfig.brightness}%
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="70"
+                    max="160"
+                    value={editingConfig.brightness}
+                    onChange={(e) =>
+                      updateFraming({ brightness: Number(e.target.value) })
+                    }
+                    className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#b5a898]"
+                  />
+                  <div className="flex justify-between gap-1 mt-1.5">
+                    {brightnessPresets.map((b) => (
+                      <button
+                        key={b}
+                        onClick={() => updateFraming({ brightness: b })}
+                        className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors cursor-pointer ${
+                          editingConfig.brightness === b
+                            ? "bg-[#b5a898] text-black font-bold"
+                            : "bg-white/10 text-white/60 hover:text-white"
+                        }`}
+                      >
+                        {b}%
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        </>
       )}
+      </div>
     </section>
   );
 }
