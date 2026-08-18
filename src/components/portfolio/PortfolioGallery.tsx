@@ -58,23 +58,35 @@ export default function PortfolioGallery({
             </h2>
           </GsapReveal>
 
-          {/* FILTROS TIPOGRÁFICOS EDITORIALES */}
-          <div className="flex flex-wrap items-center gap-5 sm:gap-8 text-xs tracking-[0.22em] uppercase font-medium">
+          {/* FILTROS TIPOGRÁFICOS EDITORIALES CON CONTEO */}
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 text-xs tracking-[0.22em] uppercase font-medium">
             {CATEGORIES.map((c) => {
               const active = (category || "all") === c.value;
+              const count =
+                c.value === "all"
+                  ? projects.length
+                  : projects.filter((p) => p.category === c.value).length;
+
               return (
                 <button
                   key={c.value}
                   onClick={() =>
                     setCategory(c.value === "all" ? null : c.value)
                   }
-                  className={`pb-1.5 transition-all duration-300 text-[11px] sm:text-xs cursor-pointer ${
+                  className={`pb-1.5 transition-all duration-300 text-[11px] sm:text-xs cursor-pointer flex items-center gap-1.5 ${
                     active
                       ? "text-[#0A0A0A] border-b-2 border-[#0A0A0A] font-semibold"
                       : "text-[#7A6A5A]/70 hover:text-[#0A0A0A] border-b-2 border-transparent"
                   }`}
                 >
-                  {c.label}
+                  <span>{c.label}</span>
+                  <span
+                    className={`text-[9.5px] font-mono transition-opacity ${
+                      active ? "text-[#0A0A0A]/70 font-semibold" : "text-[#7A6A5A]/50"
+                    }`}
+                  >
+                    ({count})
+                  </span>
                 </button>
               );
             })}
