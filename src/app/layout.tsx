@@ -5,7 +5,6 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ConciergeDrawer from "@/components/concierge/ConciergeDrawer";
-import UniversalImageCalibrator from "@/components/common/UniversalImageCalibrator";
 import "./globals.css";
 
 const bodoni = Bodoni_Moda({
@@ -104,7 +103,6 @@ export default function RootLayout({
           </Suspense>
           <main className="flex-grow">{children}</main>
           <ConciergeDrawer />
-          <UniversalImageCalibrator />
           <Footer />
         </NuqsAdapter>
       </body>
