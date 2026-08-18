@@ -171,40 +171,8 @@ export default async function PrensaPage() {
           </p>
         </div>
 
-        {/* CHARACTER-BASED UNIFIED COVERS GRID */}
+        {/* 1. MARIE CLAIRE PUBLISHED ARTICLES SECTION (COLUMN & COVERTURAS) */}
         <div className="mb-24">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-            <div>
-              <span className="text-[9px] tracking-[0.28em] uppercase text-[#7A6A5A] font-semibold font-mono block mb-1">
-                Catálogo Completo
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] font-normal">
-                Archivo Histórico de Portadas
-              </h2>
-              <p className="text-xs text-[#121212]/70 font-light mt-1">
-                Portadas agrupadas por personaje y serie editorial. Desliza o usa las flechas en cada tarjeta para explorar todas las tapas.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 self-start sm:self-auto">
-              <span className="text-[11px] font-mono text-[#7A6A5A] bg-white px-3.5 py-1.5 rounded-full border border-[#B5A898]/40 shadow-2xs">
-                {characterCoverGroups.length} Series · {totalIndividualCovers} Tapas
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-            {characterCoverGroups.map((group, idx) => (
-              <CharacterCoverCard
-                key={group.id}
-                group={group}
-                autoplayIntervalMs={3600 + (idx % 4) * 450}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* MARIE CLAIRE PUBLISHED ARTICLES SECTION */}
-        <div className="pt-12 border-t border-[#B5A898]/40 mb-24">
           <div className="mb-10">
             <span className="text-[9px] tracking-[0.28em] uppercase text-[#7A6A5A] font-semibold font-mono block mb-1">
               Columnas &amp; Coberturas
@@ -212,6 +180,9 @@ export default async function PrensaPage() {
             <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] font-normal">
               Artículos en Marie Claire Argentina
             </h2>
+            <p className="text-xs text-[#121212]/70 font-light mt-1">
+              Columnas de opinión, notas de investigación y coberturas internacionales escritas y publicadas por Ash Mateu.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -279,6 +250,38 @@ export default async function PrensaPage() {
                   )}
                 </div>
               </article>
+            ))}
+          </div>
+        </div>
+
+        {/* 2. CHARACTER-BASED UNIFIED COVERS GRID (CATÁLOGO COMPLETO) */}
+        <div className="pt-12 border-t border-[#B5A898]/40 mb-24">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <span className="text-[9px] tracking-[0.28em] uppercase text-[#7A6A5A] font-semibold font-mono block mb-1">
+                Catálogo Completo
+              </span>
+              <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] font-normal">
+                Archivo Histórico de Portadas
+              </h2>
+              <p className="text-xs text-[#121212]/70 font-light mt-1">
+                Portadas agrupadas por personaje y serie editorial. Desliza o usa las flechas en cada tarjeta para explorar todas las tapas.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <span className="text-[11px] font-mono text-[#7A6A5A] bg-white px-3.5 py-1.5 rounded-full border border-[#B5A898]/40 shadow-2xs">
+                {characterCoverGroups.length} Series · {totalIndividualCovers} Tapas
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+            {characterCoverGroups.map((group, idx) => (
+              <CharacterCoverCard
+                key={group.id}
+                group={group}
+                autoplayIntervalMs={3600 + (idx % 4) * 450}
+              />
             ))}
           </div>
         </div>
