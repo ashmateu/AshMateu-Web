@@ -180,11 +180,6 @@ export default function HighlightsGrid() {
                     sizes="(max-width: 768px) 100vw, 25vw"
                     className="object-cover object-[center_top] group-hover:scale-103 transition-transform duration-500"
                   />
-                  {m.badge && (
-                    <div className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-wider uppercase text-[#0A0A0A] border border-[#B5A898]/40">
-                      {m.badge}
-                    </div>
-                  )}
                 </div>
 
                 {/* NUMBER & CATEGORY */}
