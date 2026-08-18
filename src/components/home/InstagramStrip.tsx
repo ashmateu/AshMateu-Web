@@ -143,7 +143,7 @@ export default function InstagramStrip() {
             cardWidth="clamp(220px, 26vw, 340px)"
             gap={0.08}
             loop={true}
-            showCaption={true}
+            showCaption={false}
             showNavigation={true}
             showPagination={true}
             label="Diario Visual Ash Mateu"

@@ -138,8 +138,13 @@ export default function UniversalImageCalibrator() {
     }
   };
 
-  // Load saved slot configurations on mount
+  // Load saved slot configurations on mount ONLY if editor is visible
   useEffect(() => {
+    if (!isEditorVisible) {
+      // If we are on production without editor mode, clean up any DOM modifications
+      setSlotConfigs({});
+      return;
+    }
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -149,10 +154,11 @@ export default function UniversalImageCalibrator() {
     } catch (e) {
       console.error("Error loading saved slot configurations:", e);
     }
-  }, []);
+  }, [isEditorVisible]);
 
-  // Apply saved configurations strictly to their assigned DOM slots
+  // Apply saved configurations strictly to their assigned DOM slots ONLY in editor mode
   const applySlotConfigs = useCallback(() => {
+    if (!isEditorVisible) return;
     const images = document.querySelectorAll<HTMLImageElement>("img");
     images.forEach((img) => {
       if (img.closest("#universal-calibrator-panel")) return;
@@ -182,13 +188,14 @@ export default function UniversalImageCalibrator() {
         }
       }
     });
-  }, [slotConfigs]);
+  }, [slotConfigs, isEditorVisible]);
 
   useEffect(() => {
+    if (!isEditorVisible) return;
     applySlotConfigs();
     const interval = setInterval(applySlotConfigs, 600);
     return () => clearInterval(interval);
-  }, [applySlotConfigs]);
+  }, [applySlotConfigs, isEditorVisible]);
 
   // Click-to-select individual image slot
   useEffect(() => {
