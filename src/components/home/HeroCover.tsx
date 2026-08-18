@@ -25,18 +25,35 @@ interface FramingConfig {
 }
 
 const DEFAULT_DESKTOP: FramingConfig = {
-  x: 76,
-  y: 22,
-  zoom: 145,
-  brightness: 110,
+  x: 50,
+  y: 26,
+  zoom: 115,
+  brightness: 108,
 };
 
 const DEFAULT_MOBILE: FramingConfig = {
-  x: 75,
-  y: 22,
-  zoom: 130,
-  brightness: 110,
+  x: 50,
+  y: 24,
+  zoom: 110,
+  brightness: 108,
 };
+
+const HERO_SLIDES = [
+  {
+    src: "/images/hero/carousel/slide-1.jpg",
+    alt: "Producción Haute Couture dirigida por Ash Mateu — Paris Fashion Week",
+  },
+  {
+    src: "/images/hero/carousel/slide-2.jpg",
+    alt: "Producción editorial en rooftop de Nueva York — Ash Mateu Creative Direction",
+  },
+  {
+    src: "/images/hero/carousel/slide-3.jpg",
+    alt: "Producción editorial Marie Claire — Dirección creativa de Ash Mateu",
+  },
+];
+
+const HERO_SLIDE_INTERVAL_MS = 6000;
 
 const xPresets = [
   { label: "Izq", x: 25 },
@@ -66,6 +83,7 @@ export default function HeroCover() {
   const [showCalibrator, setShowCalibrator] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isEditorHost, setIsEditorHost] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   // Initialize screen size and load saved configurations synchronously on mount
   useEffect(() => {
@@ -197,6 +215,20 @@ export default function HeroCover() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [isMobileScreen]);
 
+  // Banner Autoplay — advances every HERO_SLIDE_INTERVAL_MS, restarts on manual navigation
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion || HERO_SLIDES.length <= 1) return;
+
+    const id = setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, HERO_SLIDE_INTERVAL_MS);
+
+    return () => clearTimeout(id);
+  }, [currentSlide]);
+
   const zoomPresets = [90, 100, 115, 130, 150, 180];
   const brightnessPresets = [100, 110, 120, 130, 140];
 
@@ -213,27 +245,59 @@ export default function HeroCover() {
         }`}
       >
         <div ref={imageWrapperRef} className="relative w-full h-full scale-[1.03]">
-          <Image
-            src="/images/hero/hero_cover_pptx.webp"
-            alt="Ash Mateu — Creative Direction & High Fashion Styling"
-            fill
-            priority
-            unoptimized
-            style={{
-              objectFit: "cover",
-              objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
-              transform: `scale(${currentConfig.zoom / 100})`,
-              transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
-              filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
-              transition: isLoaded
-                ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
-                : "none",
-            }}
-          />
+          {HERO_SLIDES.map((slide, index) => (
+            <div
+              key={slide.src}
+              className="absolute inset-0 transition-opacity duration-[1200ms] ease-out"
+              style={{ opacity: index === currentSlide ? 1 : 0 }}
+              aria-hidden={index === currentSlide ? undefined : true}
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                unoptimized
+                style={{
+                  objectFit: "cover",
+                  objectPosition: `${currentConfig.x}% ${currentConfig.y}%`,
+                  transform: `scale(${currentConfig.zoom / 100})`,
+                  transformOrigin: `${currentConfig.x}% ${currentConfig.y}%`,
+                  filter: `brightness(${currentConfig.brightness / 100}) contrast(1.04) saturate(1.05)`,
+                  transition: isLoaded
+                    ? "object-position 0.25s ease-out, transform 0.25s ease-out, filter 0.2s ease-out"
+                    : "none",
+                }}
+              />
+            </div>
+          ))}
         </div>
 
         {/* EDITORIAL GRADIENT OVERLAY (ONLY AT BOTTOM FOR CLEAN TEXT CONTRAST) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent md:from-black/70 md:via-transparent md:to-transparent pointer-events-none" />
+
+        {/* BANNER PAGINATION DOTS */}
+        {HERO_SLIDES.length > 1 && (
+          <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
+            {HERO_SLIDES.map((slide, index) => (
+              <button
+                key={slide.src}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Ver imagen ${index + 1} de ${HERO_SLIDES.length}`}
+                aria-current={index === currentSlide}
+                className="p-1.5 -m-1.5 cursor-pointer"
+              >
+                <span
+                  className={`block rounded-full transition-all duration-300 ${
+                    index === currentSlide
+                      ? "w-6 h-1.5 bg-[#EA2638]"
+                      : "w-1.5 h-1.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* HERO OVERLAID CONTENT */}
