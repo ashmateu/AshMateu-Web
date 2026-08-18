@@ -150,7 +150,7 @@ export default function HighlightsGrid() {
                   alt="Ash Mateu 20 Años de Dirección de Moda"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-[50%_15%] scale-[1.08] hover:scale-[1.12] transition-transform duration-700 ease-out"
+                  className="object-cover object-[50%_50%] scale-[1.20] hover:scale-[1.24] transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="flex justify-between items-center text-[9px] font-mono text-[#7A6A5A] mt-2 px-1">

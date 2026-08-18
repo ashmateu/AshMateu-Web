@@ -73,7 +73,7 @@ export default function ComoTrabajoPage() {
                       alt="Novias Únicas Fitting"
                       fill
                       sizes="(max-width: 768px) 100vw, 35vw"
-                      className="object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover object-[50%_15%] transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
                       Atelier Nupcial
@@ -108,7 +108,7 @@ export default function ComoTrabajoPage() {
                       alt="Alfombras Rojas & Galas"
                       fill
                       sizes="(max-width: 768px) 100vw, 35vw"
-                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover object-[50%_20%] transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
                       Red Carpet VIP
@@ -143,7 +143,7 @@ export default function ComoTrabajoPage() {
                       alt="Consultoría en Imagen"
                       fill
                       sizes="(max-width: 768px) 100vw, 35vw"
-                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover object-[42%_15%] transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
                       Fondo de Armario
@@ -178,7 +178,7 @@ export default function ComoTrabajoPage() {
                       alt="Fiestas & Eventos Styling"
                       fill
                       sizes="(max-width: 768px) 100vw, 35vw"
-                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover object-[24%_15%] transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
                       Eventos &amp; Celebraciones
@@ -319,7 +319,7 @@ export default function ComoTrabajoPage() {
                       alt="Curaduría de Diseño & Lookbooks"
                       fill
                       sizes="(max-width: 768px) 100vw, 40vw"
-                      className="object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover object-[50%_10%] transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
                       Lookbooks &amp; Colecciones
@@ -425,7 +425,7 @@ export default function ComoTrabajoPage() {
                       alt="Speaker Especializada & Masterclasses"
                       fill
                       sizes="(max-width: 768px) 100vw, 35vw"
-                      className="object-cover object-[center_10%] transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover object-[90%_36%] scale-[1.05] transition-transform duration-500 group-hover:scale-108"
                     />
                     <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[8.5px] tracking-[0.2em] uppercase px-2.5 py-1">
                       Conferencias &amp; Keynotes
