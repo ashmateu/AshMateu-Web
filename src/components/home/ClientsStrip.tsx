@@ -44,9 +44,9 @@ const brandLogos: BrandItem[] = [
   {
     name: "Dolce & Gabbana",
     src: "/images/brands/dolce_gabbana.webp",
-    width: 2030,
-    height: 226,
-    className: "h-3.5 sm:h-4 md:h-4.5 max-w-[140px] sm:max-w-[165px]",
+    width: 420,
+    height: 35,
+    className: "h-3.5 sm:h-4 md:h-4.5 max-w-[125px] sm:max-w-[145px]",
   },
   {
     name: "Marie Claire",
