@@ -68,7 +68,7 @@ export default function HighlightsGrid() {
             <div className="flex items-center gap-2.5 mb-2.5">
               <span className="w-6 h-px bg-[#7A6A5A]" />
               <span className="text-[9px] tracking-[0.28em] uppercase text-[#7A6A5A] font-semibold font-mono">
-                01 · Hitos &amp; Trayectoria
+                02 · Hitos &amp; Trayectoria
               </span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-normal text-[#0A0A0A] tracking-tight leading-[1.08]">

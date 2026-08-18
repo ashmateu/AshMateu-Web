@@ -105,7 +105,7 @@ export default function InstagramStrip() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-5 pb-6 border-b border-white/10">
           <GsapReveal>
             <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-3.5 py-1 rounded-full text-[9px] font-mono tracking-[0.26em] uppercase text-[#b5a898] mb-3 font-semibold">
-              <span>06 · Diario Visual &amp; Coberturas</span>
+              <span>01 · Diario Visual &amp; Coberturas</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-white tracking-tight">
               @ashmateu

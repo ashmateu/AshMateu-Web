@@ -15,28 +15,28 @@ export default function HomePage() {
       {/* 1. HERO COVER (FULL-SCREEN PPTX BLUEPRINT) */}
       <HeroCover />
 
-      {/* 2. HIGHLIGHTS GRID (SLIDE 6) */}
+      {/* 2. INSTAGRAM FEED / DIARIO VISUAL & COBERTURAS */}
+      <InstagramStrip />
+
+      {/* 3. HIGHLIGHTS GRID (SLIDE 6) */}
       <HighlightsGrid />
 
-      {/* 3. ¿CÓMO TRABAJO? / 3 PILLARS (SLIDES 8, 9, 10) */}
+      {/* 4. ¿CÓMO TRABAJO? / 3 PILLARS (SLIDES 8, 9, 10) */}
       <ServicesPillars />
 
-      {/* 4. GALERÍA EDITORIAL (SLIDE 11) */}
+      {/* 5. GALERÍA EDITORIAL (SLIDE 11) */}
       <EditorialGaleria />
 
-      {/* 5. PORTFOLIO SELECTED WORKS (8 PROJECTS RSC + URL STATE WITH SUSPENSE) */}
+      {/* 6. PORTFOLIO SELECTED WORKS (8 PROJECTS RSC + URL STATE WITH SUSPENSE) */}
       <Suspense fallback={<div className="py-20 text-center text-xs tracking-widest uppercase text-black/50">Cargando Portfolio...</div>}>
         <PortfolioGallery />
       </Suspense>
 
-      {/* 6. VLOG & SHORTS / MASTERCLASSES (SLIDE 12) */}
+      {/* 7. VLOG & SHORTS / MASTERCLASSES (SLIDE 12) */}
       <VlogSection />
 
-      {/* 7. CLIENTS MARQUEE */}
+      {/* 8. CLIENTS MARQUEE */}
       <ClientsStrip />
-
-      {/* 8. INSTAGRAM FEED */}
-      <InstagramStrip />
 
       {/* 9. CONTACT FORM + ZOD */}
       <ContactForm />

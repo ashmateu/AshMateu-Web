@@ -31,7 +31,7 @@ export default function VlogSection({
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-5">
           <GsapReveal>
             <div className="inline-flex items-center gap-2 border border-[#b5a898]/40 bg-[#f7f3ee] px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#7a7065] mb-2.5 font-medium">
-              <span>05 · Contenido Audiovisual &amp; Masterclasses</span>
+              <span>06 · Contenido Audiovisual &amp; Masterclasses</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-[42px] font-normal text-black tracking-tight">
               Vlog &amp; Redes
