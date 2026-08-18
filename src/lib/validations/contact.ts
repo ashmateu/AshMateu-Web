@@ -4,11 +4,11 @@ export const contactSchema = z.object({
   nombre: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
   empresa: z.string().optional(),
   tipoProyecto: z.enum([
-    "Editorial & Campañas",
+    "Editorial & Portadas",
     "Celebrity & Red Carpet",
-    "Dress to Kill (Novias & Galas)",
-    "Consultoría & Branding",
-    "Speaker & Keynote",
+    "Campañas de Marca",
+    "Novias & Galas de Autor",
+    "Consultoría & Keynote",
     "Otro",
   ], {
     errorMap: () => ({ message: "Por favor selecciona un tipo de proyecto válido" }),
