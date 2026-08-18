@@ -25,17 +25,17 @@ interface FramingConfig {
 }
 
 const DEFAULT_DESKTOP: FramingConfig = {
-  x: 76,
+  x: 50,
   y: 22,
-  zoom: 145,
-  brightness: 110,
+  zoom: 110,
+  brightness: 100,
 };
 
 const DEFAULT_MOBILE: FramingConfig = {
-  x: 75,
-  y: 22,
-  zoom: 130,
-  brightness: 110,
+  x: 50,
+  y: 20,
+  zoom: 105,
+  brightness: 100,
 };
 
 const xPresets = [
@@ -214,7 +214,7 @@ export default function HeroCover() {
       >
         <div ref={imageWrapperRef} className="relative w-full h-full scale-[1.03]">
           <Image
-            src="/images/hero/hero_cover_pptx.webp"
+            src="/images/highlights/ash_paris_portrait_2026.jpg"
             alt="Ash Mateu — Creative Direction & High Fashion Styling"
             fill
             priority
