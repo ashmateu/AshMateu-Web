@@ -322,10 +322,25 @@ export default function UniversalImageCalibrator() {
 
   const handleCopyCode = () => {
     const totalCustomSlots = Object.keys(slotConfigs).length;
-    const dataStr = JSON.stringify(slotConfigs, null, 2);
+    // Sanitize any massive base64 payloads to prevent token limits and chat filter blocks
+    const sanitizedConfigs: Record<string, any> = {};
+    for (const [k, v] of Object.entries(slotConfigs)) {
+      sanitizedConfigs[k] = {
+        x: v.x,
+        y: v.y,
+        zoom: v.zoom,
+        brightness: v.brightness,
+        originalSrc: v.originalSrc,
+        customSrc:
+          v.customSrc && v.customSrc.startsWith("data:")
+            ? "[FOTO_PERSONALIZADA_SUBIDA_DESDE_PC]"
+            : v.customSrc,
+      };
+    }
+    const dataStr = JSON.stringify(sanitizedConfigs, null, 2);
     navigator.clipboard.writeText(dataStr);
     setCopied(true);
-    setSavedFeedback(`📋 ${totalCustomSlots} cambios copiados al portapapeles`);
+    setSavedFeedback(`📋 ${totalCustomSlots} cambios copiados (sin base64 pesados)`);
     setTimeout(() => {
       setCopied(false);
       setSavedFeedback(null);

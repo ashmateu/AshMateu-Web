@@ -146,11 +146,11 @@ export default function HighlightsGrid() {
             <div className="lg:col-span-5 relative">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-[#B5A898]/40 shadow-md bg-[#FAF6F0]">
                 <Image
-                  src="/images/hero/hero_cover_pptx.webp"
-                  alt="Ash Mateu 20 Años"
+                  src="/images/highlights/ash_20_years_portrait.jpg"
+                  alt="Ash Mateu 20 Años de Dirección de Moda"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-[center_10%] hover:scale-102 transition-transform duration-700 ease-out"
+                  className="object-cover object-[50%_15%] scale-[1.08] hover:scale-[1.12] transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="flex justify-between items-center text-[9px] font-mono text-[#7A6A5A] mt-2 px-1">
