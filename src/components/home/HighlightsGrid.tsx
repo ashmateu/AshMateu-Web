@@ -83,85 +83,184 @@ export default function HighlightsGrid() {
           </GsapReveal>
         </div>
 
-        {/* MASTER FEATURED SPREAD (20 AÑOS - HERO EDITORIAL SPREAD) */}
-        <GsapReveal className="bg-white/80 backdrop-blur-md rounded-2xl p-8 md:p-12 lg:p-14 border border-[#B5A898]/40 shadow-xs mb-16 relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            
-            {/* LEFT COLUMN: NARRATIVE & DISPLAY NUMBER */}
-            <div className="lg:col-span-7 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-[9px] font-mono tracking-[0.24em] uppercase px-3 py-1 bg-[#F7F3EE] border border-[#B5A898]/50 text-[#7A6A5A] font-bold rounded-full">
+        {/* LUXURY BENTO SPREAD (20 AÑOS - PROPOSAL 2 BENTO ARCHITECTURE) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-16 items-stretch">
+          
+          {/* MAIN HERO BENTO CARD (LEFT: 7 COLS) */}
+          <GsapReveal className="lg:col-span-7 bg-white/90 backdrop-blur-md rounded-2xl p-7 sm:p-9 md:p-11 border border-[#B5A898]/40 shadow-xs flex flex-col justify-between relative overflow-hidden group hover:border-[#B5A898]/80 transition-all duration-500">
+            {/* AMBIENT WARM TINT */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#4A1525]/5 via-[#C8A870]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+            <div>
+              {/* TOP TAGS */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6 relative z-10">
+                <div className="flex items-center gap-2">
+                  <span className="text-[9px] font-mono tracking-[0.24em] uppercase px-3 py-1 bg-[#4A1525]/5 border border-[#4A1525]/20 text-[#4A1525] font-bold rounded-full">
                     2006 — 2026
                   </span>
-                  <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#7A6A5A]">
+                  <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#7A6A5A] font-semibold">
                     Master Milestone
                   </span>
                 </div>
-
-                <div className="flex items-baseline gap-4 mb-4">
-                  <span className="font-serif italic text-6xl sm:text-7xl md:text-8xl text-[#0A0A0A] font-light leading-none tracking-tight">
-                    20
-                  </span>
-                  <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#0A0A0A] font-normal leading-tight">
-                    Años de Dirección de Moda
-                  </span>
-                </div>
-
-                <p className="font-sans text-xs sm:text-[13.5px] text-[#121212]/80 font-light leading-relaxed max-w-xl">
-                  Veinte años de carrera. Moda, comunicación, estrategia, empresas, educación, tendencias, portadas, aviones, noches sin dormir pero bolsos nuevos, Excel y bastantes cambios de opinión que forjaron una mirada de autor en la industria.
-                </p>
+                <span className="text-[8.5px] font-mono tracking-widest uppercase text-[#7A6A5A]/80 hidden sm:inline-block">
+                  Direction &amp; Styling
+                </span>
               </div>
 
-              {/* THREE REFINED PILLARS UNDER MASTER */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 mt-8 border-t border-[#B5A898]/30 text-[11px] font-mono">
-                <div>
-                  <span className="text-[#7A6A5A] text-[9px] uppercase tracking-wider block mb-1">
-                    01 · Portadas
-                  </span>
-                  <span className="font-semibold text-black text-xs sm:text-[13px] font-serif">
-                    +150 Tapas Dirigidas
-                  </span>
-                </div>
-                <div>
-                  <span className="text-[#7A6A5A] text-[9px] uppercase tracking-wider block mb-1">
-                    02 · Trayectoria
-                  </span>
-                  <span className="font-semibold text-black text-xs sm:text-[13px] font-serif">
-                    NYFW &amp; Haute Couture
-                  </span>
-                </div>
-                <div>
-                  <span className="text-[#7A6A5A] text-[9px] uppercase tracking-wider block mb-1">
-                    03 · Comunidad
-                  </span>
-                  <span className="font-semibold text-black text-xs sm:text-[13px] font-serif">
-                    150k Insiders Exit
-                  </span>
-                </div>
+              {/* MASSIVE HERO HEADLINE */}
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-5 relative z-10">
+                <span className="font-serif italic text-6xl sm:text-7xl md:text-8xl text-[#0A0A0A] font-light leading-none tracking-tight">
+                  20
+                </span>
+                <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#0A0A0A] font-normal leading-tight">
+                  Años de Dirección de Moda
+                </span>
               </div>
+
+              {/* MANIFESTO COPY */}
+              <p className="font-sans text-xs sm:text-[13.5px] text-[#121212]/80 font-light leading-relaxed max-w-xl mb-8 relative z-10">
+                Veinte años de carrera. Moda, comunicación, estrategia, empresas, educación, tendencias, portadas, aviones, noches sin dormir pero bolsos nuevos, Excel y bastantes cambios de opinión que forjaron una mirada de autor en la industria.
+              </p>
             </div>
 
-            {/* RIGHT COLUMN: HIGH-RES EDITORIAL PORTRAIT */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-[#B5A898]/40 shadow-md bg-[#FAF6F0]">
+            {/* FULL-LENGTH EDITORIAL STREET STYLE PORTRAIT FRAME */}
+            <div className="relative rounded-xl overflow-hidden border border-[#B5A898]/50 shadow-md bg-[#FAF6F0] group/img mt-2">
+              <div className="relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/5] w-full overflow-hidden">
                 <Image
                   src="/images/highlights/ash_paris_portrait_2026.jpg"
-                  alt="Ash Mateu 20 Años de Dirección de Moda"
+                  alt="Ash Mateu 20 Años de Dirección de Moda - Paris Street Style"
                   fill
                   priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-[50%_36%] scale-[1.20] hover:scale-[1.24] transition-transform duration-700 ease-out"
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                  className="object-cover object-[50%_36%] scale-[1.12] group-hover/img:scale-[1.16] transition-transform duration-700 ease-out"
                 />
               </div>
-              <div className="flex justify-between items-center text-[9px] font-mono text-[#7A6A5A] mt-2 px-1">
-                <span>© Ash Mateu Studio</span>
-                <span>Editorial Portrait</span>
+
+              {/* OVERLAY LOOKBOOK CAPTION */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between text-white gap-2">
+                <div>
+                  <span className="text-[8.5px] font-mono tracking-[0.2em] uppercase text-[#E8D4D8] block font-semibold">
+                    📍 Paris Fashion Week · Haute Couture
+                  </span>
+                  <span className="text-[11px] font-serif text-white/95">
+                    Oversized Tailoring &amp; Silk Archive Scarf
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[8.5px] font-mono px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-full border border-white/20 text-white/90">
+                    © Ash Mateu Studio
+                  </span>
+                </div>
               </div>
             </div>
 
+          </GsapReveal>
+
+          {/* SIDE BENTO CARDS COLUMN (RIGHT: 5 COLS) */}
+          <div className="lg:col-span-5 flex flex-col gap-6 lg:gap-7 justify-between">
+            
+            {/* BENTO CARD 1: +150 PORTADAS */}
+            <GsapReveal delay={0.05} className="bg-white/85 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-[#B5A898]/40 shadow-xs hover:border-[#4A1525]/40 hover:shadow-md transition-all duration-400 flex flex-col justify-between group">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#4A1525]" />
+                    <span className="text-[8.5px] font-mono tracking-[0.22em] uppercase text-[#7A6A5A] font-bold">
+                      01 · Publicaciones &amp; Editorial
+                    </span>
+                  </div>
+                  <span className="font-serif text-3xl sm:text-4xl text-[#0A0A0A] font-normal leading-none block group-hover:translate-x-1 transition-transform">
+                    +150 Tapas
+                  </span>
+                </div>
+                <div className="relative w-14 h-18 sm:w-16 sm:h-20 rounded-lg overflow-hidden border border-[#B5A898]/50 shadow-xs shrink-0 bg-[#FAF6F0]">
+                  <Image
+                    src="/images/catalog_v2/portadas/1c2c1c68-11f5-4d8f-a4f6-745ea9cc1f32.jpg"
+                    alt="Portadas Históricas"
+                    fill
+                    sizes="80px"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+              <p className="font-sans text-xs text-[#121212]/75 font-light leading-relaxed">
+                Cuatro portadas simultáneas en quioscos y más de 150 producciones icónicas dirigidas en dos décadas.
+              </p>
+              <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#B5A898]/20 text-[9px] font-mono text-[#7A6A5A]">
+                <span>Marie Claire &amp; Medios Líderes</span>
+                <span className="font-bold text-[#4A1525]">2 Décadas</span>
+              </div>
+            </GsapReveal>
+
+            {/* BENTO CARD 2: NYFW & HAUTE COUTURE */}
+            <GsapReveal delay={0.1} className="bg-white/85 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-[#B5A898]/40 shadow-xs hover:border-[#4A1525]/40 hover:shadow-md transition-all duration-400 flex flex-col justify-between group">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#C8A870]" />
+                    <span className="text-[8.5px] font-mono tracking-[0.22em] uppercase text-[#7A6A5A] font-bold">
+                      02 · Coberturas Globales
+                    </span>
+                  </div>
+                  <span className="font-serif text-3xl sm:text-4xl text-[#0A0A0A] font-normal leading-none block group-hover:translate-x-1 transition-transform">
+                    Front Row
+                  </span>
+                </div>
+                <div className="relative w-14 h-18 sm:w-16 sm:h-20 rounded-lg overflow-hidden border border-[#B5A898]/50 shadow-xs shrink-0 bg-[#FAF6F0]">
+                  <Image
+                    src="/images/catalog_v2/Moda estudio tapa lunares New York jpegs/MarieClaire_Cover_2024_014.jpg"
+                    alt="NYFW Front Row"
+                    fill
+                    sizes="80px"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+              <p className="font-sans text-xs text-[#121212]/75 font-light leading-relaxed">
+                Lincoln Center, Nueva York y Haute Couture París. Coberturas editoriales y front row desde 2010.
+              </p>
+              <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#B5A898]/20 text-[9px] font-mono text-[#7A6A5A]">
+                <span>Nueva York · París · Milán</span>
+                <span className="font-bold text-[#C8A870]">Desde 2010</span>
+              </div>
+            </GsapReveal>
+
+            {/* BENTO CARD 3: 150K INSIDERS & STUDIO EXIT */}
+            <GsapReveal delay={0.15} className="bg-white/85 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-[#B5A898]/40 shadow-xs hover:border-[#4A1525]/40 hover:shadow-md transition-all duration-400 flex flex-col justify-between group">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#1A1A1A]" />
+                    <span className="text-[8.5px] font-mono tracking-[0.22em] uppercase text-[#7A6A5A] font-bold">
+                      03 · Comunidad &amp; EdTech
+                    </span>
+                  </div>
+                  <span className="font-serif text-3xl sm:text-4xl text-[#0A0A0A] font-normal leading-none block group-hover:translate-x-1 transition-transform">
+                    150k Insiders
+                  </span>
+                </div>
+                <div className="relative w-14 h-18 sm:w-16 sm:h-20 rounded-lg overflow-hidden border border-[#B5A898]/50 shadow-xs shrink-0 bg-[#FAF6F0]">
+                  <Image
+                    src="/images/catalog_v2/ASH/E0C50A9A-718F-498E-87F3-410FA4D94D3D-1.jpg"
+                    alt="Ash Mateu Studio Exit"
+                    fill
+                    sizes="80px"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+              <p className="font-sans text-xs text-[#121212]/75 font-light leading-relaxed">
+                Escuela de moda online fundada en 2015 y vendida en su totalidad (Exit) en 2025.
+              </p>
+              <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#B5A898]/20 text-[9px] font-mono text-[#7A6A5A]">
+                <span>Ash Mateu Studio</span>
+                <span className="font-bold text-[#1A1A1A]">Exit 2025</span>
+              </div>
+            </GsapReveal>
+
           </div>
-        </GsapReveal>
+
+        </div>
 
         {/* FOUR REFINED EDITORIAL COLUMNS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-16">
