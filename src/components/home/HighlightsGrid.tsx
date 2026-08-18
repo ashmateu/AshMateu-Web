@@ -40,7 +40,7 @@ const milestones: Milestone[] = [
     badge: "2 Décadas",
     title: "Dirección Creativa",
     description: "Cuatro portadas simultáneas en quioscos y más de 150 portadas en dos décadas de carrera.",
-    image: "/images/catalog_v2/portadas/TAPA1.jpg",
+    image: "/images/catalog_v2/portadas/1c2c1c68-11f5-4d8f-a4f6-745ea9cc1f32.jpg",
     imageAlt: "Tapas y Revistas",
   },
   {
@@ -49,7 +49,7 @@ const milestones: Milestone[] = [
     badge: "Exit 2025",
     title: "Ash Mateu Studio",
     description: "Comunidad de 150k Insiders en la escuela de moda online que fundé en 2015 y vendí en su totalidad en 2025.",
-    image: "/images/catalog_v2/ASH/IMG_7663-1.jpg",
+    image: "/images/catalog_v2/ASH/E0C50A9A-718F-498E-87F3-410FA4D94D3D-1.jpg",
     imageAlt: "Studio Exit",
   },
 ];
@@ -150,7 +150,7 @@ export default function HighlightsGrid() {
                   alt="Ash Mateu 20 Años de Dirección de Moda"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-[50%_50%] scale-[1.20] hover:scale-[1.24] transition-transform duration-700 ease-out"
+                  className="object-cover object-[50%_36%] scale-[1.20] hover:scale-[1.24] transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="flex justify-between items-center text-[9px] font-mono text-[#7A6A5A] mt-2 px-1">
