@@ -40,16 +40,16 @@ const DEFAULT_MOBILE: FramingConfig = {
 
 const HERO_SLIDES = [
   {
+    src: "/images/hero/hero_cover_pptx.webp",
+    alt: "Ash Mateu — Creative Direction & High Fashion Styling",
+  },
+  {
     src: "/images/hero/carousel/slide-1.jpg",
     alt: "Producción Haute Couture dirigida por Ash Mateu — Paris Fashion Week",
   },
   {
     src: "/images/hero/carousel/slide-2.jpg",
     alt: "Producción editorial en rooftop de Nueva York — Ash Mateu Creative Direction",
-  },
-  {
-    src: "/images/hero/carousel/slide-3.jpg",
-    alt: "Producción editorial Marie Claire — Dirección creativa de Ash Mateu",
   },
 ];
 
