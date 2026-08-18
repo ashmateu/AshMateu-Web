@@ -78,6 +78,15 @@ export default function UniversalImageCalibrator() {
         host.includes("127.0.0.1") ||
         window.location.search.includes("editor=true");
       setIsEditorVisible(isAllowed);
+      if (!isAllowed) {
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.removeItem("ash_hero_desktop_framing");
+          localStorage.removeItem("ash_hero_mobile_framing");
+        } catch (e) {
+          console.error(e);
+        }
+      }
     }
   }, []);
 
@@ -367,6 +376,10 @@ export default function UniversalImageCalibrator() {
     { label: "🎯 Centro (50%)", x: 50, y: 50 },
     { label: "👠 Cuerpo Entero (15%)", x: 50, y: 15 },
   ];
+
+  if (!isEditorVisible) {
+    return null;
+  }
 
   return (
     <>
