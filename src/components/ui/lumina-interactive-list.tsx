@@ -172,7 +172,8 @@ export function LuminaInteractiveList({
         vec2 s = uResolution / textureSize;
         float scale = max(s.x, s.y);
         vec2 scaledSize = textureSize * scale;
-        vec2 offset = (uResolution - scaledSize) * 0.5;
+        // Anchor vertical position to upper-third (20%) so faces and outfits are never cut off
+        vec2 offset = (uResolution - scaledSize) * vec2(0.5, 0.18);
         return (uv * uResolution - offset) / scaledSize;
       }
 
@@ -576,12 +577,12 @@ export function LuminaInteractiveList({
   return (
     <div
       ref={containerRef}
-      className={`slider-wrapper relative w-full h-[75vh] md:h-[85vh] bg-[#0A0A0A] text-white overflow-hidden rounded-2xl border border-white/10 shadow-2xl select-none ${className}`}
+      className={`slider-wrapper relative w-full aspect-[16/11] sm:aspect-[16/9] md:aspect-[21/10] min-h-[480px] max-h-[640px] bg-[#0A0A0A] text-white overflow-hidden rounded-2xl border border-white/10 shadow-2xl select-none ${className}`}
     >
       <canvas ref={canvasRef} className="webgl-canvas absolute inset-0 w-full h-full object-cover" />
 
       {/* GRADIENT VIGNETTE */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/35 pointer-events-none" />
 
       {/* TOP SLIDE COUNTER */}
       <div className="absolute top-6 left-6 md:top-8 md:left-10 z-20 flex items-baseline gap-1.5 font-mono text-xs tracking-widest text-[#b5a898]">
@@ -595,18 +596,18 @@ export function LuminaInteractiveList({
       </div>
 
       {/* SLIDE CONTENT HERO */}
-      <div className="slide-content absolute bottom-24 md:bottom-28 left-6 md:left-10 max-w-xl z-20 pointer-events-none">
+      <div className="slide-content absolute bottom-24 md:bottom-28 left-6 md:left-10 max-w-2xl z-20 pointer-events-none pr-6">
         {slides[activeIdx]?.category && (
           <span className="inline-block text-[9px] font-mono tracking-[0.3em] uppercase text-[#b5a898] bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/15 mb-3">
             {slides[activeIdx].category}
           </span>
         )}
         <h1
-          className="slide-title font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-normal leading-[1.08] tracking-tight mb-3 drop-shadow-md"
+          className="slide-title font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white font-normal leading-[1.14] tracking-tight mb-2.5 drop-shadow-md break-normal"
           id="mainTitle"
         ></h1>
         <p
-          className="slide-description font-sans text-xs sm:text-sm text-white/80 font-light leading-relaxed max-w-lg drop-shadow"
+          className="slide-description font-sans text-xs sm:text-sm text-white/80 font-light leading-relaxed max-w-xl drop-shadow"
           id="mainDesc"
         ></p>
       </div>
