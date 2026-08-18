@@ -286,19 +286,21 @@ export const CircularTestimonials = ({
       <style jsx>{`
         .testimonial-container {
           width: 100%;
-          max-width: 72rem;
-          padding: 1.5rem;
+          max-width: 76rem;
+          padding: 1rem;
         }
         .testimonial-grid {
           display: grid;
-          gap: 4rem;
+          gap: 3.5rem;
           align-items: center;
         }
         .image-container {
           position: relative;
           width: 100%;
+          max-width: 400px;
           height: 28rem;
-          perspective: 1200px;
+          margin: 0 auto;
+          perspective: 1400px;
         }
         .testimonial-image {
           position: absolute;
@@ -306,9 +308,9 @@ export const CircularTestimonials = ({
           height: 100%;
           object-fit: cover;
           object-position: center top;
-          border-radius: 1.25rem;
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-          border: 1px solid rgba(181, 168, 152, 0.4);
+          border-radius: 0.875rem;
+          box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08);
+          border: 1px solid rgba(181, 168, 152, 0.45);
           background-color: #faf6f0;
         }
         .testimonial-content {
@@ -344,11 +346,21 @@ export const CircularTestimonials = ({
         }
         @media (min-width: 768px) {
           .testimonial-grid {
-            grid-template-columns: 1.1fr 1fr;
+            grid-template-columns: 1.05fr 1fr;
             gap: 5rem;
+          }
+          .image-container {
+            height: 34rem;
+            max-width: 420px;
           }
           .arrow-buttons {
             padding-top: 2rem;
+          }
+        }
+        @media (min-width: 1200px) {
+          .image-container {
+            height: 36rem;
+            max-width: 440px;
           }
         }
       `}</style>

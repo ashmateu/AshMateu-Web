@@ -3,13 +3,12 @@ import Image from "next/image";
 import { getPressArticles } from "@/lib/data/press";
 import ContactForm from "@/components/contact/ContactForm";
 import CircularTestimonials from "@/components/ui/circular-testimonials";
-import GsapReveal from "@/components/animations/GsapReveal";
 import { Sparkles, BookOpen, ExternalLink, Award } from "lucide-react";
 
 export const metadata = {
-  title: "Prensa & Nuevas Portadas — Ash Mateu",
+  title: "Prensa & Portadas de Revista — Ash Mateu",
   description:
-    "Más de 150 portadas y artículos de moda dirigidos por Ash Mateu en Marie Claire Argentina y publicaciones de lujo.",
+    "Archivo completo de más de 150 portadas y artículos de moda dirigidos por Ash Mateu en Marie Claire Argentina y publicaciones de lujo.",
 };
 
 const featuredCovers = [
@@ -42,22 +41,50 @@ const featuredCovers = [
     src: "/images/catalog_v2/portadas/Cover-Juani-final-scaled.jpg",
   },
   {
-    name: "New York Fashion Week",
+    name: "NYFW Front Row",
     designation: "Portada Marie Claire — Pasarelas Globales",
     quote:
       "Cubriendo el front row de las semanas de la moda globales y traduciendo las macrotendencias en portadas de referencia para Latinoamérica.",
     src: "/images/catalog_v2/Moda estudio tapa lunares New York jpegs/MarieClaire_Cover_2024_014.jpg",
   },
   {
-    name: "Tecnomoda & Vanguardia",
-    designation: "Portada Marie Claire — Edición Digital",
+    name: "Belu Negri",
+    designation: "Portada DMAG — Avant-Garde Edition",
+    quote:
+      "Estilismo y dirección de arte vanguardista con texturas audaces y estética pop editorial de alto impacto visual.",
+    src: "/images/catalog_v2/BELU NEGRI/A.jpg",
+  },
+  {
+    name: "Tecnomoda & Futuro Digital",
+    designation: "Portada Marie Claire — Edición Digital A",
     quote:
       "Explorando el futuro de la moda, la inteligencia visual y la creación de universos estéticos en la era digital.",
     src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda A.jpg",
   },
   {
+    name: "Vanguardia Tecnológica",
+    designation: "Portada Marie Claire — Edición Digital B",
+    quote:
+      "Sastrería contemporánea y siluetas volumétricas en una edición que desafía los límites entre lo físico y lo digital.",
+    src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda B.jpg",
+  },
+  {
+    name: "Digital Trends 2026",
+    designation: "Portada Marie Claire — Edición Digital C",
+    quote:
+      "La nueva era de los creadores de contenido y el diseño latinoamericano en pasarelas del mundo.",
+    src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda C.jpg",
+  },
+  {
+    name: "New York Fashion Issue",
+    designation: "Portada Marie Claire — NY Special Edition",
+    quote:
+      "Dirección de moda integral en las calles y estudios de Manhattan para una de las ediciones más aclamadas de la revista.",
+    src: "/images/catalog_v2/PDFS MC/MC-073-Tapa NY.jpg",
+  },
+  {
     name: "Alta Costura & Naturaleza",
-    designation: "Portada Marie Claire — Colección de Primavera",
+    designation: "Portada Marie Claire — Colección Primavera",
     quote:
       "Sastrería refinada y texturas poéticas en una producción inolvidable de dirección de moda integral.",
     src: "/images/catalog_v2/portadas/TAPA1.jpg",
@@ -72,18 +99,31 @@ const featuredCovers = [
 ];
 
 const allCatalogCovers = [
-  { src: "/images/catalog_v2/portadas/1_TAPA SANTI TALLEDO.jpg", title: "Marie Claire — Santi Talledo", date: "Edición Primavera" },
-  { src: "/images/catalog_v2/portadas/Cover-Juani-final-scaled.jpg", title: "Marie Claire — Juana Burga", date: "Alta Costura" },
-  { src: "/images/catalog_v2/portadas/MC-064-Tapa MAIA RGB.jpg", title: "Marie Claire — Maia Reffico", date: "Edición Aniversario" },
-  { src: "/images/catalog_v2/36. Valentina Ferrer Marie Claire/MC-047-Tapa Valentina IG.jpg", title: "Marie Claire — Valentina Ferrer", date: "New York Issue" },
-  { src: "/images/catalog_v2/Moda estudio tapa lunares New York jpegs/MarieClaire_Cover_2024_014.jpg", title: "Marie Claire — NYFW Front Row", date: "Pasarela NY" },
-  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda A.jpg", title: "Marie Claire — Tecnomoda Digital", date: "Vanguardia" },
-  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda B.jpg", title: "Marie Claire — Tecnomoda B", date: "Edición Especial" },
-  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda C.jpg", title: "Marie Claire — Tecnomoda C", date: "Tendencias" },
-  { src: "/images/catalog_v2/portadas/TAPA1.jpg", title: "Marie Claire — Portada Especial", date: "Central Park" },
-  { src: "/images/catalog_v2/portadas/TAPA2.jpg", title: "Marie Claire — Alta Costura", date: "Editorial de Firma" },
-  { src: "/images/catalog_v2/portadas/005 (1).jpg", title: "Marie Claire — Colección Estudio", date: "Moda & Estilo" },
-  { src: "/images/catalog_v2/portadas/006 (1).jpg", title: "Marie Claire — Portada Archivo", date: "Colección Exclusiva" },
+  { src: "/images/catalog_v2/portadas/MC-064-Tapa MAIA RGB.jpg", title: "Marie Claire — Maia Reffico", date: "Edición Aniversario", issue: "Tapa Principal" },
+  { src: "/images/catalog_v2/36. Valentina Ferrer Marie Claire/MC-047-Tapa Valentina IG.jpg", title: "Marie Claire — Valentina Ferrer", date: "New York Issue", issue: "Alta Costura" },
+  { src: "/images/catalog_v2/portadas/1_TAPA SANTI TALLEDO.jpg", title: "Marie Claire — Santi Talledo", date: "Edición Primavera", issue: "Edición Especial" },
+  { src: "/images/catalog_v2/portadas/Cover-Juani-final-scaled.jpg", title: "Marie Claire — Juana Burga", date: "Top Model", issue: "Dirección de Arte" },
+  { src: "/images/catalog_v2/Moda estudio tapa lunares New York jpegs/MarieClaire_Cover_2024_014.jpg", title: "Marie Claire — NYFW Front Row", date: "Lincoln Center", issue: "Pasarela NY" },
+  { src: "/images/catalog_v2/BELU NEGRI/A.jpg", title: "DMAG Magazine — Belu Negri", date: "Vanguardia", issue: "Editorial Pop" },
+  { src: "/images/catalog_v2/PDFS MC/MC-073-Tapa NY.jpg", title: "Marie Claire — New York Issue", date: "Manhattan", issue: "Edición Especial" },
+  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda A.jpg", title: "Marie Claire — Tecnomoda Digital A", date: "Vanguardia Digital", issue: "Futuro & IA" },
+  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda B.jpg", title: "Marie Claire — Tecnomoda Digital B", date: "Edición Especial", issue: "Siluetas 3D" },
+  { src: "/images/catalog_v2/portadas/MC-083-Tapa DIgital-Tecnomoda C.jpg", title: "Marie Claire — Tecnomoda Digital C", date: "Tendencias", issue: "Cyber Fashion" },
+  { src: "/images/catalog_v2/portadas/TAPA1.jpg", title: "Marie Claire — Central Park", date: "Colección Flores", issue: "Primavera" },
+  { src: "/images/catalog_v2/portadas/TAPA2.jpg", title: "Marie Claire — Alta Costura", date: "Editorial de Firma", issue: "20 Años" },
+  { src: "/images/catalog_v2/portadas/005 (1).jpg", title: "Marie Claire — Estudio Colección", date: "Moda & Estilo", issue: "Estudio" },
+  { src: "/images/catalog_v2/portadas/006 (1).jpg", title: "Marie Claire — Archivo Histórico", date: "Colección Exclusiva", issue: "Retrospectiva" },
+  { src: "/images/catalog_v2/portadas/1b715713-6f62-473f-9b44-6ef35d664969.jpg", title: "Marie Claire — Alta Joyería", date: "Especial Lujo", issue: "Joyería & Moda" },
+  { src: "/images/catalog_v2/portadas/1c2c1c68-11f5-4d8f-a4f6-745ea9cc1f32.jpg", title: "Marie Claire — Sastrería & Estilo", date: "Otoño / Invierno", issue: "Sastrería" },
+  { src: "/images/catalog_v2/portadas/7c275178-47fc-467b-88e7-8f449ff62254.jpg", title: "Marie Claire — Primavera Verano", date: "Temporada Estival", issue: "Resort" },
+  { src: "/images/catalog_v2/portadas/IMG_0339.jpg", title: "Marie Claire — Cuatro Portadas en Quiosco I", date: "Simultánea 1", issue: "Colección Quiosco" },
+  { src: "/images/catalog_v2/portadas/IMG_0340.jpg", title: "Marie Claire — Cuatro Portadas en Quiosco II", date: "Simultánea 2", issue: "Colección Quiosco" },
+  { src: "/images/catalog_v2/portadas/IMG_0341.jpg", title: "Marie Claire — Cuatro Portadas en Quiosco III", date: "Simultánea 3", issue: "Colección Quiosco" },
+  { src: "/images/catalog_v2/portadas/IMG_0342.jpg", title: "Marie Claire — Cuatro Portadas en Quiosco IV", date: "Simultánea 4", issue: "Colección Quiosco" },
+  { src: "/images/catalog_v2/portadas/IMG_0343.jpg", title: "Marie Claire — Portada de Autor V", date: "Edición Limitada", issue: "Especial" },
+  { src: "/images/catalog_v2/portadas/IMG_0344.jpg", title: "Marie Claire — Portada de Autor VI", date: "Edición Limitada", issue: "Especial" },
+  { src: "/images/catalog_v2/portadas/IMG_0346.jpg", title: "Marie Claire — Archivo Editorial VII", date: "Colección Histórica", issue: "Archivo" },
+  { src: "/images/catalog_v2/portadas/IMG_0347.jpg", title: "Marie Claire — Archivo Editorial VIII", date: "Colección Histórica", issue: "Archivo" },
 ];
 
 export default async function PrensaPage() {
@@ -102,24 +142,24 @@ export default async function PrensaPage() {
             </span>
           </div>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] font-normal tracking-tight mb-4">
-            Prensa &amp; Nuevas Portadas
+            Prensa &amp; Portadas de Revista
           </h1>
           <p className="text-sm md:text-base text-[#121212]/75 max-w-2xl font-light leading-relaxed">
-            Más de 150 portadas producidas y decenas de artículos publicados a lo largo de 20 años de dirección editorial en Marie Claire Argentina y medios de moda internacionales.
+            Archivo oficial de más de 150 portadas producidas y decenas de artículos publicados a lo largo de 20 años de dirección editorial en Marie Claire Argentina, DMAG y publicaciones internacionales.
           </p>
         </div>
 
-        {/* CIRCULAR 3D TESTIMONIALS / COVERS SHOWCASE */}
-        <div className="mb-24 bg-white/70 backdrop-blur-md rounded-3xl p-6 md:p-12 border border-[#B5A898]/40 shadow-sm">
-          <div className="text-center max-w-xl mx-auto mb-6">
-            <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#7A6A5A] font-semibold block mb-1">
-              Colección Destacada
+        {/* CIRCULAR 3D TESTIMONIALS / VERTICAL MAGAZINE COVERS SHOWCASE */}
+        <div className="mb-24 bg-white/75 backdrop-blur-md rounded-3xl p-6 md:p-12 lg:p-14 border border-[#B5A898]/40 shadow-sm">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#7A6A5A] font-semibold block mb-1.5">
+              3D Interactive Cover Deck
             </span>
-            <h2 className="font-serif text-2xl md:text-3xl text-[#0A0A0A] font-normal">
-              Portadas &amp; Citas Editoriales
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#0A0A0A] font-normal">
+              Portadas Icónicas &amp; Citas Editoriales
             </h2>
-            <p className="text-xs text-[#121212]/70 font-light mt-1">
-              Navega con las flechas o arrastra para explorar las portadas más icónicas en vista 3D giratoria.
+            <p className="text-xs text-[#121212]/70 font-light mt-2 max-w-md mx-auto">
+              Visualización 3D en proporción rectangular completa de revista. Navega con las flechas o arrastra para ver las portadas.
             </p>
           </div>
 
@@ -144,19 +184,19 @@ export default async function PrensaPage() {
           </div>
         </div>
 
-        {/* FULL ARCHIVE COVERS GRID */}
+        {/* FULL ARCHIVE COVERS GRID (ALL 25+ COVERS) */}
         <div className="pt-12 border-t border-[#B5A898]/40 mb-24">
-          <div className="flex items-center justify-between mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
             <div>
               <span className="text-[9px] tracking-[0.28em] uppercase text-[#7A6A5A] font-semibold font-mono block mb-1">
                 Catálogo Completo
               </span>
               <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] font-normal">
-                Archivo de Portadas de Revista
+                Archivo Histórico de Portadas
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-[#7A6A5A] hidden sm:inline-block">
-              {allCatalogCovers.length} Portadas en Archivo
+            <span className="text-[11px] font-mono text-[#7A6A5A] bg-white px-3 py-1 rounded-full border border-[#B5A898]/40 self-start sm:self-auto">
+              {allCatalogCovers.length} Portadas Catalogadas
             </span>
           </div>
 
@@ -166,7 +206,7 @@ export default async function PrensaPage() {
                 key={i}
                 className="bg-white rounded-xl border border-[#B5A898]/40 overflow-hidden group hover:border-black transition-all duration-300 shadow-xs hover:shadow-md flex flex-col justify-between"
               >
-                <div className="relative aspect-[3/4] w-full bg-[#FAF6F0] overflow-hidden">
+                <div className="relative aspect-[3/4.2] w-full bg-[#FAF6F0] overflow-hidden">
                   <Image
                     src={cov.src}
                     alt={cov.title}
@@ -174,11 +214,14 @@ export default async function PrensaPage() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
                     className="object-cover object-[center_top] group-hover:scale-104 transition-transform duration-500"
                   />
-                  <div className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-wider uppercase text-[#0A0A0A] border border-[#B5A898]/30">
+                  <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-wider uppercase text-[#0A0A0A] border border-[#B5A898]/30">
                     {cov.date}
                   </div>
                 </div>
-                <div className="p-4 bg-white">
+                <div className="p-4 bg-white border-t border-[#B5A898]/20">
+                  <span className="text-[8px] font-mono tracking-wider uppercase text-[#7A6A5A] block mb-0.5">
+                    {cov.issue}
+                  </span>
                   <h3 className="font-serif text-sm text-[#0A0A0A] font-normal truncate">
                     {cov.title}
                   </h3>
