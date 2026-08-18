@@ -146,9 +146,10 @@ export default function HighlightsGrid() {
             <div className="lg:col-span-5 relative">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-[#B5A898]/40 shadow-md bg-[#FAF6F0]">
                 <Image
-                  src="/images/highlights/ash_20_years_portrait.jpg"
+                  src="/images/highlights/ash_paris_portrait_2026.jpg"
                   alt="Ash Mateu 20 Años de Dirección de Moda"
                   fill
+                  priority
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover object-[50%_36%] scale-[1.20] hover:scale-[1.24] transition-transform duration-700 ease-out"
                 />

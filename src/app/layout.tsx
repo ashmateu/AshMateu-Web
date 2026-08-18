@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/highlights/ash_20_years_portrait.jpg",
+        url: "/images/highlights/ash_paris_portrait_2026.jpg",
         width: 1200,
         height: 630,
         alt: "Ash Mateu — Creative Direction & Fashion Styling",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ash Mateu — Creative Direction & Fashion Styling",
     description: "Styling people, brands and ideas. Chanel, Louis Vuitton, Miu Miu, Dolce & Gabbana.",
-    images: ["/images/highlights/ash_20_years_portrait.jpg"],
+    images: ["/images/highlights/ash_paris_portrait_2026.jpg"],
   },
 };
 
@@ -73,7 +73,7 @@ const jsonLd = {
   jobTitle: "Creative Director & Fashion Stylist",
   description: "Directora Creativa de Moda y Consultora de Imagen especializada en alta costura, producciones editoriales y campañas internacionales.",
   url: "https://ashmateu.com",
-  image: "https://ashmateu.com/images/highlights/ash_20_years_portrait.jpg",
+  image: "https://ashmateu.com/images/highlights/ash_paris_portrait_2026.jpg",
   worksFor: {
     "@type": "Organization",
     name: "Marie Claire Argentina",
