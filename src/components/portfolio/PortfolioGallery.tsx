@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
-import { ArrowUpRight, Layers, Maximize2 } from "lucide-react";
-import { projects, Project } from "@/lib/data/projects";
+import { ArrowUpRight } from "lucide-react";
+import { projects } from "@/lib/data/projects";
 import GsapReveal from "@/components/animations/GsapReveal";
-import EditorialLightbox from "@/components/gallery/EditorialLightbox";
 
 interface PortfolioGalleryProps {
   isStandalone?: boolean;
@@ -21,9 +21,6 @@ export default function PortfolioGallery({
     defaultValue: "all",
   });
 
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-
   const categories = [
     { label: "Todo el Archivo", value: "all" },
     { label: "Haute Couture", value: "Haute Couture" },
@@ -36,11 +33,6 @@ export default function PortfolioGallery({
     category === "all"
       ? projects
       : projects.filter((p) => p.category === category);
-
-  const handleOpenLightbox = (project: Project) => {
-    setSelectedProject(project);
-    setIsLightboxOpen(true);
-  };
 
   return (
     <section
@@ -61,12 +53,12 @@ export default function PortfolioGallery({
                   : "04 · Selección Curada"}
               </span>
             </div>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] font-normal tracking-tight leading-[1.05]">
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] font-normal tracking-tight leading-[1.05]">
               {isStandalone ? "Fashion Gallery" : "Selected Works"}
-            </h1>
+            </h2>
           </GsapReveal>
 
-          {/* FILTROS TIPOGRÁFICOS EDITORIALES */}
+          {/* FILTROS TIPOGRÁFICOS EDITORIALES (SIN BOTONES DE MERCADO) */}
           <div className="flex flex-wrap items-center gap-6 sm:gap-8 text-xs tracking-[0.22em] uppercase font-medium">
             {categories.map((c) => {
               const active = category === c.value;
@@ -89,9 +81,10 @@ export default function PortfolioGallery({
           </div>
         </div>
 
-        {/* GRILLA EDITORIAL ASIMÉTRICA TIPO PASARELA */}
+        {/* GRILLA EDITORIAL ASIMÉTRICA TIPO PASARELA / EXHIBICIÓN DE ARTE */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-12">
           {filteredProjects.map((project, idx) => {
+            // Diseño asimétrico con alternancia editorial de columnas y alturas
             const isFeatured = idx % 5 === 0;
             const isWide = idx % 5 === 3;
             const colSpan = isFeatured
@@ -107,7 +100,6 @@ export default function PortfolioGallery({
               : "aspect-[3/4]";
 
             const formattedNumber = (idx + 1).toString().padStart(2, "0");
-            const photosCount = project.images ? project.images.length : 1;
 
             return (
               <GsapReveal
@@ -115,9 +107,9 @@ export default function PortfolioGallery({
                 delay={idx * 0.05}
                 className={`${colSpan} group relative`}
               >
-                <div
-                  onClick={() => handleOpenLightbox(project)}
-                  className="block relative overflow-hidden bg-neutral-200 border border-[#B5A898]/30 shadow-md group-hover:border-[#0A0A0A] transition-colors duration-500 rounded-xl cursor-pointer"
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="block relative overflow-hidden bg-neutral-200 border border-[#B5A898]/30 shadow-md group-hover:border-[#0A0A0A] transition-colors duration-500"
                 >
                   <div className={`relative w-full ${aspectClass} overflow-hidden`}>
                     <Image
@@ -133,23 +125,14 @@ export default function PortfolioGallery({
                     />
 
                     {/* OVERLAY EDITORIAL COMPLETO AL POSAR EL PUNTERO (HOVER) */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col justify-between p-5 md:p-6">
-                      {/* TOP ROW: CATEGORÍA + BOTÓN VISOR */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col justify-between p-5 md:p-6 pointer-events-none">
+                      {/* TOP ROW: CATEGORÍA + FLECHA */}
                       <div className="flex items-center justify-between transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                        <span className="bg-[#F7F3EE]/95 backdrop-blur-md px-3 py-1 text-[9.5px] tracking-[0.24em] uppercase text-[#0A0A0A] font-semibold border border-[#B5A898]/40 shadow-sm rounded">
+                        <span className="bg-[#F7F3EE]/95 backdrop-blur-md px-3 py-1 text-[9.5px] tracking-[0.24em] uppercase text-[#0A0A0A] font-semibold border border-[#B5A898]/40 shadow-sm">
                           {project.category}
                         </span>
-
-                        <div className="flex items-center gap-2">
-                          {photosCount > 1 && (
-                            <span className="bg-black/60 backdrop-blur-md text-white text-[9px] font-mono px-2.5 py-1 rounded flex items-center gap-1 border border-white/15">
-                              <Layers size={11} className="text-[#b5a898]" />
-                              {photosCount} fotos
-                            </span>
-                          )}
-                          <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors">
-                            <Maximize2 size={13} />
-                          </div>
+                        <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center">
+                          <ArrowUpRight size={14} />
                         </div>
                       </div>
 
@@ -159,27 +142,20 @@ export default function PortfolioGallery({
                           Nº {formattedNumber}
                         </span>
                         <h3 className="font-serif text-xl sm:text-2xl text-white font-normal leading-snug">
-                          {project.title}
+                          {project.client}
                         </h3>
                         <span className="text-[10px] tracking-[0.24em] uppercase text-white/75 font-light block mt-1.5">
-                          {project.location} · {project.year} · {project.client}
+                          {project.location} · {project.year}
                         </span>
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </GsapReveal>
             );
           })}
         </div>
       </div>
-
-      {/* FULLSCREEN LIGHTBOX VISOR */}
-      <EditorialLightbox
-        project={selectedProject}
-        isOpen={isLightboxOpen}
-        onClose={() => setIsLightboxOpen(false)}
-      />
     </section>
   );
 }
