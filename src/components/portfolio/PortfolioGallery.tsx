@@ -43,9 +43,9 @@ export default function PortfolioGallery({
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* CABECERA EDITORIAL DE ALTA COSTURA */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 md:mb-10 gap-6 border-b border-[#B5A898]/30 pb-5">
-          <GsapReveal>
-            <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.28em] uppercase text-[#7A6A5A] font-medium mb-3 font-mono">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 md:mb-10 gap-6 border-b border-[#B5A898]/30 pb-4">
+          <GsapReveal className="shrink-0">
+            <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.28em] uppercase text-[#7A6A5A] font-medium mb-2 font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0A0A0A]" />
               <span>
                 {isStandalone
@@ -53,13 +53,13 @@ export default function PortfolioGallery({
                   : "06 · Selección Curada"}
               </span>
             </div>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] font-normal tracking-tight leading-[1.05]">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#0A0A0A] font-normal tracking-tight leading-[1.05]">
               {isStandalone ? "Fashion Gallery" : "Selected Works"}
             </h2>
           </GsapReveal>
 
-          {/* FILTROS TIPOGRÁFICOS EDITORIALES CON CONTEO */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 text-xs tracking-[0.22em] uppercase font-medium">
+          {/* FILTROS TIPOGRÁFICOS EDITORIALES EN UNA SOLA LÍNEA */}
+          <div className="flex flex-nowrap items-center gap-3 sm:gap-4 md:gap-5 xl:gap-6 text-[10.5px] sm:text-[11px] md:text-xs tracking-[0.12em] sm:tracking-[0.16em] uppercase font-medium overflow-x-auto scrollbar-none whitespace-nowrap pb-1">
             {CATEGORIES.map((c) => {
               const active = (category || "all") === c.value;
               const count =
@@ -73,7 +73,7 @@ export default function PortfolioGallery({
                   onClick={() =>
                     setCategory(c.value === "all" ? null : c.value)
                   }
-                  className={`pb-1.5 transition-all duration-300 text-[11px] sm:text-xs cursor-pointer flex items-center gap-1.5 ${
+                  className={`pb-1.5 transition-all duration-300 text-[10.5px] sm:text-[11px] md:text-xs cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap ${
                     active
                       ? "text-[#0A0A0A] border-b-2 border-[#0A0A0A] font-semibold"
                       : "text-[#7A6A5A]/70 hover:text-[#0A0A0A] border-b-2 border-transparent"

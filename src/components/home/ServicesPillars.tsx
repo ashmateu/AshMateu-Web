@@ -56,32 +56,32 @@ export default function ServicesPillars() {
   ];
 
   return (
-    <section id="servicios" className="py-12 md:py-16 lg:py-20 bg-white border-b border-[#b5a898]/30">
+    <section id="servicios" className="py-10 md:py-12 lg:py-14 bg-white border-b border-[#b5a898]/30">
       <div className="max-w-[1300px] mx-auto px-6 md:px-12">
         {/* SECTION HEADER */}
-        <GsapReveal className="max-w-2xl mb-8 md:mb-10">
-          <div className="inline-flex items-center gap-2 border border-[#b5a898]/40 bg-[#f7f3ee] px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#7a7065] mb-2.5 font-medium">
+        <GsapReveal className="max-w-2xl mb-6 md:mb-7">
+          <div className="inline-flex items-center gap-2 border border-[#b5a898]/40 bg-[#f7f3ee] px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#7a7065] mb-2 font-medium">
             <span>04 · Modalidades de Trabajo</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-[42px] font-normal text-black tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-[38px] font-normal text-black tracking-tight">
             Styling Services
           </h2>
-          <p className="text-xs sm:text-[13px] text-black/70 font-light mt-2.5 leading-relaxed">
+          <p className="text-xs sm:text-[13px] text-black/70 font-light mt-1.5 leading-relaxed">
             Tres pilares especializados diseñados para potenciar la presencia de personas, la relevancia de marcas y la visión estratégica de empresas.
           </p>
         </GsapReveal>
 
         {/* 3 PILLARS WITH PHOTOGRAPHY HEADERS & HAPTIC CARDS */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6">
           {pillars.map((pillar, idx) => (
             <GsapReveal
               key={pillar.number}
               delay={idx * 0.06}
-              className="group flex flex-col justify-between border border-[#b5a898]/35 bg-[#FAF7F2] hover:bg-white hover:border-black hover:shadow-xl transition-all duration-500 rounded-none relative overflow-hidden"
+              className="group flex flex-col justify-between border border-[#b5a898]/35 bg-[#FAF7F2] hover:bg-white hover:border-black hover:shadow-lg transition-all duration-500 rounded-none relative overflow-hidden"
             >
               <div>
-                {/* PHOTOGRAPHY CARD HEADER */}
-                <div className="relative aspect-[16/10] w-full bg-neutral-200 overflow-hidden">
+                {/* PHOTOGRAPHY CARD HEADER (COMPACT HEIGHT) */}
+                <div className="relative h-32 sm:h-36 md:h-40 w-full bg-neutral-200 overflow-hidden">
                   <Image
                     src={pillar.image}
                     alt={pillar.title}
@@ -89,54 +89,54 @@ export default function ServicesPillars() {
                     sizes="(max-width: 1024px) 100vw, 33vw"
                     className="object-cover object-[center_top] transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-between p-4">
-                    <span className="text-[9px] tracking-[0.22em] uppercase text-white font-semibold">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex items-end justify-between p-3">
+                    <span className="text-[8.5px] tracking-[0.22em] uppercase text-white font-semibold">
                       Pilar {pillar.number}
                     </span>
-                    <span className="text-[8px] tracking-[0.18em] uppercase text-white/90 bg-black/60 backdrop-blur-xs px-2 py-0.5 border border-white/20 font-medium">
+                    <span className="text-[7.5px] tracking-[0.18em] uppercase text-white/90 bg-black/60 backdrop-blur-xs px-2 py-0.5 border border-white/20 font-medium">
                       {pillar.badge}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6 md:p-7 pb-4">
+                <div className="p-4 sm:p-5 pb-2">
                   {/* CARD CATEGORY & TITLE */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[9px] tracking-[0.2em] uppercase text-[#b5a898] font-semibold">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[8.5px] tracking-[0.2em] uppercase text-[#b5a898] font-semibold">
                       {pillar.category}
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-xl sm:text-2xl text-black font-normal mb-1 group-hover:text-[#b5a898] transition-colors">
+                  <h3 className="font-serif text-lg sm:text-xl text-black font-normal mb-0.5 group-hover:text-[#b5a898] transition-colors">
                     {pillar.title}
                   </h3>
-                  <p className="text-xs text-[#7a7065] italic mb-5 font-light">
+                  <p className="text-[11px] text-[#7a7065] italic mb-3 font-light leading-snug">
                     {pillar.subtitle}
                   </p>
 
                   {/* ITEMS */}
-                  <div className="space-y-3 mb-6 text-xs md:text-[12.5px] leading-relaxed text-black/80 font-light">
+                  <div className="space-y-2 mb-3.5 text-[11px] sm:text-[11.5px] leading-tight text-black/80 font-light">
                     {pillar.items.map((item, i) => (
-                      <div key={i} className="pl-3 border-l-2 border-[#b5a898]/40">
-                        <strong className="text-black font-medium block text-xs">
+                      <div key={i} className="pl-2.5 border-l-2 border-[#b5a898]/40">
+                        <strong className="text-black font-medium block text-[11px]">
                           {item.label}
                         </strong>
-                        <span className="text-black/70">{item.text}</span>
+                        <span className="text-black/70 text-[10.5px] leading-snug">{item.text}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* BUTTON-IN-BUTTON NESTED CTA */}
-              <div className="p-6 md:p-7 pt-0">
+              {/* BUTTON-IN-BUTTON NESTED CTA (ELEVATED & COMPACT) */}
+              <div className="px-4 sm:px-5 pb-4 pt-0">
                 <Link
                   href={pillar.link}
-                  className="group/btn inline-flex items-center justify-between gap-3 bg-black hover:bg-[#b5a898] text-white hover:text-black pl-4 pr-1.5 py-2 rounded-full text-[11px] tracking-[0.16em] uppercase font-semibold transition-all duration-300 active:scale-[0.98] shadow-xs w-full"
+                  className="group/btn inline-flex items-center justify-between gap-2.5 bg-black hover:bg-[#b5a898] text-white hover:text-black pl-3.5 pr-1.5 py-1.5 rounded-full text-[10px] sm:text-[10.5px] tracking-[0.14em] uppercase font-semibold transition-all duration-300 active:scale-[0.98] shadow-xs w-full"
                 >
                   <span>{pillar.cta}</span>
-                  <div className="w-5.5 h-5.5 rounded-full bg-white/20 group-hover/btn:bg-black group-hover/btn:text-white text-white flex items-center justify-center transition-all duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
-                    <ArrowUpRight size={12} strokeWidth={2.2} />
+                  <div className="w-5 h-5 rounded-full bg-white/20 group-hover/btn:bg-black group-hover/btn:text-white text-white flex items-center justify-center transition-all duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
+                    <ArrowUpRight size={11} strokeWidth={2.2} />
                   </div>
                 </Link>
               </div>
