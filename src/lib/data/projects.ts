@@ -140,10 +140,10 @@ export const projects: Project[] = [
     location: "Buenos Aires & NYC",
     year: "2023",
     role: "Dirección Creativa & Styling",
-    coverImage: "/images/catalog_v2/CALU RIVERO/Shot_03_0111.jpg",
+    coverImage: "/images/catalog_v2/CALU RIVERO/Shot_01_0213.jpg",
     images: [
-      "/images/catalog_v2/CALU RIVERO/Shot_03_0111.jpg",
       "/images/catalog_v2/CALU RIVERO/Shot_01_0213.jpg",
+      "/images/catalog_v2/CALU RIVERO/Shot_03_0111.jpg",
       "/images/catalog_v2/CALU RIVERO/Shot_01_0142.jpg",
       "/images/catalog_v2/CALU RIVERO/Shot_02_0094.jpg",
       "/images/catalog_v2/CALU RIVERO/Shot_04_0176.jpg",
