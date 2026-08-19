@@ -98,11 +98,11 @@ const visualDiarySlides: CoverflowSlide[] = [
 
 export default function InstagramStrip() {
   return (
-    <section className="py-10 md:py-14 lg:py-16 bg-[#0a0a0a] text-white border-t border-white/10 relative overflow-hidden">
+    <section className="py-8 md:py-10 lg:py-12 bg-[#0a0a0a] text-white border-t border-white/10 relative overflow-hidden">
       <div className="max-w-[1360px] mx-auto px-6 md:px-12 relative z-10">
 
         {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-8 gap-5 pb-5 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 md:mb-6 gap-4 pb-4 border-b border-white/10">
           <GsapReveal>
             <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-3.5 py-1 rounded-full text-[9px] font-mono tracking-[0.26em] uppercase text-[#b5a898] mb-2.5 font-semibold">
               <span>03 · Diario Visual &amp; Coberturas</span>

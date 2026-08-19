@@ -56,10 +56,10 @@ export default function ServicesPillars() {
   ];
 
   return (
-    <section id="servicios" className="py-16 md:py-20 lg:py-24 bg-white border-b border-[#b5a898]/30">
+    <section id="servicios" className="py-12 md:py-16 lg:py-20 bg-white border-b border-[#b5a898]/30">
       <div className="max-w-[1300px] mx-auto px-6 md:px-12">
         {/* SECTION HEADER */}
-        <GsapReveal className="max-w-2xl mb-10 md:mb-12">
+        <GsapReveal className="max-w-2xl mb-8 md:mb-10">
           <div className="inline-flex items-center gap-2 border border-[#b5a898]/40 bg-[#f7f3ee] px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#7a7065] mb-2.5 font-medium">
             <span>04 · Modalidades de Trabajo</span>
           </div>
@@ -145,14 +145,14 @@ export default function ServicesPillars() {
         </div>
 
         {/* DIFERENCIAL BANNER */}
-        <GsapReveal delay={0.2} className="mt-12 p-8 md:p-10 bg-[#0a0a0a] text-white border border-white/10 shadow-xl relative overflow-hidden text-center">
-          <span className="text-[9.5px] tracking-[0.28em] uppercase text-[#b5a898] font-medium block mb-2.5">
+        <GsapReveal delay={0.2} className="mt-8 p-6 md:p-8 bg-[#0a0a0a] text-white border border-white/10 shadow-xl relative overflow-hidden text-center">
+          <span className="text-[9.5px] tracking-[0.28em] uppercase text-[#b5a898] font-medium block mb-2">
             El Diferencial de Ash Mateu
           </span>
-          <p className="font-serif text-xl sm:text-2xl md:text-3xl text-white font-normal leading-snug mb-4 max-w-xl mx-auto">
+          <p className="font-serif text-xl sm:text-2xl md:text-3xl text-white font-normal leading-snug mb-3 max-w-xl mx-auto">
             ‘Estrategias de precisión, creatividad y recordación.’
           </p>
-          <p className="text-xs text-white/70 max-w-lg mx-auto font-light leading-relaxed mb-6">
+          <p className="text-xs text-white/70 max-w-lg mx-auto font-light leading-relaxed mb-5">
             Más de dos décadas articulando el lenguaje de la alta costura con objetivos de posicionamiento comercial medible.
           </p>
           <Link

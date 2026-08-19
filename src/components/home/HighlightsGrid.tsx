@@ -58,12 +58,12 @@ export default function HighlightsGrid() {
   return (
     <section
       id="highlights"
-      className="py-20 md:py-28 lg:py-32 bg-[#F7F3EE] text-[#0A0A0A] border-y border-[#B5A898]/40 relative overflow-hidden"
+      className="py-12 md:py-16 lg:py-20 bg-[#F7F3EE] text-[#0A0A0A] border-y border-[#B5A898]/40 relative overflow-hidden"
     >
       <div className="max-w-[1320px] mx-auto px-6 md:px-12 relative z-10">
         
         {/* SECTION HEADER (MATCHING HERO COVER AESTHETICS) */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 pb-8 border-b border-[#B5A898]/30 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 pb-6 border-b border-[#B5A898]/30 gap-6">
           <GsapReveal className="max-w-2xl">
             <div className="flex items-center gap-2.5 mb-2.5">
               <span className="w-6 h-px bg-[#7A6A5A]" />
@@ -84,7 +84,7 @@ export default function HighlightsGrid() {
         </div>
 
         {/* MASTER FEATURED SPREAD (20 AÑOS - HERO EDITORIAL SPREAD) */}
-        <GsapReveal className="bg-white/80 backdrop-blur-md rounded-2xl p-8 md:p-12 lg:p-14 border border-[#B5A898]/40 shadow-xs mb-16 relative overflow-hidden">
+        <GsapReveal className="bg-white/80 backdrop-blur-md rounded-2xl p-6 md:p-10 lg:p-12 border border-[#B5A898]/40 shadow-xs mb-12 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
             {/* LEFT COLUMN: NARRATIVE & DISPLAY NUMBER */}
@@ -164,16 +164,16 @@ export default function HighlightsGrid() {
         </GsapReveal>
 
         {/* FOUR REFINED EDITORIAL COLUMNS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-10">
           {milestones.map((m, idx) => (
             <GsapReveal
               key={m.number}
               delay={idx * 0.05}
-              className="flex flex-col justify-between group pt-4 border-t border-[#B5A898]/40 hover:border-black transition-colors duration-400"
+              className="flex flex-col justify-between group pt-3 border-t border-[#B5A898]/40 hover:border-black transition-colors duration-400"
             >
               <div>
                 {/* PHOTO CONTAINER WITH CLEAN WARM BORDER */}
-                <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-[#B5A898]/40 mb-5 shadow-xs bg-[#FAF6F0]">
+                <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-[#B5A898]/40 mb-3.5 shadow-xs bg-[#FAF6F0]">
                   <Image
                     src={m.image}
                     alt={m.imageAlt}
@@ -184,19 +184,19 @@ export default function HighlightsGrid() {
                 </div>
 
                 {/* NUMBER & CATEGORY */}
-                <div className="flex items-center gap-2 mb-1.5">
+                <div className="flex items-center gap-2 mb-1">
                   <span className="text-[8.5px] font-mono tracking-[0.2em] uppercase text-[#7A6A5A] font-semibold">
                     № {String(idx + 1).padStart(2, "0")} · {m.category}
                   </span>
                 </div>
 
-                <div className="mb-2">
+                <div className="mb-1.5">
                   <span className="font-serif italic font-light text-4xl sm:text-5xl text-[#0A0A0A] leading-none block group-hover:translate-x-1 transition-transform duration-300">
                     {m.number}
                   </span>
                 </div>
 
-                <h3 className="font-serif text-base font-normal text-[#0A0A0A] mb-1.5">
+                <h3 className="font-serif text-base font-normal text-[#0A0A0A] mb-1">
                   {m.title}
                 </h3>
 
@@ -209,7 +209,7 @@ export default function HighlightsGrid() {
         </div>
 
         {/* BOTTOM METADATA SPREAD: 5 CITIES, RED CARPETS & ACADEMY */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10 border-t border-[#B5A898]/40 text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-[#B5A898]/40 text-xs">
           
           {/* 5 CITIES */}
           <GsapReveal delay={0.05} className="pl-4 border-l border-[#B5A898]/40">

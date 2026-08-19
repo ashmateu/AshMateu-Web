@@ -68,7 +68,7 @@ export default function ContactForm() {
   return (
     <section
       id="contacto"
-      className="py-20 md:py-28 lg:py-32 bg-[#09090B] text-white relative overflow-hidden select-none"
+      className="py-14 md:py-20 lg:py-24 bg-[#09090B] text-white relative overflow-hidden select-none"
     >
       {/* 1. PHOTOGRAPHIC ATELIER BACKDROP (LOW OPACITY VIGNETTE) */}
       <div className="absolute inset-0 z-0">
@@ -86,7 +86,7 @@ export default function ContactForm() {
       <div className="max-w-[1320px] mx-auto px-6 md:px-12 relative z-10">
         
         {/* MAIN GLASSMORPHISM ATELIER CARD */}
-        <div className="p-8 md:p-12 lg:p-14 rounded-3xl bg-black/50 backdrop-blur-2xl border border-white/15 shadow-2xl relative overflow-hidden">
+        <div className="p-6 md:p-10 lg:p-12 rounded-3xl bg-black/50 backdrop-blur-2xl border border-white/15 shadow-2xl relative overflow-hidden">
           
           {/* SUBTLE GOLDEN ACCENT BORDER AT TOP */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#B5A898]/60 to-transparent" />

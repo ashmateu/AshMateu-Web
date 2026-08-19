@@ -87,11 +87,11 @@ const brandLogos: BrandItem[] = [
 
 export default function ClientsStrip() {
   return (
-    <section className="py-20 md:py-28 bg-[#f7f3ee] border-b border-[#b5a898]/30 overflow-hidden relative">
+    <section className="py-12 md:py-16 bg-[#f7f3ee] border-b border-[#b5a898]/30 overflow-hidden relative">
       <div className="max-w-[1320px] mx-auto px-6 md:px-12 text-center">
         <GsapReveal>
           {/* BADGE EDITORIAL */}
-          <div className="inline-flex items-center gap-2.5 border border-[#b5a898]/40 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[9.5px] font-mono tracking-[0.28em] uppercase text-[#7a6a5a] font-medium mb-14 md:mb-16 shadow-2xs">
+          <div className="inline-flex items-center gap-2.5 border border-[#b5a898]/40 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[9.5px] font-mono tracking-[0.28em] uppercase text-[#7a6a5a] font-medium mb-8 md:mb-10 shadow-2xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#0a0a0a]" />
             <span>Marcas &amp; Publicaciones Seleccionadas</span>
           </div>

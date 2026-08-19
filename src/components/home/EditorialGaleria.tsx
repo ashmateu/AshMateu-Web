@@ -43,12 +43,12 @@ export default function EditorialGaleria() {
   ];
 
   return (
-    <section id="galeria" className="py-16 md:py-20 lg:py-24 bg-[#0a0a0a] text-white relative overflow-hidden">
+    <section id="galeria" className="py-12 md:py-16 lg:py-20 bg-[#0a0a0a] text-white relative overflow-hidden">
       {/* BACKGROUND LUXURY LIGHTING */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1a4463]/15 blur-[120px] pointer-events-none" />
 
       <div className="max-w-[1300px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-5">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-5">
           <GsapReveal>
             <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#b5a898] mb-2.5 font-medium">
               <span>05 · Archivo Visual &amp; Proyectos</span>

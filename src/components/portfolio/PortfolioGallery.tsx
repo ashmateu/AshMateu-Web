@@ -38,12 +38,12 @@ export default function PortfolioGallery({
     <section
       id="portfolio"
       className={`${
-        isStandalone ? "pt-4 pb-20 md:pb-28" : "py-16 md:py-24 lg:py-28"
+        isStandalone ? "pt-4 pb-16 md:pb-20" : "py-12 md:py-16 lg:py-20"
       } bg-[#F7F3EE] ${className}`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* CABECERA EDITORIAL DE ALTA COSTURA */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 md:mb-16 gap-8 border-b border-[#B5A898]/30 pb-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 md:mb-10 gap-6 border-b border-[#B5A898]/30 pb-5">
           <GsapReveal>
             <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.28em] uppercase text-[#7A6A5A] font-medium mb-3 font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0A0A0A]" />

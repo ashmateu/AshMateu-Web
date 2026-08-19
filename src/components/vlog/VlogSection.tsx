@@ -24,11 +24,11 @@ export default function VlogSection({
   return (
     <section
       id="vlog"
-      className="py-16 md:py-20 lg:py-24 bg-white border-t border-[#b5a898]/30 relative overflow-hidden"
+      className="py-12 md:py-16 lg:py-20 bg-white border-t border-[#b5a898]/30 relative overflow-hidden"
     >
       <div className="max-w-[1300px] mx-auto px-6 md:px-12">
         {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-5">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-5">
           <GsapReveal>
             <div className="inline-flex items-center gap-2 border border-[#b5a898]/40 bg-[#f7f3ee] px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#7a7065] mb-2.5 font-medium">
               <span>07 · Contenido Audiovisual &amp; Masterclasses</span>
