@@ -1,308 +1,165 @@
-# Graph Report - ashmateu-web  (2026-08-18)
+# Graph Report - ashmateu-web  (2026-08-19)
 
 ## Corpus Check
-- 66 files · ~30,435,637 words
-- Verdict: corpus is large enough that graph structure adds value.
+- Large corpus: 1765 files · ~30,510,186 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
 
 ## Summary
-- 586 nodes · 673 edges · 65 communities (51 shown, 14 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.87)
+- 332 nodes · 418 edges · 33 communities (26 shown, 7 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
-## Graph Freshness
-- Built from commit: `47a4e5fd`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
-
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Portfolio y Celebridades|Portfolio y Celebridades]]
-- [[_COMMUNITY_Blog y Notas|Blog y Notas]]
-- [[_COMMUNITY_Sitio Web y Config|Sitio Web y Config]]
-- [[_COMMUNITY_Postgres Best Practices|Postgres Best Practices]]
-- [[_COMMUNITY_Sanity Studio|Sanity Studio]]
-- [[_COMMUNITY_Skills y Dependencias|Skills y Dependencias]]
-- [[_COMMUNITY_Tipos de Contenido|Tipos de Contenido]]
-- [[_COMMUNITY_i18n Multilingüe|i18n Multilingüe]]
-- [[_COMMUNITY_Supabase Schema|Supabase Schema]]
-- [[_COMMUNITY_Press Sync (Marie Claire)|Press Sync (Marie Claire)]]
-- [[_COMMUNITY_Conexiones DB|Conexiones DB]]
-- [[_COMMUNITY_Full-Text Search|Full-Text Search]]
-- [[_COMMUNITY_gstack Config|gstack Config]]
-- [[_COMMUNITY_Sanity Client|Sanity Client]]
-- [[_COMMUNITY_Migración de Datos|Migración de Datos]]
-- [[_COMMUNITY_MercadoPago Webhook|MercadoPago Webhook]]
-- [[_COMMUNITY_Claude Settings|Claude Settings]]
-- [[_COMMUNITY_Vercel Config|Vercel Config]]
-- [[_COMMUNITY_MCP Supabase|MCP Supabase]]
-- [[_COMMUNITY_Schema Tipos|Schema Tipos]]
-- [[_COMMUNITY_Página Proyecto|Página Proyecto]]
-- [[_COMMUNITY_Naming DB|Naming DB]]
-- [[_COMMUNITY_Particionado DB|Particionado DB]]
-- [[_COMMUNITY_Community 26|Community 26]]
-- [[_COMMUNITY_Community 27|Community 27]]
-- [[_COMMUNITY_Community 28|Community 28]]
-- [[_COMMUNITY_Community 29|Community 29]]
-- [[_COMMUNITY_Community 30|Community 30]]
-- [[_COMMUNITY_Community 31|Community 31]]
-- [[_COMMUNITY_Community 32|Community 32]]
-- [[_COMMUNITY_Community 33|Community 33]]
-- [[_COMMUNITY_Community 34|Community 34]]
-- [[_COMMUNITY_Community 35|Community 35]]
-- [[_COMMUNITY_Community 36|Community 36]]
-- [[_COMMUNITY_Community 37|Community 37]]
-- [[_COMMUNITY_Community 38|Community 38]]
-- [[_COMMUNITY_Community 39|Community 39]]
-- [[_COMMUNITY_Community 40|Community 40]]
-- [[_COMMUNITY_Community 41|Community 41]]
-- [[_COMMUNITY_Community 42|Community 42]]
-- [[_COMMUNITY_Community 43|Community 43]]
-- [[_COMMUNITY_Community 44|Community 44]]
-- [[_COMMUNITY_Community 45|Community 45]]
-- [[_COMMUNITY_Community 46|Community 46]]
-- [[_COMMUNITY_Community 47|Community 47]]
-- [[_COMMUNITY_Community 48|Community 48]]
-- [[_COMMUNITY_Community 49|Community 49]]
-- [[_COMMUNITY_Community 50|Community 50]]
-- [[_COMMUNITY_Community 51|Community 51]]
-- [[_COMMUNITY_Community 52|Community 52]]
-- [[_COMMUNITY_Community 53|Community 53]]
-- [[_COMMUNITY_Community 54|Community 54]]
-- [[_COMMUNITY_Community 55|Community 55]]
-- [[_COMMUNITY_Community 56|Community 56]]
-- [[_COMMUNITY_Community 57|Community 57]]
-- [[_COMMUNITY_Community 61|Community 61]]
-- [[_COMMUNITY_Community 62|Community 62]]
-- [[_COMMUNITY_Community 63|Community 63]]
-- [[_COMMUNITY_Community 64|Community 64]]
+- Home & Core Pages
+- Blog & Newsletter Routes
+- UI Libraries & Animation Dependencies
+- TypeScript & Next.js Type Environment
+- Tailwind CSS & PostCSS Tooling
+- Sanity CMS Client & Config
+- Project Details & Dynamic Slugs
+- Root Layout, Typography & SEO JSON-LD
+- Sanity Studio Schemas
+- Legacy i18n & Translation Runtime
+- AI Concierge & Qwen Backend API
+- Visual Diary & 3D Coverflow Carousel
+- Subsystem 12
+- Subsystem 13
+- Subsystem 14
+- Subsystem 15
+- Subsystem 16
+- Subsystem 17
+- Subsystem 18
+- Subsystem 19
+- Subsystem 21
+- Subsystem 22
+- Subsystem 23
+- Subsystem 24
+- Subsystem 25
+- Subsystem 27
 
 ## God Nodes (most connected - your core abstractions)
-1. `Ash Mateu (Person / Creative Director)` - 33 edges
-2. `skills` - 24 edges
-3. `compilerOptions` - 16 edges
-4. `1. Estado Actual del Proyecto & Últimos Hitos` - 15 edges
-5. `llms.txt — AI Context File` - 10 edges
-6. `Product` - 9 edges
-7. `Postgres Best Practices Section Definitions` - 9 edges
-8. `ashmateu-web — Claude Code Project Config` - 8 edges
-9. `Handoff: ashmateu.com — Reconstrucción Next.js 16 + High-End Luxury Design System` - 8 edges
-10. `Supabase Agent Skill v0.1.2` - 8 edges
+1. `compilerOptions` - 16 edges
+2. `GsapReveal()` - 12 edges
+3. `ContactForm()` - 10 edges
+4. `getPressArticles()` - 8 edges
+5. `include` - 6 edges
+6. `apply()` - 5 edges
+7. `init()` - 5 edges
+8. `handler()` - 5 edges
+9. `scripts` - 5 edges
+10. `Project` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Sanity CMS Integration (sanity.js)` --references--> `Calu Rivero — Chinese New Year (Chinatown)`  [EXTRACTED]
-  index.html → projects/calu-chinatown.html
-- `Ash Mateu (Person / Creative Director)` --styled--> `Celebrity: Calu Rivero`  [INFERRED]
-  index.html → projects/calu-chinatown.html
-- `Ash Mateu (Person / Creative Director)` --styled--> `Celebrity: Leonie Hanne`  [INFERRED]
-  index.html → projects/leonie-hanne.html
-- `Ash Mateu (Person / Creative Director)` --styled--> `Celebrity: Valentina Ferrer`  [INFERRED]
-  index.html → projects/valentina-ferrer.html
-- `Handoff: ashmateu.com todo operativo` --references--> `ashmateu-web Project Config (CLAUDE.md)`  [INFERRED]
-  HANDOFF.md → CLAUDE.md
+- `NewsletterPage()` --calls--> `getPressArticles()`  [EXTRACTED]
+  src/app/newsletter/page.tsx → src/lib/data/press.ts
+- `PrensaPage()` --calls--> `getPressArticles()`  [EXTRACTED]
+  src/app/prensa/page.backup.tsx → src/lib/data/press.ts
+- `PrensaPage()` --calls--> `getPressArticles()`  [EXTRACTED]
+  src/app/prensa/page.tsx → src/lib/data/press.ts
+- `ProjectGalleryInteractiveProps` --references--> `Project`  [EXTRACTED]
+  src/components/portfolio/ProjectGalleryInteractive.tsx → src/lib/data/projects.ts
+- `ProjectNavigationFooterProps` --references--> `Project`  [EXTRACTED]
+  src/components/portfolio/ProjectNavigationFooter.tsx → src/lib/data/projects.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (65 total, 14 thin omitted)
+## Communities (33 total, 7 thin omitted)
 
-### Community 0 - "Portfolio y Celebridades"
-Cohesion: 0.11
-Nodes (37): Celebrity: Calu Rivero, Celebrity: Leonie Hanne, Celebrity: Valentina Ferrer, Ash Mateu (Person / Creative Director), Brand: Chanel, Brand: Dolce & Gabbana, Brand: Gucci, Brand: L'Oréal (+29 more)
+### Community 0 - "Home & Core Pages"
+Cohesion: 0.09
+Nodes (24): metadata, metadata, GsapReveal(), GsapRevealProps, BrandItem, brandLogos, ClientsStrip(), EditorialGaleria() (+16 more)
 
-### Community 1 - "Blog y Notas"
-Cohesion: 0.08
-Nodes (29): Blog Collage Card Layout, articles, metadata, Blog Post Detail Page, Supabase 'posts' Slug Query (post detail), Supabase 'posts' Table Integration (blog), Auth Modal (Login / Register), Supabase 'orders' + 'products' Join Query (+21 more)
+### Community 1 - "Blog & Newsletter Routes"
+Cohesion: 0.09
+Nodes (23): articles, metadata, metadata, NewsletterPage(), covers, metadata, PrensaPage(), characterCoverGroups (+15 more)
 
-### Community 2 - "Sitio Web y Config"
-Cohesion: 0.08
-Nodes (28): Admin Panel — El Mercadito de Ash, Auth UI Reference (mercadito), ashmateu-web Project Config (CLAUDE.md), ashmateu-web Design Tokens, ashmateu-web Tech Stack (HTML/CSS/JS sin build), PostgreSQL Index (general concept), Supabase Auth (JWT, sessions, user_metadata), Supabase CLI (+20 more)
+### Community 2 - "UI Libraries & Animation Dependencies"
+Cohesion: 0.06
+Nodes (33): clsx, framer-motion, gsap, lucide-react, next, nuqs, openai, dependencies (+25 more)
 
-### Community 3 - "Postgres Best Practices"
+### Community 3 - "TypeScript & Next.js Type Environment"
 Cohesion: 0.07
-Nodes (36): Advanced Features Category (LOW), Concurrency and Locking Category (MEDIUM-HIGH), Connection Management Category (CRITICAL), Data Access Patterns Category (MEDIUM), Error-First Structure (Anti-Pattern First), GIN Index, Monitoring and Diagnostics Category (LOW-MEDIUM), PgBouncer Connection Pooler (+28 more)
+Nodes (27): dom, dom.iterable, esnext, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules, **/*.ts (+19 more)
 
-### Community 4 - "Sanity Studio"
-Cohesion: 0.11
-Nodes (17): allowScripts, esbuild@0.25.6, fsevents@2.3.3, dependencies, react, react-dom, react-is, sanity (+9 more)
+### Community 4 - "Tailwind CSS & PostCSS Tooling"
+Cohesion: 0.08
+Nodes (23): devDependencies, postcss, tailwindcss, @tailwindcss/postcss, @types/node, @types/react, @types/react-dom, typescript (+15 more)
 
-### Community 5 - "Skills y Dependencias"
-Cohesion: 0.40
-Nodes (5): supabase, computedHash, skillPath, source, sourceType
+### Community 5 - "Sanity CMS Client & Config"
+Cohesion: 0.08
+Nodes (23): react-is, sanity, @sanity/vision, allowScripts, esbuild@0.25.6, fsevents@2.3.3, dependencies, react (+15 more)
 
-### Community 7 - "i18n Multilingüe"
+### Community 6 - "Project Details & Dynamic Slugs"
+Cohesion: 0.16
+Nodes (10): ProjectPageProps, ProjectGalleryInteractive(), ProjectGalleryInteractiveProps, ProjectNavigationFooter(), ProjectNavigationFooterProps, ImageLightboxModal(), ImageLightboxModalProps, LightboxImage (+2 more)
+
+### Community 7 - "Root Layout, Typography & SEO JSON-LD"
+Cohesion: 0.18
+Nodes (9): bodoni, jsonLd, metadata, montserrat, ConciergeDrawer(), Message, STARTER_PROMPTS, Footer() (+1 more)
+
+### Community 9 - "Legacy i18n & Translation Runtime"
 Cohesion: 0.42
 Nodes (9): apply(), cacheEs(), getLang(), init(), injectStyles(), injectSwitcher(), setLang(), t() (+1 more)
 
-### Community 8 - "Supabase Schema"
-Cohesion: 0.43
-Nodes (5): orders, orders_updated_at, products, products_updated_at, update_updated_at()
+### Community 10 - "AI Concierge & Qwen Backend API"
+Cohesion: 0.31
+Nodes (7): dynamic, maxDuration, BACKUP_QWEN_MODEL, ChatMessage, CONCIERGE_SYSTEM_PROMPT, PRIMARY_QWEN_MODEL, qwenAI
 
-### Community 9 - "Press Sync (Marie Claire)"
+### Community 11 - "Visual Diary & 3D Coverflow Carousel"
+Cohesion: 0.33
+Nodes (6): InstagramStrip(), visualDiarySlides, CoverflowCarousel(), CoverflowCarouselProps, CoverflowSlide, cn()
+
+### Community 12 - "Subsystem 12"
+Cohesion: 0.25
+Nodes (7): calculateGap(), CircularTestimonials(), getImageStyle(), CircularTestimonialsProps, Colors, FontSizes, Testimonial
+
+### Community 13 - "Subsystem 13"
 Cohesion: 0.67
 Nodes (5): buildThumbnailMap(), extractCoverImage(), extractExcerpt(), extractMeta(), handler()
 
-### Community 10 - "Conexiones DB"
-Cohesion: 0.07
-Nodes (29): dependencies, clsx, gsap, lucide-react, next, nuqs, openai, react (+21 more)
+### Community 14 - "Subsystem 14"
+Cohesion: 0.33
+Nodes (5): BACKUP_NVIDIA_MODEL, ChatMessage, CONCIERGE_SYSTEM_PROMPT, nvidiaAI, PRIMARY_NVIDIA_MODEL
 
-### Community 11 - "Full-Text Search"
-Cohesion: 0.09
-Nodes (21): 1. Overview, 2. Colors, 3. Typography, 4. Elevation, 5. Components, 6. Do's and Don'ts, Case Study Blocks (Image + Text), CTAs / Links (+13 more)
-
-### Community 12 - "gstack Config"
-Cohesion: 0.10
-Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
-
-### Community 13 - "Sanity Client"
-Cohesion: 0.36
-Nodes (4): getLang(), render(), tr(), imageUrl()
-
-### Community 16 - "MercadoPago Webhook"
-Cohesion: 0.08
-Nodes (24): 36. Valentina Ferrer Marie Claire, ASH, BACKSTAGE, BELU NEGRI, CALU RIVERO, Campaigns, EMILIA ATTIAS, General / Miscelánea (+16 more)
-
-### Community 17 - "Claude Settings"
-Cohesion: 0.22
-Nodes (4): Project, projects, PortfolioGalleryProps, ProjectPageProps
-
-### Community 18 - "Vercel Config"
+### Community 16 - "Subsystem 16"
 Cohesion: 0.50
-Nodes (3): crons, framework, headers
+Nodes (4): DEFAULT_CONFIG, getDomPath(), SlotConfig, UniversalImageCalibrator()
 
-### Community 19 - "MCP Supabase"
-Cohesion: 0.20
-Nodes (9): Accessibility & Inclusion, Anti-references, Brand Personality, Design Principles, Product, Product Purpose, References, Register (+1 more)
-
-### Community 22 - "Página Proyecto"
-Cohesion: 0.11
-Nodes (7): bodoni, metadata, montserrat, DEFAULT_CONFIG, SlotConfig, Message, STARTER_PROMPTS
-
-### Community 26 - "Community 26"
-Cohesion: 0.22
-Nodes (8): Agentes disponibles (agency-agents), ashmateu-web — Claude Code Project Config, Mercadito (Tiendanube headless), Pendientes críticos, Referencias de diseño, Skills disponibles (gstack), Stack, Tokens de diseño
-
-### Community 27 - "Community 27"
-Cohesion: 0.25
-Nodes (6): HighlightItem, highlightsData, HighlightNote, highlightsNotes, Milestone, milestones
-
-### Community 28 - "Community 28"
-Cohesion: 0.08
-Nodes (26): 1. Arquitectura y Stack Actual, 1. Estado Actual del Proyecto & Últimos Hitos, 2. Mapa de Rutas & Componentes de Alta Gama, 2. Mapa de Rutas & Navegación, 2. Ramas de Git y Resguardo, 3. Arquitectura y Stack, 3. Reglas de Diseño e Imágenes, 3. Reglas de Git y Despliegue (+18 more)
-
-### Community 31 - "Community 31"
+### Community 17 - "Subsystem 17"
 Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, company-creator
+Nodes (3): DEFAULT_SLIDES, LuminaInteractiveListProps, LuminaSlide
 
-### Community 32 - "Community 32"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, create-agent-adapter
+### Community 18 - "Subsystem 18"
+Cohesion: 0.50
+Nodes (4): Project Guidelines & Dev Workflows, Warm Luxury Design System, Handoff Context & Technical State, Product Architecture & Roadmap
 
-### Community 33 - "Community 33"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, create-issue-interaction-ui
+### Community 19 - "Subsystem 19"
+Cohesion: 1.00
+Nodes (3): getLang(), render(), tr()
 
-### Community 34 - "Community 34"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, deal-with-security-advisory
-
-### Community 35 - "Community 35"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, design-guide
-
-### Community 36 - "Community 36"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, diagnose-why-work-stopped
-
-### Community 37 - "Community 37"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, doc-maintenance
-
-### Community 38 - "Community 38"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, paperclip-board
-
-### Community 39 - "Community 39"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, paperclip
-
-### Community 40 - "Community 40"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, paperclip-converting-plans-to-tasks
-
-### Community 41 - "Community 41"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, paperclip-create-agent
-
-### Community 42 - "Community 42"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, paperclip-create-plugin
-
-### Community 43 - "Community 43"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, paperclip-dev-workspace-run-verify-fix
-
-### Community 44 - "Community 44"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, paperclip-page
-
-### Community 45 - "Community 45"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, para-memory-files
-
-### Community 46 - "Community 46"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, pr-report
-
-### Community 47 - "Community 47"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, prcheckloop
-
-### Community 48 - "Community 48"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, release-changelog
-
-### Community 49 - "Community 49"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, release-changelog-discord-message
-
-### Community 50 - "Community 50"
-Cohesion: 0.40
-Nodes (5): computedHash, skillPath, source, sourceType, release
-
-### Community 51 - "Community 51"
-Cohesion: 0.40
-Nodes (5): supabase-postgres-best-practices, computedHash, skillPath, source, sourceType
-
-### Community 52 - "Community 52"
-Cohesion: 0.40
-Nodes (5): terminal-bench-loop, computedHash, skillPath, source, sourceType
-
-### Community 54 - "Community 54"
-Cohesion: 0.09
-Nodes (15): metadata, fallbackPressArticles, getPressArticles(), PressArticle, NewsletterClientProps, metadata, NewsletterPage(), publications (+7 more)
-
-### Community 61 - "Community 61"
-Cohesion: 0.40
-Nodes (3): DEFAULT_DESKTOP, DEFAULT_MOBILE, FramingConfig
+### Community 21 - "Subsystem 21"
+Cohesion: 0.67
+Nodes (3): config, handler(), stripHtml()
 
 ## Knowledge Gaps
-- **299 isolated node(s):** `config`, `nextConfig`, `name`, `version`, `private` (+294 more)
+- **124 isolated node(s):** `config`, `nextConfig`, `name`, `version`, `private` (+119 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `skills` connect `Community 55` to `Skills y Dependencias`, `Community 31`, `Community 32`, `Community 33`, `Community 34`, `Community 35`, `Community 36`, `Community 37`, `Community 38`, `Community 39`, `Community 40`, `Community 41`, `Community 42`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 47`, `Community 48`, `Community 49`, `Community 50`, `Community 51`, `Community 52`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
-- **Why does `Site Navigation Structure` connect `Blog y Notas` to `Community 54`?**
-  _High betweenness centrality (0.032) - this node is a cross-community bridge._
-- **Why does `Portfolio Section (#trabajo)` connect `Blog y Notas` to `Portfolio y Celebridades`?**
+- **Why does `dependencies` connect `UI Libraries & Animation Dependencies` to `Tailwind CSS & PostCSS Tooling`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **Are the 3 inferred relationships involving `Ash Mateu (Person / Creative Director)` (e.g. with `Celebrity: Calu Rivero` and `Celebrity: Leonie Hanne`) actually correct?**
-  _`Ash Mateu (Person / Creative Director)` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `ContactForm()` connect `Blog & Newsletter Routes` to `Home & Core Pages`, `Project Details & Dynamic Slugs`, `Subsystem 15`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **What connects `config`, `nextConfig`, `name` to the rest of the system?**
-  _317 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Portfolio y Celebridades` be split into smaller, more focused modules?**
-  _Cohesion score 0.11411411411411411 - nodes in this community are weakly interconnected._
-- **Should `Blog y Notas` be split into smaller, more focused modules?**
-  _Cohesion score 0.08172043010752689 - nodes in this community are weakly interconnected._
+  _124 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Home & Core Pages` be split into smaller, more focused modules?**
+  _Cohesion score 0.08636977058029689 - nodes in this community are weakly interconnected._
+- **Should `Blog & Newsletter Routes` be split into smaller, more focused modules?**
+  _Cohesion score 0.08858858858858859 - nodes in this community are weakly interconnected._
+- **Should `UI Libraries & Animation Dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
+- **Should `TypeScript & Next.js Type Environment` be split into smaller, more focused modules?**
+  _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
