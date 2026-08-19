@@ -61,7 +61,7 @@ export default function ServicesPillars() {
         {/* SECTION HEADER */}
         <GsapReveal className="max-w-2xl mb-10 md:mb-12">
           <div className="inline-flex items-center gap-2 border border-[#b5a898]/40 bg-[#f7f3ee] px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#7a7065] mb-2.5 font-medium">
-            <span>03 · Modalidades de Trabajo</span>
+            <span>04 · Modalidades de Trabajo</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-[42px] font-normal text-black tracking-tight">
             Styling Services

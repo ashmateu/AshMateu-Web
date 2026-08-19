@@ -50,7 +50,7 @@ export default function PortfolioGallery({
               <span>
                 {isStandalone
                   ? "Archivo Visual de Moda & Producciones"
-                  : "05 · Selección Curada"}
+                  : "06 · Selección Curada"}
               </span>
             </div>
             <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] font-normal tracking-tight leading-[1.05]">

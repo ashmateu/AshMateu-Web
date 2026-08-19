@@ -51,7 +51,7 @@ export default function EditorialGaleria() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-5">
           <GsapReveal>
             <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-3 py-1 rounded-full text-[9px] tracking-[0.26em] uppercase text-[#b5a898] mb-2.5 font-medium">
-              <span>04 · Archivo Visual &amp; Proyectos</span>
+              <span>05 · Archivo Visual &amp; Proyectos</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-[42px] font-normal text-white tracking-tight">
               Galería Editorial

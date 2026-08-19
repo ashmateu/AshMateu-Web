@@ -99,7 +99,7 @@ export default function ContactForm() {
                 <GsapReveal>
                   <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-3 py-1 rounded-full text-[9px] tracking-[0.28em] uppercase text-[#B5A898] mb-4 font-mono font-medium">
                     <Sparkles size={10} className="text-[#B5A898]" />
-                    <span>07 · Contacto &amp; Bookings 2026</span>
+                    <span>08 · Contacto &amp; Bookings 2026</span>
                   </div>
 
                   <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-white mb-4 leading-[1.1] tracking-tight">

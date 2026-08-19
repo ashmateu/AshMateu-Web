@@ -15,11 +15,11 @@ export default function HomePage() {
       {/* 1. HERO COVER (FULL-SCREEN PPTX BLUEPRINT) */}
       <HeroCover />
 
-      {/* 2. INSTAGRAM FEED / DIARIO VISUAL & COBERTURAS */}
-      <InstagramStrip />
-
-      {/* 3. HIGHLIGHTS GRID (SLIDE 6) */}
+      {/* 2. HIGHLIGHTS GRID (20 AÑOS DE TRAYECTORIA) */}
       <HighlightsGrid />
+
+      {/* 3. INSTAGRAM FEED / DIARIO VISUAL & COBERTURAS */}
+      <InstagramStrip />
 
       {/* 4. ¿CÓMO TRABAJO? / 3 PILLARS (SLIDES 8, 9, 10) */}
       <ServicesPillars />
