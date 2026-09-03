@@ -19,63 +19,83 @@ export default async function MercaditoPage() {
   return (
     <main className="min-h-[100dvh] bg-[#F7F3EE] text-[#0A0A0A] pt-28 md:pt-36 pb-32">
       {/* 1. HERO EDITORIAL LUXURY */}
-      <section className="max-w-[1440px] mx-auto px-6 md:px-12 mb-16 md:mb-24">
-        {/* Eyebrow badge + Admin Curaduría Link */}
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10.5px] uppercase tracking-[0.25em] font-medium bg-black/[0.04] border border-black/10 text-[#7A6A5A]">
-            <Sparkles className="w-3 h-3 text-[#B5A898]" />
-            ARCHIVO EXCLUSIVO • PIEZAS 1 DE 1
-          </span>
+      <section className="relative max-w-[1440px] mx-auto px-6 md:px-12 mb-16 md:mb-24 overflow-hidden rounded-3xl pt-8 pb-4">
+        {/* FOTO B&W DE ASH BUSCANDO ROPA EN EL FONDO CON MÁSCARA EDITORIAL */}
+        <div
+          className="absolute top-0 right-0 w-full lg:w-[58%] h-full pointer-events-none z-0"
+          style={{
+            backgroundImage: "url('/images/ash/bts-set.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center 25%",
+            filter: "grayscale(100%) contrast(115%) brightness(98%)",
+            opacity: 0.42,
+            maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 15%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,1) 100%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 15%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,1) 100%)",
+          }}
+        />
 
-          <div className="flex items-center gap-2">
-            <Link
-              href="/admin"
-              className="text-[10px] uppercase tracking-[0.2em] text-[#7A6A5A] hover:text-[#0A0A0A] transition-colors border border-black/10 px-3 py-1 rounded-full bg-white/50"
-            >
-              ⚙ Administrar Piezas
-            </Link>
-          </div>
-        </div>
+        <div className="relative z-10">
+          {/* Eyebrow badge + Admin Curaduría Link */}
+          <div className="flex items-center justify-between gap-4 mb-6">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10.5px] uppercase tracking-[0.25em] font-semibold bg-white/80 backdrop-blur-sm border border-black/10 text-[#7A6A5A] shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638]" />
+              ARCHIVO EXCLUSIVO • PIEZAS 1 DE 1
+            </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-black/10 pb-12">
-          <div className="lg:col-span-8 space-y-6">
-            <h1 className="font-serif text-[clamp(44px,6.5vw,92px)] leading-[0.94] tracking-[-0.02em] text-[#0A0A0A] font-normal">
-              El Mercadito <br />
-              <em className="italic font-light text-[#7A6A5A]">de Ash</em>
-            </h1>
-            
-            <p className="max-w-2xl text-[16px] md:text-[18px] text-[#0A0A0A] font-light leading-relaxed">
-              Un espacio de hallazgos, tesoros y oportunidades curados bajo mi expertise de estilista. 
-              Colecciono por el mundo piezas que son capaces de darle un subidón a cualquier vestidor. 
-              Cuentan conmigo para armar el styling juntas.
-            </p>
-
-            {/* MANIFIESTO EDITORIAL ESTILO TAPE STICKERS */}
-            <div className="inline-flex flex-col items-start gap-1 pt-2">
-              <span className="bg-white px-3 py-1 text-xs md:text-sm font-serif italic text-[#0A0A0A] shadow-sm border border-black/5">
-                “Voy por el mundo en busca de hallazgos...
-              </span>
-              <span className="bg-white px-3 py-1 text-xs md:text-sm font-serif italic text-[#0A0A0A] shadow-sm border border-black/5">
-                Me aventuro tras prendas capaces de dar un subidón de identidad a quienes se animen.
-              </span>
-              <span className="bg-[#0A0A0A] px-3 py-1 text-[11px] md:text-xs font-sans font-semibold uppercase tracking-[0.2em] text-white shadow-sm">
-                El Mercadito de Ash propone un consumo de moda más estratégico y personal.”
-              </span>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/admin"
+                className="text-[10px] uppercase tracking-[0.2em] text-[#7A6A5A] hover:text-[#0A0A0A] transition-colors border border-black/10 px-3.5 py-1 rounded-full bg-white/70 backdrop-blur-sm shadow-2xs font-medium"
+              >
+                ⚙ Administrar Piezas
+              </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 text-xs tracking-[0.16em] uppercase text-[#7A6A5A]">
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/60 border border-black/[0.06]">
-              <ShieldCheck className="w-4 h-4 text-[#B5A898] shrink-0" />
-              <span>Autenticidad Verificada · Peritaje de Lujo</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-black/10 pb-12">
+            <div className="lg:col-span-8 space-y-6">
+              <h1 className="font-serif text-[clamp(44px,6.5vw,92px)] leading-[0.94] tracking-[-0.02em] text-[#0A0A0A] font-normal">
+                El Mercadito <br />
+                <em className="italic font-light text-[#7A6A5A]">de Ash</em>
+                <span className="text-[#EA2638] font-serif">.</span>
+              </h1>
+              
+              <p className="max-w-2xl text-[16px] md:text-[18px] text-[#0A0A0A] font-light leading-relaxed">
+                Un espacio de hallazgos, tesoros y oportunidades curados bajo mi expertise de estilista. 
+                Colecciono por el mundo{" "}
+                <span className="bg-[#EA2638] text-white px-2 py-0.5 rounded-sm font-medium inline-block">
+                  piezas capaces de darle un subidón
+                </span>{" "}
+                a cualquier vestidor. Cuentan conmigo para armar el styling juntas.
+              </p>
+
+              {/* MANIFIESTO EDITORIAL ESTILO TAPE STICKERS */}
+              <div className="inline-flex flex-col items-start gap-1.5 pt-2">
+                <span className="bg-white/95 backdrop-blur-xs px-3 py-1 text-xs md:text-sm font-serif italic text-[#0A0A0A] shadow-xs border border-black/5">
+                  “Voy por el mundo en busca de hallazgos...
+                </span>
+                <span className="bg-white/95 backdrop-blur-xs px-3 py-1 text-xs md:text-sm font-serif italic text-[#0A0A0A] shadow-xs border border-black/5">
+                  Me aventuro tras prendas capaces de dar un subidón de identidad a quienes se animen.
+                </span>
+                <span className="bg-[#EA2638] px-3.5 py-1.5 text-[11px] md:text-xs font-sans font-semibold uppercase tracking-[0.2em] text-white shadow-sm">
+                  El Mercadito de Ash propone un consumo de moda más estratégico y personal.”
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/60 border border-black/[0.06]">
-              <Gem className="w-4 h-4 text-[#B5A898] shrink-0" />
-              <span>Inventario Único 1 de 1 por Pedido</span>
-            </div>
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/60 border border-black/[0.06]">
-              <Compass className="w-4 h-4 text-[#B5A898] shrink-0" />
-              <span>Checkout Directo + WhatsApp Concierge</span>
+
+            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 text-xs tracking-[0.16em] uppercase text-[#7A6A5A]">
+              <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/85 backdrop-blur-md border border-black/[0.06] shadow-xs">
+                <div className="w-5 h-5 rounded-full bg-[#EA2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">✓</div>
+                <span>Autenticidad Verificada · Peritaje de Lujo</span>
+              </div>
+              <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/85 backdrop-blur-md border border-black/[0.06] shadow-xs">
+                <div className="w-5 h-5 rounded-full bg-[#EA2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">✦</div>
+                <span>Inventario Único 1 de 1 por Pedido</span>
+              </div>
+              <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/85 backdrop-blur-md border border-black/[0.06] shadow-xs">
+                <div className="w-5 h-5 rounded-full bg-[#EA2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">⚡</div>
+                <span>Checkout Directo + WhatsApp Concierge</span>
+              </div>
             </div>
           </div>
         </div>

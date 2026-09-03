@@ -5,19 +5,42 @@
 
 -- Tabla de productos
 CREATE TABLE IF NOT EXISTS products (
-  id          UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
-  name        TEXT        NOT NULL,
-  description TEXT,
-  price       DECIMAL(10,2) NOT NULL,
-  currency    TEXT        NOT NULL DEFAULT 'ARS' CHECK (currency IN ('ARS','USD')),
-  category    TEXT        NOT NULL CHECK (category IN ('pieza','digital')),
-  stock       INTEGER     DEFAULT -1,  -- -1 = ilimitado (digitales)
-  image_url   TEXT,
-  mp_link     TEXT,                    -- https://mpago.la/xxxxxxx
-  active      BOOLEAN     DEFAULT true,
-  created_at  TIMESTAMPTZ DEFAULT NOW(),
-  updated_at  TIMESTAMPTZ DEFAULT NOW()
+  id                UUID          DEFAULT gen_random_uuid() PRIMARY KEY,
+  slug              TEXT          UNIQUE,
+  name              TEXT          NOT NULL,
+  designer          TEXT,                       -- Marca / Diseñador (Chanel, Hermès, Prada...)
+  description       TEXT,
+  price             DECIMAL(10,2) NOT NULL,
+  currency          TEXT          NOT NULL DEFAULT 'USD' CHECK (currency IN ('ARS','USD')),
+  category          TEXT          NOT NULL,     -- 'bolsos','indumentaria','joyeria','calzado','accesorios','digital'
+  condition_state   TEXT,                       -- Grado de conservación ('Pristine','Excellent', etc.)
+  dimensions        TEXT,                       -- Medidas exactas
+  materials         TEXT,                       -- Materiales / Composición
+  stock             INTEGER       DEFAULT 1,   -- 1 = pieza única
+  image_url         TEXT,                       -- Imagen principal
+  gallery_images    TEXT[],                     -- Galería HD adicional
+  source_url        TEXT,                       -- URL de origen (The RealReal)
+  is_unique_piece   BOOLEAN       DEFAULT true,
+  status            TEXT          DEFAULT 'available' CHECK (status IN ('available','reserved','sold')),
+  ash_styling_tip   TEXT,                       -- Consejo de estilismo de Ash
+  mp_link           TEXT,                       -- Enlace de pago directo / checkout
+  active            BOOLEAN       DEFAULT true,
+  created_at        TIMESTAMPTZ   DEFAULT NOW(),
+  updated_at        TIMESTAMPTZ   DEFAULT NOW()
 );
+
+-- Si la tabla ya existe, agregar las columnas que falten:
+ALTER TABLE products ADD COLUMN IF NOT EXISTS slug TEXT UNIQUE;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS designer TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS condition_state TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS dimensions TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS materials TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS gallery_images TEXT[];
+ALTER TABLE products ADD COLUMN IF NOT EXISTS source_url TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS is_unique_piece BOOLEAN DEFAULT true;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'available';
+ALTER TABLE products ADD COLUMN IF NOT EXISTS ash_styling_tip TEXT;
+
 
 -- Tabla de órdenes
 CREATE TABLE IF NOT EXISTS orders (
