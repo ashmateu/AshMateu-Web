@@ -27,6 +27,7 @@ export default function Navbar() {
     { label: "STYLING SERVICES", href: "/como-trabajo" },
     { label: "VLOG", href: "/#vlog" },
     { label: "NEWSLETTER", href: "/newsletter" },
+    { label: "EL MERCADITO", href: "/mercadito" },
   ];
 
   return (

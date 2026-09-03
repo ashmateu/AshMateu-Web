@@ -48,15 +48,29 @@ export default function ConciergeDrawer() {
       role: "assistant",
       content:
         "Bienvenido/a al Concierge Editorial de Ash Mateu.\n\nEste espacio está diseñado para asistir a directores creativos de marcas, editores y clientes privados en la articulación de su Brief Creativo.\n\n¿Qué tipo de proyecto, producción visual o concepto estético estás buscando desarrollar?",
-      timestamp: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      timestamp: "12:00",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    // Actualizar timestamp en cliente para coincidir con la hora local real
+    setMessages((prev) =>
+      prev.map((m) =>
+        m.id === "initial-welcome"
+          ? {
+              ...m,
+              timestamp: new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              }),
+            }
+          : m
+      )
+    );
+  }, []);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);

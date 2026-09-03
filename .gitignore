@@ -23,3 +23,12 @@ node_modules/
 .next/
 dist/
 build/
+scratch_*
+*.bin
+*.mp3
+*.wav
+*.tsbuildinfo
+public/videos/raw/
+public/videos/temp/
+public/videos/previews/
+

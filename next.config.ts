@@ -24,6 +24,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "marieclaire.perfil.com",
       },
+      {
+        protocol: "https",
+        hostname: "*.therealreal.com",
+      },
+      {
+        protocol: "https",
+        hostname: "product-images.therealreal.com",
+      },
     ],
   },
 };

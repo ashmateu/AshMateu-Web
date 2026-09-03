@@ -55,6 +55,27 @@ const milestones: Milestone[] = [
 ];
 
 export default function HighlightsGrid() {
+  const [imageConfigs, setImageConfigs] = React.useState<Record<string, { src: string; x: number; y: number; zoom: number }>>({});
+
+  React.useEffect(() => {
+    fetch("/api/admin/images")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.images && Array.isArray(data.images)) {
+          const map: Record<string, any> = {};
+          data.images.forEach((img: any) => {
+            map[img.id] = {
+              src: img.src,
+              x: img.objectPositionX,
+              y: img.objectPositionY,
+              zoom: img.zoom,
+            };
+          });
+          setImageConfigs(map);
+        }
+      })
+      .catch(() => {});
+  }, []);
   return (
     <section
       id="highlights"
@@ -174,13 +195,26 @@ export default function HighlightsGrid() {
               <div>
                 {/* PHOTO CONTAINER WITH CLEAN WARM BORDER */}
                 <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-[#B5A898]/40 mb-3.5 shadow-xs bg-[#FAF6F0]">
-                  <Image
-                    src={m.image}
-                    alt={m.imageAlt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                    className="object-cover object-[center_top] group-hover:scale-103 transition-transform duration-500"
-                  />
+                  {(() => {
+                    const cfg = imageConfigs[`highlight_${idx + 1}`];
+                    const src = cfg?.src || m.image;
+                    const pos = cfg ? `${cfg.x}% ${cfg.y}%` : "50% 25%";
+                    const scale = cfg ? cfg.zoom / 100 : 1;
+                    return (
+                      <Image
+                        src={src}
+                        alt={m.imageAlt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 25vw"
+                        style={{
+                          objectFit: "cover",
+                          objectPosition: pos,
+                          transform: `scale(${scale})`,
+                          transition: "object-position 0.2s ease, transform 0.2s ease",
+                        }}
+                      />
+                    );
+                  })()}
                 </div>
 
                 {/* NUMBER & CATEGORY */}

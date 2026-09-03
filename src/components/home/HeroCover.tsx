@@ -89,6 +89,33 @@ export default function HeroCover() {
         host.includes("127.0.0.1") ||
         window.location.search.includes("editor=true")
       );
+
+      // Cargar configuraciones guardadas por el admin
+      fetch("/api/admin/images")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.images && Array.isArray(data.images)) {
+            const heroMap: Record<string, any> = {};
+            data.images.forEach((img: any) => {
+              heroMap[img.id] = img;
+            });
+
+            setSlideFramings((prev) => {
+              const next = [...prev];
+              const ids = ["hero_cover", "hero_slide_1", "hero_slide_2"];
+              ids.forEach((id, idx) => {
+                if (heroMap[id] && next[idx]) {
+                  next[idx].desktop.x = heroMap[id].objectPositionX;
+                  next[idx].desktop.y = heroMap[id].objectPositionY;
+                  next[idx].desktop.zoom = heroMap[id].zoom;
+                  next[idx].desktop.brightness = heroMap[id].brightness;
+                }
+              });
+              return next;
+            });
+          }
+        })
+        .catch(() => {});
     }
 
     const isMob = window.innerWidth < 768;

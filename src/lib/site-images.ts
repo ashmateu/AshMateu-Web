@@ -1,0 +1,124 @@
+import fs from "fs";
+import path from "path";
+
+export interface SiteImageConfig {
+  id: string;
+  section: string;
+  label: string;
+  src: string;
+  objectPositionX: number; // 0% a 100% (horizontal)
+  objectPositionY: number; // 0% a 100% (vertical)
+  zoom: number; // 100% a 200%
+  brightness: number; // 80% a 140%
+}
+
+export const DEFAULT_SITE_IMAGES: SiteImageConfig[] = [
+  {
+    id: "hero_cover",
+    section: "Hero Portada",
+    label: "Portada Principal (Hero Slide 1)",
+    src: "/images/hero/hero_cover_pptx.webp",
+    objectPositionX: 76,
+    objectPositionY: 22,
+    zoom: 145,
+    brightness: 110,
+  },
+  {
+    id: "hero_slide_1",
+    section: "Hero Portada",
+    label: "Slide 2 — Haute Couture Paris",
+    src: "/images/hero/carousel/slide-1.jpg",
+    objectPositionX: 85,
+    objectPositionY: 24,
+    zoom: 170,
+    brightness: 108,
+  },
+  {
+    id: "hero_slide_2",
+    section: "Hero Portada",
+    label: "Slide 3 — Rooftop Nueva York",
+    src: "/images/hero/carousel/slide-2.jpg",
+    objectPositionX: 50,
+    objectPositionY: 26,
+    zoom: 115,
+    brightness: 108,
+  },
+  {
+    id: "highlight_1",
+    section: "20 Años de Trayectoria",
+    label: "Hito 1 — Debut Editorial 2006 (19 Años)",
+    src: "/images/catalog_v2/ASH/img_0286.jpg",
+    objectPositionX: 50,
+    objectPositionY: 30,
+    zoom: 105,
+    brightness: 100,
+  },
+  {
+    id: "highlight_2",
+    section: "20 Años de Trayectoria",
+    label: "Hito 2 — NYFW Lincoln Center 2010 (Front Row)",
+    src: "/images/catalog_v2/Moda estudio tapa lunares New York jpegs/MarieClaire_Cover_2024_014.jpg",
+    objectPositionX: 50,
+    objectPositionY: 20,
+    zoom: 110,
+    brightness: 100,
+  },
+  {
+    id: "highlight_3",
+    section: "20 Años de Trayectoria",
+    label: "Hito 3 — Tapas & Portadas de Revistas (+150)",
+    src: "/images/catalog_v2/portadas/1c2c1c68-11f5-4d8f-a4f6-745ea9cc1f32.jpg",
+    objectPositionX: 50,
+    objectPositionY: 50,
+    zoom: 100,
+    brightness: 100,
+  },
+  {
+    id: "highlight_4",
+    section: "20 Años de Trayectoria",
+    label: "Hito 4 — Community & Exit 2025 (150k)",
+    src: "/images/catalog_v2/ASH/E0C50A9A-718F-498E-87F3-410FA4D94D3D-1.jpg",
+    objectPositionX: 50,
+    objectPositionY: 25,
+    zoom: 110,
+    brightness: 100,
+  },
+];
+
+const CONFIG_FILE = path.join(process.cwd(), "data", "site-images.json");
+
+function ensureFile() {
+  const dir = path.dirname(CONFIG_FILE);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  if (!fs.existsSync(CONFIG_FILE)) {
+    fs.writeFileSync(CONFIG_FILE, JSON.stringify(DEFAULT_SITE_IMAGES, null, 2));
+  }
+}
+
+export function getSiteImagesConfig(): SiteImageConfig[] {
+  try {
+    ensureFile();
+    const raw = fs.readFileSync(CONFIG_FILE, "utf-8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : DEFAULT_SITE_IMAGES;
+  } catch (e) {
+    return DEFAULT_SITE_IMAGES;
+  }
+}
+
+export function saveSiteImageConfig(config: SiteImageConfig): void {
+  try {
+    ensureFile();
+    const list = getSiteImagesConfig();
+    const updated = list.map((item) => (item.id === config.id ? config : item));
+    // Si no existía, agregarlo
+    if (!list.some((item) => item.id === config.id)) {
+      updated.push(config);
+    }
+    fs.writeFileSync(CONFIG_FILE, JSON.stringify(updated, null, 2));
+  } catch (e) {
+    console.error("Error guardando site-images.json:", e);
+  }
+}
