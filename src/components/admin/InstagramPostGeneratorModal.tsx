@@ -33,9 +33,19 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
     strap: "55 cm",
   });
 
-  // Ajustes de encuadre y zoom de la foto
-  const [productScale, setProductScale] = useState<number>(100); // 70% a 130%
-  const [productOffsetY, setProductOffsetY] = useState<number>(0); // -80px a +80px
+  // Ajustes de encuadre y zoom de la Foto Principal (Bolso / Prenda)
+  const [productScale, setProductScale] = useState<number>(100);
+  const [productOffsetY, setProductOffsetY] = useState<number>(0);
+  const [productOffsetX, setProductOffsetX] = useState<number>(0);
+
+  // Ajustes de encuadre y zoom de la Foto Secundaria (Miniatura / Modelo / Detalle)
+  const [secondaryScale, setSecondaryScale] = useState<number>(100);
+  const [secondaryOffsetY, setSecondaryOffsetY] = useState<number>(0);
+  const [secondaryOffsetX, setSecondaryOffsetX] = useState<number>(0);
+
+  // Pestaña de imagen activa para editar: 'main' | 'secondary'
+  const [activeImageAdjust, setActiveImageAdjust] = useState<"main" | "secondary">("main");
+  const [pureWhiteBg, setPureWhiteBg] = useState<boolean>(true);
 
   const [copied, setCopied] = useState(false);
   const [generating, setGenerating] = useState(false);
@@ -54,6 +64,11 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
     measurements,
     productScale,
     productOffsetY,
+    productOffsetX,
+    secondaryScale,
+    secondaryOffsetY,
+    secondaryOffsetX,
+    pureWhiteBg,
     product,
   ]);
 
@@ -116,7 +131,9 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       targetBoxW: number,
       targetBoxH: number,
       scalePercent: number = 100,
-      offsetYPx: number = 0
+      offsetYPx: number = 0,
+      offsetXPx: number = 0,
+      applyMultiply: boolean = true
     ) => {
       const nw = img.naturalWidth || img.width;
       const nh = img.naturalHeight || img.height;
@@ -153,13 +170,20 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       const centerOffsetX = (drawW - finalW) / 2;
       const centerOffsetY = (drawH - finalH) / 2;
 
+      ctx.save();
+      // Si está activado Fondo Blanco Puro, usar multiply para que los fondos grises/blancos de estudio se fundan a blanco inmaculado
+      if (pureWhiteBg) {
+        ctx.globalCompositeOperation = "multiply";
+      }
+
       ctx.drawImage(
         img,
-        targetBoxX + offX + centerOffsetX,
+        targetBoxX + offX + centerOffsetX + offsetXPx,
         targetBoxY + offY + centerOffsetY + offsetYPx,
         finalW,
         finalH
       );
+      ctx.restore();
     };
 
     if (template === "prelove") {
@@ -171,12 +195,12 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
 
       // 1. FOTO PRINCIPAL PROTAGONISTA (EN EL FONDO PARA NO TAPAR TEXTOS)
       if (mainImg) {
-        drawImageProportional(mainImg, 80, 480, 580, 520, productScale, productOffsetY);
+        drawImageProportional(mainImg, 80, 480, 580, 520, productScale, productOffsetY, productOffsetX, pureWhiteBg);
       }
 
       // 2. FOTO SECUNDARIA (EN EL FONDO)
       if (secondaryImg) {
-        drawImageProportional(secondaryImg, 45, 175, 290, 290, 100, 0);
+        drawImageProportional(secondaryImg, 45, 175, 290, 290, secondaryScale, secondaryOffsetY, secondaryOffsetX, pureWhiteBg);
       }
 
       // 3. TÍTULO: PRE-LOVE (Impact Italic estilo revista)
@@ -274,7 +298,7 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
 
       // Foto principal a pantalla completa / enmarcada con proporciones reales
       if (mainImg) {
-        drawImageProportional(mainImg, 80, 100, 920, H - 240, productScale, productOffsetY);
+        drawImageProportional(mainImg, 80, 100, 920, H - 240, productScale, productOffsetY, productOffsetX, pureWhiteBg);
       }
 
       // Función de cinta blanca editorial
@@ -540,56 +564,173 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
               </div>
             </div>
 
-            {/* CONTROLES DE ESCALA Y ENCUADRE DE LA FOTO */}
-            <div className="p-3.5 rounded-xl bg-[#F7F3EE] border border-black/10 space-y-2">
+            {/* CONTROLES DE ESCALA, POSICIÓN Y FONDO DE AMBAS FOTOS */}
+            <div className="p-4 rounded-xl bg-[#F7F3EE] border border-black/10 space-y-3">
               <div className="flex items-center justify-between text-[11px] font-semibold text-[#0A0A0A]">
                 <span className="flex items-center gap-1.5">
                   <Sliders className="w-3.5 h-3.5 text-[#B5A898]" />
-                  Ajuste de la Pieza en la Placa
+                  Ajuste de Fotos en la Placa
                 </span>
                 <button
                   type="button"
                   onClick={() => {
-                    setProductScale(100);
-                    setProductOffsetY(0);
+                    if (activeImageAdjust === "main") {
+                      setProductScale(100);
+                      setProductOffsetY(0);
+                      setProductOffsetX(0);
+                    } else {
+                      setSecondaryScale(100);
+                      setSecondaryOffsetY(0);
+                      setSecondaryOffsetX(0);
+                    }
                   }}
                   className="text-[10px] text-[#7A6A5A] hover:text-[#0A0A0A] underline flex items-center gap-1"
                 >
                   <RefreshCw className="w-2.5 h-2.5" />
-                  Restablecer
+                  Restablecer {activeImageAdjust === "main" ? "Principal" : "Miniatura"}
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 pt-1">
-                <div>
-                  <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
-                    <span>Tamaño / Zoom</span>
-                    <span className="font-mono">{productScale}%</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="60"
-                    max="140"
-                    value={productScale}
-                    onChange={(e) => setProductScale(Number(e.target.value))}
-                    className="w-full accent-[#0A0A0A] cursor-pointer"
-                  />
-                </div>
+              {/* SELECTOR DE IMAGEN A EDITAR */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setActiveImageAdjust("main")}
+                  className={`py-1.5 px-3 rounded-lg text-center text-[10.5px] font-semibold transition-all ${
+                    activeImageAdjust === "main"
+                      ? "bg-[#0A0A0A] text-white shadow-sm"
+                      : "bg-white border border-black/10 text-[#7A6A5A] hover:text-[#0A0A0A]"
+                  }`}
+                >
+                  👜 Pieza Principal
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveImageAdjust("secondary")}
+                  className={`py-1.5 px-3 rounded-lg text-center text-[10.5px] font-semibold transition-all ${
+                    activeImageAdjust === "secondary"
+                      ? "bg-[#0A0A0A] text-white shadow-sm"
+                      : "bg-white border border-black/10 text-[#7A6A5A] hover:text-[#0A0A0A]"
+                  }`}
+                >
+                  👤 Miniatura Modelo
+                </button>
+              </div>
 
-                <div>
-                  <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
-                    <span>Posición Vertical</span>
-                    <span className="font-mono">{productOffsetY}px</span>
+              {/* SLIDERS SEGÚN LA IMAGEN SELECCIONADA */}
+              {activeImageAdjust === "main" ? (
+                <div className="space-y-2.5 pt-1">
+                  <div>
+                    <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                      <span>Tamaño / Zoom (Pieza Principal)</span>
+                      <span className="font-mono font-semibold text-[#0A0A0A]">{productScale}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="50"
+                      max="160"
+                      value={productScale}
+                      onChange={(e) => setProductScale(Number(e.target.value))}
+                      className="w-full accent-[#0A0A0A] cursor-pointer"
+                    />
                   </div>
-                  <input
-                    type="range"
-                    min="-80"
-                    max="80"
-                    value={productOffsetY}
-                    onChange={(e) => setProductOffsetY(Number(e.target.value))}
-                    className="w-full accent-[#0A0A0A] cursor-pointer"
-                  />
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                        <span>Vertical (Y)</span>
+                        <span className="font-mono font-semibold text-[#0A0A0A]">{productOffsetY}px</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="-150"
+                        max="150"
+                        value={productOffsetY}
+                        onChange={(e) => setProductOffsetY(Number(e.target.value))}
+                        className="w-full accent-[#0A0A0A] cursor-pointer"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                        <span>Horizontal (X)</span>
+                        <span className="font-mono font-semibold text-[#0A0A0A]">{productOffsetX}px</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="-150"
+                        max="150"
+                        value={productOffsetX}
+                        onChange={(e) => setProductOffsetX(Number(e.target.value))}
+                        className="w-full accent-[#0A0A0A] cursor-pointer"
+                      />
+                    </div>
+                  </div>
                 </div>
+              ) : (
+                <div className="space-y-2.5 pt-1">
+                  <div>
+                    <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                      <span>Tamaño / Zoom (Miniatura Modelo)</span>
+                      <span className="font-mono font-semibold text-[#0A0A0A]">{secondaryScale}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="50"
+                      max="160"
+                      value={secondaryScale}
+                      onChange={(e) => setSecondaryScale(Number(e.target.value))}
+                      className="w-full accent-[#0A0A0A] cursor-pointer"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                        <span>Vertical (Y)</span>
+                        <span className="font-mono font-semibold text-[#0A0A0A]">{secondaryOffsetY}px</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="-150"
+                        max="150"
+                        value={secondaryOffsetY}
+                        onChange={(e) => setSecondaryOffsetY(Number(e.target.value))}
+                        className="w-full accent-[#0A0A0A] cursor-pointer"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                        <span>Horizontal (X)</span>
+                        <span className="font-mono font-semibold text-[#0A0A0A]">{secondaryOffsetX}px</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="-150"
+                        max="150"
+                        value={secondaryOffsetX}
+                        onChange={(e) => setSecondaryOffsetX(Number(e.target.value))}
+                        className="w-full accent-[#0A0A0A] cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TOGGLE FONDO BLANCO PURO */}
+              <div className="pt-2 border-t border-black/10 flex items-center justify-between">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={pureWhiteBg}
+                    onChange={(e) => setPureWhiteBg(e.target.checked)}
+                    className="rounded text-[#0A0A0A] focus:ring-0 accent-[#0A0A0A] cursor-pointer"
+                  />
+                  <span className="text-[10px] text-[#0A0A0A] font-medium">
+                    Fondo blanco puro (eliminar recuadros de fotos)
+                  </span>
+                </label>
               </div>
             </div>
 
