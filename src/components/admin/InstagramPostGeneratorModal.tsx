@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { LuxuryProduct } from "@/types/mercadito";
-import { X, Download, Copy, Check, Sparkles, Sliders } from "lucide-react";
+import { X, Download, Copy, Check, Sliders, RefreshCw } from "lucide-react";
 
 interface Props {
   product: LuxuryProduct;
@@ -12,8 +12,9 @@ interface Props {
 export default function InstagramPostGeneratorModal({ product, onClose }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [template, setTemplate] = useState<"prelove" | "editorial">("prelove");
+  const [format, setFormat] = useState<"square" | "story">("square"); // square = 1080x1080, story = 1080x1350
 
-  // Precios y cálculo de retail estimado si no existe
+  // Precios y cálculo de retail estimado
   const estimatedRetail = Math.round(product.price * 1.35);
 
   // Estados editables en vivo
@@ -32,13 +33,29 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
     strap: "55 cm",
   });
 
+  // Ajustes de encuadre y zoom de la foto
+  const [productScale, setProductScale] = useState<number>(100); // 70% a 130%
+  const [productOffsetY, setProductOffsetY] = useState<number>(0); // -80px a +80px
+
   const [copied, setCopied] = useState(false);
   const [generating, setGenerating] = useState(false);
 
   // Renderizar en Canvas
   useEffect(() => {
     drawCanvas();
-  }, [template, title, subtitle, retailPrice, findingPrice, condition, measurements, product]);
+  }, [
+    template,
+    format,
+    title,
+    subtitle,
+    retailPrice,
+    findingPrice,
+    condition,
+    measurements,
+    productScale,
+    productOffsetY,
+    product,
+  ]);
 
   const drawCanvas = async () => {
     const canvas = canvasRef.current;
@@ -48,22 +65,22 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
 
     setGenerating(true);
 
-    // Dimensiones estándar Instagram Feed (1080 x 1080 px en alta definición)
+    // Dimensiones según formato
     const W = 1080;
-    const H = 1080;
+    const H = format === "square" ? 1080 : 1350;
     canvas.width = W;
     canvas.height = H;
 
-    // Cargar imagen principal y secundaria
+    // Cargar imagen con promesa garantizada
     const loadImg = (url: string): Promise<HTMLImageElement> => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const img = new window.Image();
         img.crossOrigin = "anonymous";
         img.onload = () => resolve(img);
         img.onerror = () => {
           const fallback = new window.Image();
           fallback.onload = () => resolve(fallback);
-          fallback.onerror = reject;
+          fallback.onerror = () => resolve(fallback);
           fallback.src = url;
         };
         img.src = url;
@@ -81,208 +98,182 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         secondaryImg = mainImg;
       }
     } catch (e) {
-      console.warn("No se pudieron cargar todas las imágenes remotas con CORS:", e);
+      console.warn("Error al cargar fotos:", e);
     }
 
+    // =========================================================================
+    // FUNCIÓN INFALIBLE: DIBUJA LA IMAGEN CONSERVANDO SU ASPECT RATIO REAL
+    // =========================================================================
+    const drawImageProportional = (
+      img: HTMLImageElement,
+      targetBoxX: number,
+      targetBoxY: number,
+      targetBoxW: number,
+      targetBoxH: number,
+      scalePercent: number = 100,
+      offsetYPx: number = 0
+    ) => {
+      const nw = img.naturalWidth || img.width;
+      const nh = img.naturalHeight || img.height;
+      if (!nw || !nh) {
+        ctx.drawImage(img, targetBoxX, targetBoxY, targetBoxW, targetBoxH);
+        return;
+      }
+
+      // Relación de aspecto natural de la fotografía
+      const imgRatio = nw / nh;
+      const boxRatio = targetBoxW / targetBoxH;
+
+      let drawW = targetBoxW;
+      let drawH = targetBoxH;
+      let offX = 0;
+      let offY = 0;
+
+      if (imgRatio > boxRatio) {
+        // La foto es más apaisada: ajustar por ancho
+        drawW = targetBoxW;
+        drawH = targetBoxW / imgRatio;
+        offY = (targetBoxH - drawH) / 2;
+      } else {
+        // La foto es más vertical: ajustar por alto
+        drawH = targetBoxH;
+        drawW = targetBoxH * imgRatio;
+        offX = (targetBoxW - drawW) / 2;
+      }
+
+      // Aplicar factor de escala manual de usuario (zoom centrado)
+      const scale = scalePercent / 100;
+      const finalW = drawW * scale;
+      const finalH = drawH * scale;
+      const centerOffsetX = (drawW - finalW) / 2;
+      const centerOffsetY = (drawH - finalH) / 2;
+
+      ctx.drawImage(
+        img,
+        targetBoxX + offX + centerOffsetX,
+        targetBoxY + offY + centerOffsetY + offsetYPx,
+        finalW,
+        finalH
+      );
+    };
+
     if (template === "prelove") {
-      // -------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // PLANTILLA A: FICHA TÉCNICA PRE-LOVE (VERDE NEÓN)
-      // -------------------------------------------------------------
-      // Fondo blanco puro
+      // -----------------------------------------------------------------------
       ctx.fillStyle = "#FFFFFF";
       ctx.fillRect(0, 0, W, H);
 
-      // TÍTULO: PRE-LOVE (Impact Italic estilo revista)
+      // 1. TÍTULO: PRE-LOVE (Impact Italic estilo revista)
       ctx.fillStyle = "#0A0A0A";
-      ctx.font = "italic 900 86px 'Impact', 'Arial Black', sans-serif";
+      ctx.font = "italic 900 92px 'Impact', 'Arial Black', sans-serif";
       ctx.letterSpacing = "2px";
-      ctx.fillText(title.toUpperCase(), 140, 140);
+      ctx.fillText(title.toUpperCase(), 140, 135);
 
-      // SUBTÍTULO CURSIVO: -Frase de estilo-
+      // 2. SUBTÍTULO: -Frase en cursiva-
       ctx.fillStyle = "#0A0A0A";
       ctx.font = "italic 400 38px 'Georgia', serif";
       ctx.fillText(subtitle, 340, 205);
 
-      // RETAIL PRICE TACHADO
+      // 3. RETAIL PRICE TACHADO
       if (retailPrice) {
         ctx.fillStyle = "#0A0A0A";
         ctx.font = "italic 900 36px 'Impact', 'Arial Black', sans-serif";
         const retailText = `Retail Price $${Number(retailPrice).toLocaleString("en-US")}.-`;
-        ctx.fillText(retailText, 370, 290);
-        
+        ctx.fillText(retailText, 360, 285);
+
         // Línea de tachado
         const textWidth = ctx.measureText(retailText).width;
         ctx.strokeStyle = "#0A0A0A";
         ctx.lineWidth = 5;
         ctx.beginPath();
-        ctx.moveTo(370, 278);
-        ctx.lineTo(370 + textWidth, 278);
+        ctx.moveTo(360, 273);
+        ctx.lineTo(360 + textWidth, 273);
         ctx.stroke();
       }
 
-      // PRECIO HALLAZGO (CON HIGHLIGHT VERDE NEÓN)
+      // 4. PRECIO HALLAZGO (CON HIGHLIGHT VERDE NEÓN)
       const findingText = `Precio Hallazgo $${Number(findingPrice).toLocaleString("en-US")}.-`;
       ctx.font = "italic 900 48px 'Impact', 'Arial Black', sans-serif";
       const findingMetrics = ctx.measureText(findingText);
       const tagW = findingMetrics.width + 24;
       const tagH = 58;
 
-      // Resaltador verde neón
       ctx.fillStyle = "#00FF2A";
-      ctx.fillRect(370, 310, tagW, tagH);
+      ctx.fillRect(360, 305, tagW, tagH);
 
-      // Texto de precio hallazgo
       ctx.fillStyle = "#0A0A0A";
-      ctx.fillText(findingText, 382, 355);
+      ctx.fillText(findingText, 372, 350);
 
-      // MEDIDAS ALINEADAS A LA DERECHA/CENTRO
+      // 5. MEDIDAS TÉCNICAS (COLUMNA DERECHA)
       ctx.fillStyle = "#0A0A0A";
-      ctx.font = "900 25px 'Impact', 'Arial Black', sans-serif";
+      ctx.font = "900 24px 'Impact', 'Arial Black', sans-serif";
       ctx.textAlign = "right";
-      let measureY = 420;
-      const lineHeight = 34;
+      let measureY = 410;
+      const lineHeight = 33;
 
       if (measurements.depth) {
-        ctx.fillText(`Profundidad: ${measurements.depth}`, 730, measureY);
+        ctx.fillText(`Profundidad: ${measurements.depth}`, 740, measureY);
         measureY += lineHeight;
       }
       if (measurements.width) {
-        ctx.fillText(`Ancho: ${measurements.width}`, 730, measureY);
+        ctx.fillText(`Ancho: ${measurements.width}`, 740, measureY);
         measureY += lineHeight;
       }
       if (measurements.height) {
-        ctx.fillText(`Altura: ${measurements.height}`, 730, measureY);
+        ctx.fillText(`Altura: ${measurements.height}`, 740, measureY);
         measureY += lineHeight;
       }
       if (measurements.handle) {
-        ctx.fillText(`Asa: ${measurements.handle}`, 730, measureY);
+        ctx.fillText(`Asa: ${measurements.handle}`, 740, measureY);
         measureY += lineHeight;
       }
       if (measurements.strap) {
-        ctx.fillText(`Correa: ${measurements.strap}`, 730, measureY);
+        ctx.fillText(`Correa: ${measurements.strap}`, 740, measureY);
       }
       ctx.textAlign = "left"; // reset
 
-      // BLOQUE DE CONDICIONES (CON FONDO VERDE NEÓN)
+      // 6. BLOQUE DE CONDICIONES (CON FONDO VERDE NEÓN)
       ctx.fillStyle = "#00FF2A";
-      ctx.fillRect(690, 620, 315, 38);
+      ctx.fillRect(700, 610, 315, 38);
 
       ctx.fillStyle = "#0A0A0A";
-      ctx.font = "900 24px 'Impact', 'Arial Black', sans-serif";
-      ctx.fillText("CONDICIONES: Pre-Love.", 696, 647);
+      ctx.font = "900 23px 'Impact', 'Arial Black', sans-serif";
+      ctx.fillText("CONDICIONES: Pre-Love.", 708, 636);
 
       ctx.fillStyle = "#0A0A0A";
-      ctx.font = "900 26px 'Impact', 'Arial Black', sans-serif";
-      ctx.fillText(condition, 690, 685);
+      ctx.font = "900 25px 'Impact', 'Arial Black', sans-serif";
+      ctx.fillText(condition, 700, 675);
 
-      // FUNCIÓN AUXILIAR PARA DIBUJAR IMAGEN RESPETANDO SU ASPECT RATIO (SIN APLASTAR NI DEFORMAR)
-      const drawImageContain = (
-        image: HTMLImageElement,
-        boxX: number,
-        boxY: number,
-        boxW: number,
-        boxH: number
-      ) => {
-        const nw = image.naturalWidth || image.width || boxW;
-        const nh = image.naturalHeight || image.height || boxH;
-        const imgRatio = nw / nh;
-        const boxRatio = boxW / boxH;
-
-        let renderW = boxW;
-        let renderH = boxH;
-        let offX = 0;
-        let offY = 0;
-
-        if (imgRatio > boxRatio) {
-          renderW = boxW;
-          renderH = boxW / imgRatio;
-          offY = (boxH - renderH) / 2;
-        } else {
-          renderH = boxH;
-          renderW = boxH * imgRatio;
-          offX = (boxW - renderW) / 2;
-        }
-
-        ctx.drawImage(image, boxX + offX, boxY + offY, renderW, renderH);
-      };
-
-      // IMAGEN SECUNDARIA (ÁNGULO / ARRIBA IZQUIERDA)
+      // 7. FOTO SECUNDARIA (ÁNGULO / ARRIBA IZQUIERDA) - PROPORCIONAL
       if (secondaryImg) {
-        try {
-          ctx.save();
-          drawImageContain(secondaryImg, 40, 170, 300, 310);
-          ctx.restore();
-        } catch (e) {
-          console.warn("Fallo al dibujar imagen secundaria:", e);
-        }
+        drawImageProportional(secondaryImg, 45, 175, 290, 290, 100, 0);
       }
 
-      // IMAGEN PRINCIPAL PROTAGONISTA (CENTRO INFERIOR)
+      // 8. FOTO PRINCIPAL PROTAGONISTA (CENTRO-INFERIOR) - PROPORCIONAL
       if (mainImg) {
-        try {
-          ctx.save();
-          // Área protagonista amplia con proporciones 100% exactas
-          drawImageContain(mainImg, 70, 490, 600, 500);
-          ctx.restore();
-        } catch (e) {
-          console.warn("Fallo al dibujar imagen principal:", e);
-        }
+        // Área rectangular de dibujo donde la foto se escala perfectamente sin recortarse
+        drawImageProportional(mainImg, 80, 480, 580, 520, productScale, productOffsetY);
       }
 
-      // TAG DE MARCA AL PIE
+      // 9. TAG DE MARCA
       ctx.fillStyle = "#7A6A5A";
-      ctx.font = "italic 600 20px 'Georgia', serif";
-      ctx.fillText("@elmercaditodeash", 140, 1020);
+      ctx.font = "italic 600 22px 'Georgia', serif";
+      ctx.fillText("@elmercaditodeash", 140, format === "square" ? 1030 : 1300);
 
     } else {
-      // -------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // PLANTILLA B: EDITORIAL TAPE STICKERS (DEL POST DE INSTAGRAM)
-      // -------------------------------------------------------------
-      // Fondo editorial crema/neutro
+      // -----------------------------------------------------------------------
       ctx.fillStyle = "#F7F3EE";
       ctx.fillRect(0, 0, W, H);
 
-      // FUNCIÓN AUXILIAR PARA DIBUJAR IMAGEN RESPETANDO SU ASPECT RATIO
-      const drawImageContain = (
-        image: HTMLImageElement,
-        boxX: number,
-        boxY: number,
-        boxW: number,
-        boxH: number
-      ) => {
-        const nw = image.naturalWidth || image.width || boxW;
-        const nh = image.naturalHeight || image.height || boxH;
-        const imgRatio = nw / nh;
-        const boxRatio = boxW / boxH;
-
-        let renderW = boxW;
-        let renderH = boxH;
-        let offX = 0;
-        let offY = 0;
-
-        if (imgRatio > boxRatio) {
-          renderW = boxW;
-          renderH = boxW / imgRatio;
-          offY = (boxH - renderH) / 2;
-        } else {
-          renderH = boxH;
-          renderW = boxH * imgRatio;
-          offX = (boxW - renderW) / 2;
-        }
-
-        ctx.drawImage(image, boxX + offX, boxY + offY, renderW, renderH);
-      };
-
-      // Si hay imagen principal, dibujarla centrada respetando proporción
+      // Foto principal a pantalla completa / enmarcada con proporciones reales
       if (mainImg) {
-        try {
-          drawImageContain(mainImg, 60, 100, 960, 880);
-        } catch (e) {
-          console.warn(e);
-        }
+        drawImageProportional(mainImg, 80, 100, 920, H - 240, productScale, productOffsetY);
       }
 
-      // FUNCIÓN AUXILIAR PARA DIBUJAR CINTA / STICKER BLANCO
+      // Función de cinta blanca editorial
       const drawTapeText = (text: string, x: number, y: number, font: string, isBlackBg = false) => {
         ctx.font = font;
         const metrics = ctx.measureText(text);
@@ -291,7 +282,6 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         const bgW = metrics.width + padX * 2;
         const bgH = parseInt(font.match(/\d+px/)?.[0] || "36") + padY * 1.5;
 
-        // Cinta de fondo con sombra sutil
         ctx.fillStyle = isBlackBg ? "#0A0A0A" : "#FFFFFF";
         ctx.shadowColor = "rgba(0,0,0,0.15)";
         ctx.shadowBlur = 10;
@@ -299,26 +289,23 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         ctx.fillRect(x, y - bgH + padY * 0.8, bgW, bgH);
         ctx.shadowColor = "transparent";
 
-        // Texto
         ctx.fillStyle = isBlackBg ? "#FFFFFF" : "#0A0A0A";
         ctx.fillText(text, x + padX, y);
       };
 
-      // TÍTULO CON STICKERS
+      // TÍTULOS EN PASTILLAS BLANCAS
       drawTapeText(product.designer.toUpperCase(), 80, 140, "italic 900 44px 'Impact', 'Arial Black', sans-serif");
       drawTapeText(product.name, 80, 210, "italic 900 36px 'Impact', 'Arial Black', sans-serif");
 
-      // FRASE EDITORIAL DE ASH
-      drawTapeText("“Voy por el mundo en busca de hallazgos...", 120, 840, "italic 400 34px 'Georgia', serif");
-      drawTapeText(subtitle.replace(/-/g, ""), 120, 900, "italic 400 32px 'Georgia', serif");
+      // FRASE EDITORIAL
+      const bottomY = format === "square" ? 860 : 1100;
+      drawTapeText("“Voy por el mundo en busca de hallazgos...", 100, bottomY, "italic 400 34px 'Georgia', serif");
+      drawTapeText(subtitle.replace(/-/g, ""), 100, bottomY + 60, "italic 400 32px 'Georgia', serif");
 
-      // PRECIO EN CINTA NEGRA
       const priceBadge = `PRECIO HALLAZGO: $${Number(findingPrice).toLocaleString("en-US")} USD`;
-      drawTapeText(priceBadge, 120, 970, "900 30px 'Impact', sans-serif", true);
+      drawTapeText(priceBadge, 100, bottomY + 130, "900 30px 'Impact', sans-serif", true);
 
-      // MARCA DE AGUA AL PIE DERECHO
-      ctx.fillStyle = "#FFFFFF";
-      drawTapeText("@elmercaditodeash", 680, 1020, "italic 600 24px 'Georgia', serif");
+      drawTapeText("@elmercaditodeash", 680, bottomY + 130, "italic 600 24px 'Georgia', serif");
     }
 
     setGenerating(false);
@@ -334,7 +321,7 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
     link.click();
   };
 
-  // Copiar al portapapeles para pegar en WhatsApp / Telegram / Photoshop
+  // Copiar al portapapeles
   const handleCopyClipboard = async () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -358,17 +345,17 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
 
   return (
     <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-8 overflow-y-auto">
-      <div className="bg-[#F7F3EE] rounded-[2.5rem] border border-black/15 shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden">
+      <div className="bg-[#F7F3EE] rounded-[2.5rem] border border-black/15 shadow-2xl max-w-5xl w-full max-h-[94vh] flex flex-col overflow-hidden">
         
         {/* HEADER MODAL */}
-        <div className="p-6 md:px-8 border-b border-black/10 flex items-center justify-between bg-white/60">
+        <div className="p-5 md:px-8 border-b border-black/10 flex items-center justify-between bg-white/70">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-[10px] uppercase tracking-[0.25em] font-semibold text-[#7A6A5A]">
                 EL MERCADITO DE ASH
               </span>
               <span className="px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wider uppercase bg-emerald-100 text-emerald-800">
-                Instagram 1080 x 1080
+                {format === "square" ? "Feed 1080 x 1080" : "Feed Vertical 1080 x 1350"}
               </span>
             </div>
             <h2 className="font-serif text-2xl text-[#0A0A0A]">
@@ -384,15 +371,27 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
           </button>
         </div>
 
-        {/* CONTENIDO EN 2 COLUMNAS */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 md:p-8 overflow-y-auto">
+        {/* CONTENIDO EN 2 COLUMNAS: ITEMS-START PARA EVITAR DEFORMACIONES POR FLEX STRETCH */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 md:p-8 overflow-y-auto items-start">
           
-          {/* COLUMNA IZQUIERDA: CANVAS DE PREVISUALIZACIÓN */}
-          <div className="lg:col-span-7 flex flex-col items-center justify-center">
-            <div className="relative w-full aspect-square max-w-[480px] bg-white rounded-2xl shadow-xl overflow-hidden border border-black/10">
+          {/* COLUMNA IZQUIERDA: PREVISUALIZACIÓN CON ASPECT RATIO RÍGIDO */}
+          <div className="lg:col-span-6 flex flex-col items-center justify-start w-full">
+            
+            {/* CONTENEDOR CON ASPECT RATIO BLOQUEADO POR STYLE DIRECTO */}
+            <div
+              className="relative shadow-2xl rounded-2xl overflow-hidden border border-black/10 bg-white w-full"
+              style={{
+                maxWidth: "420px",
+                aspectRatio: format === "square" ? "1 / 1" : "4 / 5",
+              }}
+            >
               <canvas
                 ref={canvasRef}
-                className="w-full h-full object-contain"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "block",
+                }}
               />
               {generating && (
                 <div className="absolute inset-0 bg-white/60 backdrop-blur-xs flex items-center justify-center text-xs text-[#7A6A5A]">
@@ -401,15 +400,42 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
               )}
             </div>
 
+            {/* SELECTOR DE FORMATO */}
+            <div className="flex items-center gap-2 mt-4 bg-white/70 p-1.5 rounded-full border border-black/10 text-[11px]">
+              <span className="text-[#7A6A5A] pl-2">Formato:</span>
+              <button
+                type="button"
+                onClick={() => setFormat("square")}
+                className={`px-3 py-1 rounded-full font-medium transition-all ${
+                  format === "square"
+                    ? "bg-[#0A0A0A] text-white"
+                    : "text-[#0A0A0A] hover:bg-black/5"
+                }`}
+              >
+                1:1 Cuadrado
+              </button>
+              <button
+                type="button"
+                onClick={() => setFormat("story")}
+                className={`px-3 py-1 rounded-full font-medium transition-all ${
+                  format === "story"
+                    ? "bg-[#0A0A0A] text-white"
+                    : "text-[#0A0A0A] hover:bg-black/5"
+                }`}
+              >
+                4:5 Vertical
+              </button>
+            </div>
+
             {/* BOTONES DE EXPORTACIÓN */}
-            <div className="flex flex-wrap items-center justify-center gap-3 mt-6 w-full max-w-[480px]">
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-4 w-full max-w-[420px]">
               <button
                 type="button"
                 onClick={handleDownload}
                 className="flex-1 min-w-[200px] flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-[#0A0A0A] text-white text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#7A6A5A] transition-all shadow-lg active:scale-[0.98]"
               >
                 <Download className="w-4 h-4" />
-                <span>Descargar PNG (1080x1080)</span>
+                <span>Descargar PNG</span>
               </button>
 
               <button
@@ -424,8 +450,8 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
             </div>
           </div>
 
-          {/* COLUMNA DERECHA: CONTROLES EDITABLES */}
-          <div className="lg:col-span-5 space-y-5 bg-white p-6 rounded-2xl border border-black/10 text-xs">
+          {/* COLUMNA DERECHA: CONTROLES EDITABLES Y DE AJUSTE FINO */}
+          <div className="lg:col-span-6 space-y-5 bg-white p-6 rounded-2xl border border-black/10 text-xs">
             <div>
               <label className="text-[10.5px] uppercase tracking-[0.2em] font-semibold text-[#7A6A5A] block mb-2">
                 Plantilla Visual
@@ -456,6 +482,59 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
                   <div className="text-[11px] font-bold">Editorial Tape</div>
                   <div className="text-[9.5px] text-[#7A6A5A]">Cintas estilo post Ash</div>
                 </button>
+              </div>
+            </div>
+
+            {/* CONTROLES DE ESCALA Y ENCUADRE DE LA FOTO */}
+            <div className="p-3.5 rounded-xl bg-[#F7F3EE] border border-black/10 space-y-2">
+              <div className="flex items-center justify-between text-[11px] font-semibold text-[#0A0A0A]">
+                <span className="flex items-center gap-1.5">
+                  <Sliders className="w-3.5 h-3.5 text-[#B5A898]" />
+                  Ajuste de la Pieza en la Placa
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProductScale(100);
+                    setProductOffsetY(0);
+                  }}
+                  className="text-[10px] text-[#7A6A5A] hover:text-[#0A0A0A] underline flex items-center gap-1"
+                >
+                  <RefreshCw className="w-2.5 h-2.5" />
+                  Restablecer
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                <div>
+                  <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                    <span>Tamaño / Zoom</span>
+                    <span className="font-mono">{productScale}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="60"
+                    max="140"
+                    value={productScale}
+                    onChange={(e) => setProductScale(Number(e.target.value))}
+                    className="w-full accent-[#0A0A0A] cursor-pointer"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-[10px] text-[#7A6A5A] mb-1">
+                    <span>Posición Vertical</span>
+                    <span className="font-mono">{productOffsetY}px</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="-80"
+                    max="80"
+                    value={productOffsetY}
+                    onChange={(e) => setProductOffsetY(Number(e.target.value))}
+                    className="w-full accent-[#0A0A0A] cursor-pointer"
+                  />
+                </div>
               </div>
             </div>
 
@@ -577,10 +656,6 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
                   </div>
                 </div>
               )}
-            </div>
-
-            <div className="p-3 rounded-xl bg-[#F7F3EE] text-[11px] text-[#7A6A5A] leading-relaxed">
-              ✦ <strong>Tip de Redes:</strong> La imagen se genera a <strong>1080 x 1080 px</strong> en PNG sin compresión, lista para publicar en el feed o historias de Instagram de <strong>@elmercaditodeash</strong>.
             </div>
           </div>
         </div>
