@@ -169,18 +169,28 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       ctx.fillStyle = "#FFFFFF";
       ctx.fillRect(0, 0, W, H);
 
-      // 1. TÍTULO: PRE-LOVE (Impact Italic estilo revista)
+      // 1. FOTO PRINCIPAL PROTAGONISTA (EN EL FONDO PARA NO TAPAR TEXTOS)
+      if (mainImg) {
+        drawImageProportional(mainImg, 80, 480, 580, 520, productScale, productOffsetY);
+      }
+
+      // 2. FOTO SECUNDARIA (EN EL FONDO)
+      if (secondaryImg) {
+        drawImageProportional(secondaryImg, 45, 175, 290, 290, 100, 0);
+      }
+
+      // 3. TÍTULO: PRE-LOVE (Impact Italic estilo revista)
       ctx.fillStyle = "#0A0A0A";
       ctx.font = "italic 900 92px 'Impact', 'Arial Black', sans-serif";
       ctx.letterSpacing = "2px";
       ctx.fillText(title.toUpperCase(), 140, 135);
 
-      // 2. SUBTÍTULO: -Frase en cursiva-
+      // 4. SUBTÍTULO: -Frase en cursiva-
       ctx.fillStyle = "#0A0A0A";
       ctx.font = "italic 400 38px 'Georgia', serif";
       ctx.fillText(subtitle, 340, 205);
 
-      // 3. RETAIL PRICE TACHADO
+      // 5. RETAIL PRICE TACHADO
       if (retailPrice) {
         ctx.fillStyle = "#0A0A0A";
         ctx.font = "italic 900 36px 'Impact', 'Arial Black', sans-serif";
@@ -197,7 +207,7 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         ctx.stroke();
       }
 
-      // 4. PRECIO HALLAZGO (CON HIGHLIGHT VERDE NEÓN)
+      // 6. PRECIO HALLAZGO (CON HIGHLIGHT VERDE NEÓN)
       const findingText = `Precio Hallazgo $${Number(findingPrice).toLocaleString("en-US")}.-`;
       ctx.font = "italic 900 48px 'Impact', 'Arial Black', sans-serif";
       const findingMetrics = ctx.measureText(findingText);
@@ -210,7 +220,7 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       ctx.fillStyle = "#0A0A0A";
       ctx.fillText(findingText, 372, 350);
 
-      // 5. MEDIDAS TÉCNICAS (COLUMNA DERECHA)
+      // 7. MEDIDAS TÉCNICAS (COLUMNA DERECHA, POR ENCIMA DE LA FOTO)
       ctx.fillStyle = "#0A0A0A";
       ctx.font = "900 24px 'Impact', 'Arial Black', sans-serif";
       ctx.textAlign = "right";
@@ -218,27 +228,27 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       const lineHeight = 33;
 
       if (measurements.depth) {
-        ctx.fillText(`Profundidad: ${measurements.depth}`, 740, measureY);
+        ctx.fillText(`Profundidad: ${measurements.depth}`, 1000, measureY);
         measureY += lineHeight;
       }
       if (measurements.width) {
-        ctx.fillText(`Ancho: ${measurements.width}`, 740, measureY);
+        ctx.fillText(`Ancho: ${measurements.width}`, 1000, measureY);
         measureY += lineHeight;
       }
       if (measurements.height) {
-        ctx.fillText(`Altura: ${measurements.height}`, 740, measureY);
+        ctx.fillText(`Altura: ${measurements.height}`, 1000, measureY);
         measureY += lineHeight;
       }
       if (measurements.handle) {
-        ctx.fillText(`Asa: ${measurements.handle}`, 740, measureY);
+        ctx.fillText(`Asa: ${measurements.handle}`, 1000, measureY);
         measureY += lineHeight;
       }
       if (measurements.strap) {
-        ctx.fillText(`Correa: ${measurements.strap}`, 740, measureY);
+        ctx.fillText(`Correa: ${measurements.strap}`, 1000, measureY);
       }
       ctx.textAlign = "left"; // reset
 
-      // 6. BLOQUE DE CONDICIONES (CON FONDO VERDE NEÓN)
+      // 8. BLOQUE DE CONDICIONES (CON FONDO VERDE NEÓN)
       ctx.fillStyle = "#00FF2A";
       ctx.fillRect(700, 610, 315, 38);
 
@@ -249,17 +259,6 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       ctx.fillStyle = "#0A0A0A";
       ctx.font = "900 25px 'Impact', 'Arial Black', sans-serif";
       ctx.fillText(condition, 700, 675);
-
-      // 7. FOTO SECUNDARIA (ÁNGULO / ARRIBA IZQUIERDA) - PROPORCIONAL
-      if (secondaryImg) {
-        drawImageProportional(secondaryImg, 45, 175, 290, 290, 100, 0);
-      }
-
-      // 8. FOTO PRINCIPAL PROTAGONISTA (CENTRO-INFERIOR) - PROPORCIONAL
-      if (mainImg) {
-        // Área rectangular de dibujo donde la foto se escala perfectamente sin recortarse
-        drawImageProportional(mainImg, 80, 480, 580, 520, productScale, productOffsetY);
-      }
 
       // 9. TAG DE MARCA
       ctx.fillStyle = "#7A6A5A";
