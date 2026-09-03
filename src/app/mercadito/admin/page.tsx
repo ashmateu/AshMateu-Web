@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 export const metadata = {
   title: "Admin — El Mercadito de Ash",
-  description: "Administración y control de piezas curadas en El Mercadito de Ash Mateu.",
+  description: "Administración y control de piezas curadas en El Mercadito de Ash.",
 };
 
 export default async function MercaditoAdminPage() {

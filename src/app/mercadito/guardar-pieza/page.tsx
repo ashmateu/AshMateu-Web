@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle2, ArrowUpRight, Sparkles, Loader2 } from "lucide-react";
+import { CheckCircle2, ArrowUpRight, Sparkles, Loader2, Camera } from "lucide-react";
+import InstagramPostGeneratorModal from "@/components/admin/InstagramPostGeneratorModal";
 
 export default function GuardarPiezaPage() {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState<any>(null);
   const [error, setError] = useState<string>("");
+  const [showInstagramModal, setShowInstagramModal] = useState(false);
 
   useEffect(() => {
     async function processImport() {
@@ -118,27 +120,46 @@ export default function GuardarPiezaPage() {
                   </div>
                 )}
 
-                <div className="flex flex-col sm:flex-row gap-3 w-full">
-                  <Link
-                    href={`/mercadito/${product?.slug || ""}`}
-                    className="flex-1 py-3.5 px-6 rounded-full bg-[#0A0A0A] text-white text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#7A6A5A] transition-colors flex items-center justify-center gap-2"
+                <div className="flex flex-col gap-3 w-full">
+                  <button
+                    type="button"
+                    onClick={() => setShowInstagramModal(true)}
+                    className="w-full py-3.5 px-6 rounded-full bg-[#00FF2A] hover:bg-[#00E626] text-[#0A0A0A] text-xs uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98]"
                   >
-                    <span>Ver Ficha en la Web</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </Link>
+                    <Camera className="w-4 h-4" />
+                    <span>📸 Generar Placa de Instagram (1080x1080)</span>
+                  </button>
 
-                  <Link
-                    href="/mercadito"
-                    className="flex-1 py-3.5 px-6 rounded-full border border-black/15 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-black/5 transition-colors flex items-center justify-center"
-                  >
-                    Ir al Catálogo
-                  </Link>
+                  <div className="flex flex-col sm:flex-row gap-3 w-full">
+                    <Link
+                      href={`/mercadito/${product?.slug || ""}`}
+                      className="flex-1 py-3 px-6 rounded-full bg-[#0A0A0A] text-white text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#7A6A5A] transition-colors flex items-center justify-center gap-2"
+                    >
+                      <span>Ver Ficha en la Web</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+
+                    <Link
+                      href="/mercadito"
+                      className="flex-1 py-3 px-6 rounded-full border border-black/15 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-black/5 transition-colors flex items-center justify-center"
+                    >
+                      Ir al Catálogo
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      {/* MODAL GENERADOR DE INSTAGRAM TRAS IMPORTAR */}
+      {showInstagramModal && product && (
+        <InstagramPostGeneratorModal
+          product={product}
+          onClose={() => setShowInstagramModal(false)}
+        />
+      )}
     </main>
   );
 }

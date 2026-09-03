@@ -35,16 +35,30 @@ export default async function MercaditoPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-black/10 pb-12">
-          <div className="lg:col-span-8">
-            <h1 className="font-serif text-[clamp(44px,6.5vw,92px)] leading-[0.94] tracking-[-0.02em] text-[#0A0A0A] font-normal mb-6">
+          <div className="lg:col-span-8 space-y-6">
+            <h1 className="font-serif text-[clamp(44px,6.5vw,92px)] leading-[0.94] tracking-[-0.02em] text-[#0A0A0A] font-normal">
               El Mercadito <br />
-              <em className="italic font-light text-[#7A6A5A]">de Ash Mateu</em>
+              <em className="italic font-light text-[#7A6A5A]">de Ash</em>
             </h1>
-            <p className="max-w-2xl text-[15px] md:text-[17px] text-[#0A0A0A]/80 font-light leading-relaxed">
-              Curaduría editorial de piezas únicas y de colección de archivo privado (Nueva York & París). 
-              Artículos de lujo genuinos seleccionados con criterio de stylist: vintage que vale, 
-              accesorios eternos y sastrería de autor.
+            
+            <p className="max-w-2xl text-[16px] md:text-[18px] text-[#0A0A0A] font-light leading-relaxed">
+              Un espacio de hallazgos, tesoros y oportunidades curados bajo mi expertise de estilista. 
+              Colecciono por el mundo piezas que son capaces de darle un subidón a cualquier vestidor. 
+              Cuentan conmigo para armar el styling juntas.
             </p>
+
+            {/* MANIFIESTO EDITORIAL ESTILO TAPE STICKERS */}
+            <div className="inline-flex flex-col items-start gap-1 pt-2">
+              <span className="bg-white px-3 py-1 text-xs md:text-sm font-serif italic text-[#0A0A0A] shadow-sm border border-black/5">
+                “Voy por el mundo en busca de hallazgos...
+              </span>
+              <span className="bg-white px-3 py-1 text-xs md:text-sm font-serif italic text-[#0A0A0A] shadow-sm border border-black/5">
+                Me aventuro tras prendas capaces de dar un subidón de identidad a quienes se animen.
+              </span>
+              <span className="bg-[#0A0A0A] px-3 py-1 text-[11px] md:text-xs font-sans font-semibold uppercase tracking-[0.2em] text-white shadow-sm">
+                El Mercadito de Ash propone un consumo de moda más estratégico y personal.”
+              </span>
+            </div>
           </div>
 
           <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 text-xs tracking-[0.16em] uppercase text-[#7A6A5A]">

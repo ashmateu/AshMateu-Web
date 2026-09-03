@@ -156,7 +156,7 @@
     modal.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid rgba(181,168,152,0.3);padding-bottom:14px;">
         <div>
-          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#7A6A5A;font-weight:600;">ASH MATEU — EL MERCADITO</span>
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#7A6A5A;font-weight:600;">EL MERCADITO DE ASH</span>
           <h2 style="margin:2px 0 0 0;font-family:Georgia,serif;font-size:20px;font-weight:normal;color:#0A0A0A;">Curaduría de Pieza Única</h2>
         </div>
         <button id="ash-close-btn" style="background:none;border:none;font-size:26px;cursor:pointer;color:#7A6A5A;">&times;</button>

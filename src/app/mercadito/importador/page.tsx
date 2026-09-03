@@ -4,7 +4,7 @@ import { ArrowLeft, Sparkles, ExternalLink, Bookmark, Puzzle, CheckCircle2 } fro
 
 export const metadata = {
   title: "Importador The RealReal — El Mercadito de Ash",
-  description: "Instrucciones y extensión para importar piezas de The RealReal a El Mercadito de Ash Mateu.",
+  description: "Instrucciones y extensión para importar piezas a El Mercadito de Ash.",
 };
 
 export default function ImportadorPage() {

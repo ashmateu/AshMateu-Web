@@ -15,8 +15,10 @@ import {
   Sparkles, 
   Save,
   Tag,
-  Download
+  Download,
+  Camera
 } from "lucide-react";
+import InstagramPostGeneratorModal from "./InstagramPostGeneratorModal";
 
 interface Props {
   initialProducts: LuxuryProduct[];
@@ -26,6 +28,7 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
   const [products, setProducts] = useState<LuxuryProduct[]>(initialProducts);
   const [search, setSearch] = useState("");
   const [editingProduct, setEditingProduct] = useState<LuxuryProduct | null>(null);
+  const [instagramProduct, setInstagramProduct] = useState<LuxuryProduct | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
@@ -275,6 +278,16 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
                   <td className="py-4 px-6 text-right space-x-2 whitespace-nowrap">
                     <button
                       type="button"
+                      onClick={() => setInstagramProduct(p)}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#00FF2A] hover:bg-[#00E626] text-[#0A0A0A] transition-all uppercase tracking-wider text-[10px] font-bold shadow-xs active:scale-[0.98]"
+                      title="Generar placa lista para Instagram (Feed 1080x1080)"
+                    >
+                      <Camera className="w-3.5 h-3.5" />
+                      <span>Placa Instagram</span>
+                    </button>
+
+                    <button
+                      type="button"
                       onClick={() => handleOpenEdit(p)}
                       className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-black/10 hover:bg-black/5 text-[#0A0A0A] transition-colors uppercase tracking-wider text-[10px] font-medium"
                       title="Editar pieza"
@@ -496,6 +509,14 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
             </form>
           </div>
         </div>
+      )}
+
+      {/* MODAL GENERADOR DE PLACAS INSTAGRAM */}
+      {instagramProduct && (
+        <InstagramPostGeneratorModal
+          product={instagramProduct}
+          onClose={() => setInstagramProduct(null)}
+        />
       )}
     </div>
   );

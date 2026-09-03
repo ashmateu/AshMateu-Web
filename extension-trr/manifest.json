@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Ash Mateu — The RealReal Curador",
   "version": "1.2",
-  "description": "Extrae piezas de archivo de The RealReal y las publica en El Mercadito de Ash Mateu con 1 click.",
+  "description": "Extrae piezas de archivo y las publica en El Mercadito de Ash con 1 click.",
   "permissions": ["activeTab"],
   "host_permissions": [
     "<all_urls>"
