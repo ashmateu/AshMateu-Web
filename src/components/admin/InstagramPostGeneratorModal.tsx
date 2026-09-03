@@ -406,7 +406,10 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
               <span className="text-[10px] uppercase tracking-[0.25em] font-semibold text-[#7A6A5A]">
                 EL MERCADITO DE ASH
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wider uppercase bg-emerald-100 text-emerald-800">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold uppercase tracking-wider">
+                Capas al Fondo ✓
+              </span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold uppercase tracking-wider">
                 {format === "square" ? "Feed 1080 x 1080" : "Feed Vertical 1080 x 1350"}
               </span>
             </div>
