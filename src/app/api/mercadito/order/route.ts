@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
 
     // 2. Intentar guardar orden en Supabase
     try {
-      await supabase.from("orders").insert([{
+      const { error: supaOrderErr } = await supabase.from("orders").insert([{
         order_code: orderCode,
         product_id: productId && !productId.startsWith("trr-") ? productId : null,
         product_name: productName,
@@ -152,6 +152,26 @@ export async function POST(req: NextRequest) {
         payment_method: paymentMethod,
         status: "pending_payment"
       }]);
+      if (supaOrderErr && supaOrderErr.message.includes("orders_status_check")) {
+        await supabase.from("orders").insert([{
+          order_code: orderCode,
+          product_id: productId && !productId.startsWith("trr-") ? productId : null,
+          product_name: productName,
+          product_designer: productDesigner,
+          amount: Number(productPrice),
+          currency: productCurrency,
+          deposit_amount: deposit80,
+          balance_amount: balance20,
+          buyer_name: buyerName,
+          buyer_email: buyerEmail,
+          buyer_phone: buyerPhone,
+          shipping_address: shippingAddress,
+          shipping_city: shippingCity,
+          shipping_country: shippingCountry,
+          payment_method: paymentMethod,
+          status: "pending"
+        }]);
+      }
     } catch (supaOrderErr) {
       console.warn("Error guardando orden en Supabase:", supaOrderErr);
     }
