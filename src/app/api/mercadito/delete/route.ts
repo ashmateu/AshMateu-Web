@@ -20,12 +20,14 @@ export async function POST(req: NextRequest) {
     // 1. Eliminar de almacenamiento local
     deleteStoredProduct(target);
 
-    // 2. Intentar desactivar o eliminar en Supabase si está disponible
+    // 2. Eliminar definitivamente en Supabase por slug y por UUID
     try {
-      if (id) {
-        await supabase.from("products").update({ active: false }).eq("id", id);
-      } else if (slug) {
-        await supabase.from("products").update({ active: false }).eq("slug", slug);
+      if (slug) {
+        await supabase.from("products").delete().eq("slug", slug);
+      }
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id || "");
+      if (isUuid) {
+        await supabase.from("products").delete().eq("id", id);
       }
     } catch (e) {
       console.warn("Supabase delete skipped:", e);

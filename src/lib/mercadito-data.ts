@@ -110,7 +110,7 @@ export async function getMercaditoProducts(): Promise<LuxuryProduct[]> {
       .eq("active", true)
       .order("created_at", { ascending: false });
 
-    if (error || !data || data.length === 0) {
+    if (error || !data) {
       return localProducts;
     }
 
@@ -137,10 +137,12 @@ export async function getMercaditoProducts(): Promise<LuxuryProduct[]> {
       description: item.description || "",
     }));
 
-    // Combinar sin duplicados
-    const ids = new Set(mapped.map((m) => m.slug));
-    const uniqueLocal = localProducts.filter((l) => !ids.has(l.slug));
-    return [...mapped, ...uniqueLocal];
+    // Si Supabase tiene productos activos, Supabase es la fuente oficial y única de la verdad
+    if (mapped.length > 0) {
+      return mapped;
+    }
+
+    return localProducts;
   } catch (e) {
     return localProducts;
   }
