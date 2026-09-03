@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { deleteStoredProduct } from "@/lib/mercadito-storage";
 import { createClient } from "@supabase/supabase-js";
 
@@ -29,6 +30,11 @@ export async function POST(req: NextRequest) {
     } catch (e) {
       console.warn("Supabase delete skipped:", e);
     }
+
+    try {
+      revalidatePath("/mercadito");
+      revalidatePath("/admin");
+    } catch (e) {}
 
     return NextResponse.json({ success: true, message: "Pieza eliminada con éxito" });
   } catch (err: any) {
