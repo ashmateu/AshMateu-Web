@@ -6,7 +6,8 @@ import { SiteImageConfig } from "@/lib/site-images";
 import { LuxuryProduct } from "@/types/mercadito";
 import AdminImageManager from "./AdminImageManager";
 import AdminMercaditoManager from "./AdminMercaditoManager";
-import { Image as ImageIcon, Gem, LogOut, ExternalLink, Sparkles } from "lucide-react";
+import AdminOrdersManager from "./AdminOrdersManager";
+import { Image as ImageIcon, Gem, ShoppingBag, LogOut, ExternalLink, Sparkles } from "lucide-react";
 
 interface Props {
   images: SiteImageConfig[];
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export default function AdminDashboardClient({ images, products }: Props) {
-  const [activeTab, setActiveTab] = useState<"imagenes" | "mercadito">("imagenes");
+  const [activeTab, setActiveTab] = useState<"imagenes" | "mercadito" | "ventas">("ventas");
 
   const handleLogout = async () => {
     try {
@@ -63,18 +64,18 @@ export default function AdminDashboardClient({ images, products }: Props) {
       </div>
 
       {/* PESTAÑAS PRINCIPALES */}
-      <div className="flex items-center gap-3 border-b border-black/10 pb-4">
+      <div className="flex flex-wrap items-center gap-3 border-b border-black/10 pb-4">
         <button
           type="button"
-          onClick={() => setActiveTab("imagenes")}
+          onClick={() => setActiveTab("ventas")}
           className={`flex items-center gap-2.5 px-6 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all ${
-            activeTab === "imagenes"
+            activeTab === "ventas"
               ? "bg-[#0A0A0A] text-white shadow-md"
               : "bg-white border border-black/10 text-[#0A0A0A]/70 hover:text-[#0A0A0A]"
           }`}
         >
-          <ImageIcon className="w-4 h-4" />
-          <span>Imágenes & Encuadre Web</span>
+          <ShoppingBag className="w-4 h-4" />
+          <span>Ventas & Reservas</span>
         </button>
 
         <button
@@ -89,14 +90,25 @@ export default function AdminDashboardClient({ images, products }: Props) {
           <Gem className="w-4 h-4" />
           <span>El Mercadito ({products.length})</span>
         </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("imagenes")}
+          className={`flex items-center gap-2.5 px-6 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all ${
+            activeTab === "imagenes"
+              ? "bg-[#0A0A0A] text-white shadow-md"
+              : "bg-white border border-black/10 text-[#0A0A0A]/70 hover:text-[#0A0A0A]"
+          }`}
+        >
+          <ImageIcon className="w-4 h-4" />
+          <span>Imágenes & Encuadre Web</span>
+        </button>
       </div>
 
       {/* CONTENIDO DE LA PESTAÑA */}
-      {activeTab === "imagenes" ? (
-        <AdminImageManager initialImages={images} />
-      ) : (
-        <AdminMercaditoManager initialProducts={products} />
-      )}
+      {activeTab === "ventas" && <AdminOrdersManager />}
+      {activeTab === "mercadito" && <AdminMercaditoManager initialProducts={products} />}
+      {activeTab === "imagenes" && <AdminImageManager initialImages={images} />}
     </div>
   );
 }

@@ -38,19 +38,23 @@ export interface LuxuryProduct {
 
 export interface MercaditoOrder {
   id: string;
+  orderCode?: string;
   productId: string;
   productName: string;
   productDesigner: string;
   productPrice: number;
   productCurrency: 'USD' | 'ARS';
+  depositAmount?: number;
+  balanceAmount?: number;
   buyerName: string;
   buyerEmail: string;
   buyerPhone: string;
   shippingAddress: string;
   shippingCity: string;
   shippingCountry: string;
-  paymentMethod: 'transferencia' | 'seña_50' | 'tarjeta_online' | 'coordinar_concierge';
-  status: 'pending_payment' | 'confirmed' | 'delivered' | 'cancelled';
+  paymentMethod: string;
+  status: 'pending_payment' | 'deposit_paid' | 'confirmed' | 'delivered' | 'cancelled';
+  notes?: string;
   createdAt: string;
-  whatsappMessageUrl: string;
+  whatsappMessageUrl?: string;
 }

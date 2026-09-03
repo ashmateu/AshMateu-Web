@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { saveLocalStoredOrder } from "@/lib/mercadito-orders-storage";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://jrxklahobxpxmtnncvst.supabase.co";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd";
@@ -104,24 +105,56 @@ export async function POST(req: NextRequest) {
 
     const orderData = {
       id: orderCode,
-      productId,
+      orderCode,
+      productId: productId || "",
       productName,
       productDesigner,
       productPrice: Number(productPrice),
-      productCurrency,
-      deposit80,
-      balance20,
+      productCurrency: productCurrency as any,
+      depositAmount: deposit80,
+      balanceAmount: balance20,
       buyerName,
       buyerEmail,
       buyerPhone,
-      shippingAddress,
-      shippingCity,
-      shippingCountry,
+      shippingAddress: shippingAddress || "",
+      shippingCity: shippingCity || "",
+      shippingCountry: shippingCountry || "Argentina",
       paymentMethod,
-      status: "pending_payment",
+      status: "pending_payment" as const,
       createdAt: new Date().toISOString(),
       whatsappMessageUrl: whatsappUrl,
     };
+
+    // 1. Guardar orden en almacenamiento persistente
+    try {
+      saveLocalStoredOrder(orderData);
+    } catch (saveErr) {
+      console.warn("Error guardando orden local:", saveErr);
+    }
+
+    // 2. Intentar guardar orden en Supabase
+    try {
+      await supabase.from("orders").insert([{
+        order_code: orderCode,
+        product_id: productId && !productId.startsWith("trr-") ? productId : null,
+        product_name: productName,
+        product_designer: productDesigner,
+        amount: Number(productPrice),
+        currency: productCurrency,
+        deposit_amount: deposit80,
+        balance_amount: balance20,
+        buyer_name: buyerName,
+        buyer_email: buyerEmail,
+        buyer_phone: buyerPhone,
+        shipping_address: shippingAddress,
+        shipping_city: shippingCity,
+        shipping_country: shippingCountry,
+        payment_method: paymentMethod,
+        status: "pending_payment"
+      }]);
+    } catch (supaOrderErr) {
+      console.warn("Error guardando orden en Supabase:", supaOrderErr);
+    }
 
     return NextResponse.json({
       success: true,
