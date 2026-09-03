@@ -71,19 +71,24 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
     canvas.width = W;
     canvas.height = H;
 
-    // Cargar imagen con promesa garantizada
+    // Cargar imagen con proxy local para asegurar que el canvas no quede tainted
     const loadImg = (url: string): Promise<HTMLImageElement> => {
       return new Promise((resolve) => {
+        const proxiedUrl = url.startsWith("http")
+          ? `/api/proxy-image?url=${encodeURIComponent(url)}`
+          : url;
+
         const img = new window.Image();
         img.crossOrigin = "anonymous";
         img.onload = () => resolve(img);
         img.onerror = () => {
           const fallback = new window.Image();
+          fallback.crossOrigin = "anonymous";
           fallback.onload = () => resolve(fallback);
           fallback.onerror = () => resolve(fallback);
           fallback.src = url;
         };
-        img.src = url;
+        img.src = proxiedUrl;
       });
     };
 
@@ -315,10 +320,46 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
   const handleDownload = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const link = document.createElement("a");
-    link.download = `instagram-mercadito-${product.slug || "pieza"}.png`;
-    link.href = canvas.toDataURL("image/png", 1.0);
-    link.click();
+
+    try {
+      // 1. Intentar con toBlob (más seguro y sin límites de memoria)
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          // Fallback a toDataURL si toBlob no devolviera blob
+          const dataUrl = canvas.toDataURL("image/png", 1.0);
+          const link = document.createElement("a");
+          link.download = `instagram-${product.slug || "pieza"}.png`;
+          link.href = dataUrl;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          return;
+        }
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = `instagram-${product.slug || "pieza"}.png`;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }, "image/png");
+    } catch (err) {
+      console.warn("Error en toBlob, intentando toDataURL:", err);
+      try {
+        const dataUrl = canvas.toDataURL("image/png", 1.0);
+        const link = document.createElement("a");
+        link.download = `instagram-${product.slug || "pieza"}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (innerErr) {
+        console.error("Error crítico al descargar imagen:", innerErr);
+        alert("No se pudo exportar la imagen. Por favor tomale una captura de pantalla a la vista previa.");
+      }
+    }
   };
 
   // Copiar al portapapeles
@@ -328,17 +369,29 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
 
     try {
       canvas.toBlob(async (blob) => {
-        if (!blob) return;
-        await navigator.clipboard.write([
-          new ClipboardItem({
-            "image/png": blob,
-          }),
-        ]);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2500);
+        if (!blob) {
+          handleDownload();
+          return;
+        }
+        try {
+          if (navigator.clipboard && window.ClipboardItem) {
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                "image/png": blob,
+              }),
+            ]);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2500);
+          } else {
+            handleDownload();
+          }
+        } catch (clipErr) {
+          console.warn("Clipboard API bloqueada o sin permisos, descargando archivo:", clipErr);
+          handleDownload();
+        }
       }, "image/png");
     } catch (err) {
-      console.warn("No se pudo copiar directo:", err);
+      console.warn("Error al copiar canvas, descargando archivo:", err);
       handleDownload();
     }
   };
