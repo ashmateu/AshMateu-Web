@@ -10,6 +10,9 @@ export const metadata = {
   description: "Piezas únicas de archivo y lujo curadas por Ash Mateu. Vintage y archivo exclusivo autenticado, bolsos de colección y sastrería de diseñador.",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function MercaditoPage() {
   const products = await getMercaditoProducts();
 

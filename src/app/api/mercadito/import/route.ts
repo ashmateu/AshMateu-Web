@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { saveStoredProduct } from "@/lib/mercadito-storage";
 
@@ -78,13 +79,27 @@ export async function POST(req: NextRequest) {
     // 1. Guardar de forma inmediata y segura en el almacenamiento local persistente
     saveStoredProduct(productRecord);
 
-    // 2. Intentar guardar en Supabase en segundo plano si está disponible
+    // 2. Intentar guardar en Supabase si está disponible
     try {
-      await supabase
+      const { error: supaErr } = await supabase
         .from("products")
         .insert([{ ...productRecord, active: true }]);
+      if (supaErr) {
+        console.warn("Aviso Supabase insert:", supaErr.message);
+      } else {
+        console.log("Pieza guardada en Supabase:", productRecord.id);
+      }
     } catch (supaErr) {
       console.warn("Supabase no disponible o pausado, guardado en almacenamiento local:", supaErr);
+    }
+
+    // 3. Revalidar de inmediato la caché en Vercel para que aparezca al instante
+    try {
+      revalidatePath("/mercadito");
+      revalidatePath("/admin");
+      revalidatePath("/mercadito/admin");
+    } catch (revalErr) {
+      console.warn("Error al revalidar rutas:", revalErr);
     }
 
     return NextResponse.json(
