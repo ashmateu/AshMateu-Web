@@ -175,13 +175,42 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       ctx.font = "900 26px 'Impact', 'Arial Black', sans-serif";
       ctx.fillText(condition, 690, 685);
 
+      // FUNCIÓN AUXILIAR PARA DIBUJAR IMAGEN RESPETANDO SU ASPECT RATIO (SIN APLASTAR NI DEFORMAR)
+      const drawImageContain = (
+        image: HTMLImageElement,
+        boxX: number,
+        boxY: number,
+        boxW: number,
+        boxH: number
+      ) => {
+        const nw = image.naturalWidth || image.width || boxW;
+        const nh = image.naturalHeight || image.height || boxH;
+        const imgRatio = nw / nh;
+        const boxRatio = boxW / boxH;
+
+        let renderW = boxW;
+        let renderH = boxH;
+        let offX = 0;
+        let offY = 0;
+
+        if (imgRatio > boxRatio) {
+          renderW = boxW;
+          renderH = boxW / imgRatio;
+          offY = (boxH - renderH) / 2;
+        } else {
+          renderH = boxH;
+          renderW = boxH * imgRatio;
+          offX = (boxW - renderW) / 2;
+        }
+
+        ctx.drawImage(image, boxX + offX, boxY + offY, renderW, renderH);
+      };
+
       // IMAGEN SECUNDARIA (ÁNGULO / ARRIBA IZQUIERDA)
       if (secondaryImg) {
         try {
           ctx.save();
-          const secW = 270;
-          const secH = 290;
-          ctx.drawImage(secondaryImg, 50, 180, secW, secH);
+          drawImageContain(secondaryImg, 40, 170, 300, 310);
           ctx.restore();
         } catch (e) {
           console.warn("Fallo al dibujar imagen secundaria:", e);
@@ -192,11 +221,8 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       if (mainImg) {
         try {
           ctx.save();
-          const mainW = 500;
-          const mainH = 460;
-          const mainX = 140;
-          const mainY = 510;
-          ctx.drawImage(mainImg, mainX, mainY, mainW, mainH);
+          // Área protagonista amplia con proporciones 100% exactas
+          drawImageContain(mainImg, 70, 490, 600, 500);
           ctx.restore();
         } catch (e) {
           console.warn("Fallo al dibujar imagen principal:", e);
@@ -216,10 +242,41 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       ctx.fillStyle = "#F7F3EE";
       ctx.fillRect(0, 0, W, H);
 
-      // Si hay imagen principal, dibujarla centrada
+      // FUNCIÓN AUXILIAR PARA DIBUJAR IMAGEN RESPETANDO SU ASPECT RATIO
+      const drawImageContain = (
+        image: HTMLImageElement,
+        boxX: number,
+        boxY: number,
+        boxW: number,
+        boxH: number
+      ) => {
+        const nw = image.naturalWidth || image.width || boxW;
+        const nh = image.naturalHeight || image.height || boxH;
+        const imgRatio = nw / nh;
+        const boxRatio = boxW / boxH;
+
+        let renderW = boxW;
+        let renderH = boxH;
+        let offX = 0;
+        let offY = 0;
+
+        if (imgRatio > boxRatio) {
+          renderW = boxW;
+          renderH = boxW / imgRatio;
+          offY = (boxH - renderH) / 2;
+        } else {
+          renderH = boxH;
+          renderW = boxH * imgRatio;
+          offX = (boxW - renderW) / 2;
+        }
+
+        ctx.drawImage(image, boxX + offX, boxY + offY, renderW, renderH);
+      };
+
+      // Si hay imagen principal, dibujarla centrada respetando proporción
       if (mainImg) {
         try {
-          ctx.drawImage(mainImg, 90, 140, 900, 800);
+          drawImageContain(mainImg, 60, 100, 960, 880);
         } catch (e) {
           console.warn(e);
         }
