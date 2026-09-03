@@ -38,10 +38,16 @@ export async function POST(req: NextRequest) {
       description,
     } = body;
 
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    };
+
     if (!name || !price) {
       return NextResponse.json(
         { error: "Nombre y precio son obligatorios." },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       );
     }
 
@@ -81,16 +87,26 @@ export async function POST(req: NextRequest) {
       console.warn("Supabase no disponible o pausado, guardado en almacenamiento local:", supaErr);
     }
 
-    return NextResponse.json({
-      success: true,
-      message: "Pieza única importada con éxito a El Mercadito",
-      product: productRecord,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Pieza única importada con éxito a El Mercadito",
+        product: productRecord,
+      },
+      { headers: corsHeaders }
+    );
   } catch (err: any) {
     console.error("Error en POST /api/mercadito/import:", err);
     return NextResponse.json(
       { error: err.message || "Error interno al procesar el producto." },
-      { status: 500 }
+      {
+        status: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      }
     );
   }
 }
@@ -101,7 +117,7 @@ export async function OPTIONS() {
     status: 204,
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
   });

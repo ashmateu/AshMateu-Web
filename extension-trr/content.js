@@ -238,8 +238,9 @@
     document.getElementById("ash-cancel-btn").onclick = close;
 
     document.getElementById("ash-submit-btn").onclick = async function() {
-      this.disabled = true;
-      this.innerText = "Publicando...";
+      const submitBtn = this;
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Publicando en El Mercadito...";
 
       const targetEndpoint = document.getElementById("ash-target-server").value;
 
@@ -259,13 +260,66 @@
         description: productData.description || `Pieza única curada por Ash Mateu. Autenticidad verificada.`
       };
 
-      // Abrir la web de Ash directamente para guardar la pieza sin bloqueos de red ni CORS
       const baseUrl = targetEndpoint.includes("ashmateu.com")
         ? "https://ashmateu.com"
         : "http://localhost:3000";
 
+      // 1. Intento principal: POST directo a la API (rápido y sin abrir pestañas innecesarias)
+      try {
+        const response = await fetch(targetEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const resData = await response.json();
+
+        if (response.ok && resData.success) {
+          // Éxito instantáneo dentro del modal de la extensión
+          modal.innerHTML = `
+            <div style="padding:30px 20px;text-align:center;">
+              <div style="width:60px;height:60px;border-radius:50%;background:#00FF2A;color:#0A0A0A;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold;margin:0 auto 16px;box-shadow:0 8px 20px rgba(0,255,42,0.3);">
+                ✓
+              </div>
+              <h2 style="font-family:'Georgia',serif;font-size:24px;margin:0 0 6px;color:#0A0A0A;">
+                ¡Pieza Publicada con Éxito!
+              </h2>
+              <p style="font-size:12px;color:#7A6A5A;margin:0 0 24px;">
+                Ya está disponible online en <strong>El Mercadito de Ash</strong>.
+              </p>
+
+              <div style="display:flex;flex-direction:column;gap:10px;max-width:320px;margin:0 auto;">
+                <a href="${baseUrl}/mercadito/${resData.product.slug}" target="_blank" style="display:block;background:#0A0A0A;color:#fff;text-decoration:none;padding:12px 20px;border-radius:50px;font-size:11px;text-transform:uppercase;letter-spacing:0.18em;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                  Ver Ficha en la Web ↗
+                </a>
+
+                <a href="${baseUrl}/admin" target="_blank" style="display:block;background:#00FF2A;color:#0A0A0A;text-decoration:none;padding:12px 20px;border-radius:50px;font-size:11px;text-transform:uppercase;letter-spacing:0.18em;font-weight:700;box-shadow:0 4px 12px rgba(0,255,42,0.2);">
+                  📸 Placa Instagram en Admin ↗
+                </a>
+
+                <button id="ash-finish-btn" style="background:none;border:none;color:#7A6A5A;font-size:12px;margin-top:8px;cursor:pointer;text-decoration:underline;">
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          `;
+
+          document.getElementById("ash-finish-btn").onclick = close;
+          return;
+        }
+      } catch (directErr) {
+        console.warn("Fallo el fetch directo, recurriendo a navegación segura:", directErr);
+      }
+
+      // 2. Fallback seguro: Redireccionar o abrir con enlace directo
       const importUrl = `${baseUrl}/mercadito/guardar-pieza#data=${encodeURIComponent(JSON.stringify(payload))}`;
-      window.open(importUrl, "_blank");
+      const link = document.createElement("a");
+      link.href = importUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       close();
     };
   }
