@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LuxuryProduct } from "@/types/mercadito";
+import { LuxuryProduct, ProductStatus } from "@/types/mercadito";
 import { 
   Plus, 
   Trash2, 
@@ -109,6 +109,31 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
       alert("Error al conectar con el servidor.");
     } finally {
       setSaving(false);
+    }
+  };
+
+  // Cambio rápido de estado directo desde la tabla
+  const handleQuickStatusChange = async (product: LuxuryProduct, newStatus: ProductStatus) => {
+    const updatedProduct = { ...product, status: newStatus, stock: newStatus === "sold" ? 0 : 1 };
+    setProducts((prev) => prev.map((p) => (p.id === product.id ? updatedProduct : p)));
+    setMessage(`✦ Actualizando estado de "${product.name}"...`);
+
+    try {
+      const res = await fetch("/api/mercadito/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedProduct),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setMessage(`✦ "${product.name}" marcada como ${newStatus === "sold" ? "Vendida" : newStatus === "reserved" ? "En Reserva" : "Disponible"}.`);
+        setTimeout(() => setMessage(""), 3500);
+      } else {
+        alert("No se pudo actualizar el estado.");
+      }
+    } catch (e) {
+      alert("Error al conectar con el servidor.");
     }
   };
 
@@ -262,17 +287,21 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
                   </td>
 
                   <td className="py-4 px-6">
-                    <span
-                      className={`inline-block px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-widest font-semibold ${
+                    <select
+                      value={p.status || "available"}
+                      onChange={(e) => handleQuickStatusChange(p, e.target.value as ProductStatus)}
+                      className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border cursor-pointer focus:outline-none transition-colors ${
                         p.status === "sold"
-                          ? "bg-black/10 text-[#7A6A5A]"
+                          ? "bg-neutral-100 text-neutral-600 border-neutral-300"
                           : p.status === "reserved"
-                          ? "bg-amber-100 text-amber-800"
-                          : "bg-emerald-100 text-emerald-800"
+                          ? "bg-amber-50 text-amber-800 border-amber-300"
+                          : "bg-emerald-50 text-emerald-800 border-emerald-300"
                       }`}
                     >
-                      {p.status === "sold" ? "Vendida" : p.status === "reserved" ? "En Reserva" : "Disponible"}
-                    </span>
+                      <option value="available">🟢 Disponible</option>
+                      <option value="reserved">🟡 En Reserva</option>
+                      <option value="sold">⚪ Vendida</option>
+                    </select>
                   </td>
 
                   <td className="py-4 px-6 text-right space-x-2 whitespace-nowrap">

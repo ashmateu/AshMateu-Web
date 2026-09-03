@@ -33,9 +33,10 @@ export async function POST(req: NextRequest) {
     // 1. Guardar local
     saveStoredProduct(product);
 
-    // 2. Guardar en Supabase
+    // 2. Guardar en Supabase de forma garantizada
     try {
-      await supabase.from("products").upsert({
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(product.id || "");
+      const updateData = {
         name: product.name,
         slug: product.slug,
         designer: product.designer,
@@ -49,11 +50,42 @@ export async function POST(req: NextRequest) {
         gallery_images: product.gallery_images,
         status: product.status || "available",
         ash_styling_tip: product.ash_styling_tip || "",
-        stock: product.stock ?? 1,
+        stock: product.stock !== undefined ? product.stock : (product.status === "sold" ? 0 : 1),
         active: true
-      }, { onConflict: "slug" });
+      };
+
+      let updated = false;
+
+      // Intentar update por id si es UUID
+      if (isUuid) {
+        const { data, error } = await supabase
+          .from("products")
+          .update(updateData)
+          .eq("id", product.id)
+          .select();
+        if (!error && data && data.length > 0) {
+          updated = true;
+        }
+      }
+
+      // Si no se actualizó por ID, intentar update por slug
+      if (!updated && product.slug) {
+        const { data, error } = await supabase
+          .from("products")
+          .update(updateData)
+          .eq("slug", product.slug)
+          .select();
+        if (!error && data && data.length > 0) {
+          updated = true;
+        }
+      }
+
+      // Si es un producto nuevo que no existía, insertarlo
+      if (!updated) {
+        await supabase.from("products").insert([updateData]);
+      }
     } catch (supaErr) {
-      console.warn("Error en update Supabase:", supaErr);
+      console.error("Error en update Supabase:", supaErr);
     }
 
     // 3. Revalidar
