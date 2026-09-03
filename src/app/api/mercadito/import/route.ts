@@ -53,10 +53,47 @@ export async function POST(req: NextRequest) {
     }
 
     const slug = generateSlug(designer || "vintage", name);
+    let assignedId = `item-${Date.now()}`;
 
-    const id = `trr-${Date.now()}`;
+    // 1. Guardar en Supabase dejando que Postgres autogenere el UUID nativo
+    try {
+      const { data: supaData, error: supaErr } = await supabase
+        .from("products")
+        .insert([{
+          slug,
+          name,
+          designer: designer || "Curaduría Ash",
+          category: category || "bolsos",
+          price: Number(price),
+          currency: (currency as any) || "USD",
+          condition_state: condition_state || "Excellent (Excelente estado)",
+          dimensions: dimensions || "",
+          materials: materials || "",
+          ash_styling_tip: ash_styling_tip || "",
+          image_url: image_url || "",
+          gallery_images: Array.isArray(gallery_images) && gallery_images.length > 0 ? gallery_images : [image_url],
+          source_url: source_url || "",
+          description: description || `Pieza única curada por Ash Mateu. Autenticidad verificada.`,
+          is_unique_piece: true,
+          status: "available",
+          stock: 1,
+          active: true,
+        }])
+        .select()
+        .single();
+
+      if (supaErr) {
+        console.error("Aviso Supabase insert:", supaErr.message);
+      } else if (supaData && supaData.id) {
+        assignedId = supaData.id;
+        console.log("¡Pieza guardada en Supabase con éxito! ID:", assignedId);
+      }
+    } catch (supaErr) {
+      console.warn("Supabase no disponible o pausado, guardado en almacenamiento local:", supaErr);
+    }
+
     const productRecord = {
-      id,
+      id: assignedId,
       slug,
       name,
       designer: designer || "Curaduría Ash",
@@ -69,29 +106,15 @@ export async function POST(req: NextRequest) {
       ash_styling_tip: ash_styling_tip || "",
       image_url: image_url || "",
       gallery_images: Array.isArray(gallery_images) && gallery_images.length > 0 ? gallery_images : [image_url],
-      source_url: "",
+      source_url: source_url || "",
       description: description || `Pieza única curada por Ash Mateu. Autenticidad verificada.`,
       is_unique_piece: true,
       status: "available" as const,
       stock: 1,
     };
 
-    // 1. Guardar de forma inmediata y segura en el almacenamiento local persistente
+    // 2. Guardar también en almacenamiento local persistente
     saveStoredProduct(productRecord);
-
-    // 2. Intentar guardar en Supabase si está disponible
-    try {
-      const { error: supaErr } = await supabase
-        .from("products")
-        .insert([{ ...productRecord, active: true }]);
-      if (supaErr) {
-        console.warn("Aviso Supabase insert:", supaErr.message);
-      } else {
-        console.log("Pieza guardada en Supabase:", productRecord.id);
-      }
-    } catch (supaErr) {
-      console.warn("Supabase no disponible o pausado, guardado en almacenamiento local:", supaErr);
-    }
 
     // 3. Revalidar de inmediato la caché en Vercel para que aparezca al instante
     try {
