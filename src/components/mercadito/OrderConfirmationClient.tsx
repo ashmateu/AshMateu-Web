@@ -34,7 +34,7 @@ export default function OrderConfirmationClient({ orderId }: Props) {
   }, [orderId]);
 
   // Mensaje por defecto si no está en sessionStorage
-  const defaultWhatsappUrl = `https://wa.me/5491136611090?text=${encodeURIComponent(
+  const defaultWhatsappUrl = `https://wa.me/5491123823297?text=${encodeURIComponent(
     `¡Hola Ash Mateu Concierge! ✦\nAcabo de realizar la reserva de una pieza en El Mercadito (Orden #${orderId}).\nMe gustaría coordinar el pago y la entrega. ¡Muchas gracias!`
   )}`;
 

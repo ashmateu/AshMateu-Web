@@ -56,8 +56,39 @@ export async function POST(req: NextRequest) {
       `Me gustaría recibir los datos de cuenta para abonar y coordinar el despacho. ¡Muchas gracias!`;
 
     // Número de WhatsApp oficial de Ash Mateu
-    const conciergePhone = "5491136611090"; // Teléfono oficial / WhatsApp business
+    const conciergePhone = "5491123823297"; // Teléfono oficial de Ash (+54 9 11 2382-3297)
     const whatsappUrl = `https://wa.me/${conciergePhone}?text=${encodeURIComponent(rawWhatsappMsg)}`;
+
+    // Enviar notificación automática por email a info@ashmateu.com
+    try {
+      const formspreeUrl = process.env.FORMSPREE_CONTACT_URL || "https://formspree.io/f/xeebjqpq";
+      await fetch(formspreeUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `💎 NUEVA VENTA EN EL MERCADITO: ${productDesigner} — ${productName} (#${orderCode})`,
+          _language: "es",
+          orden_id: orderCode,
+          pieza: `${productDesigner} — ${productName}`,
+          precio_total: `$${numPrice.toLocaleString("en-US")} ${productCurrency}`,
+          modalidad_pago: isSeña
+            ? `Anticipo 80% ($${deposit80} USD) / Saldo 20% al recibir ($${balance20} USD)`
+            : `Pago Total 100% ($${numPrice} USD)`,
+          canal_pago: channelName,
+          cliente_nombre: buyerName,
+          cliente_email: buyerEmail,
+          cliente_telefono: buyerPhone,
+          direccion_envio: `${shippingAddress || ""}, ${shippingCity}, ${shippingCountry}`,
+          fecha: new Date().toLocaleString("es-AR", { timeZone: "America/Argentina/Buenos_Aires" }),
+          mensaje: `Se ha efectuado la reserva de una pieza en El Mercadito de Ash para ${buyerName}. El cliente fue redirigido a WhatsApp (${conciergePhone}) con el detalle de la compra.`,
+        }),
+      });
+    } catch (mailErr) {
+      console.warn("No se pudo enviar email de notificación de orden:", mailErr);
+    }
 
     // Intentar actualizar el stock en Supabase a 'reserved'
     if (productId && !productId.startsWith("trr-")) {
