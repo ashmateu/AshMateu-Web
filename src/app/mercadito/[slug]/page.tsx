@@ -14,13 +14,12 @@ import {
   ExternalLink 
 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const dynamicParams = true;
+
 interface Props {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const products = await getMercaditoProducts();
-  return products.map((p) => ({ slug: p.slug }));
 }
 
 export default async function ProductDetailPage({ params }: Props) {
