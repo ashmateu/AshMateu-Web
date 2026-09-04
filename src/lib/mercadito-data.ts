@@ -99,6 +99,36 @@ export const INITIAL_CURATED_PIECES: LuxuryProduct[] = [
 
 import { getStoredProducts } from "@/lib/mercadito-storage";
 
+export function sanitizeGalleryImages(mainImage: string, gallery?: string[]): string[] {
+  const fallback = mainImage ? [mainImage.split("?")[0]] : [];
+  if (!gallery || !Array.isArray(gallery) || gallery.length === 0) {
+    return fallback;
+  }
+
+  const baseMain = (mainImage || "").split("?")[0];
+  const skuMatch = baseMain.match(/([A-Z0-9]{5,15})_\d+/);
+  const sku = skuMatch ? skuMatch[1] : null;
+
+  const cleaned = gallery
+    .map((url) => (typeof url === "string" ? url.split("?")[0].trim() : ""))
+    .filter(Boolean)
+    .filter((url, idx, arr) => arr.indexOf(url) === idx)
+    .filter((url) => {
+      if (!sku) return true;
+      return url.includes(sku);
+    });
+
+  if (cleaned.length === 0) {
+    return fallback;
+  }
+
+  if (baseMain && cleaned.includes(baseMain)) {
+    return [baseMain, ...cleaned.filter((u) => u !== baseMain)];
+  }
+
+  return cleaned;
+}
+
 export async function getMercaditoProducts(): Promise<LuxuryProduct[]> {
   // 1. Obtener los productos almacenados localmente (siempre disponibles y persistidos)
   const localProducts = getStoredProducts();
@@ -126,9 +156,10 @@ export async function getMercaditoProducts(): Promise<LuxuryProduct[]> {
       dimensions: item.dimensions || "",
       materials: item.materials || "",
       image_url: item.image_url || INITIAL_CURATED_PIECES[0].image_url,
-      gallery_images: item.gallery_images && item.gallery_images.length > 0
-        ? item.gallery_images
-        : [item.image_url || INITIAL_CURATED_PIECES[0].image_url],
+      gallery_images: sanitizeGalleryImages(
+        item.image_url || INITIAL_CURATED_PIECES[0].image_url,
+        item.gallery_images
+      ),
       source_url: item.source_url || "",
       is_unique_piece: item.is_unique_piece ?? true,
       status: (item.status as any) || (item.stock > 0 ? "available" : "sold"),
