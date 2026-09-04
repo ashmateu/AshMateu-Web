@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { getMercaditoProducts } from "@/lib/mercadito-data";
 import MercaditoCatalog from "@/components/mercadito/MercaditoCatalog";
@@ -35,21 +34,12 @@ export default async function MercaditoPage() {
         />
 
         <div className="relative z-10">
-          {/* Eyebrow badge + Admin Curaduría Link */}
+          {/* Eyebrow badge */}
           <div className="flex items-center justify-between gap-4 mb-6">
             <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10.5px] uppercase tracking-[0.25em] font-semibold bg-white/80 backdrop-blur-sm border border-black/10 text-[#7A6A5A] shadow-2xs">
               <span className="w-1.5 h-1.5 rounded-full bg-[#EA2638]" />
               ARCHIVO EXCLUSIVO • PIEZAS 1 DE 1
             </span>
-
-            <div className="flex items-center gap-2">
-              <Link
-                href="/admin"
-                className="text-[10px] uppercase tracking-[0.2em] text-[#7A6A5A] hover:text-[#0A0A0A] transition-colors border border-black/10 px-3.5 py-1 rounded-full bg-white/70 backdrop-blur-sm shadow-2xs font-medium"
-              >
-                ⚙ Administrar Piezas
-              </Link>
-            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-black/10 pb-12">
