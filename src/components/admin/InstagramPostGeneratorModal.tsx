@@ -2,7 +2,155 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { LuxuryProduct } from "@/types/mercadito";
-import { X, Download, Copy, Check, Sliders, RefreshCw } from "lucide-react";
+import { X, Download, Copy, Check, Sliders, RefreshCw, Sparkles } from "lucide-react";
+
+// Paleta de presets de resaltadores icónicos
+const HIGHLIGHTER_PRESETS = [
+  { name: "Verde Neón", hex: "#00FF2A" },
+  { name: "Amarillo Flúor", hex: "#FFE600" },
+  { name: "Rojo Ash", hex: "#EA2638" },
+  { name: "Rosa Neón", hex: "#FF2A85" },
+  { name: "Cyan Eléctrico", hex: "#00E5FF" },
+  { name: "Naranja Neón", hex: "#FF6B00" },
+  { name: "Blanco Puro", hex: "#FFFFFF" },
+  { name: "Negro Tape", hex: "#0A0A0A" },
+];
+
+// Helper para contraste óptimo de texto según fondo del resaltador
+function getContrastColor(hexColor: string): string {
+  const cleanHex = hexColor.replace("#", "").trim();
+  let r = 0, g = 0, b = 0;
+  if (cleanHex.length === 3) {
+    r = parseInt(cleanHex[0] + cleanHex[0], 16) || 0;
+    g = parseInt(cleanHex[1] + cleanHex[1], 16) || 0;
+    b = parseInt(cleanHex[2] + cleanHex[2], 16) || 0;
+  } else {
+    r = parseInt(cleanHex.substring(0, 2), 16) || 0;
+    g = parseInt(cleanHex.substring(2, 4), 16) || 0;
+    b = parseInt(cleanHex.substring(4, 6), 16) || 0;
+  }
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.55 ? "#0A0A0A" : "#FFFFFF";
+}
+
+interface TextLine {
+  text: string;
+  width: number;
+}
+
+interface AutoFitResult {
+  lines: TextLine[];
+  fontSize: number;
+  lineHeight: number;
+  totalHeight: number;
+}
+
+// Algoritmo de ajuste automático de texto al ancho del canvas
+function autoFitText(
+  ctx: CanvasRenderingContext2D,
+  rawText: string,
+  maxWidth: number,
+  maxHeight: number,
+  maxLines: number = 2,
+  startFontSize: number = 84,
+  minFontSize: number = 24,
+  fontFamily: string = "'Impact', 'Arial Black', sans-serif",
+  isItalic: boolean = true
+): AutoFitResult {
+  const text = rawText.trim();
+  if (!text) {
+    return { lines: [], fontSize: startFontSize, lineHeight: startFontSize, totalHeight: 0 };
+  }
+
+  // 1. Probar en 1 sola línea desde startFontSize hasta 42px
+  for (let s = startFontSize; s >= Math.max(minFontSize, 42); s -= 2) {
+    ctx.font = `${isItalic ? "italic " : ""}900 ${s}px ${fontFamily}`;
+    const w = ctx.measureText(text).width;
+    if (w <= maxWidth) {
+      const lh = Math.round(s * 1.08);
+      return {
+        lines: [{ text, width: w }],
+        fontSize: s,
+        lineHeight: lh,
+        totalHeight: lh,
+      };
+    }
+  }
+
+  // 2. Si excede, ajustar en múltiples líneas (hasta maxLines)
+  const words = text.split(/\s+/);
+
+  for (let s = Math.min(startFontSize, 62); s >= minFontSize; s -= 2) {
+    ctx.font = `${isItalic ? "italic " : ""}900 ${s}px ${fontFamily}`;
+    const lh = Math.round(s * 1.12);
+
+    const testLines: TextLine[] = [];
+    let curLine = "";
+    let canFit = true;
+
+    for (let i = 0; i < words.length; i++) {
+      const w = words[i];
+      const candidate = curLine ? `${curLine} ${w}` : w;
+      const candidateWidth = ctx.measureText(candidate).width;
+
+      if (candidateWidth <= maxWidth) {
+        curLine = candidate;
+      } else {
+        if (curLine) {
+          testLines.push({ text: curLine, width: ctx.measureText(curLine).width });
+          curLine = w;
+          if (ctx.measureText(w).width > maxWidth) {
+            canFit = false;
+            break;
+          }
+        } else {
+          canFit = false;
+          break;
+        }
+      }
+    }
+
+    if (curLine && canFit) {
+      testLines.push({ text: curLine, width: ctx.measureText(curLine).width });
+    }
+
+    const totH = testLines.length * lh;
+
+    if (canFit && testLines.length <= maxLines && totH <= maxHeight) {
+      return {
+        lines: testLines,
+        fontSize: s,
+        lineHeight: lh,
+        totalHeight: totH,
+      };
+    }
+  }
+
+  // 3. Fallback en minFontSize
+  ctx.font = `${isItalic ? "italic " : ""}900 ${minFontSize}px ${fontFamily}`;
+  const lh = Math.round(minFontSize * 1.12);
+  const fallbackLines: TextLine[] = [];
+  let cur = "";
+
+  for (const w of words) {
+    const candidate = cur ? `${cur} ${w}` : w;
+    if (ctx.measureText(candidate).width <= maxWidth) {
+      cur = candidate;
+    } else {
+      if (cur) fallbackLines.push({ text: cur, width: ctx.measureText(cur).width });
+      cur = w;
+    }
+  }
+  if (cur) fallbackLines.push({ text: cur, width: ctx.measureText(cur).width });
+
+  const finalLines = fallbackLines.slice(0, maxLines);
+  return {
+    lines: finalLines,
+    fontSize: minFontSize,
+    lineHeight: lh,
+    totalHeight: finalLines.length * lh,
+  };
+}
 
 interface Props {
   product: LuxuryProduct;
@@ -17,8 +165,10 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
   // Precios y cálculo de retail estimado
   const estimatedRetail = Math.round(product.price * 1.35);
 
-  // Estados editables en vivo
-  const [title, setTitle] = useState("PRE-LOVE");
+  // Estados editables en vivo (título extraído automáticamente del artículo)
+  const [title, setTitle] = useState(product?.name || "PRE-LOVE");
+  const [titleStyle, setTitleStyle] = useState<"solid" | "highlight-bg">("solid");
+  const [highlighterColor, setHighlighterColor] = useState<string>("#00FF2A");
   const [subtitle, setSubtitle] = useState(
     product.ash_styling_tip ? `-${product.ash_styling_tip}-` : "-Perfecta para el día a día-"
   );
@@ -50,6 +200,19 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
   const [copied, setCopied] = useState(false);
   const [generating, setGenerating] = useState(false);
 
+  // Sincronizar automáticamente datos cuando cambia el artículo
+  useEffect(() => {
+    if (product) {
+      setTitle(product.name || "PRE-LOVE");
+      setSubtitle(
+        product.ash_styling_tip ? `-${product.ash_styling_tip}-` : "-Perfecta para el día a día-"
+      );
+      setRetailPrice(Math.round(product.price * 1.35).toString());
+      setFindingPrice(product.price.toString());
+      setCondition(product.condition_state || "Excelente estado.");
+    }
+  }, [product]);
+
   // Renderizar en Canvas
   useEffect(() => {
     drawCanvas();
@@ -57,6 +220,8 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
     template,
     format,
     title,
+    titleStyle,
+    highlighterColor,
     subtitle,
     retailPrice,
     findingPrice,
@@ -203,11 +368,43 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         drawImageProportional(secondaryImg, 45, 175, 290, 290, secondaryScale, secondaryOffsetY, secondaryOffsetX, pureWhiteBg);
       }
 
-      // 3. TÍTULO: PRE-LOVE (Impact Italic estilo revista)
-      ctx.fillStyle = "#0A0A0A";
-      ctx.font = "italic 900 92px 'Impact', 'Arial Black', sans-serif";
-      ctx.letterSpacing = "2px";
-      ctx.fillText(title.toUpperCase(), 140, 135);
+      // 3. TÍTULO AUTO-AJUSTABLE (SE ADAPTA AUTOMÁTICAMENTE AL ANCHO DEL CANVAS)
+      const titleFitted = autoFitText(
+        ctx,
+        title.toUpperCase(),
+        920, // maxWidth: 1080 - 80*2
+        135, // maxHeight
+        3,   // maxLines
+        84,  // startFontSize
+        26   // minFontSize
+      );
+
+      // Centrar verticalmente las líneas de texto en la franja superior (Y: 45 a 165)
+      const topAreaCenterY = 105;
+      const startY = topAreaCenterY - (titleFitted.totalHeight / 2) + titleFitted.fontSize * 0.85;
+
+      titleFitted.lines.forEach((line, idx) => {
+        const lineY = startY + idx * titleFitted.lineHeight;
+        const lineX = 80;
+
+        ctx.font = `italic 900 ${titleFitted.fontSize}px 'Impact', 'Arial Black', sans-serif`;
+
+        if (titleStyle === "highlight-bg") {
+          const padX = 14;
+          const boxH = Math.round(titleFitted.fontSize * 1.16);
+          const boxY = Math.round(lineY - titleFitted.fontSize * 0.88);
+          const boxW = Math.round(line.width + padX * 2);
+
+          ctx.fillStyle = highlighterColor;
+          ctx.fillRect(lineX, boxY, boxW, boxH);
+
+          ctx.fillStyle = getContrastColor(highlighterColor);
+          ctx.fillText(line.text, lineX + padX, lineY);
+        } else {
+          ctx.fillStyle = "#0A0A0A";
+          ctx.fillText(line.text, lineX, lineY);
+        }
+      });
 
       // 4. SUBTÍTULO: -Frase en cursiva-
       ctx.fillStyle = "#0A0A0A";
@@ -231,17 +428,17 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         ctx.stroke();
       }
 
-      // 6. PRECIO HALLAZGO (CON HIGHLIGHT VERDE NEÓN)
+      // 6. PRECIO HALLAZGO (CON HIGHLIGHT PERSONALIZABLE)
       const findingText = `Precio Hallazgo $${Number(findingPrice).toLocaleString("en-US")}.-`;
       ctx.font = "italic 900 48px 'Impact', 'Arial Black', sans-serif";
       const findingMetrics = ctx.measureText(findingText);
       const tagW = findingMetrics.width + 24;
       const tagH = 58;
 
-      ctx.fillStyle = "#00FF2A";
+      ctx.fillStyle = highlighterColor;
       ctx.fillRect(360, 305, tagW, tagH);
 
-      ctx.fillStyle = "#0A0A0A";
+      ctx.fillStyle = getContrastColor(highlighterColor);
       ctx.fillText(findingText, 372, 350);
 
       // 7. MEDIDAS TÉCNICAS (COLUMNA DERECHA, POR ENCIMA DE LA FOTO)
@@ -272,11 +469,11 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       }
       ctx.textAlign = "left"; // reset
 
-      // 8. BLOQUE DE CONDICIONES (CON FONDO VERDE NEÓN)
-      ctx.fillStyle = "#00FF2A";
+      // 8. BLOQUE DE CONDICIONES (CON FONDO DE HIGHLIGHT PERSONALIZABLE)
+      ctx.fillStyle = highlighterColor;
       ctx.fillRect(700, 610, 315, 38);
 
-      ctx.fillStyle = "#0A0A0A";
+      ctx.fillStyle = getContrastColor(highlighterColor);
       ctx.font = "900 23px 'Impact', 'Arial Black', sans-serif";
       ctx.fillText("CONDICIONES: Pre-Love.", 708, 636);
 
@@ -301,8 +498,15 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         drawImageProportional(mainImg, 80, 100, 920, H - 240, productScale, productOffsetY, productOffsetX, pureWhiteBg);
       }
 
-      // Función de cinta blanca editorial
-      const drawTapeText = (text: string, x: number, y: number, font: string, isBlackBg = false) => {
+      // Función de cinta blanca editorial con soporte para color personalizado
+      const drawTapeText = (
+        text: string,
+        x: number,
+        y: number,
+        font: string,
+        isBlackBg = false,
+        customBgColor?: string
+      ) => {
         ctx.font = font;
         const metrics = ctx.measureText(text);
         const padX = 18;
@@ -310,20 +514,55 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
         const bgW = metrics.width + padX * 2;
         const bgH = parseInt(font.match(/\d+px/)?.[0] || "36") + padY * 1.5;
 
-        ctx.fillStyle = isBlackBg ? "#0A0A0A" : "#FFFFFF";
+        const bgColor = customBgColor ? customBgColor : isBlackBg ? "#0A0A0A" : "#FFFFFF";
+        const textColor = customBgColor
+          ? getContrastColor(customBgColor)
+          : isBlackBg
+          ? "#FFFFFF"
+          : "#0A0A0A";
+
+        ctx.fillStyle = bgColor;
         ctx.shadowColor = "rgba(0,0,0,0.15)";
         ctx.shadowBlur = 10;
         ctx.shadowOffsetY = 4;
         ctx.fillRect(x, y - bgH + padY * 0.8, bgW, bgH);
         ctx.shadowColor = "transparent";
 
-        ctx.fillStyle = isBlackBg ? "#FFFFFF" : "#0A0A0A";
+        ctx.fillStyle = textColor;
         ctx.fillText(text, x + padX, y);
       };
 
-      // TÍTULOS EN PASTILLAS BLANCAS
-      drawTapeText(product.designer.toUpperCase(), 80, 140, "italic 900 44px 'Impact', 'Arial Black', sans-serif");
-      drawTapeText(product.name, 80, 210, "italic 900 36px 'Impact', 'Arial Black', sans-serif");
+      // TÍTULOS EN PASTILLAS BLANCAS / RESALTADOR
+      drawTapeText(
+        product.designer.toUpperCase(),
+        80,
+        140,
+        "italic 900 44px 'Impact', 'Arial Black', sans-serif"
+      );
+
+      // Título auto-ajustable en pastillas editoriales
+      const editorialTitleFitted = autoFitText(
+        ctx,
+        title,
+        860, // maxWidth
+        140, // maxHeight
+        3,   // maxLines
+        36,  // startFontSize
+        24   // minFontSize
+      );
+
+      let curTapeY = 210;
+      editorialTitleFitted.lines.forEach((line) => {
+        drawTapeText(
+          line.text,
+          80,
+          curTapeY,
+          `italic 900 ${editorialTitleFitted.fontSize}px 'Impact', 'Arial Black', sans-serif`,
+          titleStyle === "highlight-bg",
+          titleStyle === "highlight-bg" ? highlighterColor : undefined
+        );
+        curTapeY += editorialTitleFitted.lineHeight + 10;
+      });
 
       // FRASE EDITORIAL
       const bottomY = format === "square" ? 860 : 1100;
@@ -331,7 +570,14 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
       drawTapeText(subtitle.replace(/-/g, ""), 100, bottomY + 60, "italic 400 32px 'Georgia', serif");
 
       const priceBadge = `PRECIO HALLAZGO: $${Number(findingPrice).toLocaleString("en-US")} USD`;
-      drawTapeText(priceBadge, 100, bottomY + 130, "900 30px 'Impact', sans-serif", true);
+      drawTapeText(
+        priceBadge,
+        100,
+        bottomY + 130,
+        "900 30px 'Impact', sans-serif",
+        false,
+        highlighterColor
+      );
 
       drawTapeText("@elmercaditodeash", 680, bottomY + 130, "italic 600 24px 'Georgia', serif");
     }
@@ -734,18 +980,161 @@ export default function InstagramPostGeneratorModal({ product, onClose }: Props)
               </div>
             </div>
 
+            {/* CONTROL DE COLOR DEL RESALTADOR */}
+            <div className="p-4 rounded-xl bg-[#F7F3EE] border border-black/10 space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-[10.5px] uppercase tracking-[0.2em] font-semibold text-[#7A6A5A] flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#EA2638]" />
+                  Color del Resaltador
+                </label>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase text-[#7A6A5A] font-semibold">
+                    {highlighterColor}
+                  </span>
+                  <span
+                    className="w-4 h-4 rounded-full border border-black/20 shadow-xs"
+                    style={{ backgroundColor: highlighterColor }}
+                  />
+                </div>
+              </div>
+
+              {/* PALETA DE CHIPS DE COLORES PRESTABLECIDOS */}
+              <div className="grid grid-cols-4 gap-1.5">
+                {HIGHLIGHTER_PRESETS.map((p) => {
+                  const isSelected = highlighterColor.toUpperCase() === p.hex.toUpperCase();
+                  return (
+                    <button
+                      key={p.hex}
+                      type="button"
+                      onClick={() => setHighlighterColor(p.hex)}
+                      className={`flex items-center gap-1.5 p-1.5 rounded-lg border text-[10px] font-medium transition-all cursor-pointer ${
+                        isSelected
+                          ? "border-[#0A0A0A] bg-white shadow-xs font-bold text-[#0A0A0A] ring-2 ring-black/10"
+                          : "border-black/10 bg-white/70 text-[#7A6A5A] hover:bg-white"
+                      }`}
+                      title={`Elegir ${p.name}`}
+                    >
+                      <span
+                        className="w-3 h-3 rounded-full border border-black/20 shrink-0"
+                        style={{ backgroundColor: p.hex }}
+                      />
+                      <span className="truncate text-[9.5px]">{p.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* SELECTOR PERSONALIZADO LIBRE */}
+              <div className="flex items-center gap-2 pt-1 border-t border-black/10">
+                <label className="text-[10px] text-[#7A6A5A] shrink-0 font-medium">Color libre:</label>
+                <div className="flex items-center gap-2 flex-1">
+                  <input
+                    type="color"
+                    value={highlighterColor}
+                    onChange={(e) => setHighlighterColor(e.target.value)}
+                    className="w-8 h-8 rounded-lg border border-black/20 cursor-pointer p-0 bg-transparent shrink-0"
+                    title="Hacé clic para seleccionar cualquier tono con el selector visual"
+                  />
+                  <input
+                    type="text"
+                    value={highlighterColor}
+                    onChange={(e) => setHighlighterColor(e.target.value)}
+                    className="flex-1 px-2.5 py-1 rounded-md border border-black/15 bg-white text-[11px] font-mono uppercase"
+                    maxLength={7}
+                    placeholder="#00FF2A"
+                  />
+                </div>
+              </div>
+
+              {/* OPCIÓN: ESTILO DEL TÍTULO (TEXTO LIMPIO VS FONDO RESALTADOR) */}
+              <div className="pt-2 border-t border-black/10">
+                <span className="text-[10px] text-[#7A6A5A] block mb-1.5 font-medium">
+                  Estilo del Título Superior:
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setTitleStyle("solid")}
+                    className={`py-1.5 px-2.5 rounded-lg text-center text-[10.5px] font-medium transition-all cursor-pointer ${
+                      titleStyle === "solid"
+                        ? "bg-[#0A0A0A] text-white font-semibold shadow-xs"
+                        : "bg-white border border-black/10 text-[#7A6A5A] hover:text-[#0A0A0A]"
+                    }`}
+                  >
+                    Texto Sólido
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTitleStyle("highlight-bg")}
+                    className={`py-1.5 px-2.5 rounded-lg text-center text-[10.5px] font-medium transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                      titleStyle === "highlight-bg"
+                        ? "bg-[#0A0A0A] text-white font-semibold shadow-xs"
+                        : "bg-white border border-black/10 text-[#7A6A5A] hover:text-[#0A0A0A]"
+                    }`}
+                  >
+                    <span
+                      className="w-2.5 h-2.5 rounded-full"
+                      style={{ backgroundColor: highlighterColor }}
+                    />
+                    Caja Resaltador
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* CAMPOS EDITABLES EN VIVO */}
             <div className="space-y-3 pt-2 border-t border-black/10">
+              {/* TÍTULO EDITABLE Y AUTO-AJUSTABLE */}
               <div>
-                <label className="text-[10px] uppercase tracking-wider text-[#7A6A5A] block mb-1">
-                  Título Superior
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-[10px] uppercase tracking-wider font-semibold text-[#7A6A5A]">
+                    Título de la Placa
+                  </label>
+                  <span className="text-[9.5px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-mono font-medium">
+                    Auto-ajuste activo ✓
+                  </span>
+                </div>
+
+                {/* ACCIONES RÁPIDAS PARA EXTRAER / CAMBIAR TÍTULO */}
+                <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                  <button
+                    type="button"
+                    onClick={() => setTitle(product.name)}
+                    className="px-2.5 py-1 rounded-md bg-[#F7F3EE] border border-black/15 text-[10px] text-[#0A0A0A] hover:bg-white hover:border-black/30 font-medium transition-all cursor-pointer flex items-center gap-1"
+                    title="Extraer y usar automáticamente el nombre del artículo"
+                  >
+                    🏷️ Nombre del Artículo
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setTitle("PRE-LOVE")}
+                    className="px-2.5 py-1 rounded-md bg-[#F7F3EE] border border-black/15 text-[10px] text-[#0A0A0A] hover:bg-white hover:border-black/30 font-medium transition-all cursor-pointer flex items-center gap-1"
+                    title="Usar clásico 'PRE-LOVE'"
+                  >
+                    ⚡ &quot;PRE-LOVE&quot;
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setTitle(`${product.designer} ${product.name}`)}
+                    className="px-2.5 py-1 rounded-md bg-[#F7F3EE] border border-black/15 text-[10px] text-[#0A0A0A] hover:bg-white hover:border-black/30 font-medium transition-all cursor-pointer flex items-center gap-1"
+                    title="Usar Diseñador + Nombre completo"
+                  >
+                    ✨ Diseñador + Nombre
+                  </button>
+                </div>
+
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full p-2 rounded-lg border border-black/15 bg-[#F7F3EE]/50 font-medium"
+                  placeholder="Título de la placa..."
+                  className="w-full p-2.5 rounded-lg border border-black/15 bg-[#F7F3EE]/50 font-medium text-xs focus:bg-white focus:outline-none focus:border-[#0A0A0A] transition-all"
                 />
+                <p className="text-[9.5px] text-[#7A6A5A] mt-1 italic">
+                  El tamaño de fuente y la cantidad de líneas se recalculan en tiempo real para que el texto siempre entre perfectamente dentro de la placa sin cortarse.
+                </p>
               </div>
 
               <div>
