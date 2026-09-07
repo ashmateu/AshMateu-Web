@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { deleteCustomer } from "@/lib/mercadito-customers-storage";
 import { cookies } from "next/headers";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const CUSTOMER_COOKIE_NAME = "ash_customer_session";
 
 export async function POST(req: NextRequest) {
@@ -26,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const removed = await deleteCustomer(targetEmail);
+    const removed = await deleteCustomer(targetEmail, targetEmail);
 
     // Borrar cookie de sesión
     cookieStore.delete(CUSTOMER_COOKIE_NAME);

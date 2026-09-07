@@ -10,13 +10,30 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const CUSTOMERS_FILE = path.join(process.cwd(), "data", "mercadito-customers.json");
 
 function ensureDataDir() {
-  const dir = path.dirname(CUSTOMERS_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+  try {
+    const dir = path.dirname(CUSTOMERS_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  } catch (e) {
+    // Ignorar en entornos de solo lectura
   }
 }
 
-// Datos semilla iniciales si el archivo no existe
+function safeWriteCustomersFile(customers: MercaditoCustomer[]): void {
+  try {
+    ensureDataDir();
+    fs.writeFileSync(CUSTOMERS_FILE, JSON.stringify(customers, null, 2));
+  } catch (e: any) {
+    // En Vercel Serverless (AWS Lambda), el filesystem es de solo lectura (EROFS).
+    // Es normal y seguro: la persistencia primaria está en Supabase.
+    if (e.code !== "EROFS") {
+      console.warn("Aviso al escribir mercadito-customers.json:", e.message);
+    }
+  }
+}
+
+// Datos semilla de muestra inicial si no hay registros
 const SEED_CUSTOMERS: MercaditoCustomer[] = [
   {
     id: "cust-ash-1001",
@@ -54,74 +71,165 @@ const SEED_CUSTOMERS: MercaditoCustomer[] = [
 
 export function getLocalStoredCustomers(): MercaditoCustomer[] {
   try {
-    ensureDataDir();
     if (!fs.existsSync(CUSTOMERS_FILE)) {
-      fs.writeFileSync(CUSTOMERS_FILE, JSON.stringify(SEED_CUSTOMERS, null, 2));
+      safeWriteCustomersFile(SEED_CUSTOMERS);
       return SEED_CUSTOMERS;
     }
     const raw = fs.readFileSync(CUSTOMERS_FILE, "utf-8");
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
   } catch (e) {
-    console.error("Error leyendo mercadito-customers.json:", e);
     return [];
   }
 }
 
 export function saveLocalStoredCustomer(customer: MercaditoCustomer): void {
   try {
-    ensureDataDir();
     const existing = getLocalStoredCustomers();
     const filtered = existing.filter(
       (c) => c.id !== customer.id && c.email.toLowerCase() !== customer.email.toLowerCase()
     );
     const updated = [customer, ...filtered];
-    fs.writeFileSync(CUSTOMERS_FILE, JSON.stringify(updated, null, 2));
+    safeWriteCustomersFile(updated);
   } catch (e) {
-    console.error("Error guardando mercadito-customers.json:", e);
+    // Silencioso
   }
 }
 
-export async function getAllCustomers(): Promise<MercaditoCustomer[]> {
-  const localCustomers = getLocalStoredCustomers();
+function parseCustomerFromRow(row: any): MercaditoCustomer {
+  const raw = row.mp_raw || {};
+  return {
+    id: raw.id || row.notes || row.id || `cust-${Date.now()}`,
+    name: raw.name || row.buyer_name || row.customer_name || "Cliente",
+    email: (raw.email || row.buyer_email || "").toLowerCase().trim(),
+    phone: raw.phone || row.buyer_phone || row.customer_phone || "",
+    instagram: raw.instagram || "",
+    city: raw.city || row.shipping_city || "",
+    country: raw.country || row.shipping_country || "Argentina",
+    password: raw.password || "",
+    marketingOptIn: raw.marketingOptIn ?? true,
+    ordersCount: Number(raw.ordersCount || 0),
+    totalSpent: Number(raw.totalSpent || 0),
+    currency: raw.currency || row.currency || "USD",
+    firstRegisteredAt: raw.firstRegisteredAt || row.created_at || new Date().toISOString(),
+    lastActiveAt: raw.lastActiveAt || row.updated_at || row.created_at || new Date().toISOString(),
+    notes: raw.notes || row.notes || "",
+  };
+}
 
-  // Intentar sincronizar / obtener de Supabase si existe tabla
+export async function getAllCustomers(): Promise<MercaditoCustomer[]> {
+  // 1. Obtener conjunto de clientes eliminados (tombstones) de Supabase
+  const deletedSet = new Set<string>();
   try {
-    const { data, error } = await supabase
-      .from("subscribers")
+    const { data: tombstones } = await supabase
+      .from("orders")
+      .select("buyer_email, notes, mp_raw")
+      .eq("status", "customer_deleted");
+
+    if (tombstones && tombstones.length > 0) {
+      for (const t of tombstones) {
+        if (t.buyer_email) deletedSet.add(t.buyer_email.toLowerCase().trim());
+        if (t.notes) deletedSet.add(t.notes.toLowerCase().trim());
+        if (t.mp_raw?.id) deletedSet.add(String(t.mp_raw.id).toLowerCase().trim());
+        if (t.mp_raw?.email) deletedSet.add(String(t.mp_raw.email).toLowerCase().trim());
+        if (t.mp_raw?.target) deletedSet.add(String(t.mp_raw.target).toLowerCase().trim());
+      }
+    }
+  } catch (err) {
+    console.warn("Aviso al consultar eliminados de Supabase:", err);
+  }
+
+  // 2. Obtener perfiles registrados explícitamente en Supabase
+  const customerMap = new Map<string, MercaditoCustomer>();
+  try {
+    const { data: profiles } = await supabase
+      .from("orders")
       .select("*")
+      .eq("status", "customer_profile")
       .order("created_at", { ascending: false });
 
-    if (!error && data && data.length > 0) {
-      // Cruzar con datos locales para enriquecer
-      const merged = [...localCustomers];
+    if (profiles && profiles.length > 0) {
+      for (const row of profiles) {
+        const cust = parseCustomerFromRow(row);
+        if (cust.email && !deletedSet.has(cust.email) && !deletedSet.has(cust.id.toLowerCase())) {
+          customerMap.set(cust.email, cust);
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("Aviso al consultar perfiles en Supabase:", err);
+  }
 
-      for (const item of data) {
-        if (!merged.some((c) => c.email.toLowerCase() === item.email?.toLowerCase())) {
-          merged.push({
-            id: item.id || `supa-${Math.random().toString(36).substring(7)}`,
-            name: item.name || item.email.split("@")[0],
-            email: item.email,
-            phone: item.phone || "",
-            instagram: item.instagram || "",
-            city: item.city || "",
-            country: item.country || "Argentina",
-            marketingOptIn: item.marketing_opt_in ?? true,
-            ordersCount: 0,
-            totalSpent: 0,
-            currency: "USD",
-            firstRegisteredAt: item.created_at || new Date().toISOString(),
-            lastActiveAt: item.created_at || new Date().toISOString(),
+  // 3. Obtener clientes de órdenes reales (compras) en Supabase para enriquecer métricas
+  try {
+    const { data: realOrders } = await supabase
+      .from("orders")
+      .select("buyer_email, buyer_name, buyer_phone, shipping_city, shipping_country, amount, currency, created_at, status")
+      .not("status", "in", '("customer_profile","customer_deleted")');
+
+    if (realOrders && realOrders.length > 0) {
+      for (const o of realOrders) {
+        const email = (o.buyer_email || "").toLowerCase().trim();
+        if (!email || deletedSet.has(email)) continue;
+
+        const orderAmt = Number(o.amount || 0);
+        const existing = customerMap.get(email);
+
+        if (existing) {
+          existing.ordersCount = (existing.ordersCount || 0) + 1;
+          existing.totalSpent = (existing.totalSpent || 0) + orderAmt;
+          if (!existing.phone && o.buyer_phone) existing.phone = o.buyer_phone;
+          if (!existing.city && o.shipping_city) existing.city = o.shipping_city;
+          if (o.created_at && (!existing.lastActiveAt || new Date(o.created_at) > new Date(existing.lastActiveAt))) {
+            existing.lastActiveAt = o.created_at;
+          }
+        } else {
+          customerMap.set(email, {
+            id: `cust-order-${email.replace(/[^a-zA-Z0-9]/g, "")}`,
+            name: o.buyer_name || email.split("@")[0],
+            email: email,
+            phone: o.buyer_phone || "",
+            instagram: "",
+            city: o.shipping_city || "",
+            country: o.shipping_country || "Argentina",
+            marketingOptIn: true,
+            ordersCount: 1,
+            totalSpent: orderAmt,
+            currency: o.currency || "USD",
+            firstRegisteredAt: o.created_at || new Date().toISOString(),
+            lastActiveAt: o.created_at || new Date().toISOString(),
+            notes: "Cliente registrado automáticamente por reserva de pieza",
           });
         }
       }
-      return merged;
     }
   } catch (err) {
-    // Graceful fallback a almacenamiento local
+    console.warn("Aviso al consultar órdenes para base de clientes:", err);
   }
 
-  return localCustomers;
+  // 4. Cruzar con datos locales (seed / JSON) sólo si no están en deletedSet
+  const localCustomers = getLocalStoredCustomers();
+  for (const localCust of localCustomers) {
+    const email = localCust.email.toLowerCase().trim();
+    const id = localCust.id.toLowerCase().trim();
+
+    if (deletedSet.has(email) || deletedSet.has(id)) {
+      continue; // Fue eliminado
+    }
+
+    if (!customerMap.has(email)) {
+      customerMap.set(email, localCust);
+    }
+  }
+
+  // 5. Devolver lista limpia garantizando exclusión de eliminados
+  const results = Array.from(customerMap.values()).filter((c) => {
+    const email = c.email.toLowerCase().trim();
+    const id = c.id.toLowerCase().trim();
+    return !deletedSet.has(email) && !deletedSet.has(id);
+  });
+
+  return results;
 }
 
 export async function getCustomerByEmail(email: string): Promise<MercaditoCustomer | null> {
@@ -135,6 +243,16 @@ export async function createOrUpdateCustomer(
   data: Partial<MercaditoCustomer> & { email: string; name: string }
 ): Promise<MercaditoCustomer> {
   const cleanEmail = data.email.trim().toLowerCase();
+
+  // Si este cliente estaba previamente marcado como eliminado, levantar la lápida
+  try {
+    await supabase
+      .from("orders")
+      .delete()
+      .eq("status", "customer_deleted")
+      .ilike("buyer_email", cleanEmail);
+  } catch (e) {}
+
   const existing = await getCustomerByEmail(cleanEmail);
 
   const customer: MercaditoCustomer = {
@@ -155,25 +273,31 @@ export async function createOrUpdateCustomer(
     notes: data.notes || existing?.notes || "",
   };
 
-  // 1. Guardar en JSON local
-  saveLocalStoredCustomer(customer);
-
-  // 2. Intentar guardar en Supabase
+  // 1. Guardar o actualizar en Supabase (tabla orders con status 'customer_profile')
   try {
-    await supabase.from("subscribers").upsert(
-      {
-        email: customer.email,
-        name: customer.name,
-        phone: customer.phone,
-        city: customer.city,
-        country: customer.country,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "email" }
-    );
+    // Eliminar registro previo de perfil si existía para evitar duplicados
+    await supabase
+      .from("orders")
+      .delete()
+      .eq("status", "customer_profile")
+      .ilike("buyer_email", cleanEmail);
+
+    await supabase.from("orders").insert({
+      status: "customer_profile",
+      buyer_email: cleanEmail,
+      buyer_name: customer.name,
+      buyer_phone: customer.phone,
+      shipping_city: customer.city,
+      shipping_country: customer.country,
+      notes: customer.id,
+      mp_raw: customer,
+    });
   } catch (err) {
-    // Silencioso
+    console.warn("Aviso al guardar perfil en Supabase:", err);
   }
+
+  // 2. Guardar en JSON local si el filesystem lo permite
+  saveLocalStoredCustomer(customer);
 
   return customer;
 }
@@ -197,7 +321,7 @@ export async function recordCustomerOrder(
       totalSpent: existing.totalSpent + Number(amount),
       lastActiveAt: new Date().toISOString(),
     };
-    saveLocalStoredCustomer(updated);
+    await createOrUpdateCustomer(updated);
   } else if (details?.name) {
     await createOrUpdateCustomer({
       ...details,
@@ -209,34 +333,73 @@ export async function recordCustomerOrder(
   }
 }
 
-export async function deleteCustomer(idOrEmail: string): Promise<boolean> {
+export async function deleteCustomer(idOrEmail: string, emailHint?: string): Promise<boolean> {
   try {
-    ensureDataDir();
-    const current = getLocalStoredCustomers();
-    const cleanQuery = idOrEmail.trim().toLowerCase();
+    const clean = idOrEmail.trim();
+    const cleanLower = clean.toLowerCase();
+    const hintLower = emailHint ? emailHint.trim().toLowerCase() : "";
 
-    const filtered = current.filter(
-      (c) => c.id !== idOrEmail && c.email.toLowerCase() !== cleanQuery
+    // 1. Resolver el email y el id del cliente buscando en la base actual
+    const all = await getAllCustomers();
+    const target = all.find(
+      (c) => c.id === clean || c.email.toLowerCase() === cleanLower || (hintLower && c.email.toLowerCase() === hintLower)
     );
 
-    const wasRemoved = filtered.length < current.length;
-    fs.writeFileSync(CUSTOMERS_FILE, JSON.stringify(filtered, null, 2));
+    const emailToDelete = target?.email.toLowerCase() || (cleanLower.includes("@") ? cleanLower : hintLower);
+    const idToDelete = target?.id || clean;
 
-    // Intentar eliminar de Supabase si existe
+    // 2. Eliminar cualquier perfil activo en Supabase
     try {
-      if (cleanQuery.includes("@")) {
-        await supabase.from("subscribers").delete().ilike("email", cleanQuery);
-      } else {
-        await supabase.from("subscribers").delete().eq("id", idOrEmail);
+      if (emailToDelete) {
+        await supabase
+          .from("orders")
+          .delete()
+          .eq("status", "customer_profile")
+          .ilike("buyer_email", emailToDelete);
       }
-    } catch (e) {
-      // Ignorar error de supabase
+      if (idToDelete) {
+        await supabase
+          .from("orders")
+          .delete()
+          .eq("status", "customer_profile")
+          .eq("notes", idToDelete);
+      }
+    } catch (supaErr) {
+      console.warn("Aviso al eliminar perfiles de Supabase:", supaErr);
     }
 
-    return wasRemoved;
+    // 3. Registrar lápida (tombstone) permanente en Supabase
+    // Esto asegura que incluso los datos seed o archivos estáticos queden bloqueados para siempre
+    try {
+      await supabase.from("orders").insert({
+        status: "customer_deleted",
+        buyer_email: emailToDelete || cleanLower,
+        notes: idToDelete,
+        mp_raw: {
+          deletedAt: new Date().toISOString(),
+          id: idToDelete,
+          email: emailToDelete,
+          target: clean,
+        },
+      });
+    } catch (tombErr) {
+      console.warn("Aviso al registrar tombstone de cliente en Supabase:", tombErr);
+    }
+
+    // 4. Intentar eliminar de archivo JSON local si el filesystem lo permite
+    try {
+      const current = getLocalStoredCustomers();
+      const filtered = current.filter(
+        (c) => c.id !== idToDelete && c.email.toLowerCase() !== emailToDelete && c.email.toLowerCase() !== cleanLower
+      );
+      safeWriteCustomersFile(filtered);
+    } catch (fsErr) {
+      // Ignorar en Vercel
+    }
+
+    return true;
   } catch (err) {
     console.error("Error eliminando cliente:", err);
     return false;
   }
 }
-

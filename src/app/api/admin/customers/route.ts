@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getAllCustomers, createOrUpdateCustomer, deleteCustomer } from "@/lib/mercadito-customers-storage";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(req: NextRequest) {
   const isAuth = await isAdminAuthenticated();
   if (!isAuth) {
@@ -10,7 +13,14 @@ export async function GET(req: NextRequest) {
 
   try {
     const customers = await getAllCustomers();
-    return NextResponse.json({ success: true, customers });
+    return NextResponse.json(
+      { success: true, customers },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+        },
+      }
+    );
   } catch (err: any) {
     return NextResponse.json({ error: err.message || "Error al obtener clientes" }, { status: 500 });
   }
@@ -46,10 +56,9 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: "id o email es requerido para eliminar" }, { status: 400 });
     }
 
-    const removed = await deleteCustomer(target);
+    const removed = await deleteCustomer(target, email);
     return NextResponse.json({ success: true, removed });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || "Error al eliminar cliente" }, { status: 500 });
   }
 }
-

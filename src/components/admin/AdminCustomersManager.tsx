@@ -152,10 +152,18 @@ export default function AdminCustomersManager() {
       });
 
       if (res.ok) {
-        setCustomers((prev) => prev.filter((c) => c.id !== customerToDelete.id));
-        setDeleteSuccess(`Cliente "${customerToDelete.name}" (${customerToDelete.email}) eliminado permanentemente.`);
+        const deletedId = customerToDelete.id;
+        const deletedEmail = customerToDelete.email.toLowerCase();
+        setCustomers((prev) =>
+          prev.filter((c) => c.id !== deletedId && c.email.toLowerCase() !== deletedEmail)
+        );
+        setDeleteSuccess(
+          `Cliente "${customerToDelete.name}" (${customerToDelete.email}) eliminado permanentemente.`
+        );
         setCustomerToDelete(null);
         setTimeout(() => setDeleteSuccess(""), 4500);
+        // Sincronizar inmediatamente con la base de datos
+        fetchCustomers();
       } else {
         const data = await res.json().catch(() => ({}));
         setDeleteError(data.error || "Ocurrió un error al intentar eliminar el cliente.");

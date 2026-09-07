@@ -10,24 +10,25 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const ORDERS_FILE = path.join(process.cwd(), "data", "mercadito-orders.json");
 
 function ensureDataDir() {
-  const dir = path.dirname(ORDERS_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+  try {
+    const dir = path.dirname(ORDERS_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  } catch (e) {
+    // Ignorar en entorno de solo lectura
   }
 }
 
 export function getLocalStoredOrders(): MercaditoOrder[] {
   try {
-    ensureDataDir();
     if (!fs.existsSync(ORDERS_FILE)) {
-      fs.writeFileSync(ORDERS_FILE, JSON.stringify([], null, 2));
       return [];
     }
     const raw = fs.readFileSync(ORDERS_FILE, "utf-8");
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
   } catch (e) {
-    console.error("Error leyendo mercadito-orders.json:", e);
     return [];
   }
 }
@@ -39,8 +40,10 @@ export function saveLocalStoredOrder(order: MercaditoOrder): void {
     const filtered = existing.filter((o) => o.id !== order.id);
     const updated = [order, ...filtered];
     fs.writeFileSync(ORDERS_FILE, JSON.stringify(updated, null, 2));
-  } catch (e) {
-    console.error("Error guardando mercadito-orders.json:", e);
+  } catch (e: any) {
+    if (e.code !== "EROFS") {
+      console.warn("Aviso guardando mercadito-orders.json:", e.message);
+    }
   }
 }
 
@@ -51,6 +54,7 @@ export async function getAllOrders(): Promise<MercaditoOrder[]> {
     const { data, error } = await supabase
       .from("orders")
       .select("*")
+      .not("status", "in", '("customer_profile","customer_deleted")')
       .order("created_at", { ascending: false });
 
     if (!error && data && data.length > 0) {
