@@ -439,8 +439,17 @@ export default function CheckoutForm({ products }: Props) {
                   alt={selectedProduct.name}
                   fill
                   sizes="96px"
-                  className="object-cover"
+                  className={`object-cover ${
+                    selectedProduct.status === "sold" ? "grayscale contrast-125 brightness-90" : ""
+                  }`}
                 />
+                {selectedProduct.status === "sold" && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-10">
+                    <div className="w-[150%] py-1 bg-black/95 text-white text-center font-sans font-black tracking-[0.25em] text-[9px] uppercase border-y border-white/20 shadow-lg -rotate-12 select-none">
+                      SOLD OUT
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col justify-between h-28">

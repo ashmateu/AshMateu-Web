@@ -127,12 +127,21 @@ export default function MercaditoCatalog({ initialProducts }: Props) {
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 ${
-                        isSold ? "grayscale contrast-125 opacity-75" : ""
+                        isSold ? "grayscale contrast-125 brightness-90" : ""
                       }`}
                     />
 
+                    {/* CARTEL DE SOLD OUT CRUZANDO */}
+                    {isSold && (
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-20">
+                        <div className="w-[150%] py-2.5 sm:py-3 bg-[#0A0A0A]/95 text-white text-center font-sans font-black tracking-[0.35em] text-xs sm:text-sm uppercase border-y-2 border-white/25 shadow-[0_12px_35px_rgba(0,0,0,0.85)] backdrop-blur-md -rotate-12 select-none">
+                          SOLD OUT
+                        </div>
+                      </div>
+                    )}
+
                     {/* BADGES SUPERIORES */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-30">
                       <span className="px-3 py-1 rounded-full text-[9.5px] uppercase tracking-[0.22em] font-semibold bg-[#0A0A0A]/90 text-white backdrop-blur-md">
                         Pieza 1 de 1
                       </span>

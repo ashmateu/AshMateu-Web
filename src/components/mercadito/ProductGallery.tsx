@@ -7,9 +7,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 interface Props {
   images: string[];
   productName: string;
+  isSold?: boolean;
 }
 
-export default function ProductGallery({ images, productName }: Props) {
+export default function ProductGallery({ images, productName, isSold }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -84,8 +85,19 @@ export default function ProductGallery({ images, productName }: Props) {
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover transition-opacity duration-500 ease-in-out animate-in fade-in"
+            className={`object-cover transition-opacity duration-500 ease-in-out animate-in fade-in ${
+              isSold ? "grayscale contrast-125 brightness-90" : ""
+            }`}
           />
+
+          {/* CARTEL DE SOLD OUT CRUZANDO */}
+          {isSold && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-30">
+              <div className="w-[150%] py-3 sm:py-4 bg-[#0A0A0A]/95 text-white text-center font-sans font-black tracking-[0.4em] text-sm sm:text-base uppercase border-y-2 border-white/25 shadow-[0_15px_40px_rgba(0,0,0,0.85)] backdrop-blur-md -rotate-12 select-none">
+                SOLD OUT
+              </div>
+            </div>
+          )}
 
           {/* CONTROLES DE NAVEGACIÓN (IR Y VENIR) */}
           {total > 1 && (
@@ -167,7 +179,7 @@ export default function ProductGallery({ images, productName }: Props) {
                   alt={`${productName} vista ${idx + 1}`}
                   fill
                   sizes="80px"
-                  className="object-cover"
+                  className={`object-cover ${isSold ? "grayscale contrast-125" : ""}`}
                 />
               </button>
             );

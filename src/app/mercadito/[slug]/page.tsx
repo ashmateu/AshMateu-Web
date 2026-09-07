@@ -54,6 +54,7 @@ export default async function ProductDetailPage({ params }: Props) {
             <ProductGallery
               images={product.gallery_images}
               productName={product.name}
+              isSold={isSold}
             />
           </div>
 
