@@ -224,10 +224,11 @@ export async function deleteCustomer(idOrEmail: string): Promise<boolean> {
 
     // Intentar eliminar de Supabase si existe
     try {
-      await supabase
-        .from("subscribers")
-        .delete()
-        .or(`id.eq.${idOrEmail},email.eq.${cleanQuery}`);
+      if (cleanQuery.includes("@")) {
+        await supabase.from("subscribers").delete().ilike("email", cleanQuery);
+      } else {
+        await supabase.from("subscribers").delete().eq("id", idOrEmail);
+      }
     } catch (e) {
       // Ignorar error de supabase
     }

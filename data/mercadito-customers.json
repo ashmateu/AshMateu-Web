@@ -1,22 +1,5 @@
 [
   {
-    "id": "cust-1788806446110-l9kde9",
-    "name": "Sofia Calvo",
-    "email": "sofiacalvo@vogue.com",
-    "phone": "+54 9 11 9876 5432",
-    "instagram": "@sofiacalvo",
-    "city": "Buenos Aires",
-    "country": "Argentina",
-    "password": "",
-    "marketingOptIn": true,
-    "ordersCount": 0,
-    "totalSpent": 0,
-    "currency": "USD",
-    "firstRegisteredAt": "2026-09-07T18:40:46.110Z",
-    "lastActiveAt": "2026-09-07T18:40:46.111Z",
-    "notes": ""
-  },
-  {
     "id": "cust-ash-1001",
     "name": "Valentina Zenere",
     "email": "valentina.zenere@ashmateu.com",
@@ -31,21 +14,5 @@
     "firstRegisteredAt": "2026-08-15T14:20:00.000Z",
     "lastActiveAt": "2026-09-02T19:40:00.000Z",
     "notes": "Cliente VIP archivo. Amiga del atelier Ash Mateu."
-  },
-  {
-    "id": "cust-ash-1002",
-    "name": "Camila Morrone",
-    "email": "camila.morrone@ashmateu.com",
-    "phone": "+1 310 882-9014",
-    "instagram": "@camilamorrone",
-    "city": "Los Ángeles",
-    "country": "Estados Unidos",
-    "marketingOptIn": true,
-    "ordersCount": 1,
-    "totalSpent": 1319,
-    "currency": "USD",
-    "firstRegisteredAt": "2026-08-28T11:15:00.000Z",
-    "lastActiveAt": "2026-09-01T16:22:00.000Z",
-    "notes": "Interesada en sastrería vintage y piezas Gianni Versace."
   }
 ]

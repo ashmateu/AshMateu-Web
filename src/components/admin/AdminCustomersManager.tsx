@@ -16,11 +16,12 @@ import {
   Phone, 
   Instagram, 
   MapPin, 
-  DollarSign, 
-  CheckCircle2, 
-  RefreshCw,
+  DollarSign,
   FolderOpen,
-  Trash2
+  Trash2,
+  AlertTriangle,
+  CheckCircle2,
+  RefreshCw
 } from "lucide-react";
 
 export default function AdminCustomersManager() {
@@ -41,6 +42,12 @@ export default function AdminCustomersManager() {
     driveUrl: string;
     instructions?: string;
   } | null>(null);
+
+  // Deletion modal states (In-app, no browser window.confirm)
+  const [customerToDelete, setCustomerToDelete] = useState<MercaditoCustomer | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState("");
+  const [deleteSuccess, setDeleteSuccess] = useState("");
 
   const fetchCustomers = async () => {
     setLoading(true);
@@ -126,31 +133,36 @@ export default function AdminCustomersManager() {
     }
   };
 
-  // Delete customer handler
-  const [deletingId, setDeletingId] = useState<string | null>(null);
+  // Delete customer handler (In-app modal)
+  const openDeleteModal = (customer: MercaditoCustomer) => {
+    setDeleteError("");
+    setCustomerToDelete(customer);
+  };
 
-  const handleDeleteCustomer = async (customer: MercaditoCustomer) => {
-    const confirmDelete = window.confirm(
-      `¿Estás seguro de que deseas eliminar permanentemente a "${customer.name}" (${customer.email}) de la base de datos?`
-    );
-    if (!confirmDelete) return;
+  const confirmDeleteCustomer = async () => {
+    if (!customerToDelete) return;
 
-    setDeletingId(customer.id);
+    setDeletingId(customerToDelete.id);
+    setDeleteError("");
     try {
       const res = await fetch("/api/admin/customers", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: customer.id, email: customer.email }),
+        body: JSON.stringify({ id: customerToDelete.id, email: customerToDelete.email }),
       });
 
       if (res.ok) {
-        setCustomers((prev) => prev.filter((c) => c.id !== customer.id));
+        setCustomers((prev) => prev.filter((c) => c.id !== customerToDelete.id));
+        setDeleteSuccess(`Cliente "${customerToDelete.name}" (${customerToDelete.email}) eliminado permanentemente.`);
+        setCustomerToDelete(null);
+        setTimeout(() => setDeleteSuccess(""), 4500);
       } else {
-        alert("Ocurrió un error al intentar eliminar el cliente.");
+        const data = await res.json().catch(() => ({}));
+        setDeleteError(data.error || "Ocurrió un error al intentar eliminar el cliente.");
       }
     } catch (err) {
       console.error("Error al eliminar cliente:", err);
-      alert("Error de conexión al eliminar.");
+      setDeleteError("Error de conexión al eliminar.");
     } finally {
       setDeletingId(null);
     }
@@ -206,6 +218,23 @@ export default function AdminCustomersManager() {
           </button>
         </div>
       </div>
+
+      {/* Delete Success Alert */}
+      {deleteSuccess && (
+        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center justify-between animate-in fade-in duration-200 shadow-xs">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>{deleteSuccess}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setDeleteSuccess("")}
+            className="text-emerald-700 hover:text-emerald-900 text-xs font-semibold px-2 py-1"
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* GOOGLE DRIVE SYNC CARD (INFO@ASHMATEU.COM / VENTAS) */}
       <div className="p-6 rounded-[2rem] bg-gradient-to-r from-[#F7F3EE] via-white to-[#F7F3EE] border border-black/10 shadow-sm space-y-4">
@@ -520,7 +549,7 @@ export default function AdminCustomersManager() {
                       <td className="py-4 px-6 text-right">
                         <button
                           type="button"
-                          onClick={() => handleDeleteCustomer(customer)}
+                          onClick={() => openDeleteModal(customer)}
                           disabled={deletingId === customer.id}
                           className="p-1.5 rounded-lg text-neutral-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-40"
                           title={`Eliminar a ${customer.name}`}
@@ -536,6 +565,57 @@ export default function AdminCustomersManager() {
           </table>
         </div>
       </div>
+
+      {/* Modal de confirmación de eliminación de cliente */}
+      {customerToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="w-full max-w-md bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-black/10 space-y-5 animate-in zoom-in-95 duration-200">
+            <div className="flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-2xl bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                <Trash2 className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-[#0A0A0A]">
+                  ¿Eliminar cliente de la base?
+                </h3>
+                <p className="text-xs text-[#7A6A5A] mt-1 leading-relaxed">
+                  Estás a punto de borrar permanentemente a <strong className="text-[#0A0A0A] font-semibold">{customerToDelete.name}</strong> ({customerToDelete.email}).
+                </p>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-neutral-50 border border-black/5 text-xs text-[#524438] space-y-1">
+              <p>• Se eliminará del listado local y de la sincronización en Supabase.</p>
+              <p>• Su suscripción a marketing y accesos quedarán revocados.</p>
+            </div>
+
+            {deleteError && (
+              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700">
+                {deleteError}
+              </div>
+            )}
+
+            <div className="flex items-center justify-end gap-3 pt-2 border-t border-black/5">
+              <button
+                type="button"
+                disabled={Boolean(deletingId)}
+                onClick={() => { setCustomerToDelete(null); setDeleteError(""); }}
+                className="px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider text-[#7A6A5A] hover:text-[#0A0A0A] hover:bg-black/5 transition-all"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                disabled={Boolean(deletingId)}
+                onClick={confirmDeleteCustomer}
+                className="px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider bg-red-600 hover:bg-red-700 text-white transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center gap-2"
+              >
+                {deletingId ? "Eliminando..." : "Eliminar Definitivamente"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
