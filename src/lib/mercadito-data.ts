@@ -169,13 +169,18 @@ export async function getMercaditoProducts(): Promise<LuxuryProduct[]> {
     }));
 
     // Si Supabase tiene productos activos, Supabase es la fuente oficial y única de la verdad
-    if (mapped.length > 0) {
-      return mapped;
-    }
-
-    return localProducts;
+    const finalProducts = mapped.length > 0 ? mapped : localProducts;
+    return finalProducts.sort((a, b) => {
+      const aSold = a.status === "sold" || (a.stock !== undefined && a.stock <= 0) ? 1 : 0;
+      const bSold = b.status === "sold" || (b.stock !== undefined && b.stock <= 0) ? 1 : 0;
+      return aSold - bSold;
+    });
   } catch (e) {
-    return localProducts;
+    return localProducts.sort((a, b) => {
+      const aSold = a.status === "sold" || (a.stock !== undefined && a.stock <= 0) ? 1 : 0;
+      const bSold = b.status === "sold" || (b.stock !== undefined && b.stock <= 0) ? 1 : 0;
+      return aSold - bSold;
+    });
   }
 }
 

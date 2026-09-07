@@ -20,9 +20,9 @@ export default function MercaditoCatalog({ initialProducts }: Props) {
     return Array.from(set);
   }, [initialProducts]);
 
-  // Filtrado de productos
+  // Filtrado y ordenamiento de productos (Disponibles arriba, Vendidos abajo de todo)
   const filteredProducts = useMemo(() => {
-    return initialProducts.filter((p) => {
+    const filtered = initialProducts.filter((p) => {
       const matchCat =
         selectedCategory === "all" ||
         p.category.toLowerCase() === selectedCategory.toLowerCase();
@@ -30,6 +30,13 @@ export default function MercaditoCatalog({ initialProducts }: Props) {
         selectedDesigner === "all" ||
         p.designer.toLowerCase() === selectedDesigner.toLowerCase();
       return matchCat && matchDes;
+    });
+
+    // Los productos vendidos figuran abajo de todos los que estén disponibles
+    return filtered.sort((a, b) => {
+      const aSold = a.status === "sold" || (a.stock !== undefined && a.stock <= 0) ? 1 : 0;
+      const bSold = b.status === "sold" || (b.stock !== undefined && b.stock <= 0) ? 1 : 0;
+      return aSold - bSold;
     });
   }, [initialProducts, selectedCategory, selectedDesigner]);
 
