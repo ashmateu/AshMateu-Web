@@ -198,13 +198,13 @@ export default function AdminCustomersManager() {
 
           <div className="flex items-center gap-2.5">
             <a
-              href="https://drive.google.com/drive/u/0/my-drive"
+              href="https://drive.google.com/drive/folders/1X3zzD75EF_My144-5ZIpn7h6-P1XGW-u?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-black/15 text-xs text-[#0A0A0A] font-medium hover:bg-black/[0.03] transition-all"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-black/15 text-xs text-[#0A0A0A] font-medium hover:bg-black/[0.03] transition-all shadow-xs"
             >
-              <span>Abrir Drive</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#7A6A5A]" />
+              <span>Abrir Carpeta VENTAS</span>
+              <ExternalLink className="w-3.5 h-3.5 text-[#1a73e8]" />
             </a>
             <button
               type="button"

@@ -6,6 +6,8 @@ import { generateExcelWorkbookXML } from "@/lib/excel-export";
 
 const TARGET_DRIVE_ACCOUNT = "info@ashmateu.com";
 const TARGET_FOLDER_NAME = "VENTAS";
+const TARGET_FOLDER_ID = "1X3zzD75EF_My144-5ZIpn7h6-P1XGW-u";
+const TARGET_FOLDER_URL = "https://drive.google.com/drive/folders/1X3zzD75EF_My144-5ZIpn7h6-P1XGW-u?usp=sharing";
 
 export async function POST(req: NextRequest) {
   const isAuth = await isAdminAuthenticated();
@@ -50,15 +52,16 @@ export async function POST(req: NextRequest) {
       message: `Archivo '${fileName}' preparado para Google Drive (${TARGET_DRIVE_ACCOUNT} / carpeta '${TARGET_FOLDER_NAME}')`,
       targetAccount: TARGET_DRIVE_ACCOUNT,
       folderName: TARGET_FOLDER_NAME,
+      folderId: TARGET_FOLDER_ID,
       fileName,
       webhookTriggered,
       ordersCount: orders.length,
       customersCount: customers.length,
       timestamp: new Date().toISOString(),
-      driveUrl: "https://drive.google.com/drive/u/0/my-drive",
+      driveUrl: TARGET_FOLDER_URL,
       instructions: webhookTriggered
         ? "Sincronizado exitosamente mediante webhook con Google Drive."
-        : "Descarga el archivo Excel con 1-click y arrástralo directamente a tu carpeta 'VENTAS' en Google Drive (info@ashmateu.com), o configura GOOGLE_DRIVE_WEBHOOK_URL para sincronización en tiempo real automática.",
+        : "Descarga el archivo Excel con 1-click y arrástralo directamente a tu carpeta 'VENTAS' en Google Drive, o abre el enlace directo a la carpeta.",
     });
   } catch (err: any) {
     console.error("Error en sincronización con Drive:", err);
