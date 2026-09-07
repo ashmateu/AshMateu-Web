@@ -58,3 +58,27 @@ export interface MercaditoOrder {
   createdAt: string;
   whatsappMessageUrl?: string;
 }
+
+export interface MercaditoCustomer {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  instagram?: string;
+  city: string;
+  country: string;
+  password?: string;
+  marketingOptIn: boolean;
+  ordersCount: number;
+  totalSpent: number;
+  currency: 'USD' | 'ARS';
+  firstRegisteredAt: string;
+  lastActiveAt: string;
+  notes?: string;
+}
+
+export interface CustomerAuthSession {
+  customer: Omit<MercaditoCustomer, 'password'>;
+  token: string;
+}
+

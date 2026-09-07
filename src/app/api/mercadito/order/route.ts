@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { saveLocalStoredOrder } from "@/lib/mercadito-orders-storage";
+import { recordCustomerOrder } from "@/lib/mercadito-customers-storage";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://jrxklahobxpxmtnncvst.supabase.co";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd";
@@ -130,6 +131,20 @@ export async function POST(req: NextRequest) {
       saveLocalStoredOrder(orderData);
     } catch (saveErr) {
       console.warn("Error guardando orden local:", saveErr);
+    }
+
+    // 1b. Actualizar base de datos de marketing / clientes
+    if (buyerEmail) {
+      try {
+        await recordCustomerOrder(buyerEmail, numPrice, {
+          name: buyerName,
+          phone: buyerPhone,
+          city: shippingCity || "",
+          country: shippingCountry || "Argentina",
+        });
+      } catch (custErr) {
+        console.warn("Error actualizando base de marketing de cliente:", custErr);
+      }
     }
 
     // 2. Intentar guardar orden en Supabase

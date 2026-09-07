@@ -17,7 +17,9 @@ import {
   MapPin,
   User,
   Phone,
-  Mail
+  Mail,
+  FileSpreadsheet,
+  CloudUpload
 } from "lucide-react";
 
 const STATUS_CONFIG: Record<
@@ -213,10 +215,20 @@ export default function AdminOrdersManager() {
             </button>
           ))}
 
+          <a
+            href="/api/admin/export-excel"
+            download
+            title="Exportar Ventas y Clientes a Excel"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/10 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 text-[11px] font-semibold transition-colors ml-auto"
+          >
+            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="hidden sm:inline">Excel</span>
+          </a>
+
           <button
             onClick={fetchOrders}
             title="Actualizar listado"
-            className="p-2 rounded-full border border-black/10 hover:bg-neutral-100 transition-colors ml-auto text-neutral-600"
+            className="p-2 rounded-full border border-black/10 hover:bg-neutral-100 transition-colors text-neutral-600"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
           </button>

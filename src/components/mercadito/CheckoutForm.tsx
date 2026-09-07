@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { LuxuryProduct } from "@/types/mercadito";
+import { LuxuryProduct, MercaditoCustomer } from "@/types/mercadito";
+import CustomerAuthCard from "./CustomerAuthCard";
 import { 
   ArrowLeft, 
   ArrowUpRight, 
@@ -14,7 +15,8 @@ import {
   CreditCard,
   Building2,
   PhoneCall,
-  Check
+  Check,
+  AlertCircle
 } from "lucide-react";
 
 interface Props {
@@ -30,6 +32,10 @@ export default function CheckoutForm({ products }: Props) {
   const defaultProduct = products.find((p) => p.slug === piezaSlug) || products[0];
   const [selectedProduct, setSelectedProduct] = useState<LuxuryProduct>(defaultProduct);
 
+  // Customer Auth State
+  const [currentCustomer, setCurrentCustomer] = useState<MercaditoCustomer | null>(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
   // Form State
   const [formData, setFormData] = useState({
     buyerName: "",
@@ -44,6 +50,60 @@ export default function CheckoutForm({ products }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Verificar sesión existente en el cliente
+  useEffect(() => {
+    async function checkSession() {
+      try {
+        const res = await fetch("/api/mercadito/auth/me");
+        const data = await res.json();
+        if (data.authenticated && data.customer) {
+          setCurrentCustomer(data.customer);
+          setFormData((prev) => ({
+            ...prev,
+            buyerName: data.customer.name,
+            buyerEmail: data.customer.email,
+            buyerPhone: data.customer.phone,
+            shippingCity: data.customer.city || prev.shippingCity,
+            shippingCountry: data.customer.country || prev.shippingCountry,
+          }));
+        }
+      } catch (err) {
+        console.error("Error verificando sesión:", err);
+      } finally {
+        setCheckingAuth(false);
+      }
+    }
+    checkSession();
+  }, []);
+
+  const handleAuthSuccess = (customer: MercaditoCustomer) => {
+    setCurrentCustomer(customer);
+    setFormData((prev) => ({
+      ...prev,
+      buyerName: customer.name,
+      buyerEmail: customer.email,
+      buyerPhone: customer.phone,
+      shippingCity: customer.city || prev.shippingCity,
+      shippingCountry: customer.country || prev.shippingCountry,
+    }));
+    setError("");
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/mercadito/auth/logout", { method: "POST" });
+      setCurrentCustomer(null);
+      setFormData((prev) => ({
+        ...prev,
+        buyerName: "",
+        buyerEmail: "",
+        buyerPhone: "",
+      }));
+    } catch (err) {
+      console.error("Error al cerrar sesión:", err);
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -51,6 +111,13 @@ export default function CheckoutForm({ products }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (!currentCustomer) {
+      setError("Es obligatorio registrarte como miembro o iniciar sesión antes de reservar la pieza.");
+      // Scroll hacia la tarjeta de registro
+      window.scrollTo({ top: 100, behavior: "smooth" });
+      return;
+    }
 
     if (!formData.buyerName || !formData.buyerPhone || !formData.buyerEmail) {
       setError("Por favor completa nombre, email y WhatsApp para la reserva.");
@@ -107,236 +174,225 @@ export default function CheckoutForm({ products }: Props) {
         </div>
 
         {error && (
-          <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700">
-            {error}
+          <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
+            <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* DATOS DE CONTACTO */}
-          <div className="p-6 md:p-8 rounded-[2rem] bg-white border border-black/10 space-y-5">
-            <h2 className="text-xs uppercase tracking-[0.22em] font-semibold text-[#0A0A0A] border-b border-black/10 pb-3">
-              1. Datos del Titular
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="sm:col-span-2">
-                <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
-                  Nombre Completo *
-                </label>
-                <input
-                  type="text"
-                  name="buyerName"
-                  required
-                  placeholder="Ej: Clara Menéndez"
-                  value={formData.buyerName}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
-                  Email de Confirmación *
-                </label>
-                <input
-                  type="email"
-                  name="buyerEmail"
-                  required
-                  placeholder="nombre@email.com"
-                  value={formData.buyerEmail}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
-                  Teléfono / WhatsApp *
-                </label>
-                <input
-                  type="tel"
-                  name="buyerPhone"
-                  required
-                  placeholder="+54 9 11 ..."
-                  value={formData.buyerPhone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all"
-                />
-              </div>
-            </div>
+        <div className="space-y-6">
+          {/* PASO 1: AUTENTICACIÓN / REGISTRO OBLIGATORIO DE CLIENTE */}
+          <div>
+            <CustomerAuthCard
+              currentCustomer={currentCustomer}
+              onAuthSuccess={handleAuthSuccess}
+              onLogout={handleLogout}
+            />
           </div>
 
-          {/* DIRECCIÓN DE ENTREGA */}
-          <div className="p-6 md:p-8 rounded-[2rem] bg-white border border-black/10 space-y-5">
-            <h2 className="text-xs uppercase tracking-[0.22em] font-semibold text-[#0A0A0A] border-b border-black/10 pb-3">
-              2. Destino de Envío
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="sm:col-span-2">
-                <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
-                  Dirección y Altura
-                </label>
-                <input
-                  type="text"
-                  name="shippingAddress"
-                  placeholder="Av. Alvear 1850, Piso 4"
-                  value={formData.shippingAddress}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all"
-                />
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* DIRECCIÓN DE ENTREGA (PASO 2) */}
+            <div className={`p-6 md:p-8 rounded-[2rem] bg-white border border-black/10 space-y-5 transition-opacity duration-300 ${!currentCustomer ? "opacity-60 pointer-events-none" : ""}`}>
+              <div className="flex items-center justify-between border-b border-black/10 pb-3">
+                <h2 className="text-xs uppercase tracking-[0.22em] font-semibold text-[#0A0A0A]">
+                  2. Destino de Envío
+                </h2>
+                {!currentCustomer && (
+                  <span className="text-[10px] uppercase tracking-wider text-[#7A6A5A] bg-[#F7F3EE] px-2.5 py-1 rounded-full flex items-center gap-1">
+                    <Lock className="w-3 h-3" /> Bloqueado
+                  </span>
+                )}
               </div>
 
-              <div>
-                <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
-                  Ciudad / Provincia
-                </label>
-                <input
-                  type="text"
-                  name="shippingCity"
-                  placeholder="Buenos Aires"
-                  value={formData.shippingCity}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
-                  País
-                </label>
-                <input
-                  type="text"
-                  name="shippingCountry"
-                  value={formData.shippingCountry}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* MÉTODO DE PAGO PREFERIDO */}
-          <div className="p-6 md:p-8 rounded-[2rem] bg-white border border-black/10 space-y-5">
-            <h2 className="text-xs uppercase tracking-[0.22em] font-semibold text-[#0A0A0A] border-b border-black/10 pb-3">
-              3. Modalidad y Medio de Pago
-            </h2>
-
-            {(() => {
-              const deposit80 = Math.round(selectedProduct.price * 0.8);
-              const balance20 = selectedProduct.price - deposit80;
-
-              return (
-                <div className="space-y-3">
-                  {/* TRANSFERENCIA 80% */}
-                  <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="transferencia_80"
-                        checked={formData.paymentMethod === "transferencia_80"}
-                        onChange={handleChange}
-                        className="accent-[#0A0A0A]"
-                      />
-                      <div>
-                        <span className="text-xs font-semibold text-[#0A0A0A] block">
-                          Transferencia Bancaria — Anticipo 80% (${deposit80.toLocaleString("en-US")} {selectedProduct.currency})
-                        </span>
-                        <span className="text-[11px] text-[#7A6A5A]">
-                          Cubre la compra directa en origen y el despacho asegurado. Saldo del 20% (${balance20.toLocaleString("en-US")} {selectedProduct.currency}) contra entrega.
-                        </span>
-                      </div>
-                    </div>
-                    <Building2 className="w-4 h-4 text-[#B5A898] shrink-0" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="sm:col-span-2">
+                  <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
+                    Dirección y Altura
                   </label>
-
-                  {/* ZELLE 80% */}
-                  <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="zelle_80"
-                        checked={formData.paymentMethod === "zelle_80"}
-                        onChange={handleChange}
-                        className="accent-[#0A0A0A]"
-                      />
-                      <div>
-                        <span className="text-xs font-semibold text-[#0A0A0A] block">
-                          Zelle (EE.UU.) — Anticipo 80% (${deposit80.toLocaleString("en-US")} {selectedProduct.currency})
-                        </span>
-                        <span className="text-[11px] text-[#7A6A5A]">
-                          Transferencia instantánea en USD vía Zelle directo a cuenta en EE.UU. Saldo 20% (${balance20.toLocaleString("en-US")} {selectedProduct.currency}) contra entrega.
-                        </span>
-                      </div>
-                    </div>
-                    <CreditCard className="w-4 h-4 text-[#B5A898] shrink-0" />
-                  </label>
-
-                  {/* TRANSFERENCIA 100% */}
-                  <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="transferencia_100"
-                        checked={formData.paymentMethod === "transferencia_100"}
-                        onChange={handleChange}
-                        className="accent-[#0A0A0A]"
-                      />
-                      <div>
-                        <span className="text-xs font-semibold text-[#0A0A0A] block">
-                          Transferencia Bancaria — Pago Total 100% (${selectedProduct.price.toLocaleString("en-US")} {selectedProduct.currency})
-                        </span>
-                        <span className="text-[11px] text-[#7A6A5A]">
-                          Cancelación completa en cuenta bancaria oficial (USD o ARS a cotización del día).
-                        </span>
-                      </div>
-                    </div>
-                    <Building2 className="w-4 h-4 text-[#B5A898] shrink-0" />
-                  </label>
-
-                  {/* ZELLE 100% */}
-                  <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="zelle_100"
-                        checked={formData.paymentMethod === "zelle_100"}
-                        onChange={handleChange}
-                        className="accent-[#0A0A0A]"
-                      />
-                      <div>
-                        <span className="text-xs font-semibold text-[#0A0A0A] block">
-                          Zelle (EE.UU.) — Pago Total 100% (${selectedProduct.price.toLocaleString("en-US")} {selectedProduct.currency})
-                        </span>
-                        <span className="text-[11px] text-[#7A6A5A]">
-                          Pago completo inmediato en USD sin comisiones vía Zelle.
-                        </span>
-                      </div>
-                    </div>
-                    <CreditCard className="w-4 h-4 text-[#B5A898] shrink-0" />
-                  </label>
+                  <input
+                    type="text"
+                    name="shippingAddress"
+                    placeholder="Av. Alvear 1850, Piso 4"
+                    value={formData.shippingAddress}
+                    onChange={handleChange}
+                    disabled={!currentCustomer}
+                    className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all disabled:cursor-not-allowed"
+                  />
                 </div>
-              );
-            })()}
-          </div>
 
-          {/* BOTÓN ISLAND CTA SUBMIT */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="group w-full flex items-center justify-between pl-8 pr-2 py-2 rounded-full bg-[#0A0A0A] text-white text-xs uppercase tracking-[0.24em] font-medium transition-all duration-300 hover:bg-[#7A6A5A] active:scale-[0.98] shadow-xl shadow-black/10 disabled:opacity-50"
-          >
-            <span>{loading ? "Reservando Pieza..." : "Confirmar Reserva & Pasar a WhatsApp"}</span>
-            <span className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
-              <ArrowUpRight className="w-5 h-5 text-white" />
-            </span>
-          </button>
-        </form>
+                <div>
+                  <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
+                    Ciudad / Provincia
+                  </label>
+                  <input
+                    type="text"
+                    name="shippingCity"
+                    placeholder="Buenos Aires"
+                    value={formData.shippingCity}
+                    onChange={handleChange}
+                    disabled={!currentCustomer}
+                    className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all disabled:cursor-not-allowed"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10.5px] uppercase tracking-[0.16em] text-[#7A6A5A] mb-1.5 font-medium">
+                    País
+                  </label>
+                  <input
+                    type="text"
+                    name="shippingCountry"
+                    value={formData.shippingCountry}
+                    onChange={handleChange}
+                    disabled={!currentCustomer}
+                    className="w-full px-4 py-3 rounded-xl border border-black/15 text-sm bg-[#F7F3EE]/30 focus:outline-none focus:border-[#0A0A0A] focus:bg-white transition-all disabled:cursor-not-allowed"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* MÉTODO DE PAGO PREFERIDO (PASO 3) */}
+            <div className={`p-6 md:p-8 rounded-[2rem] bg-white border border-black/10 space-y-5 transition-opacity duration-300 ${!currentCustomer ? "opacity-60 pointer-events-none" : ""}`}>
+              <div className="flex items-center justify-between border-b border-black/10 pb-3">
+                <h2 className="text-xs uppercase tracking-[0.22em] font-semibold text-[#0A0A0A]">
+                  3. Modalidad y Medio de Pago
+                </h2>
+                {!currentCustomer && (
+                  <span className="text-[10px] uppercase tracking-wider text-[#7A6A5A] bg-[#F7F3EE] px-2.5 py-1 rounded-full flex items-center gap-1">
+                    <Lock className="w-3 h-3" /> Bloqueado
+                  </span>
+                )}
+              </div>
+
+              {(() => {
+                const deposit80 = Math.round(selectedProduct.price * 0.8);
+                const balance20 = selectedProduct.price - deposit80;
+
+                return (
+                  <div className="space-y-3">
+                    {/* TRANSFERENCIA 80% */}
+                    <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="transferencia_80"
+                          checked={formData.paymentMethod === "transferencia_80"}
+                          onChange={handleChange}
+                          disabled={!currentCustomer}
+                          className="accent-[#0A0A0A]"
+                        />
+                        <div>
+                          <span className="text-xs font-semibold text-[#0A0A0A] block">
+                            Transferencia Bancaria — Anticipo 80% (${deposit80.toLocaleString("en-US")} {selectedProduct.currency})
+                          </span>
+                          <span className="text-[11px] text-[#7A6A5A]">
+                            Cubre la compra directa en origen y el despacho asegurado. Saldo del 20% (${balance20.toLocaleString("en-US")} {selectedProduct.currency}) contra entrega.
+                          </span>
+                        </div>
+                      </div>
+                      <Building2 className="w-4 h-4 text-[#B5A898] shrink-0" />
+                    </label>
+
+                    {/* ZELLE 80% */}
+                    <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="zelle_80"
+                          checked={formData.paymentMethod === "zelle_80"}
+                          onChange={handleChange}
+                          disabled={!currentCustomer}
+                          className="accent-[#0A0A0A]"
+                        />
+                        <div>
+                          <span className="text-xs font-semibold text-[#0A0A0A] block">
+                            Zelle (EE.UU.) — Anticipo 80% (${deposit80.toLocaleString("en-US")} {selectedProduct.currency})
+                          </span>
+                          <span className="text-[11px] text-[#7A6A5A]">
+                            Transferencia instantánea en USD vía Zelle directo a cuenta en EE.UU. Saldo 20% (${balance20.toLocaleString("en-US")} {selectedProduct.currency}) contra entrega.
+                          </span>
+                        </div>
+                      </div>
+                      <CreditCard className="w-4 h-4 text-[#B5A898] shrink-0" />
+                    </label>
+
+                    {/* TRANSFERENCIA 100% */}
+                    <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="transferencia_100"
+                          checked={formData.paymentMethod === "transferencia_100"}
+                          onChange={handleChange}
+                          disabled={!currentCustomer}
+                          className="accent-[#0A0A0A]"
+                        />
+                        <div>
+                          <span className="text-xs font-semibold text-[#0A0A0A] block">
+                            Transferencia Bancaria — Pago Total 100% (${selectedProduct.price.toLocaleString("en-US")} {selectedProduct.currency})
+                          </span>
+                          <span className="text-[11px] text-[#7A6A5A]">
+                            Cancelación completa en cuenta bancaria oficial (USD o ARS a cotización del día).
+                          </span>
+                        </div>
+                      </div>
+                      <Building2 className="w-4 h-4 text-[#B5A898] shrink-0" />
+                    </label>
+
+                    {/* ZELLE 100% */}
+                    <label className="flex items-center justify-between p-4 rounded-xl border border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors">
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="zelle_100"
+                          checked={formData.paymentMethod === "zelle_100"}
+                          onChange={handleChange}
+                          disabled={!currentCustomer}
+                          className="accent-[#0A0A0A]"
+                        />
+                        <div>
+                          <span className="text-xs font-semibold text-[#0A0A0A] block">
+                            Zelle (EE.UU.) — Pago Total 100% (${selectedProduct.price.toLocaleString("en-US")} {selectedProduct.currency})
+                          </span>
+                          <span className="text-[11px] text-[#7A6A5A]">
+                            Pago completo inmediato en USD sin comisiones vía Zelle.
+                          </span>
+                        </div>
+                      </div>
+                      <CreditCard className="w-4 h-4 text-[#B5A898] shrink-0" />
+                    </label>
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* BOTÓN ISLAND CTA SUBMIT */}
+            <button
+              type="submit"
+              disabled={loading || !currentCustomer}
+              className={`group w-full flex items-center justify-between pl-8 pr-2 py-2 rounded-full text-white text-xs uppercase tracking-[0.24em] font-medium transition-all duration-300 shadow-xl shadow-black/10 ${
+                !currentCustomer
+                  ? "bg-[#0A0A0A]/40 cursor-not-allowed text-white/60"
+                  : "bg-[#0A0A0A] hover:bg-[#7A6A5A] active:scale-[0.98]"
+              }`}
+            >
+              <span>
+                {loading 
+                  ? "Reservando Pieza..." 
+                  : !currentCustomer 
+                    ? "Completa tu Registro de Miembro Arriba para Continuar" 
+                    : "Confirmar Reserva & Pasar a WhatsApp"}
+              </span>
+              <span className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                <ArrowUpRight className="w-5 h-5 text-white" />
+              </span>
+            </button>
+          </form>
+        </div>
       </div>
 
       {/* RESUMEN DE COMPRA (COLUMNA DERECHA) - DOUBLE BEZEL */}
@@ -460,7 +516,7 @@ export default function CheckoutForm({ products }: Props) {
                 <span>Reserva Segura 1 de 1</span>
               </div>
               <p>
-                Tu reserva congela la disponibilidad del artículo mientras coordinas los detalles con el equipo de Ash.
+                Tu membresía garantiza prioridad en la asignación de la pieza mientras el concierge coordina contigo.
               </p>
             </div>
           </div>
