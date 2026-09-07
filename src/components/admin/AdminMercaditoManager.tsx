@@ -16,7 +16,8 @@ import {
   Save,
   Tag,
   Download,
-  Camera
+  Camera,
+  RefreshCw
 } from "lucide-react";
 import InstagramPostGeneratorModal from "./InstagramPostGeneratorModal";
 
@@ -31,6 +32,7 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
   const [instagramProduct, setInstagramProduct] = useState<LuxuryProduct | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [checkingTRR, setCheckingTRR] = useState(false);
   const [message, setMessage] = useState("");
 
   // Filtrar por búsqueda
@@ -137,6 +139,43 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
     }
   };
 
+  // Verificar stock en The RealReal automáticamente
+  const handleCheckTRRStock = async () => {
+    setCheckingTRR(true);
+    setMessage("✦ Conectando con The RealReal para verificar disponibilidad de piezas...");
+
+    try {
+      const res = await fetch("/api/mercadito/sync/trr-check", { method: "POST" });
+      const data = await res.json();
+
+      if (res.ok) {
+        if (data.soldCount > 0) {
+          setMessage(`✦ ¡Sincronización completada! Se detectaron y marcaron ${data.soldCount} piezas como Sold Out.`);
+        } else {
+          setMessage(`✦ Verificación completada: Todas las piezas activas continúan disponibles.`);
+        }
+
+        // Actualizar el estado de los productos en pantalla si fueron marcados
+        if (data.results && Array.isArray(data.results)) {
+          const soldIds = new Set(data.results.filter((r: any) => r.isSold).map((r: any) => r.productId));
+          if (soldIds.size > 0) {
+            setProducts((prev) =>
+              prev.map((p) => (soldIds.has(p.id) ? { ...p, status: "sold" as const, stock: 0 } : p))
+            );
+          }
+        }
+      } else {
+        setMessage("Aviso: " + (data.error || "No se pudo completar el chequeo automático."));
+      }
+    } catch (e) {
+      console.error(e);
+      setMessage("Error al conectar con el verificador de stock.");
+    } finally {
+      setCheckingTRR(false);
+      setTimeout(() => setMessage(""), 6000);
+    }
+  };
+
   // Eliminar producto
   const handleDeleteProduct = async (product: LuxuryProduct) => {
     if (!confirm(`¿Deseas eliminar "${product.name}" de El Mercadito?`)) {
@@ -186,6 +225,17 @@ export default function AdminMercaditoManager({ initialProducts }: Props) {
             <Download className="w-4 h-4 text-[#B5A898]" />
             <span>Descargar Extensión (.ZIP)</span>
           </a>
+
+          <button
+            type="button"
+            onClick={handleCheckTRRStock}
+            disabled={checkingTRR}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/15 text-[#0A0A0A] text-xs uppercase tracking-[0.2em] font-medium hover:bg-black/5 transition-colors disabled:opacity-50"
+            title="Verifica en The RealReal cuáles piezas siguen activas y marca como Sold Out las que ya no están"
+          >
+            <RefreshCw className={`w-4 h-4 text-[#7A6A5A] ${checkingTRR ? "animate-spin" : ""}`} />
+            <span>{checkingTRR ? "Verificando TRR..." : "Verificar Stock en TRR"}</span>
+          </button>
 
           <button
             type="button"

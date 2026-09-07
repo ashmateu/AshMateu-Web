@@ -208,3 +208,34 @@ export async function recordCustomerOrder(
     });
   }
 }
+
+export async function deleteCustomer(idOrEmail: string): Promise<boolean> {
+  try {
+    ensureDataDir();
+    const current = getLocalStoredCustomers();
+    const cleanQuery = idOrEmail.trim().toLowerCase();
+
+    const filtered = current.filter(
+      (c) => c.id !== idOrEmail && c.email.toLowerCase() !== cleanQuery
+    );
+
+    const wasRemoved = filtered.length < current.length;
+    fs.writeFileSync(CUSTOMERS_FILE, JSON.stringify(filtered, null, 2));
+
+    // Intentar eliminar de Supabase si existe
+    try {
+      await supabase
+        .from("subscribers")
+        .delete()
+        .or(`id.eq.${idOrEmail},email.eq.${cleanQuery}`);
+    } catch (e) {
+      // Ignorar error de supabase
+    }
+
+    return wasRemoved;
+  } catch (err) {
+    console.error("Error eliminando cliente:", err);
+    return false;
+  }
+}
+

@@ -91,8 +91,27 @@ export default async function ProductDetailPage({ params }: Props) {
             {/* BOTÓN CTA CHECKOUT DIRECTO */}
             <div>
               {isSold ? (
-                <div className="p-4 rounded-2xl bg-black/5 text-center text-xs uppercase tracking-[0.2em] text-[#7A6A5A] font-medium">
-                  Esta pieza ya fue adquirida por otro coleccionista
+                <div className="p-6 rounded-[2rem] bg-black/[0.03] border border-black/10 text-center space-y-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A0A0A] text-white text-[10px] uppercase tracking-[0.25em] font-bold">
+                    Sold Out
+                  </div>
+                  <h3 className="font-serif text-lg text-[#0A0A0A]">
+                    Esta pieza única ya fue adquirida
+                  </h3>
+                  <p className="text-xs text-[#7A6A5A] max-w-sm mx-auto font-light leading-relaxed">
+                    Nuestras piezas de archivo son únicas (1 de 1). Si buscás este modelo o similar, consultá con nuestro concierge y lo rastreamos en origen.
+                  </p>
+                  <a
+                    href={`https://wa.me/5491123823297?text=${encodeURIComponent(
+                      `¡Hola Ash Mateu Concierge! Vi que la pieza ${product.designer} — ${product.name} está Sold Out en El Mercadito. ¿Es posible conseguir una unidad similar?`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A0A0A] text-white text-xs uppercase tracking-wider font-medium hover:bg-[#7A6A5A] transition-all"
+                  >
+                    <span>Consultar pieza similar</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+                  </a>
                 </div>
               ) : isReserved ? (
                 <div className="p-4 rounded-2xl bg-[#B5A898]/20 border border-[#B5A898]/40 text-center text-xs uppercase tracking-[0.2em] text-[#0A0A0A] font-medium">

@@ -70,3 +70,36 @@ export function deleteStoredProduct(idOrSlug: string): boolean {
     return false;
   }
 }
+
+export function updateProductStatus(
+  idOrSlug: string,
+  status: "available" | "reserved" | "sold",
+  stock?: number
+): boolean {
+  try {
+    ensureDataDir();
+    const existing = getStoredProducts();
+    let updated = false;
+    const mapped = existing.map((p) => {
+      if (p.id === idOrSlug || p.slug === idOrSlug) {
+        updated = true;
+        return {
+          ...p,
+          status,
+          stock: stock !== undefined ? stock : (status === "sold" ? 0 : p.stock),
+          updated_at: new Date().toISOString(),
+        };
+      }
+      return p;
+    });
+
+    if (updated) {
+      fs.writeFileSync(DATA_FILE, JSON.stringify(mapped, null, 2));
+    }
+    return updated;
+  } catch (e) {
+    console.error("Error actualizando status de producto:", e);
+    return false;
+  }
+}
+

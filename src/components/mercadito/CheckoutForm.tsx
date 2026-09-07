@@ -119,6 +119,11 @@ export default function CheckoutForm({ products }: Props) {
       return;
     }
 
+    if (selectedProduct.status === "sold" || selectedProduct.stock === 0) {
+      setError("Esta pieza única ya fue vendida y no se encuentra disponible para reserva.");
+      return;
+    }
+
     if (!formData.buyerName || !formData.buyerPhone || !formData.buyerEmail) {
       setError("Por favor completa nombre, email y WhatsApp para la reserva.");
       return;

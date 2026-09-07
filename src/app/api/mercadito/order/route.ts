@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { saveLocalStoredOrder } from "@/lib/mercadito-orders-storage";
 import { recordCustomerOrder } from "@/lib/mercadito-customers-storage";
+import { updateProductStatus } from "@/lib/mercadito-storage";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://jrxklahobxpxmtnncvst.supabase.co";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_8vdBzcFdNVhjtjK9a4ZE9A_FPmxsHhd";
@@ -92,15 +94,30 @@ export async function POST(req: NextRequest) {
       console.warn("No se pudo enviar email de notificación de orden:", mailErr);
     }
 
-    // Intentar actualizar el stock en Supabase a 'reserved'
-    if (productId && !productId.startsWith("trr-")) {
+    // 1. Marcar de inmediato la pieza como Vendida (Sold Out) y stock 0
+    if (productId) {
+      try {
+        updateProductStatus(productId, "sold", 0);
+      } catch (err) {
+        console.warn("Error actualizando status de producto local:", err);
+      }
+
+      // Intentar actualizar también en Supabase
       try {
         await supabase
           .from("products")
-          .update({ status: "reserved" })
-          .eq("id", productId);
+          .update({ status: "sold", stock: 0 })
+          .or(`id.eq.${productId},slug.eq.${productId}`);
       } catch (err) {
         console.warn("No se pudo actualizar status en Supabase:", err);
+      }
+
+      // Revalidar caché del catálogo y la pieza
+      try {
+        revalidatePath("/mercadito");
+        revalidatePath("/admin");
+      } catch (revalErr) {
+        // Ignorar
       }
     }
 

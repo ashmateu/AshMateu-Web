@@ -1,5 +1,53 @@
 [
   {
+    "id": "8f96101d-3e13-405b-af50-8bd7b22cb192",
+    "slug": "christian-dior-sorealpop-aviator-sunglasses-q435",
+    "name": "SoRealPop Aviator Sunglasses",
+    "designer": "Christian Dior",
+    "category": "accesorios",
+    "price": 210,
+    "currency": "USD",
+    "condition_state": "Excellent (Excelente estado)",
+    "dimensions": "",
+    "materials": "",
+    "image_url": "https://product-images.therealreal.com/CHR579980_1_enlarged.jpg",
+    "gallery_images": [
+      "https://product-images.therealreal.com/CHR579980_1_enlarged.jpg",
+      "https://product-images.therealreal.com/CHR579980_2_enlarged.jpg",
+      "https://product-images.therealreal.com/CHR579980_3_enlarged.jpg"
+    ],
+    "source_url": "https://www.therealreal.com/products/women/accessories/sunglasses/christian-dior-sorealpop-aviator-sunglasses-u5c46",
+    "is_unique_piece": true,
+    "status": "sold",
+    "ash_styling_tip": "",
+    "stock": 1,
+    "description": "Christian Dior Aviator Sunglasses.\nGold Tone Metal.\nPatterned.\nGradient Lenses.\nIncludes Case.\n"
+  },
+  {
+    "id": "38b5521f-9f19-4f80-b781-2f11a982218d",
+    "slug": "tory-burch-aviator-gradient-sunglasses-kt69",
+    "name": "Aviator Gradient Sunglasses",
+    "designer": "Tory Burch",
+    "category": "accesorios",
+    "price": 145,
+    "currency": "USD",
+    "condition_state": "Excellent (Excelente estado)",
+    "dimensions": "",
+    "materials": "",
+    "image_url": "https://product-images.therealreal.com/WTO844816_1_enlarged.jpg",
+    "gallery_images": [
+      "https://product-images.therealreal.com/WTO844816_1_enlarged.jpg",
+      "https://product-images.therealreal.com/WTO844816_2_enlarged.jpg",
+      "https://product-images.therealreal.com/WTO844816_3_enlarged.jpg"
+    ],
+    "source_url": "https://www.therealreal.com/products/women/accessories/sunglasses/tory-burch-aviator-gradient-sunglasses-vkbbk",
+    "is_unique_piece": true,
+    "status": "available",
+    "ash_styling_tip": "",
+    "stock": 1,
+    "description": "Tory Burch Aviator Sunglasses.\nRose Gold Tone Metal.\nPrinted.\nGradient Lenses.\nIncludes Dust Bag &amp; Case.\n"
+  },
+  {
     "id": "trr-1788460555162",
     "slug": "tory-burch-suede-slides-ti0b",
     "name": "Suede Slides",

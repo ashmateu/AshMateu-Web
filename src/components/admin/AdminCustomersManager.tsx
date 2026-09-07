@@ -19,7 +19,8 @@ import {
   DollarSign, 
   CheckCircle2, 
   RefreshCw,
-  FolderOpen
+  FolderOpen,
+  Trash2
 } from "lucide-react";
 
 export default function AdminCustomersManager() {
@@ -122,6 +123,36 @@ export default function AdminCustomersManager() {
       console.error("Error sincronizando Drive:", err);
     } finally {
       setDriveSyncing(false);
+    }
+  };
+
+  // Delete customer handler
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const handleDeleteCustomer = async (customer: MercaditoCustomer) => {
+    const confirmDelete = window.confirm(
+      `¿Estás seguro de que deseas eliminar permanentemente a "${customer.name}" (${customer.email}) de la base de datos?`
+    );
+    if (!confirmDelete) return;
+
+    setDeletingId(customer.id);
+    try {
+      const res = await fetch("/api/admin/customers", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: customer.id, email: customer.email }),
+      });
+
+      if (res.ok) {
+        setCustomers((prev) => prev.filter((c) => c.id !== customer.id));
+      } else {
+        alert("Ocurrió un error al intentar eliminar el cliente.");
+      }
+    } catch (err) {
+      console.error("Error al eliminar cliente:", err);
+      alert("Error de conexión al eliminar.");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -360,18 +391,19 @@ export default function AdminCustomersManager() {
                 <th className="py-4 px-6 font-semibold">Historial Compras</th>
                 <th className="py-4 px-6 font-semibold">Marketing</th>
                 <th className="py-4 px-6 font-semibold">Registro</th>
+                <th className="py-4 px-6 font-semibold text-right">Acción</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5 text-xs">
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-[#7A6A5A]">
+                  <td colSpan={8} className="py-12 text-center text-[#7A6A5A]">
                     Cargando base de clientes...
                   </td>
                 </tr>
               ) : filteredCustomers.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-[#7A6A5A]">
+                  <td colSpan={8} className="py-12 text-center text-[#7A6A5A]">
                     No se encontraron clientes con los filtros aplicados.
                   </td>
                 </tr>
@@ -482,6 +514,19 @@ export default function AdminCustomersManager() {
                       {/* Fecha de Registro */}
                       <td className="py-4 px-6 text-[#7A6A5A] text-[11px] whitespace-nowrap">
                         {customer.firstRegisteredAt ? new Date(customer.firstRegisteredAt).toLocaleDateString("es-AR") : "—"}
+                      </td>
+
+                      {/* Botón de Eliminar */}
+                      <td className="py-4 px-6 text-right">
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteCustomer(customer)}
+                          disabled={deletingId === customer.id}
+                          className="p-1.5 rounded-lg text-neutral-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-40"
+                          title={`Eliminar a ${customer.name}`}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </td>
                     </tr>
                   );

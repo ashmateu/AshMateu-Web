@@ -126,7 +126,9 @@ export default function MercaditoCatalog({ initialProducts }: Props) {
                       alt={product.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105"
+                      className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 ${
+                        isSold ? "grayscale contrast-125 opacity-75" : ""
+                      }`}
                     />
 
                     {/* BADGES SUPERIORES */}
@@ -136,15 +138,15 @@ export default function MercaditoCatalog({ initialProducts }: Props) {
                       </span>
 
                       {isSold ? (
-                        <span className="px-3 py-1 rounded-full text-[9.5px] uppercase tracking-[0.22em] font-medium bg-black/60 text-white backdrop-blur-md">
-                          Vendida
+                        <span className="px-3.5 py-1 rounded-full text-[9.5px] uppercase tracking-[0.24em] font-bold bg-[#0A0A0A] text-white border border-white/20 shadow-md">
+                          Sold Out
                         </span>
                       ) : isReserved ? (
-                        <span className="px-3 py-1 rounded-full text-[9.5px] uppercase tracking-[0.22em] font-medium bg-[#7A6A5A]/80 text-white backdrop-blur-md">
+                        <span className="px-3 py-1 rounded-full text-[9.5px] uppercase tracking-[0.22em] font-medium bg-[#7A6A5A] text-white backdrop-blur-md">
                           En Reserva
                         </span>
                       ) : (
-                        <span className="px-3 py-1 rounded-full text-[9.5px] uppercase tracking-[0.22em] font-medium bg-white/90 text-[#0A0A0A] backdrop-blur-md border border-black/10">
+                        <span className="px-3 py-1 rounded-full text-[9.5px] uppercase tracking-[0.22em] font-medium bg-white/95 text-[#0A0A0A] backdrop-blur-md border border-black/10">
                           Disponible
                         </span>
                       )}
@@ -189,11 +191,17 @@ export default function MercaditoCatalog({ initialProducts }: Props) {
                       {/* BUTTON-IN-BUTTON CTA */}
                       <Link
                         href={`/mercadito/${product.slug}`}
-                        className="group/btn inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full bg-[#0A0A0A] text-white text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 hover:bg-[#7A6A5A] active:scale-[0.98]"
+                        className={`group/btn inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 ${
+                          isSold
+                            ? "bg-black/10 text-[#7A6A5A] hover:bg-black/15"
+                            : "bg-[#0A0A0A] text-white hover:bg-[#7A6A5A] active:scale-[0.98]"
+                        }`}
                       >
-                        <span>Ver Ficha</span>
-                        <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
-                          <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+                        <span>{isSold ? "Pieza Vendida" : "Ver Ficha"}</span>
+                        <span className={`w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 ${
+                          isSold ? "bg-black/10 text-[#7A6A5A]" : "bg-white/15 text-white"
+                        }`}>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </span>
                       </Link>
                     </div>
