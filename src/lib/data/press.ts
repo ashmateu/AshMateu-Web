@@ -81,7 +81,7 @@ export const fallbackPressArticles: PressArticle[] = [
     publication: "Marie Claire Argentina",
     publication_date: "2025-03-11",
     url: "https://marieclaire.perfil.com/noticias/moda/chanel-en-paris-7-tendencias-que-marcaran-la-proxima-temporada.phtml",
-    cover_url: "/images/extracted/chanel-williamsburg/img-000.webp",
+    cover_url: "/images/extracted/chanel-pap/img-000.webp",
     excerpt: "Las claves que dejó el desfile en el Grand Palais: paletas minerales, capas transparentes y accesorios joya.",
     category: "Tendencias",
   },

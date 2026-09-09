@@ -1,8 +1,8 @@
 .next/
 node_modules/
-public/images/catalog_v2/
 public/videos/*.mp4
 public/videos/*.webm
+public/images/catalog/09_videos_reels_backstage/
 .git/
 .agents/
 .claude/

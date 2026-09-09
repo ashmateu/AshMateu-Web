@@ -339,7 +339,7 @@ export const projects: Project[] = [
       "/images/extracted/gucci-rural/img-000.webp",
       "/images/extracted/gucci-rural/img-001.webp",
       "/images/extracted/gucci-rural/img-002.webp",
-      "/images/extracted/gucci-rural/img-003.webp",
+      "/images/extracted/gucci-rural/img-strip.webp",
     ],
     description:
       "Producción de moda en los paisajes rurales de Upstate New York combinando la sastrería y accesorios icónicos de Gucci con elementos naturales y rústicos.",
