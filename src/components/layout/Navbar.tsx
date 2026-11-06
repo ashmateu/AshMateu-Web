@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -10,11 +9,56 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const lightHeader = pathname !== "/";
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    menuRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const items = menuRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])'
+      );
+      if (!items?.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      desktop.removeEventListener("change", closeOnDesktop);
+      menuButtonRef.current?.focus({ preventScroll: true });
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -36,7 +80,7 @@ export default function Navbar() {
         {/* PROGRESSIVE TRANSLUCENT GRADIENT COVERING THE TOP 50% OF THE VIEWPORT */}
         <div
           className={`pointer-events-none absolute inset-x-0 top-0 h-[50svh] transition-opacity duration-700 ${
-            scrolled ? "opacity-0" : "opacity-100"
+            scrolled || lightHeader ? "opacity-0" : "opacity-100"
           }`}
           style={{
             background:
@@ -47,22 +91,27 @@ export default function Navbar() {
         {/* MAIN NAV BAR CONTAINER */}
         <div
           className={`relative z-10 w-full transition-all duration-500 ${
-            scrolled
-              ? "bg-[#0a0a0a]/92 backdrop-blur-2xl py-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.6)] border-b border-white/10"
-              : "pt-7 sm:pt-8 md:pt-9 pb-5 md:pb-6"
+            lightHeader
+              ? "bg-[#F7F3EE]/96 backdrop-blur-md py-3.5 border-b border-[#B5A898]/35"
+              : scrolled
+                ? "bg-[#0a0a0a]/92 backdrop-blur-md py-3.5 border-b border-white/10"
+                : "pt-7 sm:pt-8 md:pt-9 pb-5 md:pb-6"
           }`}
         >
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between gap-5">
             {/* NAV LINKS (HOME + EXTENDED TRACKING & BREATHING SPACE) */}
-            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] sm:text-[13.5px] tracking-[0.28em] xl:tracking-[0.32em] uppercase font-medium text-white/95">
+            <ul className="hidden lg:flex items-center gap-4 xl:gap-6 text-[11px] xl:text-[12px] tracking-[0.14em] xl:tracking-[0.2em] uppercase font-medium">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className={`transition-colors py-1.5 relative hover:text-white group flex items-center ${
-                        isActive ? "text-white font-semibold" : "text-white/85"
+                      aria-current={isActive ? "page" : undefined}
+                      className={`transition-colors py-1.5 relative group flex items-center ${
+                        lightHeader
+                          ? isActive ? "text-[#0A0A0A] font-semibold" : "text-[#7A6A5A] hover:text-[#0A0A0A]"
+                          : isActive ? "text-white font-semibold" : "text-white/85 hover:text-white"
                       }`}
                     >
                       <span>{link.label}</span>
@@ -83,11 +132,11 @@ export default function Navbar() {
                 href="https://wa.me/5491123823297"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group hidden sm:inline-flex items-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-black border border-[#25D366]/35 hover:border-[#25D366] px-4 py-2 rounded-full text-[11px] tracking-[0.18em] uppercase font-semibold transition-all duration-300 backdrop-blur-md shadow-sm active:scale-[0.98] flex-shrink-0"
+                className={`group hidden sm:inline-flex items-center gap-2 py-2 border-b text-[11px] tracking-[0.14em] uppercase font-medium transition-colors flex-shrink-0 ${lightHeader ? "text-[#0A0A0A] border-[#7A6A5A] hover:text-[#7A6A5A]" : "text-white border-white/50 hover:text-[#B5A898]"}`}
               >
                 {/* WHATSAPP OFFICIAL ICON */}
                 <svg
-                  className="w-[12px] h-[12px] fill-[#25D366] group-hover:fill-black transition-colors"
+                  className="w-[12px] h-[12px] fill-current transition-colors"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
@@ -102,9 +151,12 @@ export default function Navbar() {
 
               {/* MOBILE HAMBURGER BUTTON */}
               <button
+                ref={menuButtonRef}
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden p-2 text-white hover:text-[#b5a898] focus:outline-none"
-                aria-label="Abrir menú"
+                className={`lg:hidden p-2 hover:text-[#b5a898] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${lightHeader ? "text-[#0A0A0A]" : "text-white"}`}
+                aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+                aria-expanded={mobileOpen}
+                aria-controls={mobileOpen ? "mobile-navigation" : undefined}
               >
                 {mobileOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -115,14 +167,33 @@ export default function Navbar() {
 
       {/* MOBILE DRAWER MODAL OVERLAY */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0a0a0a]/98 backdrop-blur-3xl flex flex-col justify-between p-8 pt-28 lg:hidden animate-in fade-in duration-300">
-          <ul className="flex flex-col gap-6">
+        <div
+          ref={menuRef}
+          id="mobile-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navegación principal"
+          className="fixed inset-0 z-[60] bg-[#0A0A0A] text-[#F7F3EE] flex flex-col lg:hidden"
+        >
+          <div className="shrink-0 flex items-center justify-between gap-4 px-6 py-4 border-b border-white/15">
+            <span className="font-serif text-xl tracking-wider">Ash Mateu</span>
+            <button
+              type="button"
+              onClick={() => setMobileOpen(false)}
+              className="inline-flex items-center gap-2 min-h-11 px-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              aria-label="Cerrar menú"
+            >
+              Cerrar <X size={20} aria-hidden="true" />
+            </button>
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+          <ul className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <li key={link.label}>
                 <Link
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-serif text-3xl text-white/90 hover:text-[#b5a898] transition-colors block border-b border-white/10 pb-3"
+                  className="font-serif text-[28px] leading-tight text-white/90 hover:text-[#b5a898] transition-colors block border-b border-white/10 py-2"
                 >
                   {link.label}
                 </Link>
@@ -132,20 +203,20 @@ export default function Navbar() {
               <Link
                 href="/historia"
                 onClick={() => setMobileOpen(false)}
-                className="font-serif text-3xl text-white/90 hover:text-[#b5a898] transition-colors block border-b border-white/10 pb-3"
+                className="font-serif text-[28px] leading-tight text-white/90 hover:text-[#b5a898] transition-colors block border-b border-white/10 py-2"
               >
                 MI HISTORIA
               </Link>
             </li>
           </ul>
 
-          <div className="pt-8 border-t border-white/15">
+          <div className="mt-6 pt-6 border-t border-white/15">
             <div className="mb-3">
               <span className="font-serif text-2xl tracking-[0.22em] uppercase text-white font-normal">
                 Ash Mateu
               </span>
             </div>
-            <div className="flex flex-col gap-1 mb-4 text-[9px] tracking-[0.25em] uppercase text-[#b5a898]">
+            <div className="flex flex-col gap-1 mb-4 text-[11px] tracking-[0.12em] uppercase text-[#b5a898]">
               <p>Buenos Aires · Nueva York · París · +54 9 11 2382-3297</p>
               <a href="mailto:info@ashmateu.com" className="hover:text-white transition-colors underline underline-offset-2">
                 info@ashmateu.com
@@ -163,6 +234,7 @@ export default function Navbar() {
               <span>Contactar por WhatsApp</span>
               <ArrowUpRight size={15} />
             </a>
+          </div>
           </div>
         </div>
       )}

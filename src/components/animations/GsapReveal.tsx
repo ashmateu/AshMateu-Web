@@ -17,7 +17,7 @@ export default function GsapReveal({
   className = "",
   delay = 0,
   direction = "up",
-  duration = 0.55,
+  duration = 0.3,
 }: GsapRevealProps) {
   const elRef = useRef<HTMLDivElement>(null);
 
@@ -26,6 +26,7 @@ export default function GsapReveal({
 
     const el = elRef.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let x = 0;
     let y = 0;
@@ -40,15 +41,11 @@ export default function GsapReveal({
         el,
         {
           opacity: 0,
-          scale: 0.97,
-          filter: "blur(5px)",
           x,
           y,
         },
         {
           opacity: 1,
-          scale: 1,
-          filter: "blur(0px)",
           x: 0,
           y: 0,
           duration,
@@ -57,7 +54,7 @@ export default function GsapReveal({
           scrollTrigger: {
             trigger: el,
             start: "top 88%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         }
       );
@@ -70,7 +67,7 @@ export default function GsapReveal({
     <div
       ref={elRef}
       className={className}
-      style={{ willChange: "transform, opacity, filter" }}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </div>
