@@ -1,0 +1,4 @@
+Ash Mateu - verificacion de despliegue
+Fecha: 2026-11-06
+Identificador: codex-vercel-check-20261106-a1
+Este archivo confirma que la prueba publicada desde GitHub llego a este despliegue.
